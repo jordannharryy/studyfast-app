@@ -848,6 +848,36 @@ body.light-mode #screen-lesson .lesson-settings p strong { color:#1a1a2e !import
     font-size:10px; color:var(--muted); letter-spacing:.5px;
   }
 }
+/* Email capture — stacked layout + social proof on all screens */
+.ec-social {
+  display:flex; align-items:center; gap:10px;
+  margin-bottom:12px;
+  padding-bottom:12px;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.ec-avatars { display:flex; flex-direction:row }
+.ec-av {
+  width:24px; height:24px; border-radius:50%;
+  border:2px solid #1a1a2e;
+  margin-right:-7px; flex-shrink:0;
+  background:#2c3490; font-size:8px; font-weight:700;
+  color:rgba(255,255,255,0.4);
+  display:flex; align-items:center; justify-content:center;
+}
+.ec-av:nth-child(2) { background:#3a1a4a }
+.ec-av:nth-child(3) { background:#1a3a2a }
+.ec-social-text { font-size:11px; color:#9090b0; line-height:1.4; margin-left:14px }
+.ec-social-text b { color:#f2f1fc; display:block }
+.ec-form-row { display:flex; flex-direction:column; gap:8px; margin-bottom:6px }
+.ec-form-row input { width:100% !important; flex:none !important }
+.ec-form-row button { width:100% !important; padding:13px 16px !important }
+/* Pills visible on desktop, progress bar hidden */
+.ec-pills { display:flex; gap:5px; margin-bottom:14px }
+.ec-progress { display:none; margin-bottom:14px }
+@media(max-width:640px) {
+  .ec-pills { display:none }
+  .ec-progress { display:block }
+}
 .contact-section { margin-bottom:20px }
 .contact-label { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:12px }
 .contact-row { display:flex; gap:10px }
@@ -989,7 +1019,7 @@ body.light-mode .logo-img-colour { display:block }
     <div style="display:inline-block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);background:rgba(247,166,0,0.12);border:1px solid rgba(247,166,0,0.3);padding:3px 10px;border-radius:20px;margin-bottom:10px">7-Day Speed Reading Programme</div>
     <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px;line-height:1.3">One mode per day.<br>One week to a new reading speed.</div>
     <div style="font-size:12px;color:var(--muted2);margin-bottom:14px;line-height:1.6">Jordan walks you through all 7 training modes — one per day. By Day 7 you re-test and see exactly how far you've come.</div>
-    <div style="display:flex;gap:5px;margin-bottom:14px">
+    <div class="ec-pills">
       <div style="flex:1;background:rgba(247,166,0,0.1);border:1px solid rgba(247,166,0,0.3);border-radius:7px;padding:7px 3px;text-align:center">
         <div style="font-size:13px;font-weight:800;color:var(--gold)">1</div><div style="font-size:8px;color:rgba(247,166,0,0.6);letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Baseline</div>
       </div>
@@ -1012,14 +1042,29 @@ body.light-mode .logo-img-colour { display:block }
         <div style="font-size:13px;font-weight:800;color:#3a3a55">7</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Final Test</div>
       </div>
     </div>
-    <div style="display:flex;gap:8px;margin-bottom:6px">
-      <input id="home-email-input" type="email" placeholder="your@email.com" style="flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:11px 14px;font-size:13px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;outline:none">
-      <button id="home-email-btn" style="background:var(--gold);color:#08080e;font-size:12px;font-weight:800;padding:11px 16px;border-radius:8px;border:none;cursor:pointer;white-space:nowrap;font-family:'Plus Jakarta Sans',sans-serif">START DAY 1 →</button>
+    <div class="ec-progress">
+      <div style="height:3px;background:rgba(255,255,255,0.08);border-radius:2px;margin-bottom:8px;overflow:hidden">
+        <div style="height:100%;width:14%;background:var(--gold);border-radius:2px"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:11px">
+        <span style="color:var(--gold);font-weight:700">Day 1: Baseline Test</span>
+        <span style="color:var(--muted)">7 days</span>
+      </div>
+    </div>
+    <div class="ec-social">
+      <div class="ec-avatars">
+        <div class="ec-av">JH</div>
+        <div class="ec-av">SK</div>
+        <div class="ec-av">MR</div>
+      </div>
+      <div class="ec-social-text"><b>50,000+ readers trained</b>across 70 countries</div>
+    </div>
+    <div class="ec-form-row">
+      <input id="home-email-input" type="email" placeholder="your@email.com" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:11px 14px;font-size:13px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;outline:none">
+      <button id="home-email-btn" style="width:100%;background:var(--gold);color:#08080e;font-size:13px;font-weight:800;padding:13px 16px;border-radius:8px;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">START DAY 1 →</button>
     </div>
     <div id="home-email-msg" style="font-size:11px;color:#3a3a55;text-align:center">No spam. Unsubscribe anytime.</div>
   </div>
-
-  <!-- FUTURE RELEASES -->
   <div class="future-section">
     <div class="future-label">Coming soon</div>
     <div class="future-scroll-wrap">
@@ -1166,7 +1211,7 @@ body.light-mode .logo-img-colour { display:block }
     <div style="display:inline-block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);background:rgba(247,166,0,0.12);border:1px solid rgba(247,166,0,0.3);padding:3px 10px;border-radius:20px;margin-bottom:10px">7-Day Speed Reading Programme</div>
     <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px;line-height:1.3">One mode per day.<br>One week to a new reading speed.</div>
     <div style="font-size:12px;color:var(--muted2);margin-bottom:14px;line-height:1.6">Jordan walks you through all 7 training modes — one per day. By Day 7 you re-test and see exactly how far you've come.</div>
-    <div style="display:flex;gap:5px;margin-bottom:14px">
+    <div class="ec-pills">
       <div style="flex:1;background:rgba(247,166,0,0.1);border:1px solid rgba(247,166,0,0.3);border-radius:7px;padding:7px 3px;text-align:center">
         <div style="font-size:13px;font-weight:800;color:var(--gold)">1</div><div style="font-size:8px;color:rgba(247,166,0,0.6);letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Baseline</div>
       </div>
@@ -1189,14 +1234,29 @@ body.light-mode .logo-img-colour { display:block }
         <div style="font-size:13px;font-weight:800;color:#3a3a55">7</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Final Test</div>
       </div>
     </div>
-    <div style="display:flex;gap:8px;margin-bottom:6px">
-      <input id="email-capture-input" type="email" placeholder="your@email.com" style="flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:11px 14px;font-size:13px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;outline:none">
-      <button id="email-capture-btn" style="background:var(--gold);color:#08080e;font-size:12px;font-weight:800;padding:11px 16px;border-radius:8px;border:none;cursor:pointer;white-space:nowrap;font-family:'Plus Jakarta Sans',sans-serif">START DAY 1 →</button>
+    <div class="ec-progress">
+      <div style="height:3px;background:rgba(255,255,255,0.08);border-radius:2px;margin-bottom:8px;overflow:hidden">
+        <div style="height:100%;width:14%;background:var(--gold);border-radius:2px"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:11px">
+        <span style="color:var(--gold);font-weight:700">Day 1: Baseline Test</span>
+        <span style="color:var(--muted)">7 days</span>
+      </div>
+    </div>
+    <div class="ec-social">
+      <div class="ec-avatars">
+        <div class="ec-av">JH</div>
+        <div class="ec-av">SK</div>
+        <div class="ec-av">MR</div>
+      </div>
+      <div class="ec-social-text"><b>50,000+ readers trained</b>across 70 countries</div>
+    </div>
+    <div class="ec-form-row">
+      <input id="email-capture-input" type="email" placeholder="your@email.com" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:11px 14px;font-size:13px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;outline:none">
+      <button id="email-capture-btn" style="width:100%;background:var(--gold);color:#08080e;font-size:13px;font-weight:800;padding:13px 16px;border-radius:8px;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">START DAY 1 →</button>
     </div>
     <div id="email-capture-msg" style="font-size:11px;color:#3a3a55;text-align:center">No spam. Unsubscribe anytime.</div>
   </div>
-
-  <!-- Navigation buttons -->
   <div class="res-actions">
     <button class="btn btn-gold" id="btn-nextstep" style="flex:2;font-family:'Bebas Neue';letter-spacing:2px;font-size:17px;font-weight:400;padding:14px">NEXT STEP →</button>
     <button class="btn btn-ghost" id="btn-readagain" style="flex:1;font-family:'Bebas Neue';letter-spacing:2px;font-size:17px;font-weight:400;padding:14px">READ AGAIN</button>
