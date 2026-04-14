@@ -825,12 +825,7 @@ body.light-mode #screen-lesson .lesson-settings p strong { color:#1a1a2e !import
   }
   .future-grid::-webkit-scrollbar { display:none }
   .future-card { flex:0 0 148px; min-width:148px }
-  .future-scroll-fade {
-    display:block; position:absolute;
-    top:0; right:0; bottom:8px; width:48px;
-    background:linear-gradient(to right,transparent,var(--bg));
-    pointer-events:none;
-  }
+  .future-scroll-fade { display:none }
   .future-scroll-hint {
     display:flex; align-items:center; gap:6px;
     margin-top:10px;
@@ -878,6 +873,7 @@ body.light-mode #screen-lesson .lesson-settings p strong { color:#1a1a2e !import
   .ec-pills { display:none }
   .ec-progress { display:block }
 }
+.ec-form-row input::placeholder { color:var(--muted); opacity:1 }
 .contact-section { margin-bottom:20px }
 .contact-label { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:12px }
 .contact-row { display:flex; gap:10px }
@@ -1060,6 +1056,7 @@ body.light-mode .logo-img-colour { display:block }
       <div class="ec-social-text"><b>50,000+ readers trained</b>across 70 countries</div>
     </div>
     <div class="ec-form-row">
+      <input id="home-name-input" type="text" placeholder="First name" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:11px 14px;font-size:13px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;outline:none">
       <input id="home-email-input" type="email" placeholder="your@email.com" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:11px 14px;font-size:13px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;outline:none">
       <button id="home-email-btn" style="width:100%;background:var(--gold);color:#08080e;font-size:13px;font-weight:800;padding:13px 16px;border-radius:8px;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">START DAY 1 →</button>
     </div>
@@ -1252,6 +1249,7 @@ body.light-mode .logo-img-colour { display:block }
       <div class="ec-social-text"><b>50,000+ readers trained</b>across 70 countries</div>
     </div>
     <div class="ec-form-row">
+      <input id="email-capture-name" type="text" placeholder="First name" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:11px 14px;font-size:13px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;outline:none">
       <input id="email-capture-input" type="email" placeholder="your@email.com" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:11px 14px;font-size:13px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;outline:none">
       <button id="email-capture-btn" style="width:100%;background:var(--gold);color:#08080e;font-size:13px;font-weight:800;padding:13px 16px;border-radius:8px;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">START DAY 1 →</button>
     </div>
@@ -1982,11 +1980,18 @@ if('serviceWorker' in navigator){
 (function(){
   const btn = $('email-capture-btn');
   const inp = $('email-capture-input');
+  const nameInp = $('email-capture-name');
   const msg = $('email-capture-msg');
   if(!btn||!inp||!msg) return;
 
   btn.addEventListener('click', async function(){
     const email = inp.value.trim();
+    const firstName = nameInp ? nameInp.value.trim() : '';
+    if(!firstName){
+      msg.textContent = 'Please enter your first name.';
+      msg.style.color = 'var(--orange)';
+      return;
+    }
     if(!email || !email.includes('@')){
       msg.textContent = 'Please enter a valid email address.';
       msg.style.color = 'var(--orange)';
@@ -2004,11 +2009,12 @@ if('serviceWorker' in navigator){
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify({ email: email, groups: ['aMXZEm'] })
+        body: JSON.stringify({ email: email, firstname: firstName, groups: ['aMXZEm'] })
       });
       if(!res.ok && res.status !== 409) throw new Error('API error ' + res.status);
 
       // Success state
+      if(nameInp) nameInp.style.display = 'none';
       inp.style.display = 'none';
       btn.style.display = 'none';
       msg.textContent = '✓ You\'re in! Check your inbox for Day 1.';
@@ -2026,6 +2032,7 @@ if('serviceWorker' in navigator){
   });
 
   // Clear error on type
+
   inp.addEventListener('input', ()=>{
     msg.textContent = 'No spam. Unsubscribe anytime.';
     msg.style.color = '#3a3a55';
@@ -2035,11 +2042,18 @@ if('serviceWorker' in navigator){
 (function(){
   const btn = $('home-email-btn');
   const inp = $('home-email-input');
+  const nameInp = $('home-name-input');
   const msg = $('home-email-msg');
   if(!btn||!inp||!msg) return;
 
   btn.addEventListener('click', async function(){
     const email = inp.value.trim();
+    const firstName = nameInp ? nameInp.value.trim() : '';
+    if(!firstName){
+      msg.textContent = 'Please enter your first name.';
+      msg.style.color = 'var(--orange)';
+      return;
+    }
     if(!email || !email.includes('@')){
       msg.textContent = 'Please enter a valid email address.';
       msg.style.color = 'var(--orange)';
@@ -2057,10 +2071,11 @@ if('serviceWorker' in navigator){
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify({ email: email, groups: ['aMXZEm'] })
+        body: JSON.stringify({ email: email, firstname: firstName, groups: ['aMXZEm'] })
       });
       if(!res.ok && res.status !== 409) throw new Error('API error ' + res.status);
 
+      if(nameInp) nameInp.style.display = 'none';
       inp.style.display = 'none';
       btn.style.display = 'none';
       msg.textContent = '✓ You\'re in! Check your inbox for Day 1.';
