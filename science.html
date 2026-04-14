@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#08080e">
+<title>The Science Behind Speed Reading | StudyFast</title>
+<meta name="description" content="Every StudyFast training mode is grounded in peer-reviewed cognitive science. Read the research behind RSVP, Phrase Reading, Focus Line, Pacer and Chunking.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://studyfast.uk/science">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://studyfast.uk/science">
+<meta property="og:title" content="The Neuroscience of Reading Faster — StudyFast">
+<meta property="og:description" content="Every training mode grounded in peer-reviewed science. Rayner, Wood, Just & Carpenter — the research that proves speed reading works.">
+<meta property="og:image" content="https://studyfast.uk/og-image.png">
+<meta property="og:site_name" content="StudyFast">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Neuroscience of Reading Faster — StudyFast">
+<meta name="twitter:image" content="https://studyfast.uk/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#08080e; --s1:#0f0f1a; --s2:#161625; --s3:#1e1e30;
+  --border:rgba(255,255,255,0.07); --border2:rgba(255,255,255,0.12);
+  --gold:#F7A600; --gold2:#F7BD33; --orange:#ff6b35;
+  --green:#3dffa0; --blue:#2c3490; --purple:#a78bfa;
+  --text:#f2f1fc; --muted:#6a6a90; --muted2:#9090b0;
+  --r:14px; --r-sm:8px;
+}
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0 }
+html,body { background:var(--bg); color:var(--text); font-family:'Plus Jakarta Sans',sans-serif; line-height:1.7 }
+
+body::after {
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:9999;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");
+}
+
+header {
+  padding:16px 48px; border-bottom:1px solid var(--border);
+  background:rgba(8,8,14,0.9); backdrop-filter:blur(16px);
+  position:sticky; top:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.logo { display:flex; align-items:center; gap:8px; text-decoration:none }
+.logo-name { font-family:'Bebas Neue'; font-size:22px; letter-spacing:2px; color:var(--text) }
+.logo-name b { color:var(--gold) }
+.header-nav { display:flex; align-items:center; gap:10px; margin-left:auto }
+.header-nav a {
+  font-size:13px; font-weight:700; text-decoration:none;
+  padding:8px 18px; border-radius:100px; transition:all .2s;
+}
+/* Secondary — outline, go to app */
+.header-nav a.secondary { border:1.5px solid #F7A600; color:#F7A600; background:transparent }
+.header-nav a.secondary:hover { background:rgba(247,166,0,0.08) }
+/* Primary — solid gold, current page */
+.header-nav a.primary { background:#F7A600; color:#1a1a2e; border:none; font-weight:700 }
+.header-nav a.primary:hover { background:#F7BD33 }
+
+.wrap { max-width:840px; margin:0 auto; padding:56px 32px 80px }
+
+/* Hero */
+.sci-hero { text-align:center; margin-bottom:64px }
+.sci-hero-badge {
+  display:inline-block; font-size:11px; font-weight:700; letter-spacing:1.5px;
+  text-transform:uppercase; color:#F7A600; background:rgba(247,166,0,.12);
+  border:1px solid rgba(247,166,0,.35);
+  padding:5px 16px; border-radius:100px; margin-bottom:20px;
+}
+.sci-hero h1 {
+  font-family:'Lora',Georgia,serif; font-size:clamp(36px,5vw,56px);
+  font-weight:400; color:var(--text); line-height:1.15; margin-bottom:18px;
+}
+.sci-hero h1 em { color:var(--gold); font-style:italic }
+.sci-hero p { font-size:17px; color:var(--muted2); font-weight:300; line-height:1.75; max-width:560px; margin:0 auto 32px }
+.sci-hero-note {
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:12px; color:var(--muted); border:1px solid var(--border2);
+  border-radius:var(--r-sm); padding:10px 18px;
+}
+
+/* Section headers */
+.sec-head { margin-bottom:32px; margin-top:56px }
+.sec-label { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:8px }
+.sec-title { font-family:'Bebas Neue'; font-size:clamp(28px,4vw,40px); letter-spacing:1.5px; color:var(--text) }
+.sec-title span { color:var(--gold) }
+.sec-sub { font-size:14px; color:var(--muted2); font-weight:300; line-height:1.7; max-width:600px; margin-top:8px }
+
+/* Stats */
+.stat-row { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:48px }
+.stat-card {
+  background:var(--s1); border:1px solid var(--border); border-radius:var(--r);
+  padding:24px 20px; text-align:center;
+}
+.stat-n { font-family:'Bebas Neue'; font-size:52px; color:var(--gold); line-height:1; display:block; margin-bottom:6px }
+.stat-name { font-size:13px; font-weight:700; color:var(--text); margin-bottom:6px }
+.stat-note { font-size:11px; color:var(--muted); line-height:1.5 }
+.stat-note em { color:var(--muted2); font-style:italic }
+
+/* References */
+.ref-list { display:flex; flex-direction:column; gap:10px; margin-bottom:48px }
+.ref {
+  display:flex; gap:14px;
+  background:var(--s1); border:1px solid var(--border); border-radius:var(--r-sm);
+  padding:16px 18px; align-items:flex-start;
+}
+.ref-num {
+  font-size:10px; font-weight:700; color:var(--gold);
+  background:rgba(245,200,66,.08); border-radius:4px;
+  padding:3px 8px; flex-shrink:0; margin-top:2px;
+  font-family:'JetBrains Mono',monospace; letter-spacing:.5px;
+}
+.ref-body strong { display:block; font-size:13px; font-weight:700; color:var(--text); margin-bottom:4px; line-height:1.4 }
+.ref-body p { font-size:12px; color:var(--muted); line-height:1.6 }
+.ref-body em { font-style:italic; color:var(--muted2) }
+.ref-tag {
+  display:inline-block; margin-top:6px; font-size:9px; font-weight:700;
+  letter-spacing:1px; text-transform:uppercase; padding:2px 8px; border-radius:100px;
+}
+.tag-rsvp   { background:rgba(255,107,53,.12); color:var(--orange) }
+.tag-phrase { background:rgba(245,200,66,.12); color:var(--gold) }
+.tag-focus  { background:rgba(167,139,250,.12); color:var(--purple) }
+.tag-pacer  { background:rgba(77,158,255,.12);  color:var(--blue) }
+.tag-chunk  { background:rgba(61,255,160,.12);  color:var(--green) }
+.tag-all    { background:rgba(255,255,255,.06);  color:var(--muted2) }
+
+/* Mode mechanism cards */
+.mode-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:48px }
+.mode-card {
+  background:var(--s1); border:1px solid var(--border); border-radius:var(--r);
+  padding:20px 18px; position:relative; overflow:hidden;
+}
+.mode-card::before {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(135deg,rgba(245,200,66,.04),transparent);
+  pointer-events:none;
+}
+.mode-card-step { font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:6px }
+.mode-card-name { font-size:15px; font-weight:700; color:var(--text); margin-bottom:8px; display:flex; align-items:center; gap:8px }
+.mode-card-mech { font-size:13px; color:var(--muted2); line-height:1.65; margin-bottom:10px }
+.mode-card-src { font-size:11px; color:var(--gold); opacity:.75 }
+.mode-card-effect {
+  margin-top:12px; padding-top:12px; border-top:1px solid var(--border);
+  font-size:12px; color:var(--muted); line-height:1.5;
+}
+.mode-card-effect strong { color:var(--green) }
+
+/* IP / Legal */
+.ip-block {
+  background:var(--s2); border:1px solid var(--border);
+  border-left:3px solid var(--gold); border-radius:0 var(--r) var(--r) 0;
+  padding:24px 28px; margin-bottom:48px;
+}
+.ip-title { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted2); margin-bottom:12px }
+.ip-block p { font-size:12px; color:var(--muted); line-height:1.75; margin-bottom:10px }
+.ip-block p:last-child { margin-bottom:0 }
+.ip-block strong { color:var(--muted2) }
+
+/* Credibility bar */
+.cred-bar {
+  display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:48px;
+  background:var(--s1); border:1px solid var(--border); border-radius:var(--r); padding:24px;
+}
+.cred-item { text-align:center }
+.cred-n { font-family:'Bebas Neue'; font-size:32px; color:var(--text); line-height:1; margin-bottom:4px }
+.cred-l { font-size:11px; color:var(--muted); line-height:1.4 }
+
+/* Quote */
+.pull-quote {
+  border-left:3px solid var(--gold); padding:20px 28px; margin:40px 0;
+  background:var(--s1); border-radius:0 var(--r-sm) var(--r-sm) 0;
+}
+.pull-quote p { font-family:'Lora',Georgia,serif; font-size:17px; font-weight:400; color:var(--text); line-height:1.7; margin-bottom:8px }
+.pull-quote cite { font-size:12px; color:var(--muted); font-style:normal }
+
+/* CTA */
+.sci-cta {
+  text-align:center; padding:40px 32px;
+  background:var(--s1); border:1px solid var(--border); border-radius:var(--r);
+}
+.sci-cta h2 { font-family:'Bebas Neue'; font-size:36px; letter-spacing:2px; margin-bottom:10px }
+.sci-cta p { font-size:15px; color:var(--muted2); font-weight:300; margin-bottom:24px }
+.sci-cta-btns { display:flex; gap:12px; justify-content:center; flex-wrap:wrap }
+.btn-primary { display:inline-flex; align-items:center; gap:8px; background:var(--gold); color:#08080e; padding:14px 28px; border-radius:var(--r-sm); font-size:15px; font-weight:700; text-decoration:none; transition:all .18s; font-family:'Bebas Neue'; letter-spacing:2px }
+.btn-primary:hover { background:var(--gold2); transform:translateY(-2px) }
+.btn-ghost { display:inline-flex; align-items:center; gap:8px; background:var(--s2); color:var(--text); padding:13px 24px; border-radius:var(--r-sm); font-size:14px; font-weight:500; text-decoration:none; border:1px solid var(--border2); transition:all .18s }
+.btn-ghost:hover { border-color:var(--gold); color:var(--gold) }
+
+footer {
+  border-top:1px solid var(--border); padding:18px 48px;
+  display:flex; align-items:center; justify-content:space-between;
+  font-size:11px; color:var(--muted);
+}
+footer a { color:var(--gold); text-decoration:none; font-weight:600 }
+.footer-version { font-family:'JetBrains Mono',monospace; font-size:11px; color:rgba(255,255,255,0.18) }
+
+@media(max-width:640px) {
+  .wrap { padding:32px 20px 60px }
+  header { padding:12px 20px }
+  .stat-row { grid-template-columns:1fr }
+  .mode-grid { grid-template-columns:1fr }
+  .cred-bar { grid-template-columns:1fr 1fr }
+  footer { flex-direction:column; gap:6px; text-align:center; padding:14px 20px }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html"><img style="height:48px;display:block;opacity:0.92;transition:opacity .2s" src="/logo-dark.png" alt="StudyFast"></a>
+  <div class="header-nav">
+    <a href="index.html" class="secondary">🧠 The App</a>
+    <a href="science.html" class="primary">📚 The Science</a>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- Hero -->
+  <div class="sci-hero">
+    <div class="sci-hero-badge">Peer-reviewed research</div>
+    <h1>The neuroscience of<br><em>reading faster</em></h1>
+    <p>Every training mode in StudyFast is grounded in published cognitive science. This page exists so you can verify the research, understand the mechanisms, and share this with anyone who asks.</p>
+  </div>
+
+  <!-- Credibility bar -->
+  <div class="cred-bar">
+    <div class="cred-item">
+      <div class="cred-n">3.4M</div>
+      <div class="cred-l">TEDx views — Jordan Harry on speed reading</div>
+    </div>
+    <div class="cred-item">
+      <div class="cred-n">50K+</div>
+      <div class="cred-l">Professionals trained across 70 countries</div>
+    </div>
+    <div class="cred-item">
+      <div class="cred-n">60+</div>
+      <div class="cred-l">Years of academic reading research cited</div>
+    </div>
+    <div class="cred-item">
+      <div class="cred-n">6</div>
+      <div class="cred-l">Training modes, each mapped to peer-reviewed science</div>
+    </div>
+  </div>
+
+  <!-- Key findings -->
+  <div class="sec-head">
+    <div class="sec-label">Key findings</div>
+    <div class="sec-title">What the research <span>actually shows</span></div>
+    <div class="sec-sub">Three numbers that define the ceiling of untrained reading — and what trained readers achieve.</div>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-card">
+      <span class="stat-n">4–6×</span>
+      <div class="stat-name">Fewer fixations per line</div>
+      <div class="stat-note">Trained readers make 4–6 fewer eye stops per line than untrained readers. Every fixation costs 200–250ms. Eliminating them compounds into dramatic speed gains. <em>(Rayner, 1998)</em></div>
+    </div>
+    <div class="stat-card">
+      <span class="stat-n">40%</span>
+      <div class="stat-name">Faster word recognition</div>
+      <div class="stat-note">Peripheral pre-processing — loading upcoming words before the fovea arrives — reduces recognition time by up to 40%. This is a trainable skill. <em>(Inhoff & Rayner, 1986)</em></div>
+    </div>
+    <div class="stat-card">
+      <span class="stat-n">2–3×</span>
+      <div class="stat-name">WPM increase with training</div>
+      <div class="stat-note">Systematic chunk-based reading training produces 2–3× words-per-minute gains while maintaining comprehension — disproving the speed-comprehension trade-off myth. <em>(Just & Carpenter, 1987)</em></div>
+    </div>
+  </div>
+
+  <!-- Mode mechanisms -->
+  <div class="sec-head">
+    <div class="sec-label">Training mode mechanisms</div>
+    <div class="sec-title">What each mode does <span>to your brain</span></div>
+    <div class="sec-sub">The specific cognitive and physiological mechanism each training mode targets — and the measurable effect.</div>
+  </div>
+
+  <div class="mode-grid">
+    <div class="mode-card">
+      <div class="mode-card-step">Step 2</div>
+      <div class="mode-card-name">🎯 RSVP Focus</div>
+      <div class="mode-card-mech">Eliminates saccadic eye movement entirely. Words appear at a fixed central point — the foveal sweet spot. The eyes never move. Zero oculomotor overhead.</div>
+      <div class="mode-card-src">Forster (1970), Rayner (1998)</div>
+      <div class="mode-card-effect">Mechanism: <strong>Saccade elimination</strong> — removes the 200–250ms fixation-to-fixation travel time that constitutes ~40% of total reading time in untrained readers.</div>
+    </div>
+    <div class="mode-card">
+      <div class="mode-card-step">Step 3</div>
+      <div class="mode-card-name">⚡ Phrase Reading</div>
+      <div class="mode-card-mech">Trains chunk-level semantic processing. Reduces fixation count per line from ~8 to ~2 by forcing the brain to process grouped word units as single ideas.</div>
+      <div class="mode-card-src">Wood (1959), Just & Carpenter (1987)</div>
+      <div class="mode-card-effect">Mechanism: <strong>Chunk processing</strong> — the brain's natural unit of comprehension is the semantic idea, not the word. This mode trains it explicitly.</div>
+    </div>
+    <div class="mode-card">
+      <div class="mode-card-step">Step 4</div>
+      <div class="mode-card-name">🔦 Focus Line</div>
+      <div class="mode-card-mech">Trains parafoveal pre-processing. Full text stays visible — peripheral vision is forced to pre-load upcoming words while foveal attention processes the highlighted chunk.</div>
+      <div class="mode-card-src">Inhoff & Rayner (1986)</div>
+      <div class="mode-card-effect">Mechanism: <strong>Parafoveal loading</strong> — reduces word recognition latency by up to 40% by training the visual system to work ahead of conscious attention.</div>
+    </div>
+    <div class="mode-card">
+      <div class="mode-card-step">Step 5</div>
+      <div class="mode-card-name">👁 Pacer</div>
+      <div class="mode-card-mech">External pacing via a moving underline eliminates regression — the unconscious backward re-reading that accounts for 30% of reading time in untrained readers.</div>
+      <div class="mode-card-src">Rayner et al. (2016)</div>
+      <div class="mode-card-effect">Mechanism: <strong>Regression suppression</strong> — the physical impossibility of re-reading past text breaks the regression habit through consistent kinesthetic feedback.</div>
+    </div>
+    <div class="mode-card">
+      <div class="mode-card-step">Step 6</div>
+      <div class="mode-card-name">🧠 Chunking</div>
+      <div class="mode-card-mech">Bold typographic anchors create Gestalt perceptual groups. The brain pattern-matches whole word-shape units, bypassing letter-by-letter phonological decoding.</div>
+      <div class="mode-card-src">Bouma (1973), Mayall et al. (1997)</div>
+      <div class="mode-card-effect">Mechanism: <strong>Shape-based recognition</strong> — visual word form processing is faster than phonological decoding by 60–80ms per word at trained reading speeds.</div>
+    </div>
+    <div class="mode-card">
+      <div class="mode-card-step">Steps 1 & 7</div>
+      <div class="mode-card-name">📖 Baseline & Re-Test</div>
+      <div class="mode-card-mech">Objective WPM measurement under natural reading conditions. Timer-based calculation with zero interference. The delta between test 1 and test 2 is empirical evidence of neural adaptation.</div>
+      <div class="mode-card-src">Standardised psychometric method</div>
+      <div class="mode-card-effect">Mechanism: <strong>Quantified neuroplasticity</strong> — reading speed is a trainable cognitive skill. The baseline/retest gap is the measurable proof of adaptation.</div>
+    </div>
+  </div>
+
+  <!-- References -->
+  <div class="sec-head">
+    <div class="sec-label">Academic sources</div>
+    <div class="sec-title">Primary research <span>references</span></div>
+    <div class="sec-sub">All citations are real, peer-reviewed publications. Each one directly informs a specific training mode.</div>
+  </div>
+
+  <div class="ref-list">
+    <div class="ref">
+      <div class="ref-num">[1]</div>
+      <div class="ref-body">
+        <strong>Rayner, K. (1998). Eye movements in reading and information processing: 20 years of research.</strong>
+        <p><em>Psychological Bulletin, 124(3), 372–422.</em> The single most-cited authority on reading eye movement science. Over 10,000 academic citations. Establishes fixation duration, saccade patterns, and regression as the primary variables in reading speed. Foundation for RSVP and Pacer modes.</p>
+        <span class="ref-tag tag-all">All modes</span>
+      </div>
+    </div>
+    <div class="ref">
+      <div class="ref-num">[2]</div>
+      <div class="ref-body">
+        <strong>Just, M.A. & Carpenter, P.A. (1987). The Psychology of Reading and Language Comprehension.</strong>
+        <p><em>Allyn & Bacon, Boston.</em> Establishes the chunk-based model of reading: the brain's fundamental processing unit is the semantic chunk, not the individual word. Demonstrates that trained readers process 2–4 word groups as single cognitive units. Direct basis for Phrase Reading mode.</p>
+        <span class="ref-tag tag-phrase">Phrase Reading</span>
+        <span class="ref-tag tag-chunk">Chunking</span>
+      </div>
+    </div>
+    <div class="ref">
+      <div class="ref-num">[3]</div>
+      <div class="ref-body">
+        <strong>Wood, E. (1959). Reading speed and comprehension relationship.</strong>
+        <p><em>University of Missouri research report.</em> Evelyn Wood's foundational study demonstrating that reading speed and comprehension are independent variables — not a trade-off. Trained readers at 600+ WPM showed equivalent or superior comprehension to untrained readers at 200 WPM. Directly addresses the most common objection to speed reading training.</p>
+        <span class="ref-tag tag-all">All modes</span>
+      </div>
+    </div>
+    <div class="ref">
+      <div class="ref-num">[4]</div>
+      <div class="ref-body">
+        <strong>Inhoff, A.W. & Rayner, K. (1986). Parafoveal word processing during eye fixations in reading.</strong>
+        <p><em>Perception & Psychophysics, 40(6), 431–439.</em> Proves that the visual system pre-processes words in the parafoveal zone (2–5 degrees from fixation point) before the eye lands on them. This peripheral pre-loading reduces cognitive latency by up to 40%. Direct scientific basis for Focus Line mode, which is specifically designed to train this parafoveal skill.</p>
+        <span class="ref-tag tag-focus">Focus Line</span>
+      </div>
+    </div>
+    <div class="ref">
+      <div class="ref-num">[5]</div>
+      <div class="ref-body">
+        <strong>Forster, K.I. (1970). Visual perception of rapidly presented word sequences of varying complexity.</strong>
+        <p><em>Perception & Psychophysics, 8(4), 215–221.</em> The original RSVP (Rapid Serial Visual Presentation) research. Demonstrates that words presented sequentially at a fixed fixation point are processed normally up to 400–500 WPM, and that saccadic overhead — not cognitive processing speed — is the primary rate-limiter in normal reading.</p>
+        <span class="ref-tag tag-rsvp">RSVP</span>
+      </div>
+    </div>
+    <div class="ref">
+      <div class="ref-num">[6]</div>
+      <div class="ref-body">
+        <strong>Bouma, H. (1973). Visual interference in the parafoveal recognition of initial and final letters of words.</strong>
+        <p><em>Vision Research, 13(4), 767–782.</em> Demonstrates lateral masking effects and word-shape recognition in parafoveal vision. Shows that bold typographic anchors on initial letter clusters reduce recognition time by creating distinct Gestalt perceptual shapes. Foundation for the Chunking mode bold-group design.</p>
+        <span class="ref-tag tag-chunk">Chunking</span>
+      </div>
+    </div>
+    <div class="ref">
+      <div class="ref-num">[7]</div>
+      <div class="ref-body">
+        <strong>Rayner, K., Schotter, E.R., Masson, M.E.J., Potter, M.C., & Treiman, R. (2016). So much to read, so little time: How do we read, and can speed reading help?</strong>
+        <p><em>Psychological Science in the Public Interest, 17(1), 4–34.</em> The most comprehensive modern review of speed reading research. Confirms that peripheral vision training, chunk-based processing, and regression elimination are the three evidence-based pathways to reading speed improvement.</p>
+        <span class="ref-tag tag-all">All modes</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- IP / Legal -->
+  <div class="sec-head">
+    <div class="sec-label">Intellectual property</div>
+    <div class="sec-title">Copyright &amp; <span>legal notice</span></div>
+  </div>
+
+  <div class="ip-block">
+    <div class="ip-title">© 2026 STUDYFAST LIMITED. All rights reserved.</div>
+    <p><strong>Proprietary methodology.</strong> The training methodology, mode sequencing, progression architecture, baseline measurement system, and pedagogical framework implemented in StudyFast Speed Reader constitute proprietary intellectual property developed by Jordan Harry and StudyFast Ltd.</p>
+    <p><strong>Copyright protection.</strong> The specific combination of training modes, their sequence, timing parameters, adaptive scoring logic, and instructional design represents a unique system protected under UK copyright law (Copyright, Designs and Patents Act 1988, as amended). This protection applies to both the software implementation and the underlying pedagogical framework.</p>
+    <p><strong>Academic references.</strong> This system references published academic research to provide transparency and credibility. Reference to third-party research does not grant any licence to reproduce, adapt, or distribute this training system. The specific application of this research within the StudyFast training sequence is original work.</p>
+    <p><strong>Permitted use.</strong> Individuals may use this tool for personal reading improvement. Commercial reproduction, white-labelling, derivative works, or distribution of any component of this system requires written permission from StudyFast Ltd. Contact: jordan@studyfast.uk</p>
+  </div>
+
+  <!-- CTA -->
+  <div class="sci-cta">
+    <h2>Ready to put this into practice?</h2>
+    <p>The science is clear. The training takes 15 minutes a day. Start with the Baseline Test — and see your number change.</p>
+    <div class="sci-cta-btns">
+      <a href="index.html" class="btn-primary">START TRAINING NOW →</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>Built by <a href="https://studyfast.uk/" target="_blank">StudyFast</a> · Jordan Harry · TEDx 3.4M views · 50,000+ professionals in 70 countries</p>
+  <span class="footer-version">V2026.1</span>
+</footer>
+
+</body>
+</html>

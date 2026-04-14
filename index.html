@@ -1,0 +1,1948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#08080e">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/apple-touch-icon.png" sizes="180x180" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>Speed Reading Trainer — Double Your Reading Speed in 7 Days | StudyFast</title>
+
+<meta name="description" content="Free speed reading trainer used by 50,000+ students in 70 countries. Train 15 mins/day and double your reading speed in 7 days. 4 neuroscience-backed modes: Phrase Reading, RSVP, Focus Line & Chunking. No login needed.">
+<meta name="keywords" content="speed reading, how to read faster, speed reading training, increase reading speed, words per minute, RSVP reading, phrase reading, chunking reading, read faster online, free speed reading app">
+<meta name="author" content="Jordan Harry, StudyFast">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://studyfast.uk/">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://studyfast.uk/">
+<meta property="og:title" content="Free Speed Reading Trainer — Double Your Speed in 7 Days">
+<meta property="og:description" content="Train 15 mins/day and double your reading speed in 7 days. 4 neuroscience-backed modes. Used by 50,000+ people in 70 countries. Free — no login needed.">
+<meta property="og:image" content="https://studyfast.uk/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="StudyFast">
+<meta property="og:locale" content="en_GB">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@studyfast">
+<meta name="twitter:title" content="Free Speed Reading Trainer — Double Your Speed in 7 Days">
+<meta name="twitter:description" content="15 mins/day. 4 neuroscience-backed modes. 50,000+ students in 70 countries. Free, no login.">
+<meta name="twitter:image" content="https://studyfast.uk/og-image.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "StudyFast Speed Reading Trainer",
+  "url": "https://studyfast.uk/",
+  "description": "Free neuroscience-backed speed reading trainer. Double your reading speed in 7 days with 15 minutes of daily practice.",
+  "applicationCategory": "EducationApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "GBP" },
+  "author": {
+    "@type": "Person",
+    "name": "Jordan Harry",
+    "url": "https://studyfast.uk/"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "ratingCount": "50000"
+  }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=JetBrains+Mono:wght@400;500&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ─────────────────────────────────────────────────────── */
+:root {
+  --bg:      #08080e;
+  --s1:      #0f0f1a;
+  --s2:      #161625;
+  --s3:      #1e1e30;
+  --border:  rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --gold:    #F7A600;
+  --gold2:   #F7BD33;
+  --orange:  #ff6b35;
+  --green:   #3dffa0;
+  --blue:    #2c3490;
+  --purple:  #a78bfa;
+  --text:    #f2f1fc;
+  --muted:   #6a6a90;
+  --muted2:  #9090b0;
+  --r:       14px;
+  --r-sm:    8px;
+}
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0 }
+* { -webkit-tap-highlight-color:transparent }
+a,button,input,textarea,.mode-card,.btn,.btn-gold { touch-action:manipulation }
+.mode-card { -webkit-user-select:none; user-select:none }
+html,body { height:100%; background:var(--bg); color:var(--text); font-family:'Plus Jakarta Sans',sans-serif; overflow-x:hidden }
+
+body::after {
+  content:''; position:fixed; inset:0;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+  pointer-events:none; z-index:9999;
+}
+
+/* ─── LAYOUT ─────────────────────────────────────────────────────── */
+.app { min-height:100vh; display:flex; flex-direction:column }
+
+header {
+  padding:12px 32px;
+  display:flex; align-items:center; justify-content:space-between;
+  border-bottom:1px solid var(--border);
+  background:rgba(8,8,14,0.88);
+  backdrop-filter:blur(16px);
+  position:sticky; top:0; z-index:100;
+}
+.logo { display:flex; align-items:center; gap:10px; text-decoration:none; cursor:pointer }
+.logo-img { height:48px; display:block; opacity:0.92; transition:opacity .2s }
+.logo:hover .logo-img { opacity:1 }
+.header-tag { font-size:11px; color:var(--muted); letter-spacing:.5px }
+
+/* Back button — only visible during reading */
+.btn-back {
+  display:none; align-items:center; gap:7px;
+  padding:8px 18px; border:1.5px solid rgba(44,52,144,0.45); border-radius:100px;
+  background:rgba(44,52,144,0.12); color:#7b84d4;
+  font-family:'Plus Jakarta Sans'; font-size:13px; font-weight:700; cursor:pointer; transition:all .2s;
+}
+.btn-back:hover { background:rgba(44,52,144,0.22); border-color:rgba(44,52,144,0.7) }
+/* The App — primary solid gold (current page on app) */
+.btn-app { display:flex; align-items:center; gap:7px; padding:9px 20px; border:none; border-radius:100px; background:var(--gold); color:#1a1a2e; font-family:'Plus Jakarta Sans'; font-size:13px; font-weight:700; cursor:pointer; transition:all .2s; text-decoration:none }
+.btn-app:hover { background:var(--gold2) }
+/* The Science — secondary outline */
+.btn-science { display:flex; align-items:center; gap:7px; padding:8px 18px; border:1.5px solid var(--gold); border-radius:100px; background:transparent; color:var(--gold); font-family:'Plus Jakarta Sans'; font-size:13px; font-weight:700; cursor:pointer; transition:all .2s; text-decoration:none }
+.btn-science:hover { background:rgba(247,166,0,0.08) }
+body.reading .btn-science { display:none }
+body.reading .btn-app { display:none }
+body.reading .btn-back { display:flex }
+body.reading .header-tag { display:none }
+body.reading footer { display:none }
+
+main { flex:1; max-width:880px; width:100%; margin:0 auto; padding:36px 24px }
+
+.screen { display:none; animation:fadeUp .35s ease both }
+.screen.active { display:block }
+@keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+
+/* ─── BUTTONS ─────────────────────────────────────────────────────── */
+.btn {
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  border:none; cursor:pointer; font-family:'Plus Jakarta Sans';
+  transition:all .18s; border-radius:var(--r-sm); font-weight:600;
+}
+.btn-gold { background:var(--gold); color:#08080e; padding:14px 28px; font-size:15px }
+.btn-gold:hover { background:var(--gold2); transform:translateY(-2px); box-shadow:0 8px 28px rgba(247,166,0,.3) }
+.btn-ghost { background:var(--s2); border:1px solid var(--border2); color:var(--text); padding:12px 22px; font-size:14px }
+.btn-ghost:hover { border-color:var(--gold); color:var(--gold) }
+
+/* ─── STEPPER INPUT (MVP fix: replaces sliders) ──────────────────── */
+.stepper {
+  display:flex; align-items:center;
+  background:var(--s2); border:1px solid var(--border2); border-radius:var(--r-sm);
+  overflow:hidden;
+}
+.stepper button {
+  width:38px; height:44px; background:transparent; border:none;
+  color:var(--muted); font-size:18px; cursor:pointer; transition:all .15s;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.stepper button:hover { background:var(--s3); color:var(--gold) }
+.stepper input[type=number] {
+  flex:1; min-width:0; height:44px;
+  background:transparent; border:none;
+  border-left:1px solid var(--border); border-right:1px solid var(--border);
+  color:var(--gold); font-family:'JetBrains Mono'; font-size:16px; font-weight:500;
+  text-align:center; outline:none; -moz-appearance:textfield;
+}
+.stepper input[type=number]::-webkit-outer-spin-button,
+.stepper input[type=number]::-webkit-inner-spin-button { -webkit-appearance:none }
+.stepper input[type=number]:focus { background:var(--s3) }
+
+/* ─── SCREEN 1: INPUT ─────────────────────────────────────────────── */
+.hero { text-align:center; margin-bottom:36px }
+.hero h1 {
+  font-family:'Bebas Neue';
+  font-size:clamp(52px,9vw,88px);
+  letter-spacing:2px; line-height:.95; margin-bottom:14px;
+}
+.hero h1 .accent { color:var(--gold); display:block }
+.hero p { color:var(--muted2); font-size:16px; font-weight:300; line-height:1.7; max-width:480px; margin:0 auto }
+
+.modes-label { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:12px }
+.modes-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:10px; margin-bottom:8px }
+.mode-step { font-size:9px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--muted); margin-bottom:5px }
+.mode-card {
+  border:1px solid var(--border); border-radius:var(--r);
+  padding:16px 12px; cursor:pointer; transition:all .2s;
+  background:var(--s1); text-align:center; position:relative; overflow:hidden;
+}
+.mode-card::before {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(135deg,rgba(247,166,0,.08),transparent);
+  opacity:0; transition:opacity .2s;
+}
+.mode-card:hover { border-color:var(--border2); transform:translateY(-2px) }
+.mode-card:hover::before { opacity:1 }
+.mode-card.selected { border-color:var(--gold); border-width:2px; background:var(--s2) }
+.mode-card.selected::before { opacity:1 }
+.mode-card.selected .mode-step { color:rgba(247,166,0,.8) }
+/* Progress strip — 7-col grid mirrors .modes-grid so dots centre under each card */
+.prog-strip {
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:10px;
+  margin-bottom:20px;
+  align-items:center;
+}
+/* Each cell holds a dot centred, with a connecting line extending right (except last) */
+.ps-dot {
+  position:relative;
+  display:flex; align-items:center; justify-content:center;
+  height:16px;
+}
+.ps-dot::before {
+  content:'';
+  width:8px; height:8px; border-radius:50%; flex-shrink:0;
+  background:rgba(255,255,255,0.14);
+  transition:background .25s;
+  position:relative; z-index:1;
+  display:block;
+}
+.ps-dot.active::before { background:var(--gold) }
+/* Connecting line: right half of current cell + left half of next, via ::after */
+.ps-dot:not(:last-child)::after {
+  content:'';
+  position:absolute;
+  top:50%; left:50%;
+  width:calc(100% + 10px); /* span to centre of next cell */
+  height:1px;
+  background:rgba(255,255,255,0.08);
+  transform:translateY(-50%);
+  z-index:0;
+  transition:background .25s;
+}
+.ps-dot.active:not(:last-child)::after { background:var(--gold) }
+/* ps-line elements still exist in HTML — hide them */
+.ps-line { display:none }
+.mode-icon { font-size:24px; margin-bottom:8px; display:block }
+.mode-name { font-size:13px; font-weight:700; color:var(--text); margin-bottom:4px }
+.mode-desc { font-size:11px; color:var(--muted); line-height:1.4 }
+.mode-badge {
+  display:inline-block; margin-top:6px;
+  font-size:9px; font-weight:700; letter-spacing:1px; text-transform:uppercase;
+  padding:2px 7px; border-radius:100px;
+}
+.badge-classic { background:rgba(77,158,255,.15); color:var(--blue) }
+.badge-rsvp    { background:rgba(255,107,53,.15);  color:var(--orange) }
+.badge-phrase  { background:rgba(247,166,0,.15);  color:var(--gold) }
+.badge-bionic  { background:rgba(61,255,160,.15);  color:var(--green) }
+
+.input-card { background:var(--s1); border:1px solid var(--border); border-radius:var(--r); padding:24px; margin-bottom:16px }
+.input-card > label { display:block; font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:10px }
+textarea {
+  width:100%; min-height:160px;
+  background:var(--s2); border:1px solid var(--border); border-radius:var(--r-sm);
+  color:var(--text); font-family:'Plus Jakarta Sans'; font-size:15px; line-height:1.65;
+  padding:14px 16px; resize:vertical; outline:none; transition:border-color .2s;
+}
+textarea:focus { border-color:var(--gold) }
+textarea::placeholder { color:var(--muted) }
+
+.controls-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px }
+.ctrl > label {
+  display:block;
+  font-size:11px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase;
+  color:var(--muted); margin-bottom:8px;
+}
+
+.start-row { display:flex; gap:12px; align-items:center }
+.start-row .btn-gold {
+  flex:1; padding:16px 28px; font-size:16px;
+  font-family:'Bebas Neue'; letter-spacing:2px; font-weight:400; border-radius:var(--r-sm);
+}
+.start-row .btn-gold:disabled { opacity:.3; pointer-events:none; transform:none; box-shadow:none }
+
+.stats-row { display:flex; gap:10px; margin-top:18px; flex-wrap:wrap; justify-content:center }
+.stat-chip {
+  display:flex; align-items:center; gap:7px;
+  padding:6px 14px; border:1px solid var(--border); border-radius:100px;
+  font-size:12px; color:var(--muted2);
+}
+.stat-chip b { color:var(--text); font-weight:600 }
+
+.mode-tip {
+  background:var(--s2); border:1px solid var(--border2); border-left:3px solid var(--gold);
+  border-radius:var(--r-sm); padding:14px 18px; margin-bottom:16px;
+  font-size:13px; color:var(--muted2); line-height:1.6; display:none;
+}
+.mode-tip.show { display:block }
+.mode-tip strong { color:var(--gold) }
+
+/* ─── REAL READING MODE ───────────────────────────────────────────── */
+.rrm-toggle {
+  display:flex; align-items:center; justify-content:space-between;
+  background:var(--s1); border:1px solid var(--border2); border-radius:var(--r-sm);
+  padding:14px 18px; margin-bottom:16px; cursor:pointer; transition:border-color .2s;
+  user-select:none; -webkit-user-select:none;
+}
+.rrm-toggle:hover { border-color:var(--gold) }
+.rrm-toggle.on { border-color:var(--gold); background:rgba(247,166,0,0.05) }
+.rrm-left { display:flex; align-items:center; gap:12px }
+.rrm-icon { font-size:18px }
+.rrm-label { font-size:14px; font-weight:600; color:var(--text) }
+.rrm-sub { font-size:12px; color:var(--muted); margin-top:2px }
+.rrm-switch {
+  width:42px; height:24px; border-radius:12px;
+  background:var(--s3); border:1px solid var(--border2);
+  position:relative; transition:background .2s, border-color .2s; flex-shrink:0;
+}
+.rrm-switch::after {
+  content:''; position:absolute; top:3px; left:3px;
+  width:16px; height:16px; border-radius:50%;
+  background:var(--muted); transition:transform .2s, background .2s;
+}
+.rrm-switch[data-on="1"] { background:rgba(247,166,0,0.2) !important; border-color:var(--gold) !important }
+.rrm-switch[data-on="1"]::after { transform:translateX(18px) !important; background:var(--gold) !important }
+.usc-toggle-row[style*="rgba(247,166,0"] { background:rgba(247,166,0,0.04) }
+/* Light mode overrides for usc toggle active state */
+body.light-mode .rrm-switch[data-on="1"] { background:rgba(247,166,0,0.2) !important; border-color:var(--gold) !important }
+
+/* Real reading mode — reader overrides */
+body.rrm #phrase-display {
+  font-family:'Plus Jakarta Sans', sans-serif !important;
+  font-size:17px !important;
+  font-weight:400 !important;
+  line-height:1.75 !important;
+  letter-spacing:normal !important;
+  text-align:center !important;
+  color:#f2f1fc !important;
+}
+body.rrm #rsvp-display {
+  font-size:19px !important;
+  font-weight:400 !important;
+  letter-spacing:normal !important;
+  min-height:auto !important;
+}
+body.rrm .rsvp-ruler,
+body.rrm .rsvp-ruler-bottom { display:none }
+body.rrm .pw {
+  font-size:17px !important;
+  line-height:1.75 !important;
+}
+body.rrm #bionic-display {
+  font-size:17px !important;
+  line-height:1.75 !important;
+}
+body.rrm #focus-display {
+  font-size:17px !important;
+}
+body.rrm #baseline-display {
+  font-size:17px !important;
+  line-height:1.75 !important;
+}
+body.rrm .stage {
+  justify-content:center !important;
+  padding-top:48px !important;
+  align-items:center !important;
+}
+
+/* ─── READING MODE (LIGHT) ──────────────────────────────────────── */
+body.light-mode { background:#f5f5fa !important }
+body.light-mode header { background:rgba(255,255,255,0.95) !important; border-bottom:1px solid rgba(0,0,0,0.08) !important }
+body.light-mode .btn-back { background:rgba(44,52,144,0.08) !important; border-color:rgba(44,52,144,0.35) !important; color:#2c3490 !important }
+body.light-mode .btn-back:hover { background:rgba(44,52,144,0.15) !important }
+/* Lesson page */
+body.light-mode #screen-lesson { background:#f5f5fa }
+body.light-mode .lesson-hero h2,
+body.light-mode .lesson-title-el { color:#1a1a2e !important }
+body.light-mode .lesson-hero p,
+body.light-mode .lesson-sub-el { color:rgba(26,26,46,0.55) !important }
+body.light-mode .lesson-badge { color:#1a1a2e !important; background:rgba(26,26,46,0.08) !important }
+body.light-mode .lesson-preview { background:#ffffff !important; border-color:rgba(0,0,0,0.08) !important }
+body.light-mode .lesson-preview-label { color:rgba(26,26,46,0.4) !important }
+body.light-mode .lesson-preview-text { color:#1a1a2e !important }
+body.light-mode .lesson-preview-text span { color:#1a1a2e !important; opacity:1 !important }
+body.light-mode .lesson-preview-text .lp-dim { color:#1a1a2e !important; opacity:1 !important }
+body.light-mode .lesson-preview-text .lp-active { color:#1a1a2e !important; opacity:1 !important }
+body.light-mode .lesson-preview-text .lp-bold { color:#1a1a2e !important; font-weight:700 !important; opacity:1 !important }
+body.light-mode .lesson-preview-text.phrase-style { color:#1a1a2e !important }
+body.light-mode .lesson-preview-text.rsvp-style { color:#1a1a2e !important }
+body.light-mode .lesson-points { background:#ffffff !important; border-color:rgba(0,0,0,0.08) !important }
+body.light-mode .lp { border-color:rgba(0,0,0,0.06) !important }
+body.light-mode .lp-body strong { color:#1a1a2e !important }
+body.light-mode .lp-body span { color:rgba(26,26,46,0.55) !important }
+body.light-mode .lesson-settings-title { background:#ffffff !important; border-color:rgba(0,0,0,0.1) !important; color:#1a1a2e !important; border-left-color:var(--gold) !important }
+body.light-mode .lesson-setting > label { color:#1a1a2e !important }
+body.light-mode .stepper { background:#eeeef5 !important; border-color:rgba(0,0,0,0.1) !important }
+body.light-mode .stepper button { color:#1a1a2e !important }
+body.light-mode .stepper button:hover { background:#e0e0ec !important; color:#1a1a2e !important }
+body.light-mode .stepper input[type=number] { color:var(--gold) !important; border-color:rgba(0,0,0,0.08) !important }
+body.light-mode .rrm-toggle { background:#ffffff !important; border-color:rgba(0,0,0,0.08) !important }
+body.light-mode .rrm-toggle:hover { border-color:var(--gold) !important }
+body.light-mode .rrm-toggle.on { background:rgba(247,166,0,0.05) !important; border-color:var(--gold) !important }
+body.light-mode .rrm-label { color:#1a1a2e !important }
+body.light-mode .rrm-sub { color:#1a1a2e !important }
+body.light-mode .rrm-switch { background:#e0e0ec !important; border-color:rgba(0,0,0,0.1) !important }
+body.light-mode .rrm-switch::after { background:rgba(26,26,46,0.45) !important }
+body.light-mode .btn-lesson-skip { color:#1a1a2e !important; border-color:rgba(0,0,0,0.1) !important }
+body.light-mode .lesson-chunk-row { background:#ffffff !important; border-color:rgba(0,0,0,0.08) !important }
+body.light-mode .lesson-chunk-row label { color:#1a1a2e !important }
+body.light-mode .lesson-chunk-hint { color:#1a1a2e !important }
+/* Reader page */
+body.light-mode { background:#f5f5fa !important; color:#1a1a2e !important }
+body.light-mode #screen-reader { background:#f5f5fa }
+body.light-mode .reader-inner { background:#f5f5fa }
+body.light-mode .stage { background:#f5f5fa }
+/* Baseline — was invisible on white */
+body.light-mode #baseline-display { color:#1a1a2e !important; font-size:17px !important; line-height:1.75 !important; font-weight:400 !important }
+/* Phrase */
+body.light-mode #phrase-display { color:#1a1a2e !important; font-family:'Plus Jakarta Sans',sans-serif !important; font-size:17px !important; font-weight:400 !important; line-height:1.75 !important }
+/* RSVP */
+body.light-mode #rsvp-display { color:#1a1a2e !important; font-size:22px !important; font-weight:500 !important; letter-spacing:normal !important }
+body.light-mode .rsvp-ruler, body.light-mode .rsvp-ruler-bottom { display:none !important }
+/* Pacer — inactive words were too faint */
+body.light-mode .pw { color:rgba(26,26,46,0.55) !important; font-size:17px !important }
+body.light-mode .pw.active { color:#1a1a2e !important; font-weight:600 !important; text-decoration-color:var(--gold) !important }
+body.light-mode .pw.done { color:rgba(26,26,46,0.3) !important }
+/* Focus — was nearly invisible */
+body.light-mode #focus-display { color:rgba(26,26,46,0.45) !important; font-size:17px !important }
+body.light-mode #focus-display .focus-active { color:#1a1a2e !important; font-weight:700 !important }
+/* Bionic */
+body.light-mode #bionic-display { color:rgba(26,26,46,0.45) !important; font-size:17px !important; line-height:1.75 !important }
+body.light-mode #bionic-display .bw-bold { color:#1a1a2e !important }
+body.light-mode #bionic-display .bw-dim { color:rgba(26,26,46,0.45) !important }
+body.light-mode .reader-controls { background:rgba(255,255,255,0.95) !important; border-color:rgba(0,0,0,0.1) !important; box-shadow:0 4px 28px rgba(0,0,0,0.12) !important }
+body.light-mode .reader-controls .hint-text { color:#1a1a2e !important }
+body.light-mode .reader-controls .hint-kbd { background:rgba(26,26,46,0.08) !important; border-color:rgba(26,26,46,0.2) !important; color:#1a1a2e !important }
+body.light-mode .reader-controls .pill-sep { background:rgba(26,26,46,0.1) !important }
+body.light-mode .btn-play { background:var(--gold) !important; color:#1a1a2e !important }
+body.light-mode .wpm-pill-wrap label { color:rgba(26,26,46,0.6) !important }
+body.light-mode .wpm-pill-stepper { background:#eeeef5 !important; border-color:rgba(0,0,0,0.1) !important }
+body.light-mode .wpm-pill-stepper button { color:#1a1a2e !important }
+body.light-mode .wpm-pill-stepper input[type=number] { border-color:rgba(0,0,0,0.08) !important }
+body.light-mode .btn-advance { background:#1a1a2e !important; color:#ffffff !important }
+body.light-mode .progress-fixed { background:#e0e0ec !important }
+
+body.light-mode main { background:#f5f5fa }
+body.light-mode footer { background:#f5f5fa; border-color:rgba(0,0,0,0.08) }
+body.light-mode footer p { color:rgba(26,26,46,0.4) }
+body.light-mode footer a { color:var(--gold) }
+
+/* ─── SCREEN 2: READER ────────────────────────────────────────────── */
+/* Phrase display — Lora serif, neuroscience-optimised (MVP fix) */
+.reader-inner {
+  display:flex; flex-direction:column; align-items:center;
+  min-height:calc(100vh - 69px);
+  justify-content:center;
+  padding-bottom:100px;
+}
+
+.stage {
+  width:100%; max-width:760px; min-height:220px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding:48px 32px; position:relative; overflow:visible;
+}
+.stage::before { display:none }
+
+/*
+  PHRASE MODE — Neuroscience-optimised reading (MVP spec):
+  - Lora serif: serifs guide horizontal saccades, reduce regression
+  - 32–44px: foveal sweet spot, reduces fixation time
+  - Weight 400: lighter than bold — bold increases cognitive load
+  - Warm off-white #eeedf8: less cortical excitation than pure white
+  - Letter-spacing +0.01em: reduces Bouma lateral crowding
+*/
+#phrase-display {
+  font-family:'Lora', Georgia, serif;
+  font-size:clamp(32px,4.5vw,44px);
+  font-weight:400;
+  color:#eeedf8;
+  text-align:center;
+  line-height:1.45;
+  letter-spacing:0.01em;
+  max-width:680px;
+  transition:opacity .07s ease;
+  word-break:keep-all;
+}
+#phrase-display.flash { opacity:0 }
+
+/* RSVP display */
+.rsvp-wrapper { display:flex; flex-direction:column; align-items:center; gap:0; width:100% }
+.rsvp-ruler { width:2px; height:28px; background:var(--gold); opacity:.6; margin-bottom:2px; border-radius:2px }
+#rsvp-display {
+  font-family:'Plus Jakarta Sans'; font-size:clamp(40px,7vw,72px);
+  font-weight:700; text-align:center; color:var(--text);
+  min-height:90px; display:flex; align-items:center; justify-content:center; letter-spacing:-1px;
+}
+.rsvp-ruler-bottom { width:2px; height:28px; background:var(--gold); opacity:.6; margin-top:2px; border-radius:2px }
+.rsvp-focus { color:var(--gold) }
+
+/* Pacer display */
+#pacer-display {
+  display:block; text-align:left; max-width:680px; width:100%;
+}
+.pacer-line {
+  display:block; line-height:2.4;
+}
+.pw {
+  display:inline; font-family:'Plus Jakarta Sans'; font-size:19px;
+  font-weight:300; color:rgba(242,241,252,0.45); margin-right:0.3em;
+}
+.pw.active {
+  color:#f2f1fc;
+  text-decoration:underline; text-decoration-color:var(--gold);
+  text-decoration-thickness:2px; text-underline-offset:5px;
+}
+.pw.done { color:rgba(242,241,252,0.2); }
+
+/* Bionic display */
+#bionic-display {
+  width:100%; max-width:680px; font-family:'Plus Jakarta Sans'; font-size:17px;
+  line-height:2; font-weight:300; color:var(--text); text-align:left;
+}
+#bionic-display .bw { display:inline-block; margin-right:.25em }
+#bionic-display .bw b { font-weight:700; color:var(--text) }
+#bionic-display .bw span { opacity:.65 }
+#bionic-display .bw.current b { color:var(--gold) }
+#bionic-display .bw.current span { opacity:1; color:var(--gold2) }
+#bionic-display .bw.done b,
+#bionic-display .bw.done span { opacity:.3 }
+
+/* ─── FIXED BOTTOM PILL (MVP fix) ────────────────────────────────── */
+.reader-controls {
+  position:fixed; bottom:max(24px, calc(env(safe-area-inset-bottom) + 12px)); left:50%; transform:translateX(-50%);
+  display:flex; align-items:center; gap:16px;
+  background:rgba(15,15,26,0.95); backdrop-filter:blur(14px);
+  border:1px solid var(--border2); border-radius:100px;
+  padding:8px 20px max(8px, env(safe-area-inset-bottom)) 12px;
+  z-index:50; white-space:nowrap;
+  box-shadow:0 4px 28px rgba(0,0,0,.5);
+}
+
+.btn-play {
+  width:52px; height:52px; border-radius:50%;
+  background:var(--gold); border:none; color:#08080e; font-size:20px;
+  cursor:pointer; transition:all .18s;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.btn-play:hover { transform:scale(1.08); box-shadow:0 6px 24px rgba(247,166,0,.4) }
+
+/* WPM stepper in pill */
+.wpm-pill-wrap { display:flex; flex-direction:column; align-items:center; gap:3px }
+.wpm-pill-wrap label { font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:#ffffff }
+.wpm-pill-stepper {
+  display:flex; align-items:center;
+  background:var(--s2); border:1px solid var(--border2); border-radius:8px; overflow:hidden;
+}
+.wpm-pill-stepper button {
+  width:30px; height:38px; background:transparent; border:none;
+  color:#ffffff; font-size:16px; cursor:pointer; transition:all .15s;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.wpm-pill-stepper button:hover { background:var(--s3); color:var(--gold) }
+.wpm-pill-stepper input[type=number] {
+  width:58px; height:38px; background:transparent; border:none;
+  border-left:1px solid var(--border); border-right:1px solid var(--border);
+  color:var(--gold); font-family:'JetBrains Mono'; font-size:16px; font-weight:500;
+  text-align:center; outline:none; -moz-appearance:textfield;
+}
+.wpm-pill-stepper input[type=number]::-webkit-outer-spin-button,
+.wpm-pill-stepper input[type=number]::-webkit-inner-spin-button { -webkit-appearance:none }
+.wpm-pill-stepper input[type=number]:focus { background:var(--s3) }
+
+/* Pacer mode — controls live in header, hide bottom pill */
+.pacer-header-controls {
+  display:none; align-items:center; gap:12px;
+}
+.pacer-header-controls .btn-play-sm {
+  width:40px; height:40px; border-radius:50%;
+  background:var(--gold); border:none; color:#08080e; font-size:16px;
+  cursor:pointer; transition:all .18s;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.pacer-header-controls .btn-play-sm:hover { transform:scale(1.08) }
+.pacer-header-controls .wpm-pill-wrap { display:flex; flex-direction:column; align-items:center; gap:2px }
+.pacer-header-controls .wpm-pill-wrap label { font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:#ffffff }
+.pacer-header-controls .wpm-pill-stepper {
+  display:flex; align-items:center;
+  background:var(--s2); border:1px solid var(--border2); border-radius:8px; overflow:hidden;
+}
+.pacer-header-controls .wpm-pill-stepper button {
+  width:28px; height:34px; background:transparent; border:none;
+  color:#ffffff; font-size:15px; cursor:pointer; transition:all .15s;
+  display:flex; align-items:center; justify-content:center;
+}
+.pacer-header-controls .wpm-pill-stepper button:hover { background:var(--s3); color:var(--gold) }
+.pacer-header-controls .wpm-pill-stepper input[type=number] {
+  width:54px; height:34px; background:transparent; border:none;
+  border-left:1px solid var(--border); border-right:1px solid var(--border);
+  color:var(--gold); font-family:'JetBrains Mono'; font-size:15px; font-weight:500;
+  text-align:center; outline:none; -moz-appearance:textfield;
+}
+.pacer-header-controls .wpm-pill-stepper input[type=number]::-webkit-outer-spin-button,
+.pacer-header-controls .wpm-pill-stepper input[type=number]::-webkit-inner-spin-button { -webkit-appearance:none }
+body.pacer .pacer-header-controls { display:flex }
+body.pacer .reader-controls { display:none }
+body.pacer .header-tag { display:none }
+.progress-fixed {
+  position:fixed; bottom:0; left:0; right:0;
+  height:4px; background:var(--s3); z-index:200; display:none;
+}
+.progress-fixed-fill {
+  height:100%;
+  background:linear-gradient(90deg,var(--gold),var(--orange));
+  transition:width .35s ease; width:0%;
+}
+body.reading .progress-fixed { display:block }
+body.bionic-mode .reader-inner { justify-content:flex-start; padding-top:40px }
+body.bionic-mode .stage { min-height:unset; justify-content:flex-start; align-items:flex-start }
+
+/* ─── SCREEN 3: RESULTS ───────────────────────────────────────────── */
+.results-hero { text-align:center; margin-bottom:32px }
+.results-hero h2 { font-family:'Bebas Neue'; font-size:clamp(40px,7vw,72px); letter-spacing:2px; margin-bottom:8px }
+.results-hero p { color:var(--muted2); font-size:15px }
+
+.res-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin-bottom:24px }
+.res-card { background:var(--s1); border:1px solid var(--border); border-radius:var(--r); padding:24px 20px; text-align:center }
+.res-card.hi { border-color:var(--gold); background:linear-gradient(135deg,rgba(247,166,0,.07),var(--s1)) }
+.res-card .big { font-family:'Bebas Neue'; font-size:52px; letter-spacing:1px; color:var(--gold); line-height:1; display:block }
+.res-card .lbl { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-top:5px; display:block }
+
+.wpm-gauge { background:var(--s1); border:1px solid var(--border); border-radius:var(--r); padding:24px; margin-bottom:16px }
+.gauge-bar-track { height:10px; background:var(--s3); border-radius:6px; margin:14px 0 8px; overflow:hidden }
+.gauge-bar-fill { height:100%; border-radius:6px; transition:width 1.2s cubic-bezier(.4,0,.2,1); background:linear-gradient(90deg,var(--blue),var(--gold),var(--orange)) }
+.gauge-labels { display:flex; justify-content:space-between; font-family:'JetBrains Mono'; font-size:10px; color:var(--muted) }
+.gauge-title { font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--muted); margin-bottom:6px }
+.gauge-your { font-size:13px; color:var(--muted2) }
+.gauge-your b { color:var(--gold); font-family:'JetBrains Mono' }
+
+.insight { background:var(--s1); border:1px solid var(--border); border-left:3px solid var(--gold); border-radius:var(--r); padding:22px; margin-bottom:20px }
+.insight h3 { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin-bottom:8px }
+.insight p { font-size:15px; line-height:1.75; color:var(--text); font-weight:300 }
+
+.res-actions { display:flex; gap:10px; flex-wrap:wrap }
+.res-actions .btn { flex:1; min-width:140px; padding:13px 18px }
+.res-actions .btn-gold { font-family:'Bebas Neue'; letter-spacing:2px; font-size:17px; font-weight:400 }
+
+/* ─── COUNTDOWN ───────────────────────────────────────────────────── */
+.overlay {
+  position:fixed; inset:0; background:rgba(8,8,14,.94);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  z-index:300; backdrop-filter:blur(10px);
+}
+.countdown-n { font-family:'Bebas Neue'; font-size:150px; color:var(--gold); line-height:1; animation:cpop .55s ease }
+.countdown-l { font-size:13px; letter-spacing:3px; text-transform:uppercase; color:var(--muted); margin-top:6px }
+@keyframes cpop { from{opacity:0;transform:scale(1.5)} to{opacity:1;transform:scale(1)} }
+
+/* ─── FOOTER ─────────────────────────────────────────────────────── */
+footer {
+  padding:18px 32px; border-top:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;
+}
+footer p { font-size:11px; color:var(--muted) }
+footer a { color:var(--gold); text-decoration:none; font-weight:600 }
+
+/* ─── RESPONSIVE ─────────────────────────────────────────────────── */
+@media(max-width:640px) {
+  header { padding:12px 16px }
+  main { padding:24px 16px }
+  .modes-grid { grid-template-columns:repeat(2,1fr) }
+  .prog-strip { display:none }
+  .mode-card.selected .mode-name { color:var(--gold) }
+  .controls-row { grid-template-columns:1fr }
+  footer { flex-direction:column; text-align:center; padding:14px 16px }
+  #phrase-display { font-size:28px }
+}
+
+/* ── SCREEN 1.5: LESSON ── */
+.lesson-hero { text-align:center; margin-bottom:32px }
+.lesson-badge { display:inline-block; font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); background:rgba(247,166,0,.1); padding:5px 16px; border-radius:100px; margin-bottom:16px }
+.lesson-hero h2 { font-family:'Bebas Neue'; font-size:clamp(36px,6vw,60px); letter-spacing:2px; margin-bottom:8px }
+.lesson-hero p { color:var(--muted2); font-size:15px; font-weight:300; max-width:500px; margin:0 auto }
+.lesson-preview { background:var(--s1); border:1px solid var(--border); border-radius:var(--r); padding:28px 32px; margin-bottom:24px; min-height:110px; display:flex; flex-direction:column; justify-content:center }
+.lesson-preview-label { font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:18px }
+.lesson-preview-text { font-family:'Plus Jakarta Sans'; font-size:17px; font-weight:300; line-height:1.9; color:rgba(242,241,252,0.22); transition:font-size .25s ease, font-family .25s ease, line-height .25s ease }
+.lesson-preview-text.phrase-style { font-family:'Lora',Georgia,serif; font-size:28px; font-weight:400; color:#eeedf8; text-align:center }
+.lesson-preview-text.rsvp-style { font-size:48px; font-weight:700; text-align:center; color:var(--text); line-height:1.2 }
+.lesson-preview-text .lp-dim  { color:rgba(242,241,252,0.22) }
+.lesson-preview-text .lp-active { color:#f2f1fc; font-weight:700 }
+.lesson-preview-text .lp-bold { font-weight:700; color:#f2f1fc }
+.lesson-preview-text .pacer-active { color:#f2f1fc; text-decoration:underline; text-decoration-color:var(--gold); text-decoration-thickness:2px; text-underline-offset:4px }
+.lesson-points { display:flex; flex-direction:column; gap:0; margin-bottom:28px; background:var(--s1); border:1px solid var(--border); border-radius:var(--r); overflow:hidden }
+.lp { display:flex; gap:16px; align-items:flex-start; background:transparent; border:none; border-bottom:1px solid var(--border); border-radius:0; padding:16px 18px }
+.lp:last-child { border-bottom:none }
+.lp-num { width:28px; height:28px; border-radius:50%; flex-shrink:0; background:rgba(247,166,0,.1); border:1px solid rgba(247,166,0,.25); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:var(--gold) }
+.lp-body strong { display:block; font-size:14px; font-weight:700; color:var(--text); margin-bottom:4px }
+.lp-body span { font-size:13px; color:var(--muted2); line-height:1.6 }
+/* ─── UNIFIED SETTINGS CARD ──────────────────────────────────────── */
+.usc-card {
+  background:var(--s1); border:1px solid var(--border2); border-radius:var(--r);
+  overflow:hidden; margin-bottom:16px;
+}
+.usc-header {
+  display:flex; align-items:center; gap:12px;
+  padding:12px 18px; border-bottom:1px solid var(--border);
+}
+.usc-dot {
+  width:8px; height:8px; border-radius:50%; background:var(--gold); flex-shrink:0;
+  box-shadow:0 0 0 4px rgba(247,166,0,0.15);
+  animation:pulse-dot 2s ease-out infinite;
+}
+.usc-header span {
+  font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted2);
+}
+.usc-row {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 18px; border-bottom:1px solid var(--border); gap:16px;
+}
+.usc-row:last-child { border-bottom:none }
+.usc-label {
+  font-size:11px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase;
+  color:var(--muted); white-space:nowrap;
+}
+.usc-stepper { width:180px }
+.usc-toggle-row { cursor:pointer; transition:background .15s }
+.usc-toggle-row:hover { background:var(--s2) }
+.usc-toggle-left { display:flex; align-items:center; gap:12px }
+.usc-toggle-icon {
+  width:32px; height:32px; border-radius:8px;
+  background:rgba(247,166,0,0.1); display:flex; align-items:center; justify-content:center;
+  flex-shrink:0; color:var(--gold);
+}
+/* Light mode overrides */
+body.light-mode .usc-card { background:#ffffff !important; border-color:rgba(0,0,0,0.09) !important }
+body.light-mode .usc-header { border-color:rgba(0,0,0,0.07) !important }
+body.light-mode .usc-header span { color:#1a1a2e !important }
+body.light-mode .usc-row { border-color:rgba(0,0,0,0.06) !important }
+body.light-mode .usc-label { color:#1a1a2e !important }
+body.light-mode .usc-toggle-row:hover { background:#f5f5fa !important }
+body.light-mode .usc-toggle-icon { background:rgba(247,166,0,0.1) !important; color:#1a1a2e !important }
+body.light-mode #screen-lesson .lesson-settings p { color:#1a1a2e !important; background:#ffffff !important; border-color:rgba(0,0,0,0.08) !important }
+body.light-mode #screen-lesson .lesson-settings p strong { color:#1a1a2e !important }
+.lesson-settings-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px }
+.lesson-settings-grid.single { grid-template-columns:1fr }
+.lesson-setting > label { display:block; font-size:11px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--muted); margin-bottom:8px }
+.lesson-settings-title {
+  font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+  color:var(--muted2); margin-bottom:14px;
+  background:var(--s2); border:1px solid var(--border2);
+  border-left:3px solid var(--gold);
+  border-radius:var(--r-sm); padding:10px 14px 10px 36px;
+  position:relative;
+}
+.lesson-settings-title::before {
+  content:'';
+  position:absolute; left:13px; top:50%; transform:translateY(-50%);
+  width:7px; height:7px; border-radius:50%;
+  background:var(--gold);
+  box-shadow:0 0 0 0 rgba(247,166,0,0.6);
+  animation:pulse-dot 2s ease-out infinite;
+}
+@keyframes pulse-dot {
+  0%   { box-shadow:0 0 0 0 rgba(247,166,0,0.6) }
+  60%  { box-shadow:0 0 0 6px rgba(247,166,0,0) }
+  100% { box-shadow:0 0 0 0 rgba(247,166,0,0) }
+}
+.lesson-chunk-row { display:flex; align-items:center; gap:14px; margin-bottom:0; background:var(--s1); border:1px solid var(--border); border-radius:var(--r-sm); padding:14px 18px }
+.lesson-chunk-row label { font-size:11px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--muted); white-space:nowrap }
+.lesson-chunk-row .stepper { width:140px }
+.lesson-chunk-hint { font-size:12px; color:var(--muted2) }
+.lesson-actions { display:flex; gap:12px }
+.lesson-actions .btn-gold { flex:1; font-family:'Bebas Neue'; letter-spacing:2px; font-weight:400; font-size:16px; padding:16px; border-radius:var(--r-sm) }
+.btn-lesson-skip { padding:14px 22px; border:1px solid var(--border2); border-radius:var(--r-sm); background:transparent; color:var(--muted); font-family:'Plus Jakarta Sans'; font-size:13px; cursor:pointer; transition:all .15s; touch-action:manipulation }
+.btn-lesson-skip:hover { color:var(--muted2) }
+/* Focus line */
+.focus-viewport { width:100%; max-width:100%; overflow:hidden; position:relative; height:60px; -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 16%,#000 84%,transparent 100%); mask-image:linear-gradient(90deg,transparent 0%,#000 16%,#000 84%,transparent 100%) }
+#focus-display { position:absolute; top:50%; left:0; transform:translateY(-50%) translateX(0px); white-space:nowrap; font-family:'Plus Jakarta Sans'; font-size:19px; font-weight:300; line-height:1; color:rgba(242,241,252,0.18); will-change:transform; user-select:none; opacity:0 }
+#focus-display.focus-ready { transition:transform 0.42s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.3s ease; opacity:1 }
+#focus-display .focus-chunk { display:inline }
+#focus-display .focus-chunk.focus-active { color:#f2f1fc; font-weight:700 }
+#focus-display .focus-sep { display:inline }
+.btn-advance { height:50px; padding:0 28px; border-radius:100px; background:#f2f1fc; border:none; color:#08080e; font-family:'Plus Jakarta Sans'; font-size:15px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:8px; flex-shrink:0; transition:all .15s; touch-action:manipulation }
+.btn-advance:hover { background:#ffffff }
+/* Chunking — static full-text display */
+#bionic-display { width:100%; max-width:680px; font-family:'Plus Jakarta Sans'; font-size:19px; line-height:2.2; font-weight:300; color:rgba(242,241,252,0.35); text-align:left }
+#bionic-display .bw-bold { font-weight:700; color:var(--text) }
+#bionic-display .bw-dim  { font-weight:300; color:rgba(242,241,252,0.35) }
+/* Baseline */
+#baseline-display { width:100%; max-width:680px; font-family:'Plus Jakarta Sans'; font-size:17px; font-weight:300; line-height:1.85; color:var(--text); text-align:left }
+/* Future/Contact */
+.future-section { margin-top:36px; margin-bottom:28px }
+.future-label { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:12px }
+.future-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px }
+.future-card { background:var(--s1); border:1px solid var(--border); border-radius:var(--r); padding:16px 14px; text-align:center; opacity:.65 }
+.future-icon { font-size:22px; margin-bottom:6px; display:block }
+.future-name { font-size:13px; font-weight:700; color:var(--text); margin-bottom:4px }
+.future-desc { font-size:11px; color:var(--muted); line-height:1.45 }
+.future-badge { display:inline-block; margin-top:8px; font-size:8px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:2px 8px; border-radius:100px; background:rgba(255,255,255,.06); color:var(--muted) }
+.contact-section { margin-bottom:20px }
+.contact-label { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:12px }
+.contact-row { display:flex; gap:10px }
+.contact-btn { flex:1; display:flex; align-items:center; justify-content:center; gap:8px; padding:13px 18px; border:1px solid var(--border2); border-radius:var(--r-sm); background:var(--s1); color:var(--muted2); font-size:13px; font-weight:500; text-decoration:none; transition:all .18s; touch-action:manipulation }
+.contact-btn:hover { border-color:var(--gold); color:var(--gold) }
+/* Baseline comparison */
+.res-comparison { background:var(--s1); border:1px solid var(--gold); border-radius:var(--r); padding:22px 24px; margin-bottom:20px; text-align:center; display:none }
+.footer-version { font-size:11px; color:rgba(255,255,255,0.18); font-family:'JetBrains Mono',monospace; letter-spacing:.5px }
+
+/* ─── LIGHT MODE LOGO SWAP ───────────────────────────────────────── */
+.logo-img-dark { display:block }
+.logo-img-colour { display:none; height:48px }
+body.light-mode .logo-img-dark { display:none }
+body.light-mode .logo-img-colour { display:block }
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="logo" onclick="goHome()">
+    <img class="logo-img logo-img-dark" src="/logo-dark.png" alt="StudyFast">
+    <img class="logo-img-colour" src="/logo-colour.png" alt="StudyFast">
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;margin-left:auto">
+    <a class="btn-app" href="index.html">🧠 The App</a>
+    <a class="btn-science" href="science.html">📚 The Science</a>
+  </div>
+  <div class="pacer-header-controls" id="pacer-header-controls">
+    <button class="btn-play-sm" id="btn-playpause-hdr">&#9654;</button>
+    <div class="wpm-pill-wrap">
+      <label>Words per minute</label>
+      <div class="wpm-pill-stepper">
+        <button id="wpm-minus-hdr" tabindex="-1">−</button>
+        <input type="number" id="speed-live-hdr" min="60" max="1000" step="10" value="250">
+        <button id="wpm-plus-hdr" tabindex="-1">+</button>
+      </div>
+    </div>
+  </div>
+  <button class="btn-back" id="btn-back" onclick="goHome()">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 12L6 8l4-4"/></svg>
+    Back to start
+  </button>
+</header>
+
+<main>
+
+<!-- ══════════════════════════════════════
+     SCREEN 1 — INPUT
+══════════════════════════════════════ -->
+<div class="screen active" id="screen-input">
+
+  <div class="hero">
+    <h1>READ FASTER<span class="accent">START NOW.</span></h1>
+    <p>Seven steps to mastery. One goal. Double your reading speed in 7 days — 15 minutes a day is all it takes.</p>
+  </div>
+
+  <div class="modes-label">Your training progression — start at Step 1</div>
+  <div class="modes-grid">
+    <div class="mode-card selected" data-mode="baseline">
+      <div class="mode-step">Step 1</div>
+      <span class="mode-icon">📖</span>
+      <div class="mode-name">Baseline Test</div>
+      <div class="mode-desc">Read naturally. We measure your starting WPM.</div>
+      <span class="mode-badge" style="background:rgba(255,255,255,.08);color:var(--muted2)">Start Here</span>
+    </div>
+    <div class="mode-card" data-mode="rsvp">
+      <div class="mode-step">Step 2</div>
+      <span class="mode-icon">🎯</span>
+      <div class="mode-name">RSVP</div>
+      <div class="mode-desc">One word. Eyes still. Pure speed training.</div>
+    </div>
+    <div class="mode-card" data-mode="phrase">
+      <div class="mode-step">Step 3</div>
+      <span class="mode-icon">⚡</span>
+      <div class="mode-name">Phrase Reading</div>
+      <div class="mode-desc">Word chunks. Fewer fixations per line.</div>
+    </div>
+    <div class="mode-card" data-mode="focus">
+      <div class="mode-step">Step 4</div>
+      <span class="mode-icon">🔦</span>
+      <div class="mode-name">Focus Line</div>
+      <div class="mode-desc">Spotlight moves. Train peripheral vision.</div>
+    </div>
+    <div class="mode-card" data-mode="scroll">
+      <div class="mode-step">Step 5</div>
+      <span class="mode-icon">👁</span>
+      <div class="mode-name">Pacer</div>
+      <div class="mode-desc">Chunk underline. Eyes follow the flow.</div>
+    </div>
+    <div class="mode-card" data-mode="bionic">
+      <div class="mode-step">Step 6</div>
+      <span class="mode-icon">🧠</span>
+      <div class="mode-name">Chunking</div>
+      <div class="mode-desc">Bold groups. Brain autocompletes the rest.</div>
+    </div>
+    <div class="mode-card" data-mode="baseline_retest">
+      <div class="mode-step">Step 7</div>
+      <span class="mode-icon">🏁</span>
+      <div class="mode-name">Re-Test</div>
+      <div class="mode-desc">Same test. New speed. Prove your progress.</div>
+      <span class="mode-badge" style="background:rgba(61,255,160,.12);color:var(--green)">Prove It</span>
+    </div>
+  </div>
+  <!-- Progress strip -->
+  <div class="prog-strip" id="prog-strip">
+    <div class="ps-dot active"></div><div class="ps-line"></div>
+    <div class="ps-dot"></div><div class="ps-line"></div>
+    <div class="ps-dot"></div><div class="ps-line"></div>
+    <div class="ps-dot"></div><div class="ps-line"></div>
+    <div class="ps-dot"></div><div class="ps-line"></div>
+    <div class="ps-dot"></div><div class="ps-line"></div>
+    <div class="ps-dot"></div>
+  </div>
+
+  <div class="input-card">
+    <label>Paste your text</label>
+    <textarea id="text-input" maxlength="50000" placeholder="Paste anything — an email, report, article, chapter. The longer the better for a proper training session...&#10;&#10;Tip: paste a real work document. That's how you make the training count."></textarea>
+
+  </div>
+  <!-- hidden compat inputs -->
+  <input type="hidden" id="speed-input" value="250">
+  <input type="hidden" id="chunk-input" value="2">
+
+  <div class="start-row">
+    <button class="btn btn-gold" id="btn-start" disabled>PASTE TEXT TO BEGIN →</button>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-chip">📚 <b>Average reader:</b> 200 WPM</div>
+    <div class="stat-chip">🚀 <b>After training:</b> 300–600 WPM</div>
+    <div class="stat-chip">⏱ <b>Time saved:</b> 10+ hrs/week</div>
+  </div>
+
+  <!-- EMAIL CAPTURE — HOME SCREEN -->
+  <div style="background:#1a1a2e;border:1px solid rgba(247,166,0,0.25);border-radius:14px;padding:20px;margin-top:24px;margin-bottom:4px">
+    <div style="display:inline-block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);background:rgba(247,166,0,0.12);border:1px solid rgba(247,166,0,0.3);padding:3px 10px;border-radius:20px;margin-bottom:10px">7-Day Speed Reading Programme</div>
+    <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px;line-height:1.3">One mode per day.<br>One week to a new reading speed.</div>
+    <div style="font-size:12px;color:var(--muted2);margin-bottom:14px;line-height:1.6">Jordan walks you through all 7 training modes — one per day. By Day 7 you re-test and see exactly how far you've come.</div>
+    <div style="display:flex;gap:5px;margin-bottom:14px">
+      <div style="flex:1;background:rgba(247,166,0,0.1);border:1px solid rgba(247,166,0,0.3);border-radius:7px;padding:7px 3px;text-align:center">
+        <div style="font-size:13px;font-weight:800;color:var(--gold)">1</div><div style="font-size:8px;color:rgba(247,166,0,0.6);letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Baseline</div>
+      </div>
+      <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:7px;padding:7px 3px;text-align:center">
+        <div style="font-size:13px;font-weight:800;color:#3a3a55">2</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">RSVP</div>
+      </div>
+      <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:7px;padding:7px 3px;text-align:center">
+        <div style="font-size:13px;font-weight:800;color:#3a3a55">3</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Phrase</div>
+      </div>
+      <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:7px;padding:7px 3px;text-align:center">
+        <div style="font-size:13px;font-weight:800;color:#3a3a55">4</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Focus</div>
+      </div>
+      <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:7px;padding:7px 3px;text-align:center">
+        <div style="font-size:13px;font-weight:800;color:#3a3a55">5</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Pacer</div>
+      </div>
+      <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:7px;padding:7px 3px;text-align:center">
+        <div style="font-size:13px;font-weight:800;color:#3a3a55">6</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Chunking</div>
+      </div>
+      <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:7px;padding:7px 3px;text-align:center">
+        <div style="font-size:13px;font-weight:800;color:#3a3a55">7</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Re-Test</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:6px">
+      <input id="home-email-input" type="email" placeholder="your@email.com" style="flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:11px 14px;font-size:13px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;outline:none">
+      <button id="home-email-btn" style="background:var(--gold);color:#08080e;font-size:12px;font-weight:800;padding:11px 16px;border-radius:8px;border:none;cursor:pointer;white-space:nowrap;font-family:'Plus Jakarta Sans',sans-serif">START DAY 1 →</button>
+    </div>
+    <div id="home-email-msg" style="font-size:11px;color:#3a3a55;text-align:center">No spam. Unsubscribe anytime.</div>
+  </div>
+
+  <!-- FUTURE RELEASES -->
+  <div class="future-section">
+    <div class="future-label">Coming soon</div>
+    <div class="future-grid">
+      <div class="future-card"><span class="future-icon">👁</span><div class="future-name">Eye Warm-Up Series</div><div class="future-desc">Daily drills to prime your visual system before training.</div><span class="future-badge">In development</span></div>
+      <div class="future-card"><span class="future-icon">🎯</span><div class="future-name">Eye Training</div><div class="future-desc">Peripheral expansion, saccade control, fixation drills.</div><span class="future-badge">In development</span></div>
+      <div class="future-card"><span class="future-icon">🧪</span><div class="future-name">Comprehension Test</div><div class="future-desc">Prove retention matches your speed.</div><span class="future-badge">In development</span></div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="contact-section">
+    <div class="contact-label">Got feedback?</div>
+    <a href="mailto:jordan@studyfast.uk?subject=Feedback" class="contact-btn" target="_blank" style="display:flex;justify-content:center">💬 Send Feedback</a>
+  </div>
+
+</div>
+
+
+<!-- ══ SCREEN 1.5 — LESSON ══ -->
+<div class="screen" id="screen-lesson">
+  <div class="lesson-hero">
+    <div class="lesson-badge" id="lesson-badge-el"></div>
+    <h2 id="lesson-title-el"></h2>
+    <p id="lesson-sub-el"></p>
+  </div>
+  <div class="lesson-preview">
+    <div class="lesson-preview-label">What you'll see</div>
+    <div class="lesson-preview-text" id="lesson-preview-el"></div>
+  </div>
+  <div class="lesson-points" id="lesson-points-el"></div>
+  <div class="lesson-settings" id="lesson-settings-el"></div>
+  <div class="lesson-actions">
+    <button class="btn btn-gold" id="btn-lesson-start">START TRAINING →</button>
+    <button class="btn-lesson-skip" id="btn-lesson-skip">← Back</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SCREEN 2 — READER
+══════════════════════════════════════ -->
+<div class="screen" id="screen-reader">
+  <div class="reader-inner">
+    <div class="stage" id="stage">
+      <!-- content injected by JS per mode -->
+    </div>
+  </div>
+
+  <!-- Baseline pill -->
+  <div class="reader-controls" id="reader-controls-baseline" style="display:none">
+    <button class="btn-advance" id="btn-baseline-finish" style="background:var(--gold);color:#08080e;border-radius:100px;height:50px;padding:0 28px;font-family:'Plus Jakarta Sans';font-size:14px;font-weight:700;border:none;cursor:pointer;touch-action:manipulation">Finished — I've read it all</button>
+  </div>
+  <!-- Focus manual pill -->
+  <div class="reader-controls" id="reader-controls-manual" style="display:none">
+    <button class="btn-advance" id="btn-advance">Advance →</button>
+    <div class="pill-sep" style="width:1px;height:32px;background:rgba(255,255,255,.12);flex-shrink:0"></div>
+    <div class="hint-text" style="font-size:11px;color:#ffffff;white-space:nowrap"><span class="hint-kbd" style="display:inline-block;background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.35);border-radius:4px;padding:2px 7px;font-size:10px;color:#ffffff;font-family:monospace">space</span> or tap</div>
+  </div>
+  <!-- Standard pill -->
+  <div class="reader-controls" id="reader-controls-auto">
+    <button class="btn-play" id="btn-playpause">&#9654;</button>
+    <div class="wpm-pill-wrap">
+      <label>Words per minute</label>
+      <div class="wpm-pill-stepper">
+        <button id="wpm-minus" tabindex="-1">−</button>
+        <input type="number" id="speed-live" min="60" max="1000" step="10" value="250">
+        <button id="wpm-plus" tabindex="-1">+</button>
+      </div>
+    </div>
+    <!-- Chunk size for pacer/chunking -->
+    <div id="pill-chunk-ctrl" class="wpm-pill-wrap" style="display:none">
+      <label>Chunk size</label>
+      <div class="wpm-pill-stepper">
+        <button id="chunk-live-minus" tabindex="-1">−</button>
+        <input type="number" id="chunk-live" min="1" max="5" step="1" value="2">
+        <button id="chunk-live-plus" tabindex="-1">+</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SCREEN 3 — RESULTS
+══════════════════════════════════════ -->
+<div class="screen" id="screen-results">
+
+  <div class="results-hero">
+    <h2>SESSION <span style="color:var(--gold)">COMPLETE</span> 🎯</h2>
+    <p id="results-sub">Here's your performance breakdown.</p>
+  </div>
+
+  <!-- Baseline retest comparison — only shown on step 7 -->
+  <div class="res-comparison" id="baseline-comparison">
+    <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px">Your progress</div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap">
+      <div style="text-align:center"><div style="font-family:'Bebas Neue';font-size:44px;color:var(--muted2);line-height:1" id="bc-before">—</div><div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-top:4px">Baseline WPM</div></div>
+      <div style="font-size:28px;color:var(--gold)">→</div>
+      <div style="text-align:center"><div style="font-family:'Bebas Neue';font-size:44px;color:var(--gold);line-height:1" id="bc-after">—</div><div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-top:4px">Your speed now</div></div>
+      <div style="text-align:center"><div style="font-family:'Bebas Neue';font-size:44px;color:var(--green);line-height:1" id="bc-gain">—</div><div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-top:4px">WPM gained</div></div>
+    </div>
+  </div>
+
+  <!-- WPM comparison card -->
+  <div class="wpm-gauge" id="wpm-compare-card">
+    <div class="gauge-title">How you compare</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin:14px 0 10px;gap:16px;flex-wrap:wrap">
+      <div>
+        <div style="font-family:'Bebas Neue';font-size:52px;color:var(--gold);line-height:1" id="gauge-wpm-val">—</div>
+        <div style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-top:4px">Your speed</div>
+      </div>
+      <div style="font-size:22px;color:var(--border2)">vs</div>
+      <div style="text-align:right">
+        <div style="font-family:'Bebas Neue';font-size:52px;color:var(--muted2);line-height:1">600+</div>
+        <div style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-top:4px">Speed Reader</div>
+      </div>
+    </div>
+    <div class="gauge-bar-track">
+      <div class="gauge-bar-fill" id="gauge-fill" style="width:0%"></div>
+    </div>
+    <div style="font-size:13px;color:var(--muted2);margin-top:10px" id="gauge-context">—</div>
+  </div>
+
+  <!-- Jordan's Take -->
+  <div class="insight">
+    <h3>Jordan's Take</h3>
+    <p id="insight-text"></p>
+  </div>
+
+  <!-- 7-Day Email Capture -->
+  <div id="email-capture-card" style="background:#1a1a2e;border:1px solid rgba(247,166,0,0.25);border-radius:14px;padding:20px;margin-bottom:20px">
+    <div style="display:inline-block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);background:rgba(247,166,0,0.12);border:1px solid rgba(247,166,0,0.3);padding:3px 10px;border-radius:20px;margin-bottom:10px">7-Day Speed Reading Programme</div>
+    <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px;line-height:1.3">One mode per day.<br>One week to a new reading speed.</div>
+    <div style="font-size:12px;color:var(--muted2);margin-bottom:14px;line-height:1.6">Jordan walks you through all 7 training modes — one per day. By Day 7 you re-test and see exactly how far you've come.</div>
+    <div style="display:flex;gap:5px;margin-bottom:14px">
+      <div style="flex:1;background:rgba(247,166,0,0.1);border:1px solid rgba(247,166,0,0.3);border-radius:7px;padding:7px 3px;text-align:center">
+        <div style="font-size:13px;font-weight:800;color:var(--gold)">1</div><div style="font-size:8px;color:rgba(247,166,0,0.6);letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Baseline</div>
+      </div>
+      <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:7px;padding:7px 3px;text-align:center">
+        <div style="font-size:13px;font-weight:800;color:#3a3a55">2</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">RSVP</div>
+      </div>
+      <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:7px;padding:7px 3px;text-align:center">
+        <div style="font-size:13px;font-weight:800;color:#3a3a55">3</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Phrase</div>
+      </div>
+      <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:7px;padding:7px 3px;text-align:center">
+        <div style="font-size:13px;font-weight:800;color:#3a3a55">4</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Focus</div>
+      </div>
+      <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:7px;padding:7px 3px;text-align:center">
+        <div style="font-size:13px;font-weight:800;color:#3a3a55">5</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Pacer</div>
+      </div>
+      <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:7px;padding:7px 3px;text-align:center">
+        <div style="font-size:13px;font-weight:800;color:#3a3a55">6</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Chunking</div>
+      </div>
+      <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:7px;padding:7px 3px;text-align:center">
+        <div style="font-size:13px;font-weight:800;color:#3a3a55">7</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Re-Test</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:6px">
+      <input id="email-capture-input" type="email" placeholder="your@email.com" style="flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:11px 14px;font-size:13px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;outline:none">
+      <button id="email-capture-btn" style="background:var(--gold);color:#08080e;font-size:12px;font-weight:800;padding:11px 16px;border-radius:8px;border:none;cursor:pointer;white-space:nowrap;font-family:'Plus Jakarta Sans',sans-serif">START DAY 1 →</button>
+    </div>
+    <div id="email-capture-msg" style="font-size:11px;color:#3a3a55;text-align:center">No spam. Unsubscribe anytime.</div>
+  </div>
+
+  <!-- Navigation buttons -->
+  <div class="res-actions">
+    <button class="btn btn-gold" id="btn-nextstep" style="flex:2;font-family:'Bebas Neue';letter-spacing:2px;font-size:17px;font-weight:400;padding:14px">NEXT STEP →</button>
+    <button class="btn btn-ghost" id="btn-readagain" style="flex:1;font-family:'Bebas Neue';letter-spacing:2px;font-size:17px;font-weight:400;padding:14px">READ AGAIN</button>
+  </div>
+  <div style="text-align:center;margin-top:14px">
+    <button class="btn" id="btn-switchmode" style="background:transparent;color:var(--muted);font-size:13px;padding:8px 16px;border-radius:100px;border:1px solid var(--border)">Try a different step</button>
+  </div>
+
+</div>
+</main>
+
+<footer>
+  <p>Built by <a href="https://studyfast.uk/" target="_blank">StudyFast</a> · Jordan Harry · TEDx 3.4M views · 50,000+ professionals in 70 countries</p>
+  <span class="footer-version">V2026.1</span>
+</footer>
+
+</div><!-- .app -->
+
+<!-- Progress bar fixed to bottom during reading -->
+<div class="progress-fixed" id="progress-fixed">
+  <div class="progress-fixed-fill" id="prog-fill"></div>
+</div>
+
+<!-- Countdown -->
+<div class="overlay" id="countdown-overlay" style="display:none">
+  <div class="countdown-n" id="countdown-n">3</div>
+  <div class="countdown-l" id="countdown-l">Get ready to read</div>
+</div>
+
+<script>
+window.addEventListener('error',function(e){console.error('[StudyFast]',e.message,'|',e.filename,'line',e.lineno);});
+window.addEventListener('unhandledrejection',function(e){console.error('[StudyFast] Unhandled promise rejection:',e.reason);});
+const S = {
+  mode: 'baseline',
+  phrases: [], allWords: [], bionicHTML: [],
+  focusChunks: [], focusChunkOffsets: [], focusManual: false,
+  currentIndex: 0, isPlaying: false,
+  wpm: 250, chunkSize: 2,
+  timer: null, clockTimer: null,
+  elapsedSec: 0, totalWordsRead: 0,
+  baselineWpm: 0,
+  rrm: false,
+  manualMode: false,
+  readingMode: false
+};
+
+const MODE_ORDER = ['baseline','rsvp','phrase','focus','scroll','bionic','baseline_retest'];
+
+const LESSON_DATA = {
+  baseline: {
+    badge: '📖 Baseline Reading Test', title: 'Find your starting speed.',
+    sub: 'Read at your natural pace. We\'ll time you and calculate your WPM.',
+    preview: '<span class="lp-dim">I am Gimpel the fool. I don\'t think myself a fool. On the contrary. But that\'s what folks call me.</span>',
+    previewClass: '',
+    points: [
+      { h: 'Read at your normal comfortable pace.', b: 'Don\'t rush — this is your baseline. Just read as you would any document normally.' },
+      { h: 'Click Finished when you\'ve read it all.', b: 'We\'ll calculate your WPM from the time taken. This becomes your starting number.' },
+      { h: 'You\'ll take the same test again at Step 7.', b: 'The difference between now and then is your measurable proof of progress.' }
+    ],
+    settings: 'baseline'
+  },
+  rsvp: {
+    badge: '🎯 RSVP Focus', title: 'Zero eye movement. Maximum speed.',
+    sub: 'One word at a time, dead centre. Your eyes never move.',
+    preview: '<span style="font-size:48px;font-weight:700" class="lp-active">quickly</span>',
+    previewClass: 'rsvp-style',
+    points: [
+      { h: 'Eyes stay perfectly still.', b: 'Every word appears at the same spot. Zero saccadic movement — the main time cost in normal reading.' },
+      { h: 'Start slow. Then push hard.', b: '250 WPM feels comfortable. 350 is training. 500+ is where real adaptation happens.' },
+      { h: 'Don\'t worry about comprehension at first.', b: 'Your brain adapts. The first sessions feel chaotic — that\'s neuroplasticity. Within a week it clicks.' }
+    ],
+    settings: 'wpm'
+  },
+  phrase: {
+    badge: '⚡ Phrase Reading', title: 'Read ideas, not words.',
+    sub: '30 seconds — then you\'ll read faster than you ever have.',
+    preview: '<span style="font-family:Lora,Georgia,serif;font-size:clamp(32px,4.5vw,44px);font-weight:400;letter-spacing:0.01em;line-height:1.45" class="lp-active">read like this</span>',
+    previewClass: 'phrase-style',
+    points: [
+      { h: 'Read the bold phrase as one complete idea.', b: 'Your brain processes whole chunks — not single words. Let each phrase land as one thought.' },
+      { h: 'Never re-read. Trust the rhythm.', b: 'Regression kills speed. If you miss a phrase, move on. Breaking this habit doubles most people\'s speed.' },
+      { h: 'Slightly uncomfortable = it\'s working.', b: 'If it feels easy, increase the WPM. The stretch is the training.' }
+    ],
+    settings: 'wpm+chunk'
+  },
+  focus: {
+    badge: '🔦 Focus Line', title: 'The spotlight stays. The text moves.',
+    sub: 'Full text visible. Bold chunk fixed at centre. Peripheral vision trains itself.',
+    preview: '<span class="lp-dim">I am Gimpel the fool. I don\'t think myself</span> <span class="lp-bold"> a fool. On</span> <span class="lp-dim">the contrary. But that\'s what folks call me.</span>',
+    previewClass: '',
+    points: [
+      { h: 'The highlighted chunk is your only job.', b: 'The dimmed text trains your peripheral vision to pre-load upcoming words. Elite readers do this automatically.' },
+      { h: 'No regression. No looking back.', b: 'The text behind the highlight will tempt you to re-read. Train yourself to leave it.' },
+      { h: 'Peripheral awareness is your superpower.', b: 'After a few sessions you\'ll notice you\'re processing words before the highlight reaches them.' }
+    ],
+    settings: 'wpm+chunk'
+  },
+  scroll: {
+    badge: '👁 Pacer', title: 'Let the pace pull you forward.',
+    sub: 'Gold underline moves chunk by chunk. Your eyes follow.',
+    preview: '<span class="lp-dim">I am Gimpel the fool.</span> <span class="lp-active" style="text-decoration:underline;text-decoration-color:#F7A600;text-decoration-thickness:2px;text-underline-offset:4px">I don\'t think</span> <span class="lp-dim">myself a fool. On the contrary.</span>',
+    previewClass: '',
+    points: [
+      { h: 'Let the underline lead. Don\'t race ahead.', b: 'Trust the line. This builds rhythmic reading — one of the most transferable real-world skills.' },
+      { h: 'Eyes track the underline, not individual words.', b: 'Your peripheral vision handles the words around it. This is how fast readers actually read.' },
+      { h: 'Increase speed when the text feels easy.', b: 'Once comfortable, push up 20–30 WPM. The pacer makes this increment feel natural.' }
+    ],
+    settings: 'wpm+chunk'
+  },
+  bionic: {
+    badge: '🧠 Chunking', title: 'Bold groups. Brain fills the rest.',
+    sub: 'Read at your own pace. We\'ll time you and give you your WPM at the end.',
+    preview: '<span class="lp-bold">I am</span> <span class="lp-dim">Gimpel the</span> <span class="lp-bold">fool. I</span> <span class="lp-dim">don\'t think</span> <span class="lp-bold">myself a</span>',
+    previewClass: '',
+    points: [
+      { h: 'Your brain only needs the bold groups.', b: 'Your visual system locks onto the bold cluster and glides over the dim words. Fewer conscious fixations per line.' },
+      { h: 'Don\'t try to read every letter.', b: 'The dim words are processed by peripheral vision. Trust it. Fighting this slows you down.' },
+      { h: 'Particularly effective for ADHD readers.', b: 'The rhythmic bold pattern gives restless eyes something to anchor to.' }
+    ],
+    settings: 'bionic'
+  },
+  baseline_retest: {
+    badge: '🏁 Re-Test', title: 'How far have you come?',
+    sub: 'Same text. Same rules. See exactly how much faster you are now.',
+    preview: '<span class="lp-dim">I am Gimpel the fool. I don\'t think myself a fool. On the contrary. But that\'s what folks call me.</span>',
+    previewClass: '',
+    points: [
+      { h: 'Read at your natural pace — no rushing.', b: 'This isn\'t about trying harder. It\'s seeing what your trained brain does automatically now.' },
+      { h: 'The timer runs silently in the background.', b: 'Click Finished when done. We\'ll compare directly to your baseline result.' },
+      { h: 'Your progress is the proof.', b: 'The gap between baseline and re-test WPM is your evidence. Real, measurable, undeniable.' }
+    ],
+    settings: 'baseline'
+  }
+};
+
+const $ = id => document.getElementById(id);
+const ms = (wpm, words) => (words / wpm) * 60000;
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  $(id).classList.add('active');
+}
+function setReadingMode(on) {
+  document.body.classList.toggle('reading', on);
+  document.body.classList.toggle('rrm', on && S.readingMode);
+  if (on) {
+    document.body.classList.toggle('light-mode', S.readingMode);
+  } else {
+    document.body.classList.remove('light-mode');
+  }
+}
+function goHome() {
+  pause();
+  setReadingMode(false);
+  S.readingMode = false;
+  S.rrm = false;
+  S.manualMode = false;
+  document.body.classList.remove('rrm');
+  document.body.classList.remove('bionic-mode');
+  document.body.classList.remove('light-mode');
+  showScreen('screen-input');
+}
+function setWpm(val) {
+  S.wpm = Math.min(1000, Math.max(60, val));
+  $('speed-live').value = S.wpm;
+  if (S.isPlaying) { clearTimeout(S.timer); scheduleNext(); }
+}
+function setChunk(val) {
+  val = Math.min(5, Math.max(1, val));
+  $('chunk-input').value = val;
+  S.chunkSize = val;
+}
+
+// ── MODE SELECTION — simple direct listeners, no delegation ──
+document.querySelectorAll('.mode-card').forEach(card => {
+  card.addEventListener('click', () => {
+    document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    S.mode = card.dataset.mode;
+    const idx = MODE_ORDER.indexOf(S.mode);
+    document.querySelectorAll('.ps-dot').forEach((d,i) => d.classList.toggle('active', i <= idx));
+    document.querySelectorAll('.ps-line').forEach((l,i) => l.classList.toggle('active', i < idx));
+  });
+});
+
+// ── TEXTAREA — enable Start button when text pasted ──
+function checkText() {
+  const ok = $('text-input').value.trim().length > 30;
+  $('btn-start').disabled = !ok;
+  $('btn-start').textContent = ok ? 'START READING →' : 'PASTE TEXT TO BEGIN →';
+}
+$('text-input').addEventListener('input', checkText);
+$('text-input').addEventListener('paste', () => setTimeout(checkText, 10));
+$('text-input').addEventListener('change', checkText);
+
+// ── START BUTTON ──
+$('btn-start').addEventListener('click', () => {
+  S.currentIndex = 0; S.elapsedSec = 0; S.totalWordsRead = 0;
+  populateLesson(S.mode);
+  showScreen('screen-lesson');
+});
+
+// ── LESSON SCREEN ──
+/* ── Unified settings card builder ── */
+function buildSettingsCard({ wpm, chunk, toggle }) {
+  const wpmRow = wpm ? `
+    <div class="usc-row">
+      <label class="usc-label">Reading speed (WPM)</label>
+      <div class="stepper usc-stepper"><button id="lswpm-minus" tabindex="-1">−</button><input type="number" id="lesson-wpm" min="60" max="1000" step="10" value="${S.wpm}"><button id="lswpm-plus" tabindex="-1">+</button></div>
+    </div>` : '';
+  const chunkRow = chunk ? `
+    <div class="usc-row">
+      <label class="usc-label">Chunk size</label>
+      <div class="stepper usc-stepper"><button id="lschunk-minus" tabindex="-1">−</button><input type="number" id="lesson-chunk" min="1" max="5" step="1" value="${S.chunkSize}"><button id="lschunk-plus" tabindex="-1">+</button></div>
+    </div>` : '';
+  let toggleRow = '';
+  if (toggle === 'free') {
+    toggleRow = `
+    <div class="usc-row usc-toggle-row" id="reading-mode-toggle" onclick="toggleReadingMode()" style="cursor:pointer">
+      <div class="usc-toggle-left">
+        <div class="usc-toggle-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <div><div class="rrm-label">Reading Mode</div><div class="rrm-sub">Smaller font, white background, click or Space to advance</div></div>
+      </div>
+      <div class="rrm-switch"></div>
+    </div>`;
+  } else if (toggle === 'locked') {
+    toggleRow = `
+    <div class="usc-row usc-toggle-row" style="opacity:0.55;cursor:not-allowed">
+      <div class="usc-toggle-left">
+        <div class="usc-toggle-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div><div class="rrm-label">Reading Mode <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" style="vertical-align:middle;margin-left:4px"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><div class="rrm-sub">Required for test accuracy — cannot be changed</div></div>
+      </div>
+      <div class="rrm-switch" style="pointer-events:none"></div>
+    </div>`;
+  }
+  return `<div class="usc-card">
+    <div class="usc-header"><div class="usc-dot"></div><span>Session settings</span></div>
+    ${wpmRow}${chunkRow}${toggleRow}
+  </div>`;
+}
+
+const READING_MODE_TOGGLE_HTML = ''; /* replaced by buildSettingsCard */
+const READING_MODE_LOCKED_HTML = '';  /* replaced by buildSettingsCard */
+
+function toggleReadingMode() {
+  S.readingMode = !S.readingMode;
+  S.rrm = S.readingMode;
+  S.manualMode = S.readingMode;
+  const t = $('reading-mode-toggle');
+  if (t) {
+    const sw = t.querySelector('.rrm-switch');
+    if (sw) { sw.style.background = S.readingMode ? 'rgba(247,166,0,0.2)' : ''; sw.style.borderColor = S.readingMode ? 'var(--gold)' : ''; }
+    const knob = sw && sw.querySelector ? null : null;
+    t.style.background = S.readingMode ? 'rgba(247,166,0,0.06)' : '';
+    // animate switch knob via inline style on ::after — use a wrapper span instead
+    if (sw) sw.setAttribute('data-on', S.readingMode ? '1' : '0');
+  }
+  document.body.classList.toggle('light-mode', S.readingMode);
+  const wpmRow = $('lesson-wpm') ? $('lesson-wpm').closest('.usc-row') : null;
+  if (wpmRow) {
+    wpmRow.style.opacity = S.readingMode ? '0.35' : '1';
+    wpmRow.style.pointerEvents = S.readingMode ? 'none' : 'auto';
+  }
+}
+
+function toggleRRM() { toggleReadingMode(); }
+function toggleManualMode() { toggleReadingMode(); }
+
+function applyRRMPreview() {
+  const el = $('lesson-preview-el');
+  if (!el) return;
+  if (S.rrm) {
+    el.style.fontFamily    = "'Plus Jakarta Sans', sans-serif";
+    el.style.fontSize      = '17px';
+    el.style.fontWeight    = '400';
+    el.style.lineHeight    = '1.75';
+    el.style.textAlign     = 'left';
+    el.style.letterSpacing = 'normal';
+    el.style.color         = '#f2f1fc';
+  } else {
+    // Clear inline styles — CSS classes take back over
+    el.removeAttribute('style');
+  }
+}
+
+function populateLesson(mode) {
+  // Always reset reading mode when entering a new drill
+  S.readingMode = false;
+  S.rrm = false;
+  S.manualMode = false;
+  document.body.classList.remove('light-mode');
+  const d = LESSON_DATA[mode] || LESSON_DATA.baseline;
+  $('lesson-badge-el').textContent = d.badge;
+  $('lesson-title-el').textContent = d.title;
+  $('lesson-sub-el').textContent = d.sub;
+  $('lesson-preview-el').innerHTML = d.preview;
+  $('lesson-preview-el').className = 'lesson-preview-text' + (d.previewClass ? ' ' + d.previewClass : '');
+  $('lesson-points-el').innerHTML = d.points.map((p,i) =>
+    `<div class="lp"><div class="lp-num">${i+1}</div><div class="lp-body"><strong>${p.h}</strong><span>${p.b}</span></div></div>`
+  ).join('');
+  const sEl = $('lesson-settings-el');
+  sEl.innerHTML = '';
+  if (d.settings === 'baseline') {
+    S.readingMode = true; S.rrm = true; S.manualMode = true;
+    document.body.classList.add('light-mode');
+    sEl.innerHTML = `<p style="font-size:13px;color:var(--muted2);line-height:1.7;background:var(--s1);border:1px solid var(--border);border-radius:var(--r-sm);padding:14px 18px;margin-bottom:16px">Your text will display in full. A timer starts when you begin. Click <strong style="color:var(--text)">Finished</strong> when you've read it all.</p>` + buildSettingsCard({ toggle: 'locked' });
+  } else if (d.settings === 'wpm') {
+    sEl.innerHTML = buildSettingsCard({ wpm: true, toggle: 'free' });
+  } else if (d.settings === 'wpm+chunk') {
+    sEl.innerHTML = buildSettingsCard({ wpm: true, chunk: true, toggle: 'free' });
+  } else if (d.settings === 'bionic') {
+    sEl.innerHTML = `<p style="font-size:13px;color:var(--muted2);line-height:1.7;background:var(--s1);border:1px solid var(--border);border-radius:var(--r-sm);padding:14px 18px;margin-bottom:16px">Read at your own pace. The timer runs silently. Click <strong style="color:var(--text)">Finished</strong> when you've read it all — we'll calculate your WPM.</p>` + buildSettingsCard({ chunk: true, toggle: 'free' });
+  }
+  // Sync toggle visual states
+  requestAnimationFrame(() => {
+    const t = $('reading-mode-toggle');
+    if (t) {
+      const sw = t.querySelector('.rrm-switch');
+      if (sw) sw.setAttribute('data-on', S.readingMode ? '1' : '0');
+      t.style.background = S.readingMode ? 'rgba(247,166,0,0.06)' : '';
+    }
+    const wpmRow = $('lesson-wpm') ? $('lesson-wpm').closest('.usc-row') : null;
+    if (wpmRow && S.readingMode) {
+      wpmRow.style.opacity = '0.35';
+      wpmRow.style.pointerEvents = 'none';
+    }
+  });
+  // Wire up lesson steppers
+  requestAnimationFrame(() => {
+    const wIn = $('lesson-wpm'), cIn = $('lesson-chunk');
+    if (wIn) {
+      $('lswpm-minus') && $('lswpm-minus').addEventListener('click', () => { const v=Math.max(60,(parseInt(wIn.value)||250)-10); wIn.value=v; S.wpm=v; });
+      $('lswpm-plus')  && $('lswpm-plus').addEventListener('click',  () => { const v=Math.min(1000,(parseInt(wIn.value)||250)+10); wIn.value=v; S.wpm=v; });
+      wIn.addEventListener('change', () => { S.wpm=Math.min(1000,Math.max(60,parseInt(wIn.value)||250)); wIn.value=S.wpm; });
+    }
+    if (cIn) {
+      $('lschunk-minus') && $('lschunk-minus').addEventListener('click', () => { const v=Math.max(1,(parseInt(cIn.value)||2)-1); cIn.value=v; S.chunkSize=v; });
+      $('lschunk-plus')  && $('lschunk-plus').addEventListener('click',  () => { const v=Math.min(5,(parseInt(cIn.value)||2)+1); cIn.value=v; S.chunkSize=v; });
+      cIn.addEventListener('change', () => { S.chunkSize=Math.min(5,Math.max(1,parseInt(cIn.value)||2)); cIn.value=S.chunkSize; });
+    }
+  });
+}
+function setLessonWpm(val) {
+  val=Math.min(1000,Math.max(60,val)); S.wpm=val;
+  const el=$('lesson-wpm'); if(el) el.value=val;
+}
+$('btn-lesson-start').addEventListener('click', () => {
+  buildContent($('text-input').value.trim());
+  startCountdown();
+});
+$('btn-lesson-skip').addEventListener('click', () => goHome());
+
+// ── CONTENT BUILDER ──
+function buildContent(text) {
+  const _d=document.createElement('div');_d.textContent=text;text=_d.innerHTML;
+  const words = text.replace(/\s+/g,' ').split(' ').filter(Boolean);
+  S.allWords = words;
+  const cs = S.chunkSize;
+  if (S.mode === 'phrase') {
+    S.phrases = [];
+    for (let i=0;i<words.length;i+=cs) S.phrases.push(words.slice(i,i+cs).join(' '));
+  } else if (S.mode === 'rsvp') {
+    S.phrases = words;
+  } else if (S.mode === 'scroll') {
+    S.phrases = [];
+    for (let i=0;i<words.length;i+=cs) S.phrases.push(words.slice(i,i+cs).join(' '));
+  } else if (S.mode === 'bionic') {
+    S.phrases = [];
+    for (let i=0;i<words.length;i+=cs) S.phrases.push(words.slice(i,i+cs).join(' '));
+    S.bionicHTML = S.phrases.map((p,ci) => ci%2===0 ? `<span class="bw-bold">${p}</span>` : `<span class="bw-dim">${p}</span>`);
+  } else if (S.mode==='baseline'||S.mode==='baseline_retest') {
+    S.phrases = [words.join(' ')];
+  } else if (S.mode==='focus') {
+    S.focusChunks=[];
+    let full='';
+    for (let i=0;i<words.length;i+=cs) {
+      const chunk=words.slice(i,i+cs);
+      const start=full.length+(i===0?0:1);
+      const txt=chunk.join(' ');
+      full+=(i===0?'':' ')+txt;
+      S.focusChunks.push({text:txt,startChar:start,endChar:full.length});
+    }
+    S.focusFullText=full;
+    S.phrases=S.focusChunks;
+  }
+}
+
+// ── STAGE BUILDER ──
+function buildStage() {
+  const stage=$('stage'); stage.innerHTML='';
+  if (S.mode==='phrase') {
+    const el=document.createElement('div'); el.id='phrase-display'; el.textContent='Get ready…'; stage.appendChild(el);
+  } else if (S.mode==='rsvp') {
+    const w=document.createElement('div'); w.className='rsvp-wrapper';
+    w.innerHTML='<div class="rsvp-ruler"></div><div id="rsvp-display">Ready</div><div class="rsvp-ruler-bottom"></div>';
+    stage.appendChild(w);
+  } else if (S.mode==='scroll') {
+    const bl=document.createElement('div'); bl.id='pacer-display';
+    S.phrases.forEach((chunk,i) => {
+      const sp=document.createElement('span');
+      sp.className='pw'; sp.id='pw-'+i; sp.textContent=(i===0?'':' ')+chunk;
+      bl.appendChild(sp);
+    });
+    stage.appendChild(bl);
+  } else if (S.mode==='bionic') {
+    const el=document.createElement('div'); el.id='bionic-display';
+    S.bionicHTML.forEach((h,i) => {
+      if(i>0) el.appendChild(document.createTextNode(' '));
+      const sp=document.createElement('span'); sp.id='bw-'+i; sp.innerHTML=h; el.appendChild(sp);
+    });
+    stage.appendChild(el);
+  } else if (S.mode==='baseline'||S.mode==='baseline_retest') {
+    const el=document.createElement('div'); el.id='baseline-display'; el.textContent=S.phrases[0]||''; stage.appendChild(el);
+  } else if (S.mode==='focus') {
+    const vp=document.createElement('div'); vp.className='focus-viewport';
+    const el=document.createElement('div'); el.id='focus-display'; vp.appendChild(el); stage.appendChild(vp);
+    renderFocusLine(0);
+  }
+}
+
+// ── FOCUS LINE ──
+function renderFocusLine(idx) {
+  const el=$('focus-display'); if(!el) return;
+  if(!el._built) {
+    el.innerHTML=S.focusChunks.map((ch,i)=>`<span class="focus-chunk" id="fc-${i}">${escHtml(ch.text)}</span>`).join('<span class="focus-sep"> </span>');
+    el._built=true;
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      const vp=el.closest('.focus-viewport'); if(!vp) return;
+      const vpc=vp.offsetWidth/2;
+      S.focusChunkOffsets=S.focusChunks.map((_,i)=>{
+        const s=$('fc-'+i); if(!s) return 0;
+        return vpc-(s.offsetLeft+s.offsetWidth/2);
+      });
+      applyFocusTranslate(idx); highlightFocusChunk(idx);
+    }));
+    return;
+  }
+  applyFocusTranslate(idx); highlightFocusChunk(idx);
+}
+function highlightFocusChunk(idx) {
+  document.querySelectorAll('.focus-chunk').forEach((s,i)=>{ s.className='focus-chunk'+(i===idx?' focus-active':''); });
+}
+function applyFocusTranslate(idx) {
+  const el=$('focus-display'); if(!el||!S.focusChunkOffsets||!S.focusChunkOffsets.length) return;
+  const x=S.focusChunkOffsets[idx]||0;
+  if(idx===0){ el.style.transition='none'; el.style.transform=`translateY(-50%) translateX(${x}px)`; void el.offsetWidth; el.classList.add('focus-ready'); }
+  else { el.style.transform=`translateY(-50%) translateX(${x}px)`; }
+}
+function escHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// ── COUNTDOWN ──
+function startCountdown() {
+  const ov=$('countdown-overlay'), n=$('countdown-n'), l=$('countdown-l');
+  ov.style.display='flex'; let c=3; n.textContent=c; l.textContent='Get ready — eyes on screen';
+  const tick=setInterval(()=>{
+    c--;
+    if(c===0){n.textContent='GO';l.textContent='Read fast. Think deep.'}
+    else if(c<0){clearInterval(tick);ov.style.display='none';initReader();}
+    else{n.textContent=c;}
+    n.style.animation='none'; void n.offsetWidth; n.style.animation='cpop .55s ease';
+  },800);
+}
+
+// ── READER INIT ──
+function initReader() {
+  buildStage(); setReadingMode(true); showScreen('screen-reader');
+  const isBaseline=S.mode==='baseline'||S.mode==='baseline_retest';
+  const isBionic=S.mode==='bionic';
+  const isStatic=isBaseline||isBionic;
+  const isManual = S.readingMode && ['rsvp','phrase','scroll','focus'].includes(S.mode);
+  const isFocusManual = isManual;
+  $('reader-controls-baseline').style.display=isStatic?'flex':'none';
+  if(isBionic) $('btn-baseline-finish').textContent='Finished — I\'ve read it all';
+  $('reader-controls-manual').style.display=isFocusManual?'flex':'none';
+  $('reader-controls-auto').style.display=(!isStatic&&!isFocusManual)?'flex':'none';
+  if(isStatic){
+    S.isPlaying=true; S.totalWordsRead=S.allWords.length;
+    if(S.clockTimer) clearInterval(S.clockTimer);
+    S.clockTimer=setInterval(()=>{S.elapsedSec++;},1000);
+    if(isBionic){ document.body.classList.add('bionic-mode'); initBionicScroll(); }
+  } else if(isFocusManual){
+    S.isPlaying=false; if(S.clockTimer) clearInterval(S.clockTimer);
+    S.clockTimer=setInterval(()=>{S.elapsedSec++;},1000);
+    // Show first item immediately so user sees something before first click
+    updateDisplay();
+  } else {
+    $('speed-live').value=S.wpm;
+    const sc=S.mode==='scroll';
+    $('pill-chunk-ctrl').style.display=sc?'flex':'none';
+    if(sc&&$('chunk-live')) $('chunk-live').value=S.chunkSize;
+    updateDisplay(); play();
+  }
+}
+
+function initBionicScroll() {
+  const updateProgress = () => {
+    const el = $('bionic-display'); if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const total = rect.height;
+    const scrolled = Math.max(0, -rect.top + window.innerHeight * 0.5);
+    const pct = Math.min(100, Math.round((scrolled / total) * 100));
+    $('prog-fill').style.width = pct + '%';
+  };
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+}
+
+// ── DISPLAY UPDATE ──
+function updateDisplay() {
+  const i=S.currentIndex, total=S.phrases.length;
+  $('prog-fill').style.width=total>0?Math.round(((i+1)/total)*100)+'%':'0%';
+  if(S.mode==='phrase'){
+    const el=$('phrase-display'); if(!el) return;
+    el.classList.add('flash'); setTimeout(()=>{el.textContent=S.phrases[i]||'—';el.classList.remove('flash');},70);
+  } else if(S.mode==='rsvp'){
+    const el=$('rsvp-display'); if(!el) return;
+    el.textContent=S.phrases[i]||'';
+  } else if(S.mode==='scroll'){
+    document.querySelectorAll('.pw').forEach((el,idx)=>{el.className='pw'+(idx===i?' active':idx<i?' done':'');});
+    const cur=$('pw-'+i); if(cur) cur.scrollIntoView({block:'nearest',behavior:'smooth'});
+  } else if(S.mode==='bionic'){
+    const all=document.querySelectorAll('#bionic-display > span');
+    all.forEach((el,idx)=>{
+      if(idx===i) el.innerHTML=`<span class="bw-current">${el.textContent}</span>`;
+      else if(idx<i) el.innerHTML=`<span class="bw-past">${el.textContent}</span>`;
+    });
+    const cur=$('bw-'+i); if(cur) cur.scrollIntoView({block:'nearest',behavior:'smooth'});
+  } else if(S.mode==='focus'){
+    if(!$('focus-display')?._built) renderFocusLine(i);
+    else { applyFocusTranslate(i); highlightFocusChunk(i); }
+  }
+}
+
+// ── PLAYBACK ──
+function play() {
+  if(S.currentIndex>=S.phrases.length){finish();return;}
+  S.isPlaying=true; $('btn-playpause').innerHTML='&#9646;&#9646;';
+  if(S.clockTimer) clearInterval(S.clockTimer);
+  S.clockTimer=setInterval(()=>{S.elapsedSec++;},1000);
+  scheduleNext();
+}
+function scheduleNext() {
+  if(!S.isPlaying) return;
+  const phrase=S.mode==='focus'?S.focusChunks[S.currentIndex]?.text||'':S.phrases[S.currentIndex]||'';
+  const wc=phrase.split(' ').filter(Boolean).length;
+  S.timer=setTimeout(()=>{
+    if(!S.isPlaying) return;
+    S.totalWordsRead+=wc; S.currentIndex++;
+    if(S.currentIndex>=S.phrases.length){finish();return;}
+    updateDisplay(); scheduleNext();
+  },ms(S.wpm,wc));
+}
+function pause() {
+  S.isPlaying=false; clearTimeout(S.timer); clearInterval(S.clockTimer);
+  const pp=$('btn-playpause'); if(pp) pp.innerHTML='&#9654;';
+}
+function finish() {
+  S.isPlaying=false; clearTimeout(S.timer); clearInterval(S.clockTimer);
+  if(S.mode==='baseline'||S.mode==='baseline_retest') S.totalWordsRead=S.allWords.length;
+  setReadingMode(false); showResults();
+}
+
+// ── READER CONTROLS ──
+$('btn-playpause').addEventListener('click', ()=>S.isPlaying?pause():play());
+$('wpm-minus').addEventListener('click', ()=>setWpm(S.wpm-10));
+$('wpm-plus').addEventListener('click',  ()=>setWpm(S.wpm+10));
+$('speed-live').addEventListener('change', function(){const v=parseInt(this.value);if(!isNaN(v))setWpm(v);});
+$('speed-live').addEventListener('keydown', function(e){if(e.key==='Enter')this.blur();});
+$('chunk-live-minus') && $('chunk-live-minus').addEventListener('click', ()=>{const v=Math.max(1,S.chunkSize-1);S.chunkSize=v;$('chunk-live').value=v;buildContent($('text-input').value.trim());S.currentIndex=0;buildStage();if(S.isPlaying){clearTimeout(S.timer);scheduleNext();}});
+$('chunk-live-plus')  && $('chunk-live-plus').addEventListener('click',  ()=>{const v=Math.min(5,S.chunkSize+1);S.chunkSize=v;$('chunk-live').value=v;buildContent($('text-input').value.trim());S.currentIndex=0;buildStage();if(S.isPlaying){clearTimeout(S.timer);scheduleNext();}});
+$('btn-advance').addEventListener('click', (e)=>{
+  e.stopPropagation();
+  if(S.readingMode && ['rsvp','phrase','scroll'].includes(S.mode)) advanceManual();
+  else advanceFocusManual();
+});
+$('btn-baseline-finish').addEventListener('click', ()=>{
+  S.totalWordsRead=S.allWords.length;
+  clearInterval(S.clockTimer); S.isPlaying=false;
+  if(S.mode==='baseline') S.baselineWpm=S.elapsedSec>0?Math.round((S.totalWordsRead/S.elapsedSec)*60):0;
+  window.removeEventListener('scroll', ()=>{});
+  setReadingMode(false); showResults();
+});
+
+document.addEventListener('click', e=>{
+  if(!$('screen-reader').classList.contains('active')) return;
+  const pill=$('reader-controls-manual');
+  if(pill && pill.contains(e.target)) return; // ignore clicks inside the pill itself
+  if(S.mode==='focus' && S.readingMode) advanceFocusManual();
+  else if(S.readingMode && ['rsvp','phrase','scroll'].includes(S.mode)) advanceManual();
+});
+function advanceManual() {
+  if(S.currentIndex>=S.phrases.length){finish();return;}
+  const phrase=S.phrases[S.currentIndex]||'';
+  const wc=phrase.split(' ').filter(Boolean).length;
+  S.totalWordsRead+=wc; S.currentIndex++;
+  if(S.currentIndex>=S.phrases.length){finish();return;}
+  updateDisplay();
+  $('prog-fill').style.width=Math.round(((S.currentIndex+1)/S.phrases.length)*100)+'%';
+}
+function advanceFocusManual() {
+  if(S.currentIndex>=S.focusChunks.length){finish();return;}
+  const wc=S.focusChunks[S.currentIndex].text.split(' ').filter(Boolean).length;
+  S.totalWordsRead+=wc; S.currentIndex++;
+  if(S.currentIndex>=S.focusChunks.length){finish();return;}
+  applyFocusTranslate(S.currentIndex); highlightFocusChunk(S.currentIndex);
+  $('prog-fill').style.width=Math.round(((S.currentIndex+1)/S.focusChunks.length)*100)+'%';
+}
+
+document.addEventListener('keydown', e=>{
+  if(!$('screen-reader').classList.contains('active')) return;
+  if(e.code==='Space'){
+    e.preventDefault();
+    if(S.mode==='focus'&&S.readingMode&&!S.isPlaying){advanceFocusManual();return;}
+    if(S.readingMode&&['rsvp','phrase','scroll'].includes(S.mode)){advanceManual();return;}
+    S.isPlaying?pause():play();
+  }
+  if(e.code==='Escape'){pause();goHome();}
+});
+
+// ── RESULTS ──
+const INSIGHTS = {
+  low:   w=>`${w} WPM — and that's your starting line, not your ceiling. You're not a slow reader. You're an untrained one. Give this 7 days — 15 minutes a day — and you'll feel a difference you can measure.`,
+  avg:   w=>`${w} WPM — right at average, which means there's massive upside waiting. Most students double their speed in week one. Keep training and 400 WPM with full comprehension is your next milestone.`,
+  good:  w=>`${w} WPM — above average. You're already outreading most professionals. Now the Ebbinghaus Forgetting Curve becomes your focus: reading faster means nothing if retention drops.`,
+  elite: w=>`${w} WPM — elite territory. A 300-page business book takes under 3 hours. Now the game becomes memory architecture — using the Memory Palace to make every insight stick.`,
+  beast: w=>`${w} WPM — world-class. You're reading faster than 99% of the population. The only frontier left is retention.`,
+};
+function getInsight(w){if(w<180)return INSIGHTS.low(w);if(w<280)return INSIGHTS.avg(w);if(w<450)return INSIGHTS.good(w);if(w<650)return INSIGHTS.elite(w);return INSIGHTS.beast(w);}
+
+function getPercentile(wpm) {
+  if (wpm < 150) return { pct: Math.round((wpm/150)*15), label: `You're in the bottom 15% — but that changes fast with daily training.` };
+  if (wpm < 200) return { pct: Math.round(15+(wpm-150)/50*15), label: `You're reading faster than most people who've never trained.` };
+  if (wpm < 300) return { pct: Math.round(30+(wpm-200)/100*25), label: `You're reading faster than roughly ${Math.round(30+(wpm-200)/100*25)}% of the population.` };
+  if (wpm < 450) return { pct: Math.round(55+(wpm-300)/150*20), label: `You're outreading the majority of professionals.` };
+  if (wpm < 600) return { pct: Math.round(75+(wpm-450)/150*15), label: `You're in the top 10% of readers globally.` };
+  return { pct: 95, label: `You're reading at elite level — top 5% globally.` };
+}
+
+function showResults() {
+  const wpm = S.elapsedSec > 0 ? Math.round((S.totalWordsRead / S.elapsedSec) * 60) : S.wpm;
+  if($('res-wpm')) $('res-wpm').textContent = wpm;
+  $('gauge-wpm-val').textContent = wpm;
+
+  // Gauge bar vs 600 elite
+  const barPct = Math.min(100, Math.round((wpm / 650) * 100));
+  setTimeout(() => { $('gauge-fill').style.width = barPct + '%'; }, 100);
+
+  // Context line
+  const { pct, label } = getPercentile(wpm);
+  $('gauge-context').textContent = label;
+
+  $('insight-text').textContent = getInsight(wpm);
+
+  // Baseline retest comparison
+  const cmp = $('baseline-comparison');
+  if (cmp && S.mode === 'baseline_retest' && S.baselineWpm > 0) {
+    const gain = wpm - S.baselineWpm;
+    $('bc-before').textContent = S.baselineWpm;
+    $('bc-after').textContent = wpm;
+    $('bc-gain').textContent = (gain >= 0 ? '+' : '') + gain;
+    $('bc-gain').style.color = gain > 0 ? 'var(--green)' : 'var(--orange)';
+    cmp.style.display = 'block';
+  } else if (cmp) {
+    cmp.style.display = 'none';
+  }
+
+  // Next step button label
+  const idx = MODE_ORDER.indexOf(S.mode);
+  const nextMode = MODE_ORDER[idx + 1];
+  const modeNames = { baseline:'Baseline Test', rsvp:'RSVP', phrase:'Phrase Reading', focus:'Focus Line', scroll:'Pacer', bionic:'Chunking', baseline_retest:'Re-Test' };
+  const nextBtn = $('btn-nextstep');
+  if (nextMode) {
+    nextBtn.textContent = `NEXT: ${modeNames[nextMode] || nextMode} →`;
+    nextBtn.style.display = '';
+  } else {
+    nextBtn.textContent = 'ALL STEPS DONE 🎯';
+  }
+
+  showScreen('screen-results');
+}
+
+$('btn-nextstep').addEventListener('click', () => {
+  const idx = MODE_ORDER.indexOf(S.mode);
+  const nextMode = MODE_ORDER[idx + 1];
+  pause(); goHome();
+  if (nextMode) {
+    setTimeout(() => {
+      // Pre-select next mode card
+      document.querySelectorAll('.mode-card').forEach(c => {
+        c.classList.toggle('selected', c.dataset.mode === nextMode);
+      });
+      S.mode = nextMode;
+      const nIdx = MODE_ORDER.indexOf(nextMode);
+      document.querySelectorAll('.ps-dot').forEach((d, i) => d.classList.toggle('active', i <= nIdx));
+      document.querySelectorAll('.ps-line').forEach((l, i) => l.classList.toggle('active', i < nIdx));
+      document.querySelector('.modes-grid').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 350);
+  }
+});
+
+$('btn-readagain').addEventListener('click', () => {
+  pause();
+  setReadingMode(false);
+  S.currentIndex = 0; S.elapsedSec = 0; S.totalWordsRead = 0;
+  populateLesson(S.mode);
+  showScreen('screen-lesson');
+});
+
+$('btn-switchmode').addEventListener('click', () => {
+  pause(); goHome();
+  setTimeout(() => document.querySelector('.modes-grid').scrollIntoView({ behavior: 'smooth', block: 'center' }), 350);
+});
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('/sw.js')
+      .then(r=>console.log('[StudyFast] SW registered, scope:',r.scope))
+      .catch(e=>console.warn('[StudyFast] SW failed:',e));
+  });
+}
+// ── EMAIL CAPTURE ──
+(function(){
+  const btn = $('email-capture-btn');
+  const inp = $('email-capture-input');
+  const msg = $('email-capture-msg');
+  if(!btn||!inp||!msg) return;
+
+  btn.addEventListener('click', async function(){
+    const email = inp.value.trim();
+    if(!email || !email.includes('@')){
+      msg.textContent = 'Please enter a valid email address.';
+      msg.style.color = 'var(--orange)';
+      return;
+    }
+    btn.textContent = 'Sending…';
+    btn.style.opacity = '0.7';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch('https://api.sender.net/v2/subscribers', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOWM5ZTc5OTViN2IzNDg5YjFmMWM2OGIwZjdhYWM0ZWI3OTUyMmM3YmIyMzMzMDRjMjc1MzExZjRlYmE5M2YxYThjOTdmMzFmZDllZjlmNTEiLCJpYXQiOjE3NzYxNjM1NDUuODMzODU5LCJuYmYiOjE3NzYxNjM1NDUuODMzODYxLCJleHAiOjQ5Mjk3NjcxNDUuODMxNzc0LCJzdWIiOiIxMDY2NDk5Iiwic2NvcGVzIjpbXX0.oc8ZU6uXB7wRyoLOg5_vb0jsD-m1Yhgte4sJTe_ZZpMLY-6Gk7hZkzTViQKbFTplQGhs7iWhFUMTPzq6R6_Fvtg1R0Mnp6s-MCp6qLymlsrplWzg-UfgxSLbSvjK68dS_caII55BFhBwu2rvSyxj2HXnLf1m7NSR_c5SQCdszN2w_JCr_2faD01AM6YKQ4LobEOGsT_1EcDlncgJGqRLb8STa60haI45kjv48wzIGCBobKJ71pVA6u2KVzYQrsvCRbKmWFGg-jEP_DMoOZZOArmDfm7QHlGQHmZ8l5QMmDd9vogrPo5bmhshyBzWYESuLy3oHGvS9427q5DNYxCAHX-1HqgbdcUOFTOnm7fVTmhci8jib0qQh-_5_7KCvDT-RwMkjwwX5xOa7RGaECM3CEmNt27B21DbAOWBfyGFCf5pCtYus8rNiNlliLyUpBqYSynjKDXndBLVEfmPW2FlEoHRZ1dmJnKdJ3AsTUKp8etLAobv2OgT-Io1pEecxW0XAv_0tVpLSM6XmD54nu7tb92VCnooIoZLNtbV8CVnKtDDcpjn8MiAnY3dqGwu6Aw7Ab0VWRQ3dP_GF-mXGd9wVa3Ds8jA1GnJiU9Xb4nBE2zj1H9olbwRoGtILdvnfug9apDmPKZpVT8fQrBapd3R3IzAA-igP5tCucQRurCzJ1Q',
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({ email: email, groups: ['aMXZEm'] })
+      });
+      if(!res.ok && res.status !== 409) throw new Error('API error ' + res.status);
+
+      // Success state
+      inp.style.display = 'none';
+      btn.style.display = 'none';
+      msg.textContent = '✓ You\'re in! Check your inbox for Day 1.';
+      msg.style.color = 'var(--green)';
+      msg.style.fontSize = '13px';
+      msg.style.padding = '4px 0';
+    } catch(err) {
+      btn.textContent = 'START DAY 1 →';
+      btn.style.opacity = '1';
+      btn.disabled = false;
+      msg.textContent = 'Something went wrong — please try again.';
+      msg.style.color = 'var(--orange)';
+      console.error('[StudyFast] Email capture error:', err);
+    }
+  });
+
+  // Clear error on type
+  inp.addEventListener('input', ()=>{
+    msg.textContent = 'No spam. Unsubscribe anytime.';
+    msg.style.color = '#3a3a55';
+  });
+})();
+// ── HOME EMAIL CAPTURE ──
+(function(){
+  const btn = $('home-email-btn');
+  const inp = $('home-email-input');
+  const msg = $('home-email-msg');
+  if(!btn||!inp||!msg) return;
+
+  btn.addEventListener('click', async function(){
+    const email = inp.value.trim();
+    if(!email || !email.includes('@')){
+      msg.textContent = 'Please enter a valid email address.';
+      msg.style.color = 'var(--orange)';
+      return;
+    }
+    btn.textContent = 'Sending…';
+    btn.style.opacity = '0.7';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch('https://api.sender.net/v2/subscribers', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOWM5ZTc5OTViN2IzNDg5YjFmMWM2OGIwZjdhYWM0ZWI3OTUyMmM3YmIyMzMzMDRjMjc1MzExZjRlYmE5M2YxYThjOTdmMzFmZDllZjlmNTEiLCJpYXQiOjE3NzYxNjM1NDUuODMzODU5LCJuYmYiOjE3NzYxNjM1NDUuODMzODYxLCJleHAiOjQ5Mjk3NjcxNDUuODMxNzc0LCJzdWIiOiIxMDY2NDk5Iiwic2NvcGVzIjpbXX0.oc8ZU6uXB7wRyoLOg5_vb0jsD-m1Yhgte4sJTe_ZZpMLY-6Gk7hZkzTViQKbFTplQGhs7iWhFUMTPzq6R6_Fvtg1R0Mnp6s-MCp6qLymlsrplWzg-UfgxSLbSvjK68dS_caII55BFhBwu2rvSyxj2HXnLf1m7NSR_c5SQCdszN2w_JCr_2faD01AM6YKQ4LobEOGsT_1EcDlncgJGqRLb8STa60haI45kjv48wzIGCBobKJ71pVA6u2KVzYQrsvCRbKmWFGg-jEP_DMoOZZOArmDfm7QHlGQHmZ8l5QMmDd9vogrPo5bmhshyBzWYESuLy3oHGvS9427q5DNYxCAHX-1HqgbdcUOFTOnm7fVTmhci8jib0qQh-_5_7KCvDT-RwMkjwwX5xOa7RGaECM3CEmNt27B21DbAOWBfyGFCf5pCtYus8rNiNlliLyUpBqYSynjKDXndBLVEfmPW2FlEoHRZ1dmJnKdJ3AsTUKp8etLAobv2OgT-Io1pEecxW0XAv_0tVpLSM6XmD54nu7tb92VCnooIoZLNtbV8CVnKtDDcpjn8MiAnY3dqGwu6Aw7Ab0VWRQ3dP_GF-mXGd9wVa3Ds8jA1GnJiU9Xb4nBE2zj1H9olbwRoGtILdvnfug9apDmPKZpVT8fQrBapd3R3IzAA-igP5tCucQRurCzJ1Q',
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({ email: email, groups: ['aMXZEm'] })
+      });
+      if(!res.ok && res.status !== 409) throw new Error('API error ' + res.status);
+
+      inp.style.display = 'none';
+      btn.style.display = 'none';
+      msg.textContent = '✓ You\'re in! Check your inbox for Day 1.';
+      msg.style.color = 'var(--green)';
+      msg.style.fontSize = '13px';
+    } catch(err) {
+      btn.textContent = 'START DAY 1 →';
+      btn.style.opacity = '1';
+      btn.disabled = false;
+      msg.textContent = 'Something went wrong — please try again.';
+      msg.style.color = 'var(--orange)';
+      console.error('[StudyFast] Home email capture error:', err);
+    }
+  });
+
+  inp.addEventListener('input', ()=>{
+    msg.textContent = 'No spam. Unsubscribe anytime.';
+    msg.style.color = '#3a3a55';
+  });
+})();
+</script>
+</body>
+</html>

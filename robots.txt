@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://app.studyfast.uk/sitemap.xml
