@@ -117,10 +117,13 @@ header {
 }
 .btn-back:hover { background:rgba(44,52,144,0.22); border-color:rgba(44,52,144,0.7) }
 /* The App — primary solid gold (current page on app) */
+.btn-app { display:flex; align-items:center; gap:7px; padding:9px 20px; border:none; border-radius:100px; background:var(--gold); color:#1a1a2e; font-family:'Plus Jakarta Sans'; font-size:13px; font-weight:700; cursor:pointer; transition:all .2s; text-decoration:none }
+.btn-app:hover { background:var(--gold2) }
 /* The Science — secondary outline */
 .btn-science { display:flex; align-items:center; gap:7px; padding:8px 18px; border:1.5px solid var(--gold); border-radius:100px; background:transparent; color:var(--gold); font-family:'Plus Jakarta Sans'; font-size:13px; font-weight:700; cursor:pointer; transition:all .2s; text-decoration:none }
 .btn-science:hover { background:rgba(247,166,0,0.08) }
 body.reading .btn-science { display:none }
+body.reading .btn-app { display:none }
 body.reading .btn-back { display:flex }
 body.reading .header-tag { display:none }
 body.reading footer { display:none }
@@ -193,6 +196,31 @@ main { flex:1; max-width:880px; width:100%; margin:0 auto; padding:36px 24px }
 .mode-card.selected { border-color:var(--gold); border-width:2px; background:var(--s2) }
 .mode-card.selected::before { opacity:1 }
 .mode-card.selected .mode-step { color:rgba(247,166,0,.8) }
+/* Step 7 Re-Test — green accent, desktop same position as before */
+.mode-card-retest {
+  border-color:rgba(61,255,160,.25);
+}
+.mode-card-retest::before {
+  background:linear-gradient(135deg,rgba(61,255,160,.06),transparent);
+}
+.mode-card-retest .mode-step { color:rgba(61,255,160,.6) }
+.mode-card-retest:hover { border-color:rgba(61,255,160,.5) }
+.mode-card-retest.selected {
+  border-color:var(--green); border-width:2px; background:var(--s2);
+}
+.mode-card-retest.selected::before { opacity:1 }
+.mode-card-retest.selected .mode-step { color:rgba(61,255,160,.8) }
+/* Mobile only — full width span + horizontal layout */
+@media(max-width:640px) {
+  .mode-card-retest {
+    grid-column:1 / -1;
+    display:flex; flex-direction:row; align-items:center;
+    text-align:left; gap:16px;
+  }
+  .mode-card-retest .mode-icon { margin-bottom:0; font-size:28px; flex-shrink:0 }
+  .mode-card-retest .mode-card-text { flex:1 }
+  .mode-card-retest .mode-badge { margin-top:0 }
+}
 /* Progress strip — 7-col grid mirrors .modes-grid so dots centre under each card */
 .prog-strip {
   display:grid;
@@ -656,6 +684,7 @@ footer a { color:var(--gold); text-decoration:none; font-weight:600 }
   .modes-grid { grid-template-columns:repeat(2,1fr) }
   .prog-strip { display:none }
   .mode-card.selected .mode-name { color:var(--gold) }
+  .mode-card-retest.selected .mode-name { color:var(--green) }
   .controls-row { grid-template-columns:1fr }
   footer { flex-direction:column; text-align:center; padding:14px 16px }
   #phrase-display { font-size:28px }
@@ -782,6 +811,43 @@ body.light-mode #screen-lesson .lesson-settings p strong { color:#1a1a2e !import
 .future-name { font-size:13px; font-weight:700; color:var(--text); margin-bottom:4px }
 .future-desc { font-size:11px; color:var(--muted); line-height:1.45 }
 .future-badge { display:inline-block; margin-top:8px; font-size:8px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:2px 8px; border-radius:100px; background:rgba(255,255,255,.06); color:var(--muted) }
+.future-scroll-wrap { position:relative }
+.future-scroll-fade { display:none }
+.future-scroll-hint { display:none }
+@media(max-width:640px) {
+  .future-grid {
+    display:flex; flex-direction:row;
+    overflow-x:auto; -webkit-overflow-scrolling:touch;
+    gap:10px; padding-bottom:8px;
+    margin-left:-20px; margin-right:-20px;
+    padding-left:20px; padding-right:20px;
+    scrollbar-width:none;
+  }
+  .future-grid::-webkit-scrollbar { display:none }
+  .future-card { flex:0 0 148px; min-width:148px }
+  .future-scroll-fade {
+    display:block; position:absolute;
+    top:0; right:0; bottom:8px; width:48px;
+    background:linear-gradient(to right,transparent,var(--bg));
+    pointer-events:none;
+  }
+  .future-scroll-hint {
+    display:flex; align-items:center; gap:6px;
+    margin-top:10px;
+  }
+  .future-scroll-dots { display:flex; gap:5px; align-items:center }
+  .fsd {
+    width:6px; height:6px; border-radius:50%;
+    background:rgba(255,255,255,0.13);
+    transition:width .25s ease, border-radius .25s ease, background .25s ease;
+    flex-shrink:0;
+  }
+  .fsd.active { width:18px; border-radius:3px; background:var(--gold) }
+  .future-swipe-label {
+    margin-left:auto; display:flex; align-items:center; gap:4px;
+    font-size:10px; color:var(--muted); letter-spacing:.5px;
+  }
+}
 .contact-section { margin-bottom:20px }
 .contact-label { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:12px }
 .contact-row { display:flex; gap:10px }
@@ -808,6 +874,7 @@ body.light-mode .logo-img-colour { display:block }
     <img class="logo-img-colour" src="/logo-colour.png" alt="StudyFast">
   </div>
   <div style="display:flex;align-items:center;gap:10px;margin-left:auto">
+    <a class="btn-app" href="index.html">🧠 The App</a>
     <a class="btn-science" href="science.html">📚 The Science</a>
   </div>
   <div class="pacer-header-controls" id="pacer-header-controls">
@@ -845,44 +912,46 @@ body.light-mode .logo-img-colour { display:block }
       <div class="mode-step">Step 1</div>
       <span class="mode-icon">📖</span>
       <div class="mode-name">Baseline Test</div>
-      <div class="mode-desc">Read naturally. We measure your starting WPM.</div>
+      <div class="mode-desc">Measure your words per minute.</div>
       <span class="mode-badge" style="background:rgba(255,255,255,.08);color:var(--muted2)">Start Here</span>
     </div>
     <div class="mode-card" data-mode="rsvp">
       <div class="mode-step">Step 2</div>
       <span class="mode-icon">🎯</span>
       <div class="mode-name">RSVP</div>
-      <div class="mode-desc">One word. Eyes still. Pure speed training.</div>
+      <div class="mode-desc">Pure speed training.</div>
     </div>
     <div class="mode-card" data-mode="phrase">
       <div class="mode-step">Step 3</div>
       <span class="mode-icon">⚡</span>
       <div class="mode-name">Phrase Reading</div>
-      <div class="mode-desc">Word chunks. Fewer fixations per line.</div>
+      <div class="mode-desc">Fewer fixations per line.</div>
     </div>
     <div class="mode-card" data-mode="focus">
       <div class="mode-step">Step 4</div>
       <span class="mode-icon">🔦</span>
       <div class="mode-name">Focus Line</div>
-      <div class="mode-desc">Spotlight moves. Train peripheral vision.</div>
+      <div class="mode-desc">Train your peripheral vision.</div>
     </div>
     <div class="mode-card" data-mode="scroll">
       <div class="mode-step">Step 5</div>
       <span class="mode-icon">👁</span>
       <div class="mode-name">Pacer</div>
-      <div class="mode-desc">Chunk underline. Eyes follow the flow.</div>
+      <div class="mode-desc">Retrain your eye movement.</div>
     </div>
     <div class="mode-card" data-mode="bionic">
       <div class="mode-step">Step 6</div>
       <span class="mode-icon">🧠</span>
       <div class="mode-name">Chunking</div>
-      <div class="mode-desc">Bold groups. Brain autocompletes the rest.</div>
+      <div class="mode-desc">Absorb more information.</div>
     </div>
-    <div class="mode-card" data-mode="baseline_retest">
+    <div class="mode-card mode-card-retest" data-mode="baseline_retest">
       <div class="mode-step">Step 7</div>
       <span class="mode-icon">🏁</span>
-      <div class="mode-name">Re-Test</div>
-      <div class="mode-desc">Same test. New speed. Prove your progress.</div>
+      <div class="mode-card-text">
+        <div class="mode-name">Final Test</div>
+        <div class="mode-desc">Measure your new words per minute.</div>
+      </div>
       <span class="mode-badge" style="background:rgba(61,255,160,.12);color:var(--green)">Prove It</span>
     </div>
   </div>
@@ -941,7 +1010,7 @@ body.light-mode .logo-img-colour { display:block }
         <div style="font-size:13px;font-weight:800;color:#3a3a55">6</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Chunking</div>
       </div>
       <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:7px;padding:7px 3px;text-align:center">
-        <div style="font-size:13px;font-weight:800;color:#3a3a55">7</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Re-Test</div>
+        <div style="font-size:13px;font-weight:800;color:#3a3a55">7</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Final Test</div>
       </div>
     </div>
     <div style="display:flex;gap:8px;margin-bottom:6px">
@@ -954,10 +1023,24 @@ body.light-mode .logo-img-colour { display:block }
   <!-- FUTURE RELEASES -->
   <div class="future-section">
     <div class="future-label">Coming soon</div>
-    <div class="future-grid">
-      <div class="future-card"><span class="future-icon">👁</span><div class="future-name">Eye Warm-Up Series</div><div class="future-desc">Daily drills to prime your visual system before training.</div><span class="future-badge">In development</span></div>
-      <div class="future-card"><span class="future-icon">🎯</span><div class="future-name">Eye Training</div><div class="future-desc">Peripheral expansion, saccade control, fixation drills.</div><span class="future-badge">In development</span></div>
-      <div class="future-card"><span class="future-icon">🧪</span><div class="future-name">Comprehension Test</div><div class="future-desc">Prove retention matches your speed.</div><span class="future-badge">In development</span></div>
+    <div class="future-scroll-wrap">
+      <div class="future-grid" id="future-grid">
+        <div class="future-card"><span class="future-icon">👁</span><div class="future-name">Eye Warm-Up Series</div><div class="future-desc">Daily drills to prime your visual system before training.</div><span class="future-badge">In development</span></div>
+        <div class="future-card"><span class="future-icon">🎯</span><div class="future-name">Eye Training</div><div class="future-desc">Peripheral expansion, saccade control, fixation drills.</div><span class="future-badge">In development</span></div>
+        <div class="future-card"><span class="future-icon">🧪</span><div class="future-name">Comprehension Test</div><div class="future-desc">Prove retention matches your speed.</div><span class="future-badge">In development</span></div>
+      </div>
+      <div class="future-scroll-fade"></div>
+    </div>
+    <div class="future-scroll-hint" id="future-scroll-hint">
+      <div class="future-scroll-dots">
+        <div class="fsd active" id="fsd-0"></div>
+        <div class="fsd" id="fsd-1"></div>
+        <div class="fsd" id="fsd-2"></div>
+      </div>
+      <div class="future-swipe-label">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 6h8M7 3l3 3-3 3"/></svg>
+        swipe
+      </div>
     </div>
   </div>
 
@@ -1104,7 +1187,7 @@ body.light-mode .logo-img-colour { display:block }
         <div style="font-size:13px;font-weight:800;color:#3a3a55">6</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Chunking</div>
       </div>
       <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:7px;padding:7px 3px;text-align:center">
-        <div style="font-size:13px;font-weight:800;color:#3a3a55">7</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Re-Test</div>
+        <div style="font-size:13px;font-weight:800;color:#3a3a55">7</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Final Test</div>
       </div>
     </div>
     <div style="display:flex;gap:8px;margin-bottom:6px">
@@ -1237,7 +1320,7 @@ const LESSON_DATA = {
     settings: 'bionic'
   },
   baseline_retest: {
-    badge: '🏁 Re-Test', title: 'How far have you come?',
+    badge: '🏁 Final Test', title: 'How far have you come?',
     sub: 'Same text. Same rules. See exactly how much faster you are now.',
     preview: '<span class="lp-dim">I am Gimpel the fool. I don\'t think myself a fool. On the contrary. But that\'s what folks call me.</span>',
     previewClass: '',
@@ -1784,7 +1867,7 @@ function showResults() {
   // Next step button label
   const idx = MODE_ORDER.indexOf(S.mode);
   const nextMode = MODE_ORDER[idx + 1];
-  const modeNames = { baseline:'Baseline Test', rsvp:'RSVP', phrase:'Phrase Reading', focus:'Focus Line', scroll:'Pacer', bionic:'Chunking', baseline_retest:'Re-Test' };
+  const modeNames = { baseline:'Baseline Test', rsvp:'RSVP', phrase:'Phrase Reading', focus:'Focus Line', scroll:'Pacer', bionic:'Chunking', baseline_retest:'Final Test' };
   const nextBtn = $('btn-nextstep');
   if (nextMode) {
     nextBtn.textContent = `NEXT: ${modeNames[nextMode] || nextMode} →`;
@@ -1938,6 +2021,23 @@ if('serviceWorker' in navigator){
     msg.textContent = 'No spam. Unsubscribe anytime.';
     msg.style.color = '#3a3a55';
   });
+})();
+// ── FUTURE GRID SCROLL DOTS ──
+(function(){
+  const grid = $('future-grid');
+  if(!grid) return;
+  const dots = [0,1,2].map(i => $('fsd-'+i));
+  let active = 0;
+  grid.addEventListener('scroll', () => {
+    const max = grid.scrollWidth - grid.clientWidth;
+    if(max <= 0) return;
+    const idx = Math.min(2, Math.round((grid.scrollLeft / max) * 2));
+    if(idx !== active) {
+      dots[active].classList.remove('active');
+      dots[idx].classList.add('active');
+      active = idx;
+    }
+  }, { passive: true });
 })();
 </script>
 </body>
