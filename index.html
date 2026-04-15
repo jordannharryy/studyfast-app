@@ -881,6 +881,39 @@ body.light-mode #screen-lesson .lesson-settings p strong { color:#1a1a2e !import
 .contact-btn:hover { border-color:var(--gold); color:var(--gold) }
 /* Baseline comparison */
 .res-comparison { background:var(--s1); border:1px solid var(--gold); border-radius:var(--r); padding:22px 24px; margin-bottom:20px; text-align:center; display:none }
+/* Coaching CTA */
+.coaching-cta {
+  display:none; background:#161625; border:1px solid rgba(61,255,160,0.2);
+  border-radius:var(--r); padding:22px 20px; margin-bottom:20px; text-align:center;
+}
+.coaching-cta.show { display:block }
+.coaching-badge {
+  display:inline-block; font-size:9px; font-weight:700; letter-spacing:1px;
+  text-transform:uppercase; color:var(--green); background:rgba(61,255,160,0.08);
+  border:1px solid rgba(61,255,160,0.2); padding:3px 10px;
+  border-radius:100px; margin-bottom:14px;
+}
+.coaching-jordan {
+  display:flex; align-items:center; gap:10px;
+  background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);
+  border-radius:10px; padding:10px 12px; margin-bottom:16px; text-align:left;
+}
+.coaching-jordan img {
+  width:40px; height:40px; border-radius:50%; object-fit:cover; flex-shrink:0;
+  border:1px solid rgba(255,255,255,0.1);
+}
+.coaching-jordan-text { font-size:11px; color:#9090b0; line-height:1.5 }
+.coaching-jordan-text b { color:var(--text); display:block; font-size:13px; margin-bottom:1px }
+.coaching-title { font-size:17px; font-weight:700; color:var(--text); margin-bottom:8px; line-height:1.35 }
+.coaching-title span { color:var(--green) }
+.coaching-sub { font-size:13px; color:var(--muted2); margin-bottom:18px; line-height:1.65 }
+.coaching-btn {
+  display:block; width:100%; background:var(--green); color:#08080e;
+  font-size:14px; font-weight:800; padding:14px; border-radius:var(--r-sm);
+  text-decoration:none; margin-bottom:8px; font-family:'Bebas Neue'; letter-spacing:2px;
+}
+.coaching-btn:hover { background:#5cffc0 }
+.coaching-note { font-size:11px; color:var(--muted) }
 .footer-version { font-size:11px; color:rgba(255,255,255,0.18); font-family:'JetBrains Mono',monospace; letter-spacing:.5px }
 
 /* ─── LIGHT MODE LOGO SWAP ───────────────────────────────────────── */
@@ -1014,7 +1047,7 @@ body.light-mode .logo-img-colour { display:block }
   <div style="background:#1a1a2e;border:1px solid rgba(247,166,0,0.25);border-radius:14px;padding:20px;margin-top:24px;margin-bottom:4px">
     <div style="display:inline-block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);background:rgba(247,166,0,0.12);border:1px solid rgba(247,166,0,0.3);padding:3px 10px;border-radius:20px;margin-bottom:10px">7-Day Speed Reading Programme</div>
     <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px;line-height:1.3">One mode per day.<br>One week to a new reading speed.</div>
-    <div style="font-size:12px;color:var(--muted2);margin-bottom:14px;line-height:1.6">Jordan walks you through all 7 training modes — one per day. By day 7 you re-test and see exactly how far you've come.</div>
+    <div style="font-size:12px;color:var(--muted2);margin-bottom:14px;line-height:1.6">Jordan walks you through all 7 training modes — one per day. By day 7 you take the final test and see exactly how far you've come.</div>
     <div class="ec-pills">
       <div style="flex:1;background:rgba(247,166,0,0.1);border:1px solid rgba(247,166,0,0.3);border-radius:7px;padding:7px 3px;text-align:center">
         <div style="font-size:13px;font-weight:800;color:var(--gold)">1</div><div style="font-size:8px;color:rgba(247,166,0,0.6);letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Baseline</div>
@@ -1166,17 +1199,6 @@ body.light-mode .logo-img-colour { display:block }
     <p id="results-sub">Here's your performance breakdown.</p>
   </div>
 
-  <!-- Baseline retest comparison — only shown on step 7 -->
-  <div class="res-comparison" id="baseline-comparison">
-    <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px">Your progress</div>
-    <div style="display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap">
-      <div style="text-align:center"><div style="font-family:'Bebas Neue';font-size:44px;color:var(--muted2);line-height:1" id="bc-before">—</div><div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-top:4px">Baseline WPM</div></div>
-      <div style="font-size:28px;color:var(--gold)">→</div>
-      <div style="text-align:center"><div style="font-family:'Bebas Neue';font-size:44px;color:var(--gold);line-height:1" id="bc-after">—</div><div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-top:4px">Your speed now</div></div>
-      <div style="text-align:center"><div style="font-family:'Bebas Neue';font-size:44px;color:var(--green);line-height:1" id="bc-gain">—</div><div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-top:4px">WPM gained</div></div>
-    </div>
-  </div>
-
   <!-- WPM comparison card -->
   <div class="wpm-gauge" id="wpm-compare-card">
     <div class="gauge-title">How you compare</div>
@@ -1203,11 +1225,27 @@ body.light-mode .logo-img-colour { display:block }
     <p id="insight-text"></p>
   </div>
 
+  <!-- Coaching CTA — Step 7 only -->
+  <div class="coaching-cta" id="coaching-cta">
+    <div class="coaching-badge">Private Coaching</div>
+    <div class="coaching-jordan">
+      <img src="/jordan.jpg" alt="Jordan Harry">
+      <div class="coaching-jordan-text">
+        <b>Jordan Harry</b>
+        50,000+ professionals trained · 70 countries
+      </div>
+    </div>
+    <div class="coaching-title"><span id="coaching-wpm">—</span> WPM in one session.<br>Imagine 21 days with me.</div>
+    <div class="coaching-sub">Book a free discovery call and I'll show you exactly what's possible.</div>
+    <a class="coaching-btn" href="https://studyfast.uk/private-coaching" target="_blank">BOOK FREE CALL →</a>
+    <div class="coaching-note">No commitment. 15 minutes.</div>
+  </div>
+
   <!-- 7-Day Email Capture -->
   <div id="email-capture-card" style="background:#1a1a2e;border:1px solid rgba(247,166,0,0.25);border-radius:14px;padding:20px;margin-bottom:20px">
     <div style="display:inline-block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);background:rgba(247,166,0,0.12);border:1px solid rgba(247,166,0,0.3);padding:3px 10px;border-radius:20px;margin-bottom:10px">7-Day Speed Reading Programme</div>
     <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px;line-height:1.3">One mode per day.<br>One week to a new reading speed.</div>
-    <div style="font-size:12px;color:var(--muted2);margin-bottom:14px;line-height:1.6">Jordan walks you through all 7 training modes — one per day. By day 7 you re-test and see exactly how far you've come.</div>
+    <div style="font-size:12px;color:var(--muted2);margin-bottom:14px;line-height:1.6">Jordan walks you through all 7 training modes — one per day. By day 7 you take the final test and see exactly how far you've come.</div>
     <div class="ec-pills">
       <div style="flex:1;background:rgba(247,166,0,0.1);border:1px solid rgba(247,166,0,0.3);border-radius:7px;padding:7px 3px;text-align:center">
         <div style="font-size:13px;font-weight:800;color:var(--gold)">1</div><div style="font-size:8px;color:rgba(247,166,0,0.6);letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Baseline</div>
@@ -1558,9 +1596,7 @@ function populateLesson(mode) {
   const sEl = $('lesson-settings-el');
   sEl.innerHTML = '';
   if (d.settings === 'baseline') {
-    S.readingMode = true; S.rrm = true; S.manualMode = true;
-    document.body.classList.add('light-mode');
-    sEl.innerHTML = `<p style="font-size:13px;color:var(--muted2);line-height:1.7;background:var(--s1);border:1px solid var(--border);border-radius:var(--r-sm);padding:14px 18px;margin-bottom:16px">Your text will display in full. A timer starts when you begin. Click <strong style="color:var(--text)">Finished</strong> when you've read it all.</p>` + buildSettingsCard({ toggle: 'locked' });
+    sEl.innerHTML = `<p style="font-size:13px;color:var(--muted2);line-height:1.7;background:var(--s1);border:1px solid var(--border);border-radius:var(--r-sm);padding:14px 18px;margin-bottom:16px">Your text will display in full. A timer starts when you begin. Click <strong style="color:var(--text)">Finished</strong> when you've read it all.</p>` + buildSettingsCard({ toggle: 'free' });
   } else if (d.settings === 'wpm') {
     sEl.innerHTML = buildSettingsCard({ wpm: true, toggle: 'free' });
   } else if (d.settings === 'wpm+chunk') {
@@ -1931,6 +1967,18 @@ function showResults() {
     nextBtn.style.display = '';
   } else {
     nextBtn.textContent = 'ALL STEPS DONE 🎯';
+  }
+
+  // Coaching CTA — step 7 only
+  const coachingCta = $('coaching-cta');
+  const coachingWpm = $('coaching-wpm');
+  if (coachingCta) {
+    if (S.mode === 'baseline_retest') {
+      coachingWpm.textContent = wpm;
+      coachingCta.classList.add('show');
+    } else {
+      coachingCta.classList.remove('show');
+    }
   }
 
   showScreen('screen-results');

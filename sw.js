@@ -1,11 +1,11 @@
-const CACHE = 'studyfast-v2';
+const CACHE = 'studyfast-v4';
 const ASSETS = [
   '/',
   '/index.html',
   '/logo-dark.png',
   '/logo-colour.png',
   '/favicon.ico',
-  '/apple-touch-icon.png',
+  '/jordan.jpg',
   'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=JetBrains+Mono:wght@400;500&family=Lora:wght@400;500&display=swap'
 ];
 
