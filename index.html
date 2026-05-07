@@ -105,7 +105,18 @@ header {
   backdrop-filter:blur(16px);
   position:sticky; top:0; z-index:100;
 }
-.logo { display:flex; align-items:center; gap:10px; text-decoration:none; cursor:pointer }
+.header-nav-mid { display:flex; align-items:center; gap:4px; margin-left:auto; margin-right:12px }
+.header-nav-right { display:flex; align-items:center; gap:8px }
+.btn-nav-link { font-family:'Plus Jakarta Sans'; font-size:13px; font-weight:500; color:var(--muted2); padding:6px 10px; border-radius:6px; text-decoration:none; transition:color .15s; white-space:nowrap }
+.btn-nav-link:hover { color:var(--text) }
+.btn-nav-create { font-family:'Plus Jakarta Sans'; font-size:13px; font-weight:700; color:#08080e; background:var(--gold); padding:7px 16px; border-radius:100px; text-decoration:none; transition:background .15s; white-space:nowrap }
+.btn-nav-create:hover { background:var(--gold2) }
+body.reading .header-nav-mid { display:none }
+body.reading .header-nav-right { display:none }
+@media(max-width:640px) {
+  .header-nav-mid { display:none }
+  .btn-nav-link[href="login.html"] { display:none }
+}
 .logo-img { height:48px; display:block; opacity:0.92; transition:opacity .2s }
 .logo:hover .logo-img { opacity:1 }
 .header-tag { font-size:11px; color:var(--muted); letter-spacing:.5px }
@@ -1142,8 +1153,13 @@ body.light-mode .logo-img-colour { display:block }
     <img class="logo-img logo-img-dark" src="/logo-dark.png" alt="StudyFast">
     <img class="logo-img-colour" src="/logo-colour.png" alt="StudyFast">
   </div>
-  <div style="display:flex;align-items:center;gap:10px;margin-left:auto">
-    <a class="btn-science" href="science.html">📚 The Science</a>
+  <div class="header-nav-mid">
+    <a class="btn-nav-link" href="science.html">The Science</a>
+    <a class="btn-nav-link" href="index.html">App</a>
+  </div>
+  <div class="header-nav-right">
+    <a class="btn-nav-link" href="login.html">Log in</a>
+    <a class="btn-nav-create" href="signup.html">Create account</a>
   </div>
   <div class="pacer-header-controls" id="pacer-header-controls">
     <button class="btn-play-sm" id="btn-playpause-hdr">&#9654;</button>
