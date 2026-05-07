@@ -86,7 +86,7 @@
 * { -webkit-tap-highlight-color:transparent }
 a,button,input,textarea,.mode-card,.btn,.btn-gold { touch-action:manipulation }
 .mode-card { -webkit-user-select:none; user-select:none }
-html,body { height:100%; background:var(--bg); color:var(--text); font-family:'Plus Jakarta Sans',sans-serif; overflow-x:hidden }
+html,body { height:100%; background:var(--bg); color:var(--text); font-family:'Plus Jakarta Sans',sans-serif; overflow-x:hidden; scroll-padding-top:72px }
 
 body::after {
   content:''; position:fixed; inset:0;
@@ -185,7 +185,7 @@ main { flex:1; max-width:880px; width:100%; margin:0 auto; padding:36px 24px }
 .mode-step { font-size:9px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--muted); margin-bottom:5px }
 .mode-card {
   border:1px solid var(--border); border-radius:var(--r);
-  padding:16px 12px 32px; cursor:pointer; transition:all .2s;
+  padding:16px 12px 20px; cursor:pointer; transition:all .2s;
   background:var(--s1); text-align:center; position:relative; overflow:hidden;
 }
 .mode-card::before {
@@ -425,7 +425,7 @@ textarea::placeholder { color:var(--muted) }
   color:var(--muted); margin-bottom:8px;
 }
 
-.start-row { display:flex; gap:12px; align-items:center }
+.start-row { display:flex; gap:12px; align-items:center; margin-top:20px }
 .start-row .btn-gold {
   flex:1; padding:16px 28px; font-size:16px;
   font-family:'Bebas Neue'; letter-spacing:2px; font-weight:400; border-radius:var(--r-sm);
@@ -1209,42 +1209,42 @@ body.light-mode .logo-img-colour { display:block }
       <span class="mode-icon">📖</span>
       <div class="mode-name">Baseline Test</div>
       <div class="mode-desc">Find out how fast you read right now.</div>
-      <div class="mode-time-bar">Your pace</div>
+
     </div>
     <div class="mode-card" data-mode="rsvp">
       <div class="mode-step">Step 2</div>
       <span class="mode-icon">🎯</span>
       <div class="mode-name">RSVP</div>
       <div class="mode-desc">Train your eyes to stop moving.</div>
-      <div class="mode-time-bar">10 min</div>
+
     </div>
     <div class="mode-card" data-mode="phrase">
       <div class="mode-step">Step 3</div>
       <span class="mode-icon">⚡</span>
       <div class="mode-name">Phrase</div>
       <div class="mode-desc">Read ideas, not words.</div>
-      <div class="mode-time-bar">15 min</div>
+
     </div>
     <div class="mode-card" data-mode="focus">
       <div class="mode-step">Step 4</div>
       <span class="mode-icon">🔦</span>
       <div class="mode-name">Focus Line</div>
       <div class="mode-desc">See more words per glance.</div>
-      <div class="mode-time-bar">10 min</div>
+
     </div>
     <div class="mode-card" data-mode="scroll">
       <div class="mode-step">Step 5</div>
       <span class="mode-icon">👁</span>
       <div class="mode-name">Pacer</div>
       <div class="mode-desc">Never lose your place again.</div>
-      <div class="mode-time-bar">15 min</div>
+
     </div>
     <div class="mode-card" data-mode="bionic">
       <div class="mode-step">Step 6</div>
       <span class="mode-icon">🧠</span>
       <div class="mode-name">Chunking</div>
       <div class="mode-desc">Your brain reads faster than you think.</div>
-      <div class="mode-time-bar">Your pace</div>
+
     </div>
     <div class="mode-card mode-card-retest" data-mode="baseline_retest">
       <div class="mode-step">Step 7</div>
@@ -1253,7 +1253,7 @@ body.light-mode .logo-img-colour { display:block }
         <div class="mode-name">Final Test</div>
         <div class="mode-desc">See exactly how far you've come.</div>
       </div>
-      <div class="mode-time-bar">Your pace</div>
+
     </div>
   </div>
   <!-- Progress strip -->
@@ -1299,7 +1299,7 @@ body.light-mode .logo-img-colour { display:block }
     </div>
   </div>
 
-  <div class="input-card" style="padding-bottom:0;border-bottom:none;border-radius:14px;margin-bottom:16px">
+  <div class="input-card" style="padding-bottom:20px;border-bottom:none;border-radius:14px;margin-bottom:16px">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
       <label style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin:0">Paste your text</label>
       <button id="btn-clear-text" onclick="clearText()" style="display:none;align-items:center;gap:5px;background:transparent;border:1px solid rgba(255,255,255,0.1);border-radius:100px;padding:3px 10px;color:var(--muted);font-family:'Plus Jakarta Sans';font-size:11px;font-weight:600;cursor:pointer;transition:all .15s" onmouseover="this.style.borderColor='rgba(255,107,53,0.5)';this.style.color='#ff6b35'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.color='var(--muted)'">
@@ -1490,11 +1490,13 @@ body.light-mode .logo-img-colour { display:block }
 <!-- ══ SCREEN 1.5 — LESSON ══ -->
 <div class="screen" id="screen-lesson">
   <div class="lesson-hero">
-    <div id="lesson-time-badge" style="display:inline-flex;align-items:center;gap:6px;background:rgba(247,166,0,0.08);border:1px solid rgba(247,166,0,0.2);border-radius:100px;padding:4px 14px;margin-bottom:14px;font-size:12px;font-weight:600;color:var(--gold)">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-      <span id="lesson-time-el"></span>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:14px">
+      <div class="lesson-badge" id="lesson-badge-el"></div>
+      <div id="lesson-time-badge" style="display:inline-flex;align-items:center;gap:5px;background:transparent;border:1px solid rgba(255,255,255,0.1);border-radius:100px;padding:3px 10px;font-size:11px;font-weight:500;color:var(--muted)">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <span id="lesson-time-el"></span>
+      </div>
     </div>
-    <div class="lesson-badge" id="lesson-badge-el"></div>
     <h2 id="lesson-title-el"></h2>
     <p id="lesson-sub-el"></p>
   </div>
@@ -1804,7 +1806,7 @@ const MODE_ORDER = ['baseline','rsvp','phrase','focus','scroll','bionic','baseli
 const LESSON_DATA = {
   baseline: {
     badge: '📖 Baseline Reading Test', title: 'Find your starting speed.',
-    time: 'Your pace',
+    time: 'Your pace, no time limit',
     sub: 'Read at your natural pace. We\'ll time you and calculate your WPM.',
     preview: '<span class="lp-dim">I am Gimpel the fool. I don\'t think myself a fool. On the contrary. But that\'s what folks call me.</span>',
     previewClass: '',
@@ -1817,7 +1819,7 @@ const LESSON_DATA = {
   },
   rsvp: {
     badge: '🎯 RSVP Focus', title: 'Zero eye movement. Maximum speed.',
-    time: '10 min optimal session',
+    time: '3-10 min recommended',
     sub: 'One word at a time, dead centre. Your eyes never move.',
     preview: '<span style="font-size:48px;font-weight:700" class="lp-active">quickly</span>',
     previewClass: 'rsvp-style',
@@ -1830,7 +1832,7 @@ const LESSON_DATA = {
   },
   phrase: {
     badge: '⚡ Phrase Reading', title: 'Read ideas, not words.',
-    time: '15 min optimal session',
+    time: '5-15 min recommended',
     sub: '30 seconds in, you\'ll read faster than you ever have.',
     preview: '<span style="font-family:Lora,Georgia,serif;font-size:clamp(32px,4.5vw,44px);font-weight:400;letter-spacing:0.01em;line-height:1.45" class="lp-active">read like this</span>',
     previewClass: 'phrase-style',
@@ -1843,7 +1845,7 @@ const LESSON_DATA = {
   },
   focus: {
     badge: '🔦 Focus Line', title: 'The spotlight stays. The text moves.',
-    time: '10 min optimal session',
+    time: '3-10 min recommended',
     sub: 'Full text visible. Bold chunk fixed at centre. Peripheral vision trains itself.',
     preview: '<span class="lp-dim">I am Gimpel the fool. I don\'t think myself</span> <span class="lp-bold"> a fool. On</span> <span class="lp-dim">the contrary. But that\'s what folks call me.</span>',
     previewClass: '',
@@ -1856,8 +1858,7 @@ const LESSON_DATA = {
   },
   scroll: {
     badge: '👁 Pacer', title: 'Let the pace pull you forward.',
-    time: '15 min optimal session',
-    sub: 'Gold underline moves chunk by chunk. Your eyes follow.',
+    time: '3-15 min recommended',
     preview: '<span class="lp-dim">I am Gimpel the fool.</span> <span class="lp-active" style="text-decoration:underline;text-decoration-color:#F7A600;text-decoration-thickness:2px;text-underline-offset:4px">I don\'t think</span> <span class="lp-dim">myself a fool. On the contrary.</span>',
     previewClass: '',
     points: [
@@ -1869,7 +1870,7 @@ const LESSON_DATA = {
   },
   bionic: {
     badge: '🧠 Chunking', title: 'Bold groups. Brain fills the rest.',
-    time: 'Your pace',
+    time: 'Your pace, no time limit',
     sub: 'Read at your own pace. We\'ll time you and give you your WPM at the end.',
     preview: '<span class="lp-bold">I am</span> <span class="lp-dim">Gimpel the</span> <span class="lp-bold">fool. I</span> <span class="lp-dim">don\'t think</span> <span class="lp-bold">myself a</span>',
     previewClass: '',
@@ -1882,7 +1883,7 @@ const LESSON_DATA = {
   },
   baseline_retest: {
     badge: '🏁 Final Test', title: 'How far have you come?',
-    time: 'Your pace',
+    time: 'Your pace, no time limit',
     sub: 'Same text. Same rules. See exactly how much faster you are now.',
     preview: '<span class="lp-dim">I am Gimpel the fool. I don\'t think myself a fool. On the contrary. But that\'s what folks call me.</span>',
     previewClass: '',
@@ -1901,6 +1902,9 @@ const ms = (wpm, words) => (words / wpm) * 60000;
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   $(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'instant' });
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
 }
 function setReadingMode(on) {
   document.body.classList.toggle('reading', on);
