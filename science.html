@@ -50,17 +50,13 @@ header {
 .logo { display:flex; align-items:center; gap:8px; text-decoration:none }
 .logo-name { font-family:'Bebas Neue'; font-size:22px; letter-spacing:2px; color:var(--text) }
 .logo-name b { color:var(--gold) }
-.header-nav { display:flex; align-items:center; gap:10px; margin-left:auto }
-.header-nav a {
-  font-size:13px; font-weight:700; text-decoration:none;
-  padding:8px 18px; border-radius:100px; transition:all .2s;
-}
-/* Secondary — outline, go to app */
-.header-nav a.secondary { border:1.5px solid #F7A600; color:#F7A600; background:transparent }
-.header-nav a.secondary:hover { background:rgba(247,166,0,0.08) }
-/* Primary — solid gold, current page */
-.header-nav a.primary { background:#F7A600; color:#1a1a2e; border:none; font-weight:700 }
-.header-nav a.primary:hover { background:#F7BD33 }
+.header-nav-mid { display:flex; align-items:center; gap:4px; margin-left:auto; margin-right:12px }
+.header-nav-right { display:flex; align-items:center; gap:8px }
+.btn-nav-link { font-family:'Plus Jakarta Sans'; font-size:13px; font-weight:500; color:var(--muted2); padding:6px 10px; border-radius:6px; text-decoration:none; transition:color .15s; white-space:nowrap }
+.btn-nav-link:hover { color:var(--text) }
+.btn-nav-create { font-family:'Plus Jakarta Sans'; font-size:13px; font-weight:700; color:#08080e; background:var(--gold); padding:7px 16px; border-radius:100px; text-decoration:none; transition:background .15s; white-space:nowrap }
+.btn-nav-create:hover { background:var(--gold2) }
+@media(max-width:640px) { .header-nav-mid { display:none } }
 
 .wrap { max-width:840px; margin:0 auto; padding:56px 32px 80px }
 
@@ -213,8 +209,13 @@ footer a { color:var(--gold); text-decoration:none; font-weight:600 }
 
 <header>
   <a class="logo" href="index.html"><img style="height:48px;display:block;opacity:0.92;transition:opacity .2s" src="/logo-dark.png" alt="StudyFast"></a>
-  <div class="header-nav">
-    <a href="index.html" class="secondary">🧠 The App</a>
+  <div class="header-nav-mid">
+    <a class="btn-nav-link" href="index.html">App</a>
+    <a class="btn-nav-link" href="science.html" style="color:var(--text)">The Science</a>
+  </div>
+  <div class="header-nav-right">
+    <a class="btn-nav-link" href="login.html">Log in</a>
+    <a class="btn-nav-create" href="signup.html">Create account</a>
   </div>
 </header>
 
