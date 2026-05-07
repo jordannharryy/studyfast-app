@@ -9,7 +9,7 @@
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/apple-touch-icon.png" sizes="180x180" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<title>Speed Reading Trainer — Double Your Reading Speed in 7 Days | StudyFast</title>
+<title>Speed Reading Trainer: Double Your Reading Speed in 7 Days | StudyFast</title>
 
 <meta name="description" content="Free speed reading trainer used by 50,000+ students in 70 countries. Train 15 mins/day and double your reading speed in 7 days. 4 neuroscience-backed modes: Phrase Reading, RSVP, Focus Line & Chunking. No login needed.">
 <meta name="keywords" content="speed reading, how to read faster, speed reading training, increase reading speed, words per minute, RSVP reading, phrase reading, chunking reading, read faster online, free speed reading app">
@@ -19,8 +19,8 @@
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://studyfast.uk/">
-<meta property="og:title" content="Free Speed Reading Trainer — Double Your Speed in 7 Days">
-<meta property="og:description" content="Train 15 mins/day and double your reading speed in 7 days. 4 neuroscience-backed modes. Used by 50,000+ people in 70 countries. Free — no login needed.">
+<meta property="og:title" content="Free Speed Reading Trainer: Double Your Speed in 7 Days">
+<meta property="og:description" content="Train 15 mins/day and double your reading speed in 7 days. 4 neuroscience-backed modes. Used by 50,000+ people in 70 countries. Free, no login needed.">
 <meta property="og:image" content="https://studyfast.uk/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -29,7 +29,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@studyfast">
-<meta name="twitter:title" content="Free Speed Reading Trainer — Double Your Speed in 7 Days">
+<meta name="twitter:title" content="Free Speed Reading Trainer: Double Your Speed in 7 Days">
 <meta name="twitter:description" content="15 mins/day. 4 neuroscience-backed modes. 50,000+ students in 70 countries. Free, no login.">
 <meta name="twitter:image" content="https://studyfast.uk/og-image.png">
 
@@ -59,6 +59,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=JetBrains+Mono:wght@400;500&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <style>
 /* ─── TOKENS ─────────────────────────────────────────────────────── */
 :root {
@@ -183,7 +185,7 @@ main { flex:1; max-width:880px; width:100%; margin:0 auto; padding:36px 24px }
 .mode-step { font-size:9px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--muted); margin-bottom:5px }
 .mode-card {
   border:1px solid var(--border); border-radius:var(--r);
-  padding:16px 12px; cursor:pointer; transition:all .2s;
+  padding:16px 12px 32px; cursor:pointer; transition:all .2s;
   background:var(--s1); text-align:center; position:relative; overflow:hidden;
 }
 .mode-card::before {
@@ -212,6 +214,7 @@ main { flex:1; max-width:880px; width:100%; margin:0 auto; padding:36px 24px }
 .mode-card-retest.selected .mode-step { color:rgba(61,255,160,.8) }
 /* Mobile only — full width span + horizontal layout */
 @media(max-width:640px) {
+  .mode-time-bar { padding:8px 0; font-size:10px }
   .mode-card-retest {
     grid-column:1 / -1;
     display:flex; flex-direction:row; align-items:center;
@@ -272,6 +275,138 @@ main { flex:1; max-width:880px; width:100%; margin:0 auto; padding:36px 24px }
 .badge-phrase  { background:rgba(247,166,0,.15);  color:var(--gold) }
 .badge-bionic  { background:rgba(61,255,160,.15);  color:var(--green) }
 
+/* ─── EYE WARM-UP BANNER ────────────────────────────────────────── */
+.warmup-banner {
+  display:flex; align-items:center; gap:14px;
+  background:rgba(247,166,0,0.04);
+  border:1px solid rgba(247,166,0,0.2);
+  border-radius:var(--r); padding:14px 18px;
+  margin-bottom:14px; cursor:pointer; transition:all .2s;
+  text-decoration:none;
+}
+.warmup-banner:hover { background:rgba(247,166,0,0.07); border-color:rgba(247,166,0,0.4) }
+.warmup-banner-icon {
+  width:40px; height:40px; border-radius:10px;
+  background:rgba(247,166,0,0.1); border:1px solid rgba(247,166,0,0.2);
+  display:flex; align-items:center; justify-content:center;
+  font-size:20px; flex-shrink:0;
+}
+.warmup-banner-text { flex:1; min-width:0 }
+.warmup-banner-title { font-size:13px; font-weight:700; color:var(--text); margin-bottom:2px }
+.warmup-banner-sub { font-size:11px; color:var(--muted2) }
+.warmup-banner-pill {
+  font-family:'JetBrains Mono'; font-size:10px; font-weight:500;
+  color:var(--gold); background:rgba(247,166,0,0.08);
+  border:1px solid rgba(247,166,0,0.2);
+  padding:3px 10px; border-radius:100px; white-space:nowrap; flex-shrink:0;
+}
+.warmup-banner-arrow { color:var(--muted); font-size:16px; flex-shrink:0 }
+
+/* ─── EYE WARM-UP SCREEN ─────────────────────────────────────────── */
+#screen-warmup { background:#050509 }
+.wu-header {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 24px; border-bottom:1px solid rgba(255,255,255,0.05);
+  background:#050509;
+}
+.wu-step-label { font-size:11px; color:rgba(255,255,255,0.3); font-weight:600; letter-spacing:.5px }
+.wu-step-label span { color:rgba(255,255,255,0.7) }
+.wu-quit {
+  font-size:12px; color:rgba(255,255,255,0.25); background:transparent;
+  border:1px solid rgba(255,255,255,0.08); border-radius:100px;
+  padding:4px 14px; cursor:pointer; font-family:'Plus Jakarta Sans'; transition:all .15s;
+}
+.wu-quit:hover { border-color:rgba(255,107,53,0.5); color:#ff6b35 }
+.wu-dots {
+  display:flex; align-items:center; justify-content:center; gap:7px;
+  padding:20px 24px 0; background:#050509;
+}
+.wu-dot {
+  height:3px; border-radius:2px; background:rgba(255,255,255,0.06);
+  transition:all .35s ease; width:18px;
+}
+.wu-dot.done { background:rgba(247,166,0,0.25) }
+.wu-dot.active { background:var(--gold); width:28px; box-shadow:0 0 10px rgba(247,166,0,0.5) }
+.wu-timer-wrap { display:flex; justify-content:center; padding:20px 24px 8px; background:#050509 }
+.wu-timer { position:relative; width:56px; height:56px }
+.wu-timer svg { transform:rotate(-90deg) }
+.wu-timer-num {
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  font-family:'JetBrains Mono'; font-size:16px; font-weight:500; color:rgba(247,166,0,0.9);
+}
+.wu-stage {
+  min-height:300px; display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  padding:24px 40px 32px; position:relative; overflow:hidden;
+  background:radial-gradient(ellipse at 50% 60%, #0a0a12 0%, #050509 70%);
+}
+.wu-stage::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(0,0,0,0.6) 100%);
+  pointer-events:none; z-index:0;
+}
+.wu-exercise-label {
+  font-size:9px; font-weight:700; letter-spacing:3px; text-transform:uppercase;
+  color:rgba(247,166,0,0.35); margin-bottom:10px; text-align:center; position:relative; z-index:1;
+}
+.wu-title {
+  font-family:'Bebas Neue'; font-size:clamp(38px,5vw,54px);
+  letter-spacing:4px; color:rgba(255,255,255,0.9); text-align:center;
+  margin-bottom:8px; line-height:1; position:relative; z-index:1;
+}
+.wu-instruction {
+  font-size:12px; color:rgba(255,255,255,0.28); text-align:center;
+  margin-bottom:32px; line-height:1.7; max-width:360px; position:relative; z-index:1;
+}
+.wu-instruction strong { color:rgba(255,255,255,0.55); font-weight:600 }
+.wu-anim { position:relative; display:flex; align-items:center; justify-content:center; z-index:1 }
+.wu-dot-ball {
+  width:14px; height:14px; border-radius:50%; position:absolute;
+  box-shadow:0 0 24px 4px currentColor, 0 0 60px currentColor;
+}
+.wu-track-h { width:100%; height:1px; background:rgba(255,255,255,0.04); border-radius:1px; position:absolute; top:50%; transform:translateY(-50%) }
+.wu-track-end { position:absolute; top:50%; transform:translateY(-50%); width:1px; height:16px; background:rgba(255,255,255,0.06); border-radius:1px }
+.wu-track-end.l { left:0 }
+.wu-track-end.r { right:0 }
+@keyframes wu-lr   { 0%,100%{left:2px} 50%{left:calc(100% - 18px)} }
+@keyframes wu-ud   { 0%,100%{top:2px} 50%{top:calc(100% - 18px)} }
+@keyframes wu-diag { 0%,100%{top:2px;left:2px} 50%{top:calc(100% - 18px);left:calc(100% - 18px)} }
+@keyframes wu-anti { 0%,100%{top:2px;left:calc(100% - 18px)} 50%{top:calc(100% - 18px);left:2px} }
+@keyframes wu-inf  { 0%{transform:translate(60px,0px)} 25%{transform:translate(0px,-28px)} 50%{transform:translate(-60px,0px)} 75%{transform:translate(0px,28px)} 100%{transform:translate(60px,0px)} }
+@keyframes wu-zoom { 0%,100%{opacity:1;transform:translate(-50%,-50%) scale(1)} 50%{opacity:0.3;transform:translate(-50%,-50%) scale(2.8)} }
+@keyframes wu-blink { 0%,40%,100%{transform:scaleY(1);opacity:1} 50%{transform:scaleY(0.05);opacity:.15} }
+@keyframes wu-converge { 0%{transform:translateX(-50%) translateY(-50%) scale(1);opacity:.7} 50%{transform:translateX(-50%) translateY(-50%) scale(0.35);opacity:1} 100%{transform:translateX(-50%) translateY(-50%) scale(1);opacity:.7} }
+@keyframes wu-ring { 0%{opacity:.7;transform:scale(.6)} 100%{opacity:0;transform:scale(1.4)} }
+@keyframes wu-breathe { 0%,100%{opacity:.3;transform:scale(1)} 50%{opacity:.9;transform:scale(1.04)} }
+.wu-prog-track { height:2px; background:rgba(255,255,255,0.04) }
+.wu-prog-fill { height:100%; background:var(--gold); transition:width 1s linear; width:0%; opacity:0.7 }
+.wu-footer {
+  border-top:1px solid rgba(255,255,255,0.05); padding:16px 24px; background:#050509;
+  display:flex; align-items:center; gap:10px;
+}
+.wu-next {
+  flex:1; padding:14px; background:var(--gold); color:#08080e;
+  border:none; border-radius:var(--r-sm);
+  font-family:'Bebas Neue'; font-size:17px; letter-spacing:2px; cursor:pointer; transition:all .18s;
+}
+.wu-next:hover { background:var(--gold2) }
+.wu-skip-ex {
+  padding:13px 18px; background:transparent;
+  border:1px solid rgba(255,255,255,0.08); border-radius:var(--r-sm);
+  color:rgba(255,255,255,0.2); font-family:'Plus Jakarta Sans'; font-size:12px;
+  cursor:pointer; transition:all .15s; white-space:nowrap;
+}
+.wu-skip-ex:hover { color:rgba(255,255,255,0.45) }
+/* Complete state */
+.wu-complete {
+  text-align:center; padding:48px 32px; background:#050509;
+  display:flex; flex-direction:column; align-items:center; min-height:400px; justify-content:center;
+}
+.wu-complete-icon { font-size:48px; margin-bottom:16px }
+.wu-complete-title { font-family:'Bebas Neue'; font-size:48px; letter-spacing:3px; color:var(--gold); margin-bottom:8px }
+.wu-complete-sub { font-size:13px; color:rgba(255,255,255,0.35); line-height:1.75; margin-bottom:28px; max-width:320px }
+.wu-complete-cta { width:100%; max-width:320px; padding:16px; background:var(--gold); color:#08080e; border:none; border-radius:var(--r-sm); font-family:'Bebas Neue'; font-size:18px; letter-spacing:2px; cursor:pointer; margin-bottom:12px }
+.wu-complete-back { font-size:12px; color:rgba(255,255,255,0.2); background:none; border:none; cursor:pointer; font-family:'Plus Jakarta Sans'; text-decoration:underline; text-decoration-color:rgba(255,255,255,0.1); text-underline-offset:3px }
 .input-card { background:var(--s1); border:1px solid var(--border); border-radius:var(--r); padding:24px; margin-bottom:16px }
 .input-card > label { display:block; font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:10px }
 textarea {
@@ -785,8 +920,30 @@ body.light-mode #screen-lesson .lesson-settings p strong { color:#1a1a2e !import
 .lesson-chunk-hint { font-size:12px; color:var(--muted2) }
 .lesson-actions { display:flex; gap:12px }
 .lesson-actions .btn-gold { flex:1; font-family:'Bebas Neue'; letter-spacing:2px; font-weight:400; font-size:16px; padding:16px; border-radius:var(--r-sm) }
-.btn-lesson-skip { padding:14px 22px; border:1px solid var(--border2); border-radius:var(--r-sm); background:transparent; color:var(--muted); font-family:'Plus Jakarta Sans'; font-size:13px; cursor:pointer; transition:all .15s; touch-action:manipulation }
-.btn-lesson-skip:hover { color:var(--muted2) }
+.btn-lesson-skip { padding:13px 4px; border:none; border-bottom:1px solid rgba(144,144,176,0.3); border-radius:0; background:transparent; color:var(--muted2); font-family:'Plus Jakarta Sans'; font-size:14px; font-weight:600; cursor:pointer; transition:all .15s; touch-action:manipulation; display:inline-flex; align-items:center; gap:7px }
+.btn-lesson-skip:hover { color:var(--text); border-bottom-color:rgba(144,144,176,0.6) }
+.sample-chip { display:inline-flex; align-items:center; gap:4px; padding:4px 10px; border:1px solid var(--border2); border-radius:100px; background:var(--s2); font-size:11px; font-weight:600; color:var(--muted2); cursor:pointer; transition:all .15s; white-space:nowrap; font-family:"Plus Jakarta Sans"; }
+.sample-chip:hover, .sample-chip.active { border-color:var(--gold); color:var(--gold); background:rgba(247,166,0,0.06); }
+
+.sample-chip {
+  display:inline-flex; align-items:center; gap:4px;
+  padding:4px 11px; border:1px solid var(--border2); border-radius:100px;
+  background:var(--s2); font-size:11px; font-weight:600; color:var(--muted2);
+  cursor:pointer; transition:all .15s; white-space:nowrap; font-family:'Plus Jakarta Sans';
+}
+.sample-chip:hover, .sample-chip.active {
+  border-color:var(--gold); color:var(--gold); background:rgba(247,166,0,0.06);
+}
+.mode-time-bar {
+  position:absolute; bottom:0; left:0; right:0;
+  padding:6px 0;
+  background:rgba(247,166,0,0.1);
+  border-top:1px solid rgba(247,166,0,0.2);
+  font-family:'JetBrains Mono',monospace; font-size:9px;
+  color:rgba(247,166,0,0.85); text-align:center; letter-spacing:0.5px;
+  font-weight:500;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
 /* Focus line */
 .focus-viewport { width:100%; max-width:100%; overflow:hidden; position:relative; height:60px; -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 16%,#000 84%,transparent 100%); mask-image:linear-gradient(90deg,transparent 0%,#000 16%,#000 84%,transparent 100%) }
 #focus-display { position:absolute; top:50%; left:0; transform:translateY(-50%) translateX(0px); white-space:nowrap; font-family:'Plus Jakarta Sans'; font-size:19px; font-weight:300; line-height:1; color:rgba(242,241,252,0.18); will-change:transform; user-select:none; opacity:0 }
@@ -883,20 +1040,49 @@ body.light-mode #screen-lesson .lesson-settings p strong { color:#1a1a2e !import
 .res-comparison { background:var(--s1); border:1px solid var(--gold); border-radius:var(--r); padding:22px 24px; margin-bottom:20px; text-align:center; display:none }
 /* Coaching CTA */
 .coaching-cta {
-  display:none; background:#161625; border:1px solid rgba(61,255,160,0.2);
-  border-radius:var(--r); padding:22px 20px; margin-bottom:20px; text-align:center;
+  display:none; margin-bottom:16px;
 }
 .coaching-cta.show { display:block }
+
+/* Achievement ring */
+.achievement-ring-wrap {
+  text-align:center;
+  background:linear-gradient(180deg,rgba(61,255,160,0.05) 0%,transparent 100%);
+  border:1px solid rgba(61,255,160,0.12);
+  border-radius:var(--r);padding:28px 24px;margin-bottom:14px;
+  position:relative;overflow:hidden;
+}
+.achievement-ring-wrap::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:240px;height:1px;background:linear-gradient(90deg,transparent,var(--green),transparent)}
+.ar-finished{font-family:'Bebas Neue';font-size:clamp(38px,6vw,52px);letter-spacing:3px;color:var(--text);margin-bottom:6px}
+.ar-ring{position:relative;width:140px;height:140px;margin:0 auto 16px}
+.ar-ring svg{position:absolute;top:0;left:0;transform:rotate(-90deg)}
+.ar-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ar-pct{font-family:'Bebas Neue';font-size:36px;color:var(--green);line-height:1;letter-spacing:1px}
+.ar-pct-label{font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(61,255,160,0.6);margin-top:2px}
+.ar-of{font-family:'Bebas Neue';font-size:clamp(28px,4vw,36px);letter-spacing:2px;color:var(--text);margin-bottom:8px}
+.ar-sub{font-size:13px;color:var(--muted2);line-height:1.65;max-width:340px;margin:0 auto 16px}
+.ar-chips{display:flex;align-items:center;justify-content:center;gap:7px;flex-wrap:wrap}
+.ar-chip{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;padding:4px 10px;border-radius:100px;border:1px solid rgba(61,255,160,0.2);color:rgba(61,255,160,0.8);background:rgba(61,255,160,0.06)}
+
+/* Coaching card */
+.coaching-card-inner {
+  background:linear-gradient(135deg,#0d0d1f,#111128);
+  border:1px solid rgba(61,255,160,0.2);
+  border-radius:var(--r);padding:22px;margin-bottom:10px;
+  position:relative;overflow:hidden;
+}
+.coaching-card-inner::before{content:'';position:absolute;top:0;right:0;width:140px;height:140px;background:radial-gradient(circle,rgba(61,255,160,0.05),transparent 70%);pointer-events:none}
 .coaching-badge {
-  display:inline-block; font-size:9px; font-weight:700; letter-spacing:1px;
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:10px; font-weight:700; letter-spacing:1px;
   text-transform:uppercase; color:var(--green); background:rgba(61,255,160,0.08);
   border:1px solid rgba(61,255,160,0.2); padding:3px 10px;
-  border-radius:100px; margin-bottom:14px;
+  border-radius:100px; margin-bottom:12px;
 }
 .coaching-jordan {
   display:flex; align-items:center; gap:10px;
   background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);
-  border-radius:10px; padding:10px 12px; margin-bottom:16px; text-align:left;
+  border-radius:10px; padding:10px 12px; margin-bottom:14px; text-align:left;
 }
 .coaching-jordan img {
   width:40px; height:40px; border-radius:50%; object-fit:cover; flex-shrink:0;
@@ -904,16 +1090,40 @@ body.light-mode #screen-lesson .lesson-settings p strong { color:#1a1a2e !import
 }
 .coaching-jordan-text { font-size:11px; color:#9090b0; line-height:1.5 }
 .coaching-jordan-text b { color:var(--text); display:block; font-size:13px; margin-bottom:1px }
-.coaching-title { font-size:17px; font-weight:700; color:var(--text); margin-bottom:8px; line-height:1.35 }
+.coaching-title { font-size:17px; font-weight:700; color:var(--text); margin-bottom:6px; line-height:1.35 }
 .coaching-title span { color:var(--green) }
-.coaching-sub { font-size:13px; color:var(--muted2); margin-bottom:18px; line-height:1.65 }
+.coaching-sub { font-size:12px; color:var(--muted2); margin-bottom:16px; line-height:1.65 }
 .coaching-btn {
   display:block; width:100%; background:var(--green); color:#08080e;
-  font-size:14px; font-weight:800; padding:14px; border-radius:var(--r-sm);
+  font-size:16px; font-weight:800; padding:15px; border-radius:var(--r-sm);
   text-decoration:none; margin-bottom:8px; font-family:'Bebas Neue'; letter-spacing:2px;
+  text-align:center; border:none; cursor:pointer;
 }
 .coaching-btn:hover { background:#5cffc0 }
-.coaching-note { font-size:11px; color:var(--muted) }
+.coaching-note { font-size:11px; color:var(--muted); text-align:center }
+
+/* Jordan Minutes secondary */
+.jm-section-label{
+  display:flex;align-items:center;gap:10px;
+  font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);
+  margin:16px 0 12px;
+}
+.jm-section-label::before,.jm-section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.jm-card {
+  background:var(--s1);border:1px solid var(--border);border-radius:var(--r);
+  padding:18px 20px;margin-bottom:16px;
+}
+.jm-header{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.jm-title{font-size:13px;font-weight:700;color:var(--text)}
+.jm-title span{font-size:11px;font-weight:400;color:var(--muted);margin-left:4px}
+.jm-body{font-size:12px;color:var(--muted2);line-height:1.65;margin-bottom:12px}
+.jm-form{display:flex;flex-direction:column;gap:7px;margin-bottom:7px}
+.jm-input{width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:11px 14px;font-size:13px;color:var(--text);font-family:'Plus Jakarta Sans';outline:none;transition:border-color .2s}
+.jm-input:focus{border-color:var(--gold)}
+.jm-input::placeholder{color:var(--muted)}
+.jm-btn{width:100%;background:var(--gold);color:#08080e;font-size:14px;font-weight:800;padding:13px;border-radius:8px;border:none;cursor:pointer;font-family:'Plus Jakarta Sans'}
+.jm-microcopy{font-size:10px;color:var(--muted);text-align:center;margin-top:6px}
+
 .footer-version { font-size:11px; color:rgba(255,255,255,0.18); font-family:'JetBrains Mono',monospace; letter-spacing:.5px }
 
 /* ─── LIGHT MODE LOGO SWAP ───────────────────────────────────────── */
@@ -960,57 +1170,90 @@ body.light-mode .logo-img-colour { display:block }
 <div class="screen active" id="screen-input">
 
   <div class="hero">
+    <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(247,166,0,0.08);border:1px solid rgba(247,166,0,0.2);border-radius:100px;padding:6px 16px;margin-bottom:18px;font-size:12px;font-weight:600;color:var(--gold)">
+      Jordan Harry · UK's #1 Speed Reading Coach · TEDx 3.4M Views
+    </div>
     <h1>READ FASTER<span class="accent">START NOW.</span></h1>
-    <p>Seven steps to mastery. One goal. Double your reading speed in 7 days — 15 minutes a day is all it takes.</p>
+    <p>Your brain can process 1,000 words per minute (WPM). Your eyes are the bottleneck. Fix that in 7 days, 15 minutes a day.</p>
   </div>
 
-  <div class="modes-label">Your training progression — start at Step 1</div>
+
+
+
+  <!-- #8 Onboarding pill — first-timer orientation, minimal footprint -->
+  <div id="onboarding-pill-wrap" style="display:flex;justify-content:center;margin-bottom:16px">
+    <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:100px;padding:6px 14px;font-size:11px;color:var(--muted2)">
+      <span style="font-size:13px">👋</span>
+      <span>New here? Start at <strong style="color:var(--text)">Step 1</strong></span>
+      <button onclick="document.getElementById('onboarding-pill-wrap').style.display='none'" style="margin-left:4px;font-size:11px;color:var(--muted);background:transparent;border:none;cursor:pointer;font-family:'Plus Jakarta Sans';padding:0 0 0 4px;line-height:1">✕</button>
+    </div>
+  </div>
+
+  <div class="modes-label">Your training progression</div>
+
+  <!-- EYE WARM-UP BANNER — temporarily hidden, restore when ready
+  <div class="warmup-banner" id="btn-warmup" onclick="startWarmup()">
+    <div class="warmup-banner-icon">👁</div>
+    <div class="warmup-banner-text">
+      <div class="warmup-banner-title">Eye Warm-Up <span style="font-size:10px;font-weight:400;color:var(--muted);margin-left:4px">— do this before every session</span></div>
+      <div class="warmup-banner-sub">8 research-backed exercises · primes your visual system</div>
+    </div>
+    <div class="warmup-banner-pill">~3 min</div>
+    <div class="warmup-banner-arrow">›</div>
+  </div>
+  -->
+
   <div class="modes-grid">
     <div class="mode-card selected" data-mode="baseline">
       <div class="mode-step">Step 1</div>
       <span class="mode-icon">📖</span>
       <div class="mode-name">Baseline Test</div>
-      <div class="mode-desc">Measure your words per minute.</div>
-      <span class="mode-badge" style="background:rgba(255,255,255,.08);color:var(--muted2)">Start Here</span>
+      <div class="mode-desc">Find out how fast you read right now.</div>
+      <div class="mode-time-bar">Your pace</div>
     </div>
     <div class="mode-card" data-mode="rsvp">
       <div class="mode-step">Step 2</div>
       <span class="mode-icon">🎯</span>
       <div class="mode-name">RSVP</div>
-      <div class="mode-desc">Pure speed training.</div>
+      <div class="mode-desc">Train your eyes to stop moving.</div>
+      <div class="mode-time-bar">10 min</div>
     </div>
     <div class="mode-card" data-mode="phrase">
       <div class="mode-step">Step 3</div>
       <span class="mode-icon">⚡</span>
-      <div class="mode-name">Phrase Reading</div>
-      <div class="mode-desc">Fewer fixations per line.</div>
+      <div class="mode-name">Phrase</div>
+      <div class="mode-desc">Read ideas, not words.</div>
+      <div class="mode-time-bar">15 min</div>
     </div>
     <div class="mode-card" data-mode="focus">
       <div class="mode-step">Step 4</div>
       <span class="mode-icon">🔦</span>
       <div class="mode-name">Focus Line</div>
-      <div class="mode-desc">Train your peripheral vision.</div>
+      <div class="mode-desc">See more words per glance.</div>
+      <div class="mode-time-bar">10 min</div>
     </div>
     <div class="mode-card" data-mode="scroll">
       <div class="mode-step">Step 5</div>
       <span class="mode-icon">👁</span>
       <div class="mode-name">Pacer</div>
-      <div class="mode-desc">Retrain your eye movement.</div>
+      <div class="mode-desc">Never lose your place again.</div>
+      <div class="mode-time-bar">15 min</div>
     </div>
     <div class="mode-card" data-mode="bionic">
       <div class="mode-step">Step 6</div>
       <span class="mode-icon">🧠</span>
       <div class="mode-name">Chunking</div>
-      <div class="mode-desc">Absorb more information.</div>
+      <div class="mode-desc">Your brain reads faster than you think.</div>
+      <div class="mode-time-bar">Your pace</div>
     </div>
     <div class="mode-card mode-card-retest" data-mode="baseline_retest">
       <div class="mode-step">Step 7</div>
       <span class="mode-icon">🏁</span>
       <div class="mode-card-text">
         <div class="mode-name">Final Test</div>
-        <div class="mode-desc">Measure your new words per minute.</div>
+        <div class="mode-desc">See exactly how far you've come.</div>
       </div>
-      <span class="mode-badge" style="background:rgba(61,255,160,.12);color:var(--green)">Prove It</span>
+      <div class="mode-time-bar">Your pace</div>
     </div>
   </div>
   <!-- Progress strip -->
@@ -1024,11 +1267,114 @@ body.light-mode .logo-img-colour { display:block }
     <div class="ps-dot"></div>
   </div>
 
-  <div class="input-card">
-    <label>Paste your text</label>
-    <textarea id="text-input" maxlength="50000" placeholder="Paste anything — an email, report, article, chapter. The longer the better for a proper training session...&#10;&#10;Tip: paste a real work document. That's how you make the training count."></textarea>
-
+  <!-- #12 Why it works — collapsible for sceptics -->
+  <div style="margin-bottom:16px">
+    <div id="why-toggle" onclick="toggleWhy()" style="display:flex;align-items:center;justify-content:space-between;background:var(--s1);border:1px solid var(--border);border-radius:var(--r-sm);padding:12px 16px;cursor:pointer;transition:all .2s;user-select:none">
+      <span style="font-size:12px;font-weight:700;color:var(--muted2)">🧬 Why does speed reading actually work?</span>
+      <span id="why-toggle-icon" style="transition:transform .2s;display:flex;align-items:center;flex-shrink:0">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9090b0" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </span>
+    </div>
+    <div id="why-content" style="display:none;background:var(--s1);border:1px solid var(--border);border-top:none;border-radius:0 0 var(--r-sm) var(--r-sm);padding:16px;display:none;grid-template-columns:1fr 1fr;gap:10px">
+      <div style="padding:12px;background:var(--s2);border-radius:var(--r-sm)">
+        <div style="font-size:16px;margin-bottom:5px">👁</div>
+        <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:3px">The bottleneck is your eyes</div>
+        <div style="font-size:10px;color:var(--muted2);line-height:1.55">Your visual cortex processes images in 13ms. The average reader wastes 80% of that capacity through uncontrolled eye movement.</div>
+      </div>
+      <div style="padding:12px;background:var(--s2);border-radius:var(--r-sm)">
+        <div style="font-size:16px;margin-bottom:5px">🔁</div>
+        <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:3px">Regression kills speed</div>
+        <div style="font-size:10px;color:var(--muted2);line-height:1.55">Untrained readers re-read up to 30% of text unconsciously. Breaking this habit alone increases speed by 50%.</div>
+      </div>
+      <div style="padding:12px;background:var(--s2);border-radius:var(--r-sm)">
+        <div style="font-size:16px;margin-bottom:5px">🗣</div>
+        <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:3px">Sub-vocalisation caps you</div>
+        <div style="font-size:10px;color:var(--muted2);line-height:1.55">If you "hear" words as you read, you're limited to speech speed (~300 WPM). Phrase reading bypasses this ceiling entirely.</div>
+      </div>
+      <div style="padding:12px;background:var(--s2);border-radius:var(--r-sm)">
+        <div style="font-size:16px;margin-bottom:5px">⚡</div>
+        <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:3px">Neuroplasticity is fast</div>
+        <div style="font-size:10px;color:var(--muted2);line-height:1.55">The visual system adapts within days of targeted training, not weeks. 15 minutes a day is scientifically sufficient for measurable gains.</div>
+      </div>
+    </div>
   </div>
+
+  <div class="input-card" style="padding-bottom:0;border-bottom:none;border-radius:14px;margin-bottom:16px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+      <label style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin:0">Paste your text</label>
+      <button id="btn-clear-text" onclick="clearText()" style="display:none;align-items:center;gap:5px;background:transparent;border:1px solid rgba(255,255,255,0.1);border-radius:100px;padding:3px 10px;color:var(--muted);font-family:'Plus Jakarta Sans';font-size:11px;font-weight:600;cursor:pointer;transition:all .15s" onmouseover="this.style.borderColor='rgba(255,107,53,0.5)';this.style.color='#ff6b35'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.color='var(--muted)'">
+        <svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="2" y1="2" x2="14" y2="14"/><line x1="14" y1="2" x2="2" y2="14"/></svg>
+        Clear
+      </button>
+    </div>
+
+    <!-- Sample text chips -->
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:10px;flex-wrap:wrap">
+      <span style="font-size:10px;color:var(--muted);font-weight:600;white-space:nowrap">Try a sample:</span>
+      <button class="sample-chip" onclick="loadSample('psych',this)">🧠 Psychology</button>
+      <button class="sample-chip" onclick="loadSample('biz',this)">💼 Business</button>
+      <button class="sample-chip" onclick="loadSample('sci',this)">🔬 Science</button>
+      <button class="sample-chip" onclick="loadSample('fiction',this)">📖 Fiction</button>
+    </div>
+
+    <textarea id="text-input" maxlength="50000" style="border-radius:8px 8px 0 0;border-bottom:none" placeholder="Paste anything: an email, report, NDA, client brief. The longer the better.&#10;&#10;✦ Your text stays in this tab only. We never read it, store it, or send it anywhere. Close the tab, it's gone for good."></textarea>
+
+    <!-- OR divider -->
+    <div style="display:flex;align-items:center;gap:10px;margin:10px 0;font-size:11px;color:var(--muted);font-weight:600">
+      <div style="flex:1;height:1px;background:var(--border)"></div>
+      or
+      <div style="flex:1;height:1px;background:var(--border)"></div>
+    </div>
+
+    <div id="drop-zone" style="border:1.5px dashed rgba(255,255,255,0.12);border-radius:8px;overflow:hidden;cursor:pointer;transition:all .2s;"
+      onclick="$('file-input').click()"
+      ondragover="event.preventDefault();this.style.borderColor='rgba(247,166,0,0.5)'"
+      ondragleave="this.style.borderColor='rgba(255,255,255,0.12)'"
+      ondrop="event.preventDefault();this.style.borderColor='rgba(255,255,255,0.12)';handleFileUpload(event.dataTransfer.files[0])">
+      <div style="padding:18px 16px;text-align:center;background:rgba(255,255,255,0.02)">
+        <div style="font-size:22px;margin-bottom:6px">📂</div>
+        <div style="font-size:13px;font-weight:600;color:var(--muted2);margin-bottom:3px">Drop a file here <span style="color:var(--muted);font-weight:400">or click to browse</span></div>
+        <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-top:8px">
+          <span style="font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;background:rgba(255,107,53,0.15);color:#ff6b35;border:1px solid rgba(255,107,53,0.2)">PDF</span>
+          <span style="font-size:10px;color:var(--muted)">·</span>
+          <span style="font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;background:rgba(77,158,255,0.15);color:#4d9eff;border:1px solid rgba(77,158,255,0.2)">DOCX</span>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:7px;padding:8px 14px;background:rgba(255,255,255,0.02);border-top:1px solid rgba(255,255,255,0.05);font-size:10px;color:var(--muted)">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="opacity:0.4;flex-shrink:0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Processed on your device
+        <span style="color:rgba(255,255,255,0.1)">·</span>
+        Deleted on tab close
+      </div>
+    </div>
+    <input type="file" id="file-input" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" style="display:none" onchange="handleFileUpload(this.files[0])">
+
+    <!-- Extracting state -->
+    <div id="file-extracting" style="display:none;align-items:center;gap:12px;padding:14px 16px;background:var(--s2);border:1px solid var(--border);border-radius:8px;margin-bottom:4px">
+      <div style="width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,0.1);border-top-color:var(--gold);animation:spin .7s linear infinite;flex-shrink:0"></div>
+      <div>
+        <div id="extracting-label" style="font-size:13px;color:var(--muted2)">Extracting text…</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px">Processing locally, nothing leaves your device</div>
+      </div>
+    </div>
+
+    <!-- File loaded state -->
+    <div id="file-loaded" style="display:none;align-items:center;gap:10px;padding:12px 14px;background:rgba(61,255,160,0.05);border:1px solid rgba(61,255,160,0.2);border-radius:8px;margin-bottom:4px">
+      <div style="font-size:20px;flex-shrink:0" id="file-loaded-icon">📄</div>
+      <div style="flex:1;min-width:0">
+        <div id="file-loaded-name" style="font-size:13px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></div>
+        <div id="file-loaded-meta" style="font-size:11px;color:var(--muted);margin-top:2px"></div>
+      </div>
+      <button onclick="clearFile()" style="background:transparent;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:2px 6px;border-radius:4px;line-height:1;transition:color .15s" onmouseover="this.style.color='#ff6b35'" onmouseout="this.style.color='var(--muted)'">✕</button>
+    </div>
+
+    <!-- Error state -->
+    <div id="file-error" style="display:none;align-items:center;gap:10px;padding:12px 14px;background:rgba(255,107,53,0.06);border:1px solid rgba(255,107,53,0.2);border-radius:8px;margin-bottom:4px">
+      <div style="font-size:18px;flex-shrink:0">⚠️</div>
+      <div id="file-error-msg" style="font-size:12px;color:#ff6b35;line-height:1.5"></div>
+    </div>
+  </div>
+
   <!-- hidden compat inputs -->
   <input type="hidden" id="speed-input" value="250">
   <input type="hidden" id="chunk-input" value="2">
@@ -1039,69 +1385,55 @@ body.light-mode .logo-img-colour { display:block }
 
   <div class="stats-row">
     <div class="stat-chip">📚 <b>Average reader:</b> 200 WPM</div>
-    <div class="stat-chip">🚀 <b>After training:</b> 300–600 WPM</div>
+    <div class="stat-chip">🚀 <b>After training:</b> 400–700 WPM</div>
     <div class="stat-chip">⏱ <b>Time saved:</b> 10+ hrs/week</div>
   </div>
 
   <!-- EMAIL CAPTURE — HOME SCREEN -->
-  <div style="background:#1a1a2e;border:1px solid rgba(247,166,0,0.25);border-radius:14px;padding:20px;margin-top:24px;margin-bottom:4px">
-    <div style="display:inline-block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);background:rgba(247,166,0,0.12);border:1px solid rgba(247,166,0,0.3);padding:3px 10px;border-radius:20px;margin-bottom:10px">7-Day Speed Reading Programme</div>
-    <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px;line-height:1.3">One mode per day.<br>One week to a new reading speed.</div>
-    <div style="font-size:12px;color:var(--muted2);margin-bottom:14px;line-height:1.6">Jordan walks you through all 7 training modes — one per day. By day 7 you take the final test and see exactly how far you've come.</div>
-    <div class="ec-pills">
-      <div style="flex:1;background:rgba(247,166,0,0.1);border:1px solid rgba(247,166,0,0.3);border-radius:7px;padding:7px 3px;text-align:center">
-        <div style="font-size:13px;font-weight:800;color:var(--gold)">1</div><div style="font-size:8px;color:rgba(247,166,0,0.6);letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Baseline</div>
+  <div style="background:linear-gradient(135deg,#0f0f1a,#141428);border:1px solid rgba(247,166,0,0.22);border-radius:16px;padding:22px;margin-top:24px;margin-bottom:4px;position:relative;overflow:hidden">
+    <div style="position:absolute;top:0;right:0;width:140px;height:140px;background:radial-gradient(circle,rgba(247,166,0,0.07),transparent 70%);pointer-events:none"></div>
+    <div style="display:inline-block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);background:rgba(247,166,0,0.1);border:1px solid rgba(247,166,0,0.25);padding:3px 10px;border-radius:100px;margin-bottom:12px">7-Day Programme</div>
+    <div style="font-size:18px;font-weight:800;color:var(--text);margin-bottom:6px;line-height:1.3">Don't read alone.<br>Get Jordan's daily guide.</div>
+    <div style="font-size:12px;color:var(--muted2);margin-bottom:16px;line-height:1.6">One training mode per day. Jordan explains the science, what to focus on, and how to make it stick. 7 days. One email a day.</div>
+    <!-- What you get -->
+    <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:var(--r-sm);padding:12px 14px;margin-bottom:14px">
+      <div style="display:flex;gap:10px;padding-bottom:9px;border-bottom:1px solid rgba(255,255,255,0.06);margin-bottom:9px">
+        <div style="font-size:15px;flex-shrink:0;margin-top:1px">🧠</div>
+        <div><div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:2px">The neuroscience, plain English</div><div style="font-size:11px;color:var(--muted2);line-height:1.5">Jordan explains why each technique works before you train with it.</div></div>
       </div>
-      <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:7px;padding:7px 3px;text-align:center">
-        <div style="font-size:13px;font-weight:800;color:#3a3a55">2</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">RSVP</div>
+      <div style="display:flex;gap:10px;padding-bottom:9px;border-bottom:1px solid rgba(255,255,255,0.06);margin-bottom:9px">
+        <div style="font-size:15px;flex-shrink:0;margin-top:1px">📅</div>
+        <div><div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:2px">One mode per day, guided</div><div style="font-size:11px;color:var(--muted2);line-height:1.5">Each day builds on the last. Miss one and you'll know exactly where to pick up.</div></div>
       </div>
-      <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:7px;padding:7px 3px;text-align:center">
-        <div style="font-size:13px;font-weight:800;color:#3a3a55">3</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Phrase</div>
-      </div>
-      <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:7px;padding:7px 3px;text-align:center">
-        <div style="font-size:13px;font-weight:800;color:#3a3a55">4</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Focus</div>
-      </div>
-      <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:7px;padding:7px 3px;text-align:center">
-        <div style="font-size:13px;font-weight:800;color:#3a3a55">5</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Pacer</div>
-      </div>
-      <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:7px;padding:7px 3px;text-align:center">
-        <div style="font-size:13px;font-weight:800;color:#3a3a55">6</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Chunking</div>
-      </div>
-      <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:7px;padding:7px 3px;text-align:center">
-        <div style="font-size:13px;font-weight:800;color:#3a3a55">7</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Final Test</div>
+      <div style="display:flex;gap:10px">
+        <div style="font-size:15px;flex-shrink:0;margin-top:1px">🏁</div>
+        <div><div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:2px">Day 7: Your re-test</div><div style="font-size:11px;color:var(--muted2);line-height:1.5">A number that shows exactly how much faster you've become.</div></div>
       </div>
     </div>
-    <div class="ec-progress">
-      <div style="height:3px;background:rgba(255,255,255,0.08);border-radius:2px;margin-bottom:8px;overflow:hidden">
-        <div style="height:100%;width:14%;background:var(--gold);border-radius:2px"></div>
+    <!-- Social proof immediately above button -->
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+      <div style="display:flex">
+        <div style="width:26px;height:26px;border-radius:50%;background:#2c3490;border:2px solid #0f0f1a;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff">JH</div>
+        <div style="width:26px;height:26px;border-radius:50%;background:#6b21a8;border:2px solid #0f0f1a;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff;margin-left:-7px">SK</div>
+        <div style="width:26px;height:26px;border-radius:50%;background:#065f46;border:2px solid #0f0f1a;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff;margin-left:-7px">MR</div>
       </div>
-      <div style="display:flex;justify-content:space-between;font-size:11px">
-        <span style="color:var(--gold);font-weight:700">Day 1: Baseline Test</span>
-        <span style="color:var(--muted)">7 days</span>
-      </div>
+      <div><div style="font-size:12px;font-weight:700;color:var(--text)">50,000+ readers trained</div><div style="font-size:10px;color:var(--muted2)">across 70 countries</div></div>
     </div>
-    <div class="ec-social">
-      <div class="ec-avatars">
-        <div class="ec-av">JH</div>
-        <div class="ec-av">SK</div>
-        <div class="ec-av">MR</div>
-      </div>
-      <div class="ec-social-text"><b>50,000+ readers trained</b>across 70 countries</div>
+    <!-- Form -->
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:8px">
+      <input id="home-name-input" type="text" placeholder="First name" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:12px 14px;font-size:14px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;outline:none">
+      <input id="home-email-input" type="email" placeholder="your@email.com" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:12px 14px;font-size:14px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;outline:none">
+      <button id="home-email-btn" style="width:100%;background:var(--gold);color:#08080e;font-size:15px;font-weight:800;padding:15px;border-radius:8px;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">GET THE FULL 7-DAY GUIDE →</button>
     </div>
-    <div class="ec-form-row">
-      <input id="home-name-input" type="text" placeholder="First name" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:11px 14px;font-size:13px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;outline:none">
-      <input id="home-email-input" type="email" placeholder="your@email.com" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:11px 14px;font-size:13px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;outline:none">
-      <button id="home-email-btn" style="width:100%;background:var(--gold);color:#08080e;font-size:13px;font-weight:800;padding:13px 16px;border-radius:8px;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">START DAY 1 →</button>
-    </div>
-    <div id="home-email-msg" style="font-size:11px;color:#3a3a55;text-align:center">No spam. Unsubscribe anytime.</div>
+    <div id="home-email-msg" style="font-size:11px;color:var(--muted);text-align:center">No spam. One email a day. Unsubscribe anytime.</div>
   </div>
   <div class="future-section">
-    <div class="future-label">Coming soon</div>
+    <div class="future-label">What's next</div>
     <div class="future-scroll-wrap">
       <div class="future-grid" id="future-grid">
-        <div class="future-card"><span class="future-icon">👁</span><div class="future-name">Eye Warm-Up Series</div><div class="future-desc">Daily drills to prime your visual system before training.</div><span class="future-badge">In development</span></div>
-        <div class="future-card"><span class="future-icon">🎯</span><div class="future-name">Eye Training</div><div class="future-desc">Peripheral expansion, saccade control, fixation drills.</div><span class="future-badge">In development</span></div>
-        <div class="future-card"><span class="future-icon">🧪</span><div class="future-name">Comprehension Test</div><div class="future-desc">Prove retention matches your speed.</div><span class="future-badge">In development</span></div>
+        <div class="future-card"><span class="future-icon">👁</span><div class="future-name">Eye Warm-Up</div><div class="future-desc">8 research-backed exercises before every session. Primes your visual system for faster training.</div><span class="future-badge">Coming soon</span></div>
+        <div class="future-card"><span class="future-icon">🧪</span><div class="future-name">Comprehension Test</div><div class="future-desc">3 questions after each session. Prove your retention matches your speed.</div><span class="future-badge">Coming soon</span></div>
+        <div class="future-card"><span class="future-icon">📊</span><div class="future-name">Progress Dashboard</div><div class="future-desc">Your WPM chart over 7 days. See the improvement happening in real time.</div><span class="future-badge">Coming soon</span></div>
       </div>
       <div class="future-scroll-fade"></div>
     </div>
@@ -1127,9 +1459,41 @@ body.light-mode .logo-img-colour { display:block }
 </div>
 
 
+<!-- EYE WARM-UP SCREEN — temporarily hidden, restore when ready
+<div class="screen" id="screen-warmup">
+  <div class="wu-header">
+    <div class="wu-step-label">Eye Warm-Up &nbsp;·&nbsp; Exercise <span id="wu-step-num">1</span> of 8</div>
+    <button class="wu-quit" onclick="goHome()">✕ Quit</button>
+  </div>
+  <div class="wu-dots" id="wu-dots"></div>
+  <div class="wu-timer-wrap">
+    <div class="wu-timer">
+      <svg width="60" height="60" viewBox="0 0 60 60">
+        <circle cx="30" cy="30" r="26" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="3"/>
+        <circle id="wu-timer-arc" cx="30" cy="30" r="26" fill="none" stroke="var(--gold)" stroke-width="3"
+          stroke-dasharray="163.4" stroke-dashoffset="0" stroke-linecap="round" style="transition:stroke-dashoffset 1s linear"/>
+      </svg>
+      <div class="wu-timer-num" id="wu-timer-num">20</div>
+    </div>
+  </div>
+  <div class="wu-stage" id="wu-stage"></div>
+  <div class="wu-prog-track">
+    <div class="wu-prog-fill" id="wu-prog-fill"></div>
+  </div>
+  <div class="wu-footer">
+    <button class="wu-next" id="wu-next-btn" onclick="wuNext()">NEXT EXERCISE →</button>
+    <button class="wu-skip-ex" onclick="wuNext()">Skip</button>
+  </div>
+</div>
+-->
+
 <!-- ══ SCREEN 1.5 — LESSON ══ -->
 <div class="screen" id="screen-lesson">
   <div class="lesson-hero">
+    <div id="lesson-time-badge" style="display:inline-flex;align-items:center;gap:6px;background:rgba(247,166,0,0.08);border:1px solid rgba(247,166,0,0.2);border-radius:100px;padding:4px 14px;margin-bottom:14px;font-size:12px;font-weight:600;color:var(--gold)">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      <span id="lesson-time-el"></span>
+    </div>
     <div class="lesson-badge" id="lesson-badge-el"></div>
     <h2 id="lesson-title-el"></h2>
     <p id="lesson-sub-el"></p>
@@ -1142,7 +1506,10 @@ body.light-mode .logo-img-colour { display:block }
   <div class="lesson-settings" id="lesson-settings-el"></div>
   <div class="lesson-actions">
     <button class="btn btn-gold" id="btn-lesson-start">START TRAINING →</button>
-    <button class="btn-lesson-skip" id="btn-lesson-skip">← Back</button>
+    <button class="btn-lesson-skip" id="btn-lesson-skip">
+      <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" style="vertical-align:middle"><path d="M10 12L6 8l4-4"/></svg>
+      Back
+    </button>
   </div>
 </div>
 
@@ -1157,8 +1524,8 @@ body.light-mode .logo-img-colour { display:block }
   </div>
 
   <!-- Baseline pill -->
-  <div class="reader-controls" id="reader-controls-baseline" style="display:none">
-    <button class="btn-advance" id="btn-baseline-finish" style="background:var(--gold);color:#08080e;border-radius:100px;height:50px;padding:0 28px;font-family:'Plus Jakarta Sans';font-size:14px;font-weight:700;border:none;cursor:pointer;touch-action:manipulation">Finished — I've read it all</button>
+  <div class="reader-controls" id="reader-controls-baseline" style="display:none;padding:8px">
+    <button class="btn-advance" id="btn-baseline-finish" style="background:var(--gold);color:#08080e;border-radius:100px;height:50px;padding:0 28px;font-family:'Plus Jakarta Sans';font-size:14px;font-weight:700;border:none;cursor:pointer;touch-action:manipulation">I've finished reading</button>
   </div>
   <!-- Focus manual pill -->
   <div class="reader-controls" id="reader-controls-manual" style="display:none">
@@ -1227,78 +1594,120 @@ body.light-mode .logo-img-colour { display:block }
 
   <!-- Coaching CTA — Step 7 only -->
   <div class="coaching-cta" id="coaching-cta">
-    <div class="coaching-badge">Private Coaching</div>
-    <div class="coaching-jordan">
-      <img src="/jordan.jpg" alt="Jordan Harry">
-      <div class="coaching-jordan-text">
-        <b>Jordan Harry</b>
-        50,000+ professionals trained · 70 countries
+
+    <!-- Achievement ring -->
+    <div class="achievement-ring-wrap">
+      <div class="ar-finished">🏁 YOU FINISHED.</div>
+      <div class="ar-ring">
+        <svg width="140" height="140" viewBox="0 0 140 140">
+          <circle cx="70" cy="70" r="58" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="8"/>
+          <circle cx="70" cy="70" r="58" fill="none" stroke="var(--green)" stroke-width="8"
+            stroke-dasharray="364.4" id="ar-ring-fill" stroke-dashoffset="80" stroke-linecap="round"
+            style="transition:stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1)"/>
+        </svg>
+        <div class="ar-inner">
+          <div class="ar-pct" id="ar-pct">78%</div>
+          <div class="ar-pct-label">faster than</div>
+        </div>
+      </div>
+      <div class="ar-of">OF READERS</div>
+      <div class="ar-sub">You read at <strong style="color:var(--gold)" id="ar-wpm">—</strong> WPM, after 7 days of training. That puts you in the top <span id="ar-top-pct">22%</span> of readers globally.</div>
+      <div class="ar-chips">
+        <div class="ar-chip">✓ Programme complete</div>
+        <div class="ar-chip">✓ 7 steps done</div>
+        <div class="ar-chip" id="ar-rank-chip">✓ Top 22% globally</div>
       </div>
     </div>
-    <div class="coaching-title"><span id="coaching-wpm">—</span> WPM in one session.<br>Imagine 21 days with me.</div>
-    <div class="coaching-sub">Book a free discovery call and I'll show you exactly what's possible.</div>
-    <a class="coaching-btn" href="https://studyfast.uk/private-coaching" target="_blank">BOOK FREE CALL →</a>
-    <div class="coaching-note">No commitment. 15 minutes.</div>
+
+    <!-- Coaching card — primary -->
+    <div class="coaching-card-inner">
+      <div class="coaching-badge">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        Private Coaching with Jordan
+      </div>
+      <div class="coaching-title"><span id="coaching-wpm">—</span> WPM in 7 days.<br>Imagine 21 days with me.</div>
+      <div class="coaching-sub">You've done the hard part, proving this works. A private programme takes you from trained to exceptional. This is what Jordan works on 1-to-1 with busy professionals and students who need to read faster and retain more.</div>
+      <div class="coaching-jordan">
+        <img src="/jordan.jpg" alt="Jordan Harry" onerror="this.style.display='none';this.nextElementSibling.style.paddingLeft='0'">
+        <div class="coaching-jordan-text">
+          <b>Jordan Harry</b>
+          UK's #1 Speed Reading Coach · TEDx 3.4M views · 50,000+ trained
+        </div>
+      </div>
+      <a class="coaching-btn" href="https://studyfast.uk/private-coaching" target="_blank">BOOK FREE DISCOVERY CALL →</a>
+      <div class="coaching-note">15 minutes. No commitment. Jordan will tell you honestly if coaching is right for you.</div>
+    </div>
+
+    <!-- Jordan Minutes — secondary -->
+    <div class="jm-section-label">Not ready for a call?</div>
+    <div class="jm-card">
+      <div class="jm-header">
+        <div style="font-size:18px">📬</div>
+        <div class="jm-title">Jordan Minutes <span>— 2 emails a week</span></div>
+      </div>
+      <div class="jm-body">How to learn anything faster, using the techniques Jordan teaches to busy professionals and students across 70 countries. Practical, short, actionable.</div>
+      <div class="jm-form">
+        <input id="email-capture-name" class="jm-input" type="text" placeholder="First name">
+        <input id="email-capture-input" class="jm-input" type="email" placeholder="your@email.com">
+        <button id="email-capture-btn" class="jm-btn">JOIN JORDAN MINUTES →</button>
+      </div>
+      <div id="email-capture-msg" class="jm-microcopy">No spam. Two emails a week. Unsubscribe anytime.</div>
+    </div>
+
   </div>
 
   <!-- 7-Day Email Capture -->
-  <div id="email-capture-card" style="background:#1a1a2e;border:1px solid rgba(247,166,0,0.25);border-radius:14px;padding:20px;margin-bottom:20px">
-    <div style="display:inline-block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);background:rgba(247,166,0,0.12);border:1px solid rgba(247,166,0,0.3);padding:3px 10px;border-radius:20px;margin-bottom:10px">7-Day Speed Reading Programme</div>
-    <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px;line-height:1.3">One mode per day.<br>One week to a new reading speed.</div>
-    <div style="font-size:12px;color:var(--muted2);margin-bottom:14px;line-height:1.6">Jordan walks you through all 7 training modes — one per day. By day 7 you take the final test and see exactly how far you've come.</div>
-    <div class="ec-pills">
-      <div style="flex:1;background:rgba(247,166,0,0.1);border:1px solid rgba(247,166,0,0.3);border-radius:7px;padding:7px 3px;text-align:center">
-        <div style="font-size:13px;font-weight:800;color:var(--gold)">1</div><div style="font-size:8px;color:rgba(247,166,0,0.6);letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Baseline</div>
+  <div id="email-capture-card" style="margin-bottom:20px">
+    <div style="background:linear-gradient(135deg,#0f0f1a,#141428);border:1px solid rgba(247,166,0,0.22);border-radius:16px;padding:22px;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;right:0;width:140px;height:140px;background:radial-gradient(circle,rgba(247,166,0,0.07),transparent 70%);pointer-events:none"></div>
+      <div data-ec-tag style="display:inline-block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);background:rgba(247,166,0,0.1);border:1px solid rgba(247,166,0,0.25);padding:3px 10px;border-radius:100px;margin-bottom:12px">Step 1 of 7 complete ✓</div>
+      <div data-ec-headline style="font-size:18px;font-weight:800;color:var(--text);line-height:1.3;margin-bottom:6px;white-space:pre-line">6 steps to go.
+Don't stop now.</div>
+      <div data-ec-body style="font-size:12px;color:var(--muted2);line-height:1.65;margin-bottom:16px">People who complete the full 7 steps read, on average, 73% faster than when they started. The ones who stop early don't.</div>
+      <!-- Zeigarnik progress bar -->
+      <div style="margin-bottom:16px">
+        <div style="height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden;margin-bottom:6px">
+          <div data-ec-prog style="height:100%;width:14%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:2px;transition:width .4s ease"></div>
+        </div>
+        <div data-ec-steps style="display:flex;justify-content:space-between">
+          <span style="font-size:9px;color:rgba(247,166,0,0.7)">✓</span>
+          <span style="font-size:9px;color:var(--gold);font-weight:700">2</span>
+          <span style="font-size:9px;color:var(--muted)">3</span>
+          <span style="font-size:9px;color:var(--muted)">4</span>
+          <span style="font-size:9px;color:var(--muted)">5</span>
+          <span style="font-size:9px;color:var(--muted)">6</span>
+          <span style="font-size:9px;color:var(--muted)">7 🏁</span>
+        </div>
       </div>
-      <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:7px;padding:7px 3px;text-align:center">
-        <div style="font-size:13px;font-weight:800;color:#3a3a55">2</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">RSVP</div>
+      <!-- Social proof immediately above button -->
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+        <div style="display:flex">
+          <div style="width:26px;height:26px;border-radius:50%;background:#2c3490;border:2px solid #0f0f1a;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff">JH</div>
+          <div style="width:26px;height:26px;border-radius:50%;background:#6b21a8;border:2px solid #0f0f1a;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff;margin-left:-7px">SK</div>
+          <div style="width:26px;height:26px;border-radius:50%;background:#065f46;border:2px solid #0f0f1a;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff;margin-left:-7px">MR</div>
+        </div>
+        <div><div style="font-size:12px;font-weight:700;color:var(--text)">50,000+ readers trained</div><div style="font-size:10px;color:var(--muted2)">across 70 countries</div></div>
       </div>
-      <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:7px;padding:7px 3px;text-align:center">
-        <div style="font-size:13px;font-weight:800;color:#3a3a55">3</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Phrase</div>
+      <!-- Form -->
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:8px">
+        <input id="email-capture-name" type="text" placeholder="First name" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:12px 14px;font-size:14px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;outline:none">
+        <input id="email-capture-input" type="email" placeholder="your@email.com" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:12px 14px;font-size:14px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;outline:none">
+        <button id="email-capture-btn" style="width:100%;background:var(--gold);color:#08080e;font-size:15px;font-weight:800;padding:15px;border-radius:8px;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">GET THE FULL 7-DAY GUIDE →</button>
       </div>
-      <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:7px;padding:7px 3px;text-align:center">
-        <div style="font-size:13px;font-weight:800;color:#3a3a55">4</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Focus</div>
-      </div>
-      <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:7px;padding:7px 3px;text-align:center">
-        <div style="font-size:13px;font-weight:800;color:#3a3a55">5</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Pacer</div>
-      </div>
-      <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:7px;padding:7px 3px;text-align:center">
-        <div style="font-size:13px;font-weight:800;color:#3a3a55">6</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Chunking</div>
-      </div>
-      <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:7px;padding:7px 3px;text-align:center">
-        <div style="font-size:13px;font-weight:800;color:#3a3a55">7</div><div style="font-size:8px;color:#3a3a55;letter-spacing:0.4px;text-transform:uppercase;margin-top:2px">Final Test</div>
-      </div>
+      <div id="email-capture-msg" style="font-size:11px;color:var(--muted);text-align:center">No spam. One email a day. Unsubscribe anytime.</div>
     </div>
-    <div class="ec-progress">
-      <div style="height:3px;background:rgba(255,255,255,0.08);border-radius:2px;margin-bottom:8px;overflow:hidden">
-        <div style="height:100%;width:14%;background:var(--gold);border-radius:2px"></div>
-      </div>
-      <div style="display:flex;justify-content:space-between;font-size:11px">
-        <span style="color:var(--gold);font-weight:700">Day 1: Baseline Test</span>
-        <span style="color:var(--muted)">7 days</span>
-      </div>
-    </div>
-    <div class="ec-social">
-      <div class="ec-avatars">
-        <div class="ec-av">JH</div>
-        <div class="ec-av">SK</div>
-        <div class="ec-av">MR</div>
-      </div>
-      <div class="ec-social-text"><b>50,000+ readers trained</b>across 70 countries</div>
-    </div>
-    <div class="ec-form-row">
-      <input id="email-capture-name" type="text" placeholder="First name" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:11px 14px;font-size:13px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;outline:none">
-      <input id="email-capture-input" type="email" placeholder="your@email.com" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:11px 14px;font-size:13px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;outline:none">
-      <button id="email-capture-btn" style="width:100%;background:var(--gold);color:#08080e;font-size:13px;font-weight:800;padding:13px 16px;border-radius:8px;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">START DAY 1 →</button>
-    </div>
-    <div id="email-capture-msg" style="font-size:11px;color:#3a3a55;text-align:center">No spam. Unsubscribe anytime.</div>
   </div>
+
+  <!-- Navigation — next step only, back to start as quiet link -->
   <div class="res-actions">
-    <button class="btn btn-gold" id="btn-nextstep" style="flex:2;font-family:'Bebas Neue';letter-spacing:2px;font-size:17px;font-weight:400;padding:14px">NEXT STEP →</button>
-    <button class="btn btn-ghost" id="btn-readagain" style="flex:1;font-family:'Bebas Neue';letter-spacing:2px;font-size:17px;font-weight:400;padding:14px">READ AGAIN</button>
+    <button class="btn btn-gold" id="btn-nextstep" style="flex:1;font-family:'Bebas Neue';letter-spacing:2px;font-size:17px;font-weight:400;padding:14px">NEXT STEP →</button>
   </div>
-  <div style="text-align:center;margin-top:14px">
-    <button class="btn" id="btn-switchmode" style="background:transparent;color:var(--muted);font-size:13px;padding:8px 16px;border-radius:100px;border:1px solid var(--border)">Try a different step</button>
+  <div style="height:1px;background:var(--border);margin:14px 0 4px"></div>
+  <div style="text-align:center">
+    <button class="btn" id="btn-switchmode" style="background:transparent;color:var(--muted2);font-size:14px;font-weight:600;padding:10px 16px;border:none;border-radius:0;text-decoration:underline;text-decoration-color:rgba(144,144,176,0.3);text-underline-offset:3px;display:inline-flex;align-items:center;gap:7px">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10 12L6 8l4-4"/></svg>
+      Back to start
+    </button>
   </div>
 
 </div>
@@ -1306,7 +1715,7 @@ body.light-mode .logo-img-colour { display:block }
 
 <footer>
   <p>Built by <a href="https://studyfast.uk/" target="_blank">StudyFast</a> · Jordan Harry · TEDx 3.4M views · 50,000+ professionals in 70 countries</p>
-  <span class="footer-version">V2026.1</span>
+  <span class="footer-version">V2026.2</span>
 </footer>
 
 </div><!-- .app -->
@@ -1316,14 +1725,65 @@ body.light-mode .logo-img-colour { display:block }
   <div class="progress-fixed-fill" id="prog-fill"></div>
 </div>
 
+<!-- Celebration overlay -->
+<div id="celebration-overlay" style="display:none;position:fixed;inset:0;z-index:400;pointer-events:none">
+  <div id="confetti-container" style="position:absolute;inset:0;overflow:hidden"></div>
+</div>
+
+<style>
+@keyframes confetti-fall {
+  0%   { transform:translateY(-20px) rotate(0deg); opacity:1 }
+  100% { transform:translateY(105vh) rotate(720deg); opacity:0 }
+}
+</style>
+
+<script>
+function triggerCelebration() {
+  const overlay = document.getElementById('celebration-overlay');
+  const container = document.getElementById('confetti-container');
+  if (!overlay || !container) return;
+
+  container.innerHTML = '';
+  overlay.style.display = 'block';
+
+  const colors = ['#F7A600','#F7BD33','#ff6b35','#f2f1fc','#a78bfa','#3dffa0'];
+  const shapes = ['2px','4px','6px','8px'];
+
+  for (let i = 0; i < 80; i++) {
+    const p = document.createElement('div');
+    const size = shapes[Math.floor(Math.random() * shapes.length)];
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const duration = 2 + Math.random() * 2;
+    const delay = Math.random() * 0.8;
+    const isRect = Math.random() > 0.5;
+    p.style.cssText = `
+      position:absolute;
+      left:${Math.random() * 100}vw;
+      top:-10px;
+      width:${isRect ? parseInt(size) * 2 + 'px' : size};
+      height:${size};
+      background:${color};
+      border-radius:${isRect ? '2px' : '50%'};
+      animation:confetti-fall ${duration}s ${delay}s ease-in forwards;
+    `;
+    container.appendChild(p);
+  }
+
+  // Auto-hide after animation completes
+  setTimeout(() => {
+    overlay.style.display = 'none';
+    container.innerHTML = '';
+  }, 3500);
+}
+</script>
+
 <!-- Countdown -->
 <div class="overlay" id="countdown-overlay" style="display:none">
   <div class="countdown-n" id="countdown-n">3</div>
-  <div class="countdown-l" id="countdown-l">Get ready to read</div>
+  <div class="countdown-l" id="countdown-l">Get ready, eyes on screen</div>
 </div>
 
 <script>
-window.addEventListener('error',function(e){console.error('[StudyFast]',e.message,'|',e.filename,'line',e.lineno);});
 window.addEventListener('unhandledrejection',function(e){console.error('[StudyFast] Unhandled promise rejection:',e.reason);});
 const S = {
   mode: 'baseline',
@@ -1344,11 +1804,12 @@ const MODE_ORDER = ['baseline','rsvp','phrase','focus','scroll','bionic','baseli
 const LESSON_DATA = {
   baseline: {
     badge: '📖 Baseline Reading Test', title: 'Find your starting speed.',
+    time: 'Your pace',
     sub: 'Read at your natural pace. We\'ll time you and calculate your WPM.',
     preview: '<span class="lp-dim">I am Gimpel the fool. I don\'t think myself a fool. On the contrary. But that\'s what folks call me.</span>',
     previewClass: '',
     points: [
-      { h: 'Read at your normal comfortable pace.', b: 'Don\'t rush — this is your baseline. Just read as you would any document normally.' },
+      { h: 'Read at your normal comfortable pace.', b: 'Don\'t rush. This is your baseline. Just read as you would any document normally.' },
       { h: 'Click Finished when you\'ve read it all.', b: 'We\'ll calculate your WPM from the time taken. This becomes your starting number.' },
       { h: 'You\'ll take the same test again at Step 7.', b: 'The difference between now and then is your measurable proof of progress.' }
     ],
@@ -1356,23 +1817,25 @@ const LESSON_DATA = {
   },
   rsvp: {
     badge: '🎯 RSVP Focus', title: 'Zero eye movement. Maximum speed.',
+    time: '10 min optimal session',
     sub: 'One word at a time, dead centre. Your eyes never move.',
     preview: '<span style="font-size:48px;font-weight:700" class="lp-active">quickly</span>',
     previewClass: 'rsvp-style',
     points: [
-      { h: 'Eyes stay perfectly still.', b: 'Every word appears at the same spot. Zero saccadic movement — the main time cost in normal reading.' },
+      { h: 'Eyes stay perfectly still.', b: 'Every word appears at the same spot. Zero saccadic movement, the main time cost in normal reading.' },
       { h: 'Start slow. Then push hard.', b: '250 WPM feels comfortable. 350 is training. 500+ is where real adaptation happens.' },
-      { h: 'Don\'t worry about comprehension at first.', b: 'Your brain adapts. The first sessions feel chaotic — that\'s neuroplasticity. Within a week it clicks.' }
+      { h: 'Don\'t worry about comprehension at first.', b: 'Your brain adapts. The first sessions feel chaotic, that\'s neuroplasticity. Within a week it clicks.' }
     ],
     settings: 'wpm'
   },
   phrase: {
     badge: '⚡ Phrase Reading', title: 'Read ideas, not words.',
-    sub: '30 seconds — then you\'ll read faster than you ever have.',
+    time: '15 min optimal session',
+    sub: '30 seconds in, you\'ll read faster than you ever have.',
     preview: '<span style="font-family:Lora,Georgia,serif;font-size:clamp(32px,4.5vw,44px);font-weight:400;letter-spacing:0.01em;line-height:1.45" class="lp-active">read like this</span>',
     previewClass: 'phrase-style',
     points: [
-      { h: 'Read the bold phrase as one complete idea.', b: 'Your brain processes whole chunks — not single words. Let each phrase land as one thought.' },
+      { h: 'Read the bold phrase as one complete idea.', b: 'Your brain processes whole chunks, not single words. Let each phrase land as one thought.' },
       { h: 'Never re-read. Trust the rhythm.', b: 'Regression kills speed. If you miss a phrase, move on. Breaking this habit doubles most people\'s speed.' },
       { h: 'Slightly uncomfortable = it\'s working.', b: 'If it feels easy, increase the WPM. The stretch is the training.' }
     ],
@@ -1380,6 +1843,7 @@ const LESSON_DATA = {
   },
   focus: {
     badge: '🔦 Focus Line', title: 'The spotlight stays. The text moves.',
+    time: '10 min optimal session',
     sub: 'Full text visible. Bold chunk fixed at centre. Peripheral vision trains itself.',
     preview: '<span class="lp-dim">I am Gimpel the fool. I don\'t think myself</span> <span class="lp-bold"> a fool. On</span> <span class="lp-dim">the contrary. But that\'s what folks call me.</span>',
     previewClass: '',
@@ -1392,11 +1856,12 @@ const LESSON_DATA = {
   },
   scroll: {
     badge: '👁 Pacer', title: 'Let the pace pull you forward.',
+    time: '15 min optimal session',
     sub: 'Gold underline moves chunk by chunk. Your eyes follow.',
     preview: '<span class="lp-dim">I am Gimpel the fool.</span> <span class="lp-active" style="text-decoration:underline;text-decoration-color:#F7A600;text-decoration-thickness:2px;text-underline-offset:4px">I don\'t think</span> <span class="lp-dim">myself a fool. On the contrary.</span>',
     previewClass: '',
     points: [
-      { h: 'Let the underline lead. Don\'t race ahead.', b: 'Trust the line. This builds rhythmic reading — one of the most transferable real-world skills.' },
+      { h: 'Let the underline lead. Don\'t race ahead.', b: 'Trust the line. This builds rhythmic reading, one of the most transferable real-world skills.' },
       { h: 'Eyes track the underline, not individual words.', b: 'Your peripheral vision handles the words around it. This is how fast readers actually read.' },
       { h: 'Increase speed when the text feels easy.', b: 'Once comfortable, push up 20–30 WPM. The pacer makes this increment feel natural.' }
     ],
@@ -1404,6 +1869,7 @@ const LESSON_DATA = {
   },
   bionic: {
     badge: '🧠 Chunking', title: 'Bold groups. Brain fills the rest.',
+    time: 'Your pace',
     sub: 'Read at your own pace. We\'ll time you and give you your WPM at the end.',
     preview: '<span class="lp-bold">I am</span> <span class="lp-dim">Gimpel the</span> <span class="lp-bold">fool. I</span> <span class="lp-dim">don\'t think</span> <span class="lp-bold">myself a</span>',
     previewClass: '',
@@ -1416,11 +1882,12 @@ const LESSON_DATA = {
   },
   baseline_retest: {
     badge: '🏁 Final Test', title: 'How far have you come?',
+    time: 'Your pace',
     sub: 'Same text. Same rules. See exactly how much faster you are now.',
     preview: '<span class="lp-dim">I am Gimpel the fool. I don\'t think myself a fool. On the contrary. But that\'s what folks call me.</span>',
     previewClass: '',
     points: [
-      { h: 'Read at your natural pace — no rushing.', b: 'This isn\'t about trying harder. It\'s seeing what your trained brain does automatically now.' },
+      { h: 'Read at your natural pace, no rushing.', b: 'This isn\'t about trying harder. It\'s seeing what your trained brain does automatically now.' },
       { h: 'The timer runs silently in the background.', b: 'Click Finished when done. We\'ll compare directly to your baseline result.' },
       { h: 'Your progress is the proof.', b: 'The gap between baseline and re-test WPM is your evidence. Real, measurable, undeniable.' }
     ],
@@ -1479,10 +1946,85 @@ document.querySelectorAll('.mode-card').forEach(card => {
 });
 
 // ── TEXTAREA — enable Start button when text pasted ──
+// ── SAMPLE TEXTS ──────────────────────────────────────────────────
+const SAMPLES = {
+  psych: `You can paste anything you want to read into this box, or just click Start Reading to try it on this sample text. Either way, you are about to find out exactly how fast you currently read.
+
+Speed reading is, at its core, the art of silencing subvocalisation. Most people read at around 200 words per minute, which is roughly the speed at which they could read the same text aloud. That is not a coincidence. The inner voice that quietly pronounces each word as your eyes pass over it is the thing holding you back. It ties your reading speed to your speaking speed, and that ceiling is hard to break through without knowing it is there.
+
+The good news is that you do not need that voice. Your brain is capable of understanding written language far faster than any inner monologue can keep up with. The goal is to absorb text quickly enough that the voice simply cannot follow. When you do, comprehension does not suffer. For most people, it actually improves, because the brain is being asked to engage rather than just listen passively to itself reading.
+
+In practice, this is what techniques like phrase reading and the pacer method achieve. Instead of processing one word at a time, you train your eyes to land on groups of words and extract meaning from the whole chunk at once. A finger, a cursor, or a moving underline pulls your eyes forward at a pace slightly faster than feels comfortable. The inner voice falls behind. And then, gradually, it stops trying to keep up at all.
+
+What you are about to experience is the first step in that process. Read the text in front of you at whatever pace feels natural. Do not rush. We are measuring where you start, not where you will end up. By Step 7, that number will look very different.`,
+
+  biz: `Businesses that grow consistently over decades tend to share a quality that is rarely mentioned in strategy textbooks. They are exceptionally good at saying no. Not occasionally, not reluctantly, but as a matter of habitual discipline applied to opportunities that look attractive on the surface and would almost certainly destroy focus in practice.
+
+Warren Buffett has described this as his most important operating principle. He turns down the vast majority of investment proposals he receives, including many that would produce acceptable returns. His argument is that the cost of a mediocre opportunity is not just the capital it consumes. It is the attention, management time, and organisational energy that could have gone into a genuinely outstanding one.
+
+The same logic applies to product decisions. Apple under Steve Jobs removed features and product lines at a rate that alarmed competitors and confused analysts. The result was not a diminished company but a more powerful one. When a business tries to serve everyone, it typically serves no one particularly well. Constraints, when chosen deliberately, produce clarity rather than limitation.
+
+This is counterintuitive in a culture that treats growth as the primary measure of success. Revenue going up looks like progress regardless of what is generating it. But sustainable competitive advantage usually comes from being meaningfully better at a specific thing rather than being adequate at many things. The companies that dominate their categories rarely arrived there by expanding in every available direction. They arrived by focusing on something precise and executing it with unusual consistency.
+
+The difficulty is psychological. Turning down revenue feels like failure in the short term. Watching a competitor enter a market you declined to enter creates pressure to reconsider. The discipline required to maintain focus through those moments is less about strategy and more about the willingness to tolerate temporary discomfort in service of a longer-term position.
+
+Most companies never develop this discipline. They respond to every signal, pursue every opening, and fragment their energy across an expanding set of priorities until none of them receive what they actually require.`,
+
+  sci: `Every time you read a word, your eyes do something you are almost certainly not aware of. They jump. The movement is called a saccade, and it happens between three and five times every second as you scan a line of text. During each jump, your vision is largely suppressed. You are effectively blind for a fraction of a second while your eyes reposition. What you experience as continuous reading is actually a series of still images stitched together by your brain.
+
+This matters because it exposes a significant inefficiency in the way most people read. The brain is not processing text during the saccade. It is only processing during the fixations, the brief moments of stillness between movements. An average reader makes around four fixations per line. A trained reader can reduce this to two, which means they extract the same information in roughly half the time, not by reading faster in any naive sense, but by extracting more from each moment of processing.
+
+The width of the area from which a reader can extract information during a single fixation is called the perceptual span. Research conducted at the University of Massachusetts has measured this consistently across thousands of subjects. For most untrained readers, the span extends about three or four characters to the left of the fixation point and fifteen characters to the right. The asymmetry is not accidental. The brain prioritises the direction of reading, preparing for what is coming rather than revisiting what has passed.
+
+Training can expand this span measurably. The expansion is not unlimited, but gains of thirty to forty percent are achievable within weeks of consistent practice. More importantly, the visual system can be trained to suppress the impulse to regress, to move backwards to re-read text that has already been processed. Regression accounts for a substantial fraction of reading time in untrained readers, and breaking this habit alone produces significant speed improvements without any other change in technique.`,
+
+  fiction: `She had always read faster than anyone in her class, not because she was smarter, she told herself, but because she had learned early that the story only lived in the forward movement. To go back was to admit that the first time had not been enough. She refused that admission on principle.
+
+By the time she was twelve, she had finished every book in the school library. By fifteen she had moved on to her father's shelves, thick volumes that smelled of old paper and someone else's decade. She did not understand all of it. Some of the arguments went past her. Some of the references landed without context. But she pushed forward anyway, trusting that meaning accumulated over time the way sediment did, gradually, without your noticing until suddenly there was ground beneath you that had not been there before.
+
+Her teachers assumed she was skimming. They were wrong. She was reading, fully and carefully, but she had taught herself to process phrases as units rather than words as units. She did not read the way other people read, one careful step at a time, checking the ground before each foot landed. She read the way you run downhill, trusting momentum, accepting that some details would blur and others would sharpen, that the picture would resolve itself in the end.
+
+At university she met a professor who studied reading cognition and spent an afternoon explaining to her precisely what she had been doing since childhood. He named it. He gave her the research. She sat in his office with the odd feeling of discovering that something she had always done instinctively was also something people were trying to teach.
+
+She asked him why most people read so slowly. He said that most people had been taught to trust only what they could verify one word at a time. They had learned caution and called it comprehension. She had learned momentum and called it reading. The difference, he said, was not intelligence. It was permission. She had given herself permission to move.`
+};
+
+function loadSample(key, el) {
+  document.querySelectorAll('.sample-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  $('text-input').value = SAMPLES[key];
+  checkText();
+}
+
+function toggleWhy() {
+  const content = $("why-content");
+  const icon = $("why-toggle-icon");
+  const toggle = $("why-toggle");
+  const isOpen = content.style.display === "grid";
+  content.style.display = isOpen ? "none" : "grid";
+  icon.style.transform = isOpen ? "" : "rotate(180deg)";
+  toggle.style.borderRadius = isOpen ? "var(--r-sm)" : "var(--r-sm) var(--r-sm) 0 0";
+  toggle.style.borderColor = isOpen ? "var(--border)" : "var(--border2)";
+}
+
 function checkText() {
   const ok = $('text-input').value.trim().length > 30;
   $('btn-start').disabled = !ok;
   $('btn-start').textContent = ok ? 'START READING →' : 'PASTE TEXT TO BEGIN →';
+  const clearBtn = $('btn-clear-text');
+  if (clearBtn) clearBtn.style.display = ok ? 'inline-flex' : 'none';
+}
+function clearText() {
+  $('text-input').value = '';
+  showFileState('idle');
+  document.querySelectorAll('.sample-chip').forEach(c => c.classList.remove('active'));
+  checkText();
+  $('text-input').focus();
+}
+function clearFile() {
+  $('text-input').value = '';
+  showFileState('idle');
+  checkText();
 }
 $('text-input').addEventListener('input', checkText);
 $('text-input').addEventListener('paste', () => setTimeout(checkText, 10));
@@ -1523,7 +2065,7 @@ function buildSettingsCard({ wpm, chunk, toggle }) {
     <div class="usc-row usc-toggle-row" style="opacity:0.55;cursor:not-allowed">
       <div class="usc-toggle-left">
         <div class="usc-toggle-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-        <div><div class="rrm-label">Reading Mode <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" style="vertical-align:middle;margin-left:4px"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><div class="rrm-sub">Required for test accuracy — cannot be changed</div></div>
+        <div><div class="rrm-label">Reading Mode <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" style="vertical-align:middle;margin-left:4px"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><div class="rrm-sub">Required for test accuracy, cannot be changed</div></div>
       </div>
       <div class="rrm-switch" style="pointer-events:none"></div>
     </div>`;
@@ -1586,6 +2128,7 @@ function populateLesson(mode) {
   document.body.classList.remove('light-mode');
   const d = LESSON_DATA[mode] || LESSON_DATA.baseline;
   $('lesson-badge-el').textContent = d.badge;
+  $('lesson-time-el').textContent = d.time || 'Your pace';
   $('lesson-title-el').textContent = d.title;
   $('lesson-sub-el').textContent = d.sub;
   $('lesson-preview-el').innerHTML = d.preview;
@@ -1602,7 +2145,7 @@ function populateLesson(mode) {
   } else if (d.settings === 'wpm+chunk') {
     sEl.innerHTML = buildSettingsCard({ wpm: true, chunk: true, toggle: 'free' });
   } else if (d.settings === 'bionic') {
-    sEl.innerHTML = `<p style="font-size:13px;color:var(--muted2);line-height:1.7;background:var(--s1);border:1px solid var(--border);border-radius:var(--r-sm);padding:14px 18px;margin-bottom:16px">Read at your own pace. The timer runs silently. Click <strong style="color:var(--text)">Finished</strong> when you've read it all — we'll calculate your WPM.</p>` + buildSettingsCard({ chunk: true, toggle: 'free' });
+    sEl.innerHTML = `<p style="font-size:13px;color:var(--muted2);line-height:1.7;background:var(--s1);border:1px solid var(--border);border-radius:var(--r-sm);padding:14px 18px;margin-bottom:16px">Read at your own pace. The timer runs silently. Click <strong style="color:var(--text)">Finished</strong> when you've read it all. We'll calculate your WPM.</p>` + buildSettingsCard({ chunk: true, toggle: 'free' });
   }
   // Sync toggle visual states
   requestAnimationFrame(() => {
@@ -1646,7 +2189,12 @@ $('btn-lesson-skip').addEventListener('click', () => goHome());
 // ── CONTENT BUILDER ──
 function buildContent(text) {
   const _d=document.createElement('div');_d.textContent=text;text=_d.innerHTML;
-  const words = text.replace(/\s+/g,' ').split(' ').filter(Boolean);
+  text = text
+    .replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>')
+    .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g,'')
+    .replace(/\s+/g,' ')
+    .trim();
+  const words = text.split(' ').filter(w => w.length > 0);
   S.allWords = words;
   const cs = S.chunkSize;
   if (S.mode === 'phrase') {
@@ -1743,8 +2291,9 @@ function escHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replac
 
 // ── COUNTDOWN ──
 function startCountdown() {
+  tawkHide();
   const ov=$('countdown-overlay'), n=$('countdown-n'), l=$('countdown-l');
-  ov.style.display='flex'; let c=3; n.textContent=c; l.textContent='Get ready — eyes on screen';
+  ov.style.display='flex'; let c=3; n.textContent=c; l.textContent='Get ready, eyes on screen';
   const tick=setInterval(()=>{
     c--;
     if(c===0){n.textContent='GO';l.textContent='Read fast. Think deep.'}
@@ -1763,7 +2312,7 @@ function initReader() {
   const isManual = S.readingMode && ['rsvp','phrase','scroll','focus'].includes(S.mode);
   const isFocusManual = isManual;
   $('reader-controls-baseline').style.display=isStatic?'flex':'none';
-  if(isBionic) $('btn-baseline-finish').textContent='Finished — I\'ve read it all';
+  if(isBionic) $('btn-baseline-finish').textContent='Finished. I\'ve read it all';
   $('reader-controls-manual').style.display=isFocusManual?'flex':'none';
   $('reader-controls-auto').style.display=(!isStatic&&!isFocusManual)?'flex':'none';
   if(isStatic){
@@ -1912,21 +2461,21 @@ document.addEventListener('keydown', e=>{
 
 // ── RESULTS ──
 const INSIGHTS = {
-  low:   w=>`${w} WPM — and that's your starting line, not your ceiling. You're not a slow reader. You're an untrained one. Give this 7 days — 15 minutes a day — and you'll feel a difference you can measure.`,
-  avg:   w=>`${w} WPM — right at average, which means there's massive upside waiting. Most students double their speed in week one. Keep training and 400 WPM with full comprehension is your next milestone.`,
-  good:  w=>`${w} WPM — above average. You're already outreading most professionals. Now the Ebbinghaus Forgetting Curve becomes your focus: reading faster means nothing if retention drops.`,
-  elite: w=>`${w} WPM — elite territory. A 300-page business book takes under 3 hours. Now the game becomes memory architecture — using the Memory Palace to make every insight stick.`,
-  beast: w=>`${w} WPM — world-class. You're reading faster than 99% of the population. The only frontier left is retention.`,
+  low:   w=>`${w} WPM. That's your starting line, not your ceiling. You're not a slow reader. You're an untrained one. Give this 7 days, 15 minutes a day, and you'll feel a difference you can measure.`,
+  avg:   w=>`${w} WPM, right at average, which means there's massive upside waiting. Most students double their speed in week one. Keep training and 400 WPM with full comprehension is your next milestone.`,
+  good:  w=>`${w} WPM, above average. You're already outreading most professionals. Now the Ebbinghaus Forgetting Curve becomes your focus: reading faster means nothing if retention drops.`,
+  elite: w=>`${w} WPM. Elite territory. A 300-page business book takes under 3 hours. Now the game becomes memory architecture, using the Memory Palace to make every insight stick.`,
+  beast: w=>`${w} WPM. World-class. You're reading faster than 99% of the population. The only frontier left is retention.`,
 };
 function getInsight(w){if(w<180)return INSIGHTS.low(w);if(w<280)return INSIGHTS.avg(w);if(w<450)return INSIGHTS.good(w);if(w<650)return INSIGHTS.elite(w);return INSIGHTS.beast(w);}
 
 function getPercentile(wpm) {
-  if (wpm < 150) return { pct: Math.round((wpm/150)*15), label: `You're in the bottom 15% — but that changes fast with daily training.` };
+  if (wpm < 150) return { pct: Math.round((wpm/150)*15), label: `You're in the bottom 15%, but that changes fast with daily training.` };
   if (wpm < 200) return { pct: Math.round(15+(wpm-150)/50*15), label: `You're reading faster than most people who've never trained.` };
   if (wpm < 300) return { pct: Math.round(30+(wpm-200)/100*25), label: `You're reading faster than roughly ${Math.round(30+(wpm-200)/100*25)}% of the population.` };
   if (wpm < 450) return { pct: Math.round(55+(wpm-300)/150*20), label: `You're outreading the majority of professionals.` };
   if (wpm < 600) return { pct: Math.round(75+(wpm-450)/150*15), label: `You're in the top 10% of readers globally.` };
-  return { pct: 95, label: `You're reading at elite level — top 5% globally.` };
+  return { pct: 95, label: `You're reading at elite level, top 5% globally.` };
 }
 
 function showResults() {
@@ -1943,6 +2492,60 @@ function showResults() {
   $('gauge-context').textContent = label;
 
   $('insight-text').textContent = getInsight(wpm);
+
+  // ── Email capture — hide if already signed up OR on step 7 (Jordan Minutes is in coaching block) ──
+  const captureCard = $('email-capture-card');
+  if (captureCard) {
+    const alreadySignedUp = localStorage.getItem('sf_signed_up') === 'true';
+    const isStep7 = S.mode === 'baseline_retest';
+    captureCard.style.display = (alreadySignedUp || isStep7) ? 'none' : 'block';
+
+    if (!alreadySignedUp) {
+      // Step-aware copy — Option C
+      const STEP_COPY = {
+        baseline:       { tag:'Step 1 of 7 complete ✓', headline:'6 steps to go.\nDon\'t stop now.', body:'You\'ve measured your starting speed. The training starts now. Jordan guides you through each step. People who complete all 7 read 73% faster on average.', prog:14, cta:'GET THE FULL 7-DAY GUIDE →' },
+        rsvp:           { tag:'Step 2 of 7 complete ✓', headline:'Good momentum.\nKeep it going.', body:'Your eyes are beginning to adapt. Five more modes to go, each building on the last. Jordan explains what\'s happening in your brain as it happens.', prog:28, cta:'GET THE FULL 7-DAY GUIDE →' },
+        phrase:         { tag:'Step 3 of 7 complete ✓', headline:'You\'re nearly halfway.\nDon\'t stop here.', body:'Phrase reading is where most people feel the first real click. Four steps done. The next three push the gains even further.', prog:43, cta:'GET THE FULL 7-DAY GUIDE →' },
+        focus:          { tag:'Step 4 of 7 complete ✓', headline:'Four down.\nThree to go.', body:'Your peripheral span is widening. The final three modes lock in everything you\'ve trained so far. Jordan\'s guide keeps you on track every step.', prog:57, cta:'GET THE FULL 7-DAY GUIDE →' },
+        scroll:         { tag:'Step 5 of 7 complete ✓', headline:'Two steps from\nproving it.', body:'Five modes complete. The final two, Chunking and the re-test, are where everything compounds. Don\'t lose this progress now.', prog:71, cta:'FINISH THE PROGRAMME →' },
+        bionic:         { tag:'Step 6 of 7 complete ✓', headline:'One step from\nyour result.', body:'Six modes done. One left: the re-test. You\'re about to find out exactly how much faster you\'ve become. Jordan\'s final guide prepares you for it.', prog:85, cta:'FINISH THE PROGRAMME →' },
+        baseline_retest:{ tag:'All 7 steps complete 🏁', headline:'You finished.\nStay connected.', body:'Get Jordan\'s weekly insights, two emails a week on how to learn anything faster. The same techniques he teaches to busy professionals and students across 70 countries.', prog:100, cta:'JOIN JORDAN MINUTES →' },
+      };
+
+      const copy = STEP_COPY[S.mode] || STEP_COPY.baseline;
+
+      // Tag
+      const tagEl = captureCard.querySelector('[data-ec-tag]');
+      if (tagEl) tagEl.textContent = copy.tag;
+
+      // Headline
+      const headlineEl = captureCard.querySelector('[data-ec-headline]');
+      if (headlineEl) headlineEl.textContent = copy.headline;
+
+      // Body
+      const bodyEl = captureCard.querySelector('[data-ec-body]');
+      if (bodyEl) bodyEl.textContent = copy.body;
+
+      // Progress bar
+      const progEl = captureCard.querySelector('[data-ec-prog]');
+      if (progEl) progEl.style.width = copy.prog + '%';
+
+      // Progress steps
+      const stepsEl = captureCard.querySelector('[data-ec-steps]');
+      if (stepsEl) {
+        const stepNum = Math.round(copy.prog / 14.3);
+        stepsEl.innerHTML = [1,2,3,4,5,6,7].map(i => {
+          if (i < stepNum) return `<span style="color:rgba(247,166,0,0.7)">✓</span>`;
+          if (i === stepNum) return `<span style="color:var(--gold);font-weight:700">${i===7?'🏁':i}</span>`;
+          return `<span style="color:var(--muted)">${i===7?'7 🏁':i}</span>`;
+        }).join('');
+      }
+
+      // CTA button
+      const btnEl = $('email-capture-btn');
+      if (btnEl) btnEl.textContent = copy.cta;
+    }
+  }
 
   // Baseline retest comparison
   const cmp = $('baseline-comparison');
@@ -1971,17 +2574,35 @@ function showResults() {
 
   // Coaching CTA — step 7 only
   const coachingCta = $('coaching-cta');
-  const coachingWpm = $('coaching-wpm');
   if (coachingCta) {
     if (S.mode === 'baseline_retest') {
-      coachingWpm.textContent = wpm;
       coachingCta.classList.add('show');
+      // Populate dynamic elements
+      if ($('coaching-wpm')) $('coaching-wpm').textContent = wpm;
+      if ($('ar-wpm')) $('ar-wpm').textContent = wpm;
+      // Calculate percentile for ring
+      const { pct } = getPercentile(wpm);
+      const topPct = 100 - pct;
+      if ($('ar-pct')) $('ar-pct').textContent = pct + '%';
+      if ($('ar-top-pct')) $('ar-top-pct').textContent = topPct + '%';
+      if ($('ar-rank-chip')) $('ar-rank-chip').textContent = '✓ Top ' + topPct + '% globally';
+      // Animate ring — 364.4 is full circumference
+      setTimeout(() => {
+        const ring = $('ar-ring-fill');
+        if (ring) ring.style.strokeDashoffset = 364.4 * (1 - pct / 100);
+      }, 300);
     } else {
       coachingCta.classList.remove('show');
     }
   }
 
   showScreen('screen-results');
+  tawkShow();
+
+  // Celebrate on Step 1 (baseline), Step 3 (phrase), Step 7 (final test)
+  if (['baseline', 'phrase', 'baseline_retest'].includes(S.mode)) {
+    setTimeout(() => triggerCelebration(), 400);
+  }
 }
 
 $('btn-nextstep').addEventListener('click', () => {
@@ -2003,18 +2624,314 @@ $('btn-nextstep').addEventListener('click', () => {
   }
 });
 
-$('btn-readagain').addEventListener('click', () => {
-  pause();
-  setReadingMode(false);
-  S.currentIndex = 0; S.elapsedSec = 0; S.totalWordsRead = 0;
-  populateLesson(S.mode);
-  showScreen('screen-lesson');
-});
-
 $('btn-switchmode').addEventListener('click', () => {
   pause(); goHome();
   setTimeout(() => document.querySelector('.modes-grid').scrollIntoView({ behavior: 'smooth', block: 'center' }), 350);
 });
+
+// ── EYE WARM-UP ──────────────────────────────────────────────────
+const WU_EXERCISES = [
+  {
+    id: 'sidetoside',
+    label: 'Exercise 1: Horizontal Saccades',
+    title: 'SIDE TO SIDE',
+    instruction: 'Head perfectly still. <strong>Only your eyes move.</strong> Follow the dot from left to right. Let your eyes land at each end before moving back.',
+    duration: 20,
+    build: () => `
+      <div class="wu-anim" style="width:340px;height:60px;max-width:90vw">
+        <div class="wu-track-h"></div>
+        <div class="wu-track-end l"></div>
+        <div class="wu-track-end r"></div>
+        <div class="wu-dot-ball" style="color:var(--gold);background:var(--gold);animation:wu-lr 1.8s ease-in-out infinite;top:50%;transform:translateY(-50%)"></div>
+      </div>`
+  },
+  {
+    id: 'updown',
+    label: 'Exercise 2: Vertical Saccades',
+    title: 'UP AND DOWN',
+    instruction: '<strong>Pause briefly at top and bottom.</strong> This trains your superior and inferior rectus muscles, for vertical reading movement.',
+    duration: 20,
+    build: () => `
+      <div class="wu-anim" style="width:60px;height:120px">
+        <div style="position:absolute;left:50%;top:0;bottom:0;width:2px;background:rgba(255,255,255,0.05);transform:translateX(-50%)"></div>
+        <div class="wu-dot-ball" style="color:var(--gold);background:var(--gold);animation:wu-ud 1.8s ease-in-out infinite;left:50%;transform:translateX(-50%)"></div>
+      </div>`
+  },
+  {
+    id: 'diagonal',
+    label: 'Exercise 3: Oblique Tracking',
+    title: 'DIAGONAL',
+    instruction: 'Corner to corner, <strong>the hardest eye movement to master.</strong> Most people skip this. Don\'t. Your oblique muscles are critical for scanning pages.',
+    duration: 20,
+    build: () => `
+      <div class="wu-anim" style="width:240px;height:120px;max-width:80vw">
+        <div style="position:absolute;top:0;left:0;right:0;bottom:0;border:1px solid rgba(255,255,255,0.04);border-radius:4px"></div>
+        <div class="wu-dot-ball" style="color:var(--gold);background:var(--gold);animation:wu-diag 2s ease-in-out infinite;width:14px;height:14px"></div>
+        <div class="wu-dot-ball" style="color:rgba(247,166,0,0.25);background:rgba(247,166,0,0.25);animation:wu-anti 2s ease-in-out infinite;width:10px;height:10px;filter:blur(1px)"></div>
+      </div>`
+  },
+  {
+    id: 'infinity',
+    label: 'Exercise 4: Smooth Pursuit (∞)',
+    title: 'INFINITY LOOP',
+    instruction: '<strong>Follow the dot without jerking.</strong> The infinity path, not a figure-8, recruits all six eye muscles simultaneously. Smooth pursuit is how elite readers pre-scan lines.',
+    duration: 20,
+    build: () => `
+      <div class="wu-anim" style="width:200px;height:80px;position:relative">
+        <div style="position:absolute;top:50%;left:50%;width:1px;height:1px">
+          <div class="wu-dot-ball" style="color:var(--gold);background:var(--gold);width:14px;height:14px;animation:wu-inf 2.5s ease-in-out infinite;top:0;left:0"></div>
+        </div>
+        <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.08" viewBox="0 0 200 80" fill="none">
+          <path d="M100 40 C100 15 140 15 160 40 C180 65 180 65 160 40 C140 15 100 15 100 40 C100 65 60 65 40 40 C20 15 20 15 40 40 C60 65 100 65 100 40Z" stroke="white" stroke-width="1"/>
+        </svg>
+      </div>`
+  },
+  {
+    id: 'nearfar',
+    label: 'Exercise 5: Accommodation',
+    title: 'NEAR / FAR',
+    instruction: 'Hold your <strong>index finger 10cm from your nose.</strong> Focus on your fingertip, then shift to something across the room. Alternate every 3 seconds. Trains your ciliary muscle.',
+    duration: 20,
+    build: () => `
+      <div class="wu-anim" style="width:160px;height:100px;position:relative">
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)">
+          <div style="position:absolute;border-radius:50%;border:1px solid rgba(247,166,0,0.2);animation:wu-ring 2s ease-out infinite;width:24px;height:24px;top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+          <div style="position:absolute;border-radius:50%;border:1px solid rgba(247,166,0,0.15);animation:wu-ring 2s ease-out .4s infinite;width:48px;height:48px;top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+          <div style="position:absolute;border-radius:50%;border:1px solid rgba(247,166,0,0.1);animation:wu-ring 2s ease-out .8s infinite;width:72px;height:72px;top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold);position:absolute;top:50%;left:50%;animation:wu-converge 2s ease-in-out infinite"></div>
+        </div>
+        <div style="position:absolute;bottom:0;left:0;right:0;font-family:'JetBrains Mono';font-size:9px;color:var(--muted);text-align:center;letter-spacing:.5px">FOCUS · SHIFT · REPEAT</div>
+      </div>`
+  },
+  {
+    id: 'convergence',
+    label: 'Exercise 6: Convergence',
+    title: 'CONVERGENCE',
+    instruction: 'Extend your arm, <strong>focus on your fingertip.</strong> Slowly bring it towards your nose. Stop before it goes double. Hold 2 seconds, then push back out. The most neglected exercise. The biggest gain.',
+    duration: 20,
+    build: () => `
+      <div class="wu-anim" style="width:200px;height:80px;position:relative">
+        <div style="font-size:32px;animation:wu-converge 3s ease-in-out infinite;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)">☝️</div>
+        <div style="position:absolute;bottom:0;left:0;right:0;font-family:'JetBrains Mono';font-size:9px;color:var(--muted);text-align:center;letter-spacing:.5px">EXTEND → BRING IN → PUSH BACK</div>
+      </div>`
+  },
+  {
+    id: 'peripheral',
+    label: 'Exercise 7: Peripheral Expansion',
+    title: 'WIDE VISION',
+    instruction: '<strong>Fix your eyes dead centre.</strong> Without moving them, become aware of what\'s at the very edges of your vision. Hold that awareness. This expands your visual span, the key to phrase reading.',
+    duration: 20,
+    build: () => `
+      <div class="wu-anim" style="width:320px;height:60px;max-width:90vw;position:relative">
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 14px var(--gold)"></div>
+        <div style="position:absolute;top:50%;left:8px;transform:translateY(-50%);width:6px;height:6px;border-radius:50%;background:rgba(247,166,0,0.3);animation:wu-breathe 2s ease-in-out infinite"></div>
+        <div style="position:absolute;top:50%;right:8px;transform:translateY(-50%);width:6px;height:6px;border-radius:50%;background:rgba(247,166,0,0.3);animation:wu-breathe 2s ease-in-out .5s infinite"></div>
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:280px;height:1px;background:rgba(247,166,0,0.06)"></div>
+        <div style="position:absolute;bottom:-16px;left:0;right:0;font-family:'JetBrains Mono';font-size:9px;color:var(--muted);text-align:center;letter-spacing:.5px">EYES ON CENTRE, NOTICE THE EDGES</div>
+      </div>`
+  },
+  {
+    id: 'palming',
+    label: 'Exercise 8: Palming (Bates Method)',
+    title: 'PALM & REST',
+    instruction: '<strong>Cup your palms over your closed eyes.</strong> No pressure. Total darkness. Breathe slowly. The optic nerve fully relaxes in darkness, your reset before reading begins.',
+    duration: 30,
+    build: () => `
+      <div class="wu-anim" style="width:200px;height:90px;position:relative;flex-direction:column;gap:12px">
+        <div style="font-size:40px;animation:wu-breathe 4s ease-in-out infinite">🤲</div>
+        <div style="font-family:'JetBrains Mono';font-size:9px;color:var(--muted);letter-spacing:1px;text-align:center;animation:wu-breathe 4s ease-in-out infinite;position:absolute;bottom:0;left:0;right:0">BREATHE IN &nbsp;·&nbsp; BREATHE OUT</div>
+      </div>`
+  }
+];
+
+let WU = { index: 0, timer: null, seconds: 0, maxSeconds: 20 };
+
+function startWarmup() {
+  WU.index = 0;
+  body_reading_off();
+  showScreen('screen-warmup');
+  buildWuDots();
+  loadWuExercise(0);
+}
+
+function body_reading_off() {
+  document.body.classList.remove('reading','rrm','light-mode','bionic-mode','pacer');
+}
+
+function buildWuDots() {
+  const c = $('wu-dots'); c.innerHTML = '';
+  WU_EXERCISES.forEach((_,i) => {
+    const d = document.createElement('div');
+    d.className = 'wu-dot' + (i===0?' active':'');
+    d.id = 'wu-dot-'+i;
+    c.appendChild(d);
+  });
+}
+
+function loadWuExercise(idx) {
+  clearInterval(WU.timer);
+  const ex = WU_EXERCISES[idx];
+  if (!ex) { showWuComplete(); return; }
+
+  WU.maxSeconds = ex.duration;
+  WU.seconds = ex.duration;
+
+  // Dots
+  document.querySelectorAll('.wu-dot').forEach((d,i) => {
+    d.className = 'wu-dot' + (i < idx ? ' done' : i === idx ? ' active' : '');
+  });
+
+  // Header
+  $('wu-step-num').textContent = idx + 1;
+
+  // Stage
+  $('wu-stage').innerHTML = `
+    <div class="wu-exercise-label">${ex.label}</div>
+    <div class="wu-title">${ex.title}</div>
+    <div class="wu-instruction">${ex.instruction}</div>
+    <div class="wu-anim-wrap" style="display:flex;align-items:center;justify-content:center;min-height:100px">${ex.build()}</div>
+  `;
+
+  // Next button label
+  $('wu-next-btn').textContent = idx < WU_EXERCISES.length - 1 ? 'NEXT EXERCISE →' : 'FINISH WARM-UP →';
+
+  // Progress bar
+  const pct = Math.round((idx / WU_EXERCISES.length) * 100);
+  $('wu-prog-fill').style.width = pct + '%';
+
+  // Timer
+  updateWuTimer();
+  WU.timer = setInterval(() => {
+    WU.seconds--;
+    updateWuTimer();
+    if (WU.seconds <= 0) { clearInterval(WU.timer); wuNext(); }
+  }, 1000);
+}
+
+function updateWuTimer() {
+  $('wu-timer-num').textContent = WU.seconds;
+  const circ = 163.4;
+  const offset = circ * (1 - WU.seconds / WU.maxSeconds);
+  $('wu-timer-arc').style.strokeDashoffset = offset;
+}
+
+function wuNext() {
+  clearInterval(WU.timer);
+  WU.index++;
+  if (WU.index >= WU_EXERCISES.length) { showWuComplete(); return; }
+  loadWuExercise(WU.index);
+}
+
+function showWuComplete() {
+  $('wu-dots').innerHTML = '';
+  $('wu-timer-wrap') && ($('wu-timer-wrap').style.display = 'none');
+  $('wu-prog-fill').style.width = '100%';
+  $('wu-stage').innerHTML = `
+    <div class="wu-complete">
+      <div class="wu-complete-icon">👁</div>
+      <div class="wu-complete-title">EYES PRIMED</div>
+      <p class="wu-complete-sub">Your visual system is warmed up and ready. Reduced eye strain, expanded peripheral vision, full accommodation. Now train.</p>
+      <button class="wu-complete-cta" onclick="goHome()">START TRAINING →</button>
+      <button class="wu-complete-back" onclick="goHome()">Back to home</button>
+    </div>
+  `;
+  $('wu-footer').style.display = 'none';
+  $('wu-header') && ($('wu-header').style.display = 'none');
+}
+
+// Expose timer-wrap id for complete screen
+document.addEventListener('DOMContentLoaded', () => {
+  const tw = document.querySelector('.wu-timer-wrap');
+  if (tw) tw.id = 'wu-timer-wrap';
+  const wh = document.querySelector('.wu-header');
+  if (wh) wh.id = 'wu-header';
+  const wf = document.querySelector('.wu-footer');
+  if (wf) wf.id = 'wu-footer';
+  // Pre-load psychology sample for new users
+  const firstChip = document.querySelector('.sample-chip');
+  if (firstChip && $('text-input') && !$('text-input').value.trim()) {
+    loadSample('psych', firstChip);
+  }
+});
+if (typeof pdfjsLib !== 'undefined') {
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+}
+function showFileState(state) {
+  $('drop-zone').style.display        = state === 'idle'       ? 'block' : 'none';
+  $('file-extracting').style.display  = state === 'extracting' ? 'flex'  : 'none';
+  $('file-loaded').style.display      = state === 'loaded'     ? 'flex'  : 'none';
+  $('file-error').style.display       = state === 'error'      ? 'flex'  : 'none';
+}
+function cleanExtractedText(raw) {
+  return raw
+    .replace(/\r\n/g, '\n').replace(/\r/g, '\n')
+    .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '')
+    .replace(/\n{3,}/g, '\n\n')
+    .replace(/-\n(\S)/g, '$1')
+    .replace(/([^\n.!?:;])\n([a-z])/g, '$1 $2')
+    .replace(/[ \t]{2,}/g, ' ')
+    .replace(/^\s*\d+\s*$/gm, '')
+    .trim();
+}
+async function handleFileUpload(file) {
+  if (!file) return;
+  const ext = file.name.split('.').pop().toLowerCase();
+  if (!['pdf', 'docx'].includes(ext)) {
+    showFileState('error');
+    $('file-error-msg').textContent = 'Unsupported file type. Please upload a PDF or DOCX file.';
+    return;
+  }
+  showFileState('extracting');
+  $('extracting-label').innerHTML = `Extracting text from <strong style="color:var(--text)">${file.name}</strong>…`;
+  try {
+    let text = '';
+    if (ext === 'docx') {
+      if (typeof mammoth === 'undefined') throw new Error('Mammoth.js not loaded');
+      const arrayBuffer = await file.arrayBuffer();
+      const result = await mammoth.extractRawText({ arrayBuffer });
+      text = result.value;
+    } else if (ext === 'pdf') {
+      if (typeof pdfjsLib === 'undefined') throw new Error('PDF.js not loaded');
+      const arrayBuffer = await file.arrayBuffer();
+      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      const pages = [];
+      for (let i = 1; i <= pdf.numPages; i++) {
+        const page = await pdf.getPage(i);
+        const content = await page.getTextContent();
+        let pageText = '';
+        let lastY = null;
+        for (const item of content.items) {
+          if (lastY !== null && Math.abs(item.transform[5] - lastY) > 5) pageText += '\n';
+          pageText += item.str;
+          lastY = item.transform[5];
+        }
+        pages.push(pageText);
+      }
+      text = pages.join('\n\n');
+    }
+    text = cleanExtractedText(text);
+    if (!text || text.length < 30) {
+      showFileState('error');
+      $('file-error-msg').textContent = ext === 'pdf'
+        ? 'No readable text found. This may be a scanned PDF. Try copying the text manually.'
+        : 'No text could be extracted from this file.';
+      return;
+    }
+    $('text-input').value = text;
+    checkText();
+    const wordCount = text.split(/\s+/).filter(Boolean).length;
+    $('file-loaded-icon').textContent = ext === 'pdf' ? '📄' : '📝';
+    $('file-loaded-name').textContent = file.name;
+    $('file-loaded-meta').textContent = `${wordCount.toLocaleString()} words extracted · ready to train`;
+    showFileState('loaded');
+    $('file-input').value = '';
+  } catch (err) {
+    console.error('[StudyFast] File extraction error:', err);
+    showFileState('error');
+    $('file-error-msg').textContent = 'Something went wrong extracting this file. Try pasting the text directly instead.';
+    $('file-input').value = '';
+  }
+}
 </script>
 <script>
 if('serviceWorker' in navigator){
@@ -2057,15 +2974,16 @@ if('serviceWorker' in navigator){
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify({ email: email, firstname: firstName, groups: ['aMXZEm'] })
+        body: JSON.stringify({ email: email, firstname: firstName, groups: [S.mode === 'baseline_retest' ? 'bomjxk' : 'aMXZEm'] })
       });
       if(!res.ok && res.status !== 409) throw new Error('API error ' + res.status);
 
       // Success state
+      localStorage.setItem('sf_signed_up', 'true');
       if(nameInp) nameInp.style.display = 'none';
       inp.style.display = 'none';
       btn.style.display = 'none';
-      msg.textContent = '✓ You\'re in! Check your inbox for Day 1.';
+      msg.textContent = S.mode === 'baseline_retest' ? '✓ You\'re in! Jordan Minutes starts this week.' : '✓ You\'re in! Check your inbox for Day 1.';
       msg.style.color = 'var(--green)';
       msg.style.fontSize = '13px';
       msg.style.padding = '4px 0';
@@ -2073,7 +2991,7 @@ if('serviceWorker' in navigator){
       btn.textContent = 'START DAY 1 →';
       btn.style.opacity = '1';
       btn.disabled = false;
-      msg.textContent = 'Something went wrong — please try again.';
+      msg.textContent = 'Something went wrong. Please try again.';
       msg.style.color = 'var(--orange)';
       console.error('[StudyFast] Email capture error:', err);
     }
@@ -2123,6 +3041,7 @@ if('serviceWorker' in navigator){
       });
       if(!res.ok && res.status !== 409) throw new Error('API error ' + res.status);
 
+      localStorage.setItem('sf_signed_up', 'true');
       if(nameInp) nameInp.style.display = 'none';
       inp.style.display = 'none';
       btn.style.display = 'none';
@@ -2133,7 +3052,7 @@ if('serviceWorker' in navigator){
       btn.textContent = 'START DAY 1 →';
       btn.style.opacity = '1';
       btn.disabled = false;
-      msg.textContent = 'Something went wrong — please try again.';
+      msg.textContent = 'Something went wrong. Please try again.';
       msg.style.color = 'var(--orange)';
       console.error('[StudyFast] Home email capture error:', err);
     }
@@ -2161,6 +3080,41 @@ if('serviceWorker' in navigator){
     }
   }, { passive: true });
 })();
+</script>
+<!-- Tawk.to live chat — passive, hidden during active reading -->
+<script>
+var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+(function(){
+  var s1 = document.createElement('script'), s0 = document.getElementsByTagName('script')[0];
+  s1.async = true;
+  s1.src = 'https://embed.tawk.to/67370c912480f5b4f59e73b6/1icngi6mc';
+  s1.charset = 'UTF-8';
+  s1.setAttribute('crossorigin', '*');
+  s0.parentNode.insertBefore(s1, s0);
+})();
+
+// Hide during active reading, show on all other screens
+function tawkHide() { if (typeof Tawk_API !== 'undefined' && Tawk_API.hideWidget) Tawk_API.hideWidget(); }
+function tawkShow() { if (typeof Tawk_API !== 'undefined' && Tawk_API.showWidget) Tawk_API.showWidget(); }
+
+// Hook into screen transitions
+const _origShowScreen = window.showScreen;
+if (typeof showScreen === 'function') {
+  const __showScreen = showScreen;
+  window.showScreen = function(id) {
+    __showScreen(id);
+    if (id === 'screen-reader') tawkHide();
+    else tawkShow();
+  };
+}
+
+// Also hook into reading state directly in case showScreen is called before Tawk loads
+Tawk_API.onLoad = function() {
+  const readerActive = document.getElementById('screen-reader') &&
+    document.getElementById('screen-reader').classList.contains('active');
+  if (readerActive) tawkHide();
+  else tawkShow();
+};
 </script>
 </body>
 </html>
