@@ -1157,7 +1157,7 @@ body.light-mode .logo-img-colour { display:block }
     <a class="btn-nav-link" href="index.html">App</a>
     <a class="btn-nav-link" href="science.html">The Science</a>
   </div>
-  <div class="header-nav-right" id="header-nav-right">
+  <div class="header-nav-right" id="header-nav-right" style="display:none">
     <a class="btn-nav-link" href="login.html">Log in</a>
     <a class="btn-nav-create" href="signup.html">Create account</a>
   </div>
@@ -1185,10 +1185,11 @@ body.light-mode .logo-img-colour { display:block }
 ══════════════════════════════════════ -->
 <div class="screen active" id="screen-input">
 
+  <div style="text-align:center;padding:8px 20px;background:rgba(247,166,0,0.06);border-bottom:1px solid rgba(247,166,0,0.12)">
+    <span style="font-size:11px;color:rgba(247,166,0,0.75);font-weight:500">Jordan Harry · UK's #1 Speed Reading Coach · TEDx 3.4M Views</span>
+  </div>
+
   <div class="hero">
-    <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(247,166,0,0.08);border:1px solid rgba(247,166,0,0.2);border-radius:100px;padding:6px 16px;margin-bottom:18px;font-size:12px;font-weight:600;color:var(--gold)">
-      Jordan Harry · UK's #1 Speed Reading Coach · TEDx 3.4M Views
-    </div>
     <h1>READ FASTER<span class="accent">START NOW.</span></h1>
     <p>Your brain can process 1,000 words per minute (WPM). Your eyes are the bottleneck. Fix that in 7 days, 15 minutes a day.</p>
   </div>
@@ -1196,16 +1197,17 @@ body.light-mode .logo-img-colour { display:block }
 
 
 
-  <!-- #8 Onboarding pill — first-timer orientation, minimal footprint -->
-  <div id="onboarding-pill-wrap" style="display:flex;justify-content:center;margin-bottom:16px">
-    <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:100px;padding:6px 14px;font-size:11px;color:var(--muted2)">
-      <span style="font-size:13px">👋</span>
-      <span>New here? Start at <strong style="color:var(--text)">Step 1</strong></span>
-      <button onclick="document.getElementById('onboarding-pill-wrap').style.display='none'" style="margin-left:4px;font-size:11px;color:var(--muted);background:transparent;border:none;cursor:pointer;font-family:'Plus Jakarta Sans';padding:0 0 0 4px;line-height:1">✕</button>
+  <!-- #12 Why it works — moved below start button -->
+
+  <div style="margin-bottom:4px;display:flex;align-items:flex-start;gap:10px">
+    <div style="width:24px;height:24px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#08080e;flex-shrink:0;margin-top:2px">1</div>
+    <div>
+      <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:3px">Pick your training mode</div>
+      <div style="font-size:12px;color:var(--muted2)">First time? Start at Step 1 and work through in order, one per day.</div>
     </div>
   </div>
 
-  <div class="modes-label">Your training progression</div>
+  <div style="height:14px"></div>
 
   <!-- EYE WARM-UP BANNER — temporarily hidden, restore when ready
   <div class="warmup-banner" id="btn-warmup" onclick="startWarmup()">
@@ -1283,35 +1285,11 @@ body.light-mode .logo-img-colour { display:block }
     <div class="ps-dot"></div>
   </div>
 
-  <!-- #12 Why it works — collapsible for sceptics -->
-  <div style="margin-bottom:16px">
-    <div id="why-toggle" onclick="toggleWhy()" style="display:flex;align-items:center;justify-content:space-between;background:var(--s1);border:1px solid var(--border);border-radius:var(--r-sm);padding:12px 16px;cursor:pointer;transition:all .2s;user-select:none">
-      <span style="font-size:12px;font-weight:700;color:var(--muted2)">🧬 Why does speed reading actually work?</span>
-      <span id="why-toggle-icon" style="transition:transform .2s;display:flex;align-items:center;flex-shrink:0">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9090b0" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-      </span>
-    </div>
-    <div id="why-content" style="display:none;background:var(--s1);border:1px solid var(--border);border-top:none;border-radius:0 0 var(--r-sm) var(--r-sm);padding:16px;display:none;grid-template-columns:1fr 1fr;gap:10px">
-      <div style="padding:12px;background:var(--s2);border-radius:var(--r-sm)">
-        <div style="font-size:16px;margin-bottom:5px">👁</div>
-        <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:3px">The bottleneck is your eyes</div>
-        <div style="font-size:10px;color:var(--muted2);line-height:1.55">Your visual cortex processes images in 13ms. The average reader wastes 80% of that capacity through uncontrolled eye movement.</div>
-      </div>
-      <div style="padding:12px;background:var(--s2);border-radius:var(--r-sm)">
-        <div style="font-size:16px;margin-bottom:5px">🔁</div>
-        <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:3px">Regression kills speed</div>
-        <div style="font-size:10px;color:var(--muted2);line-height:1.55">Untrained readers re-read up to 30% of text unconsciously. Breaking this habit alone increases speed by 50%.</div>
-      </div>
-      <div style="padding:12px;background:var(--s2);border-radius:var(--r-sm)">
-        <div style="font-size:16px;margin-bottom:5px">🗣</div>
-        <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:3px">Sub-vocalisation caps you</div>
-        <div style="font-size:10px;color:var(--muted2);line-height:1.55">If you "hear" words as you read, you're limited to speech speed (~300 WPM). Phrase reading bypasses this ceiling entirely.</div>
-      </div>
-      <div style="padding:12px;background:var(--s2);border-radius:var(--r-sm)">
-        <div style="font-size:16px;margin-bottom:5px">⚡</div>
-        <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:3px">Neuroplasticity is fast</div>
-        <div style="font-size:10px;color:var(--muted2);line-height:1.55">The visual system adapts within days of targeted training, not weeks. 15 minutes a day is scientifically sufficient for measurable gains.</div>
-      </div>
+  <div style="margin-bottom:14px;display:flex;align-items:flex-start;gap:10px">
+    <div style="width:24px;height:24px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#08080e;flex-shrink:0;margin-top:2px">2</div>
+    <div>
+      <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:3px">Add your reading material</div>
+      <div style="font-size:12px;color:var(--muted2)">Paste anything, or pick a sample to start in seconds.</div>
     </div>
   </div>
 
@@ -1397,6 +1375,38 @@ body.light-mode .logo-img-colour { display:block }
 
   <div class="start-row">
     <button class="btn btn-gold" id="btn-start" disabled>PASTE TEXT TO BEGIN →</button>
+  </div>
+
+  <!-- Why it works — below start button for cold traffic -->
+  <div style="margin-top:16px;margin-bottom:4px">
+    <div id="why-toggle" onclick="toggleWhy()" style="display:flex;align-items:center;justify-content:space-between;background:var(--s1);border:1px solid var(--border);border-radius:var(--r-sm);padding:12px 16px;cursor:pointer;transition:all .2s;user-select:none">
+      <span style="font-size:12px;font-weight:700;color:var(--muted2)">🧬 Why does speed reading actually work?</span>
+      <span id="why-toggle-icon" style="transition:transform .2s;display:flex;align-items:center;flex-shrink:0">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9090b0" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </span>
+    </div>
+    <div id="why-content" style="display:none;background:var(--s1);border:1px solid var(--border);border-top:none;border-radius:0 0 var(--r-sm) var(--r-sm);padding:16px;grid-template-columns:1fr 1fr;gap:10px">
+      <div style="padding:12px;background:var(--s2);border-radius:var(--r-sm)">
+        <div style="font-size:16px;margin-bottom:5px">👁</div>
+        <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:3px">The bottleneck is your eyes</div>
+        <div style="font-size:10px;color:var(--muted2);line-height:1.55">Your visual cortex processes images in 13ms. The average reader wastes 80% of that capacity through uncontrolled eye movement.</div>
+      </div>
+      <div style="padding:12px;background:var(--s2);border-radius:var(--r-sm)">
+        <div style="font-size:16px;margin-bottom:5px">🔁</div>
+        <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:3px">Regression kills speed</div>
+        <div style="font-size:10px;color:var(--muted2);line-height:1.55">Untrained readers re-read up to 30% of text unconsciously. Breaking this habit alone increases speed by 50%.</div>
+      </div>
+      <div style="padding:12px;background:var(--s2);border-radius:var(--r-sm)">
+        <div style="font-size:16px;margin-bottom:5px">🗣</div>
+        <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:3px">Sub-vocalisation caps you</div>
+        <div style="font-size:10px;color:var(--muted2);line-height:1.55">If you hear words as you read, you're limited to speech speed (around 300 WPM). Phrase reading bypasses this ceiling entirely.</div>
+      </div>
+      <div style="padding:12px;background:var(--s2);border-radius:var(--r-sm)">
+        <div style="font-size:16px;margin-bottom:5px">⚡</div>
+        <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:3px">Neuroplasticity is fast</div>
+        <div style="font-size:10px;color:var(--muted2);line-height:1.55">The visual system adapts within days of targeted training, not weeks. 15 minutes a day is scientifically sufficient for measurable gains.</div>
+      </div>
+    </div>
   </div>
 
   <div class="stats-row">
@@ -2980,6 +2990,7 @@ async function _initAuth() {
     _sbUser = session.user;
     const name = _sbUser.user_metadata?.full_name || _sbUser.user_metadata?.first_name || _sbUser.email.split('@')[0];
     const firstName = name.split(' ')[0];
+    navRight.style.display = 'flex';
     navRight.innerHTML = `
       <a class="btn-nav-link" href="dashboard.html">Dashboard</a>
       <a class="btn-nav-link" href="dashboard.html" style="width:32px;height:32px;border-radius:50%;background:#2c3490;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;padding:0">${_initials(name, _sbUser.email)}</a>
