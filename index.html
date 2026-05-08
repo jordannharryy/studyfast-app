@@ -1157,7 +1157,7 @@ body.light-mode .logo-img-colour { display:block }
     <a class="btn-nav-link" href="index.html">App</a>
     <a class="btn-nav-link" href="science.html">The Science</a>
   </div>
-  <div class="header-nav-right">
+  <div class="header-nav-right" id="header-nav-right">
     <a class="btn-nav-link" href="login.html">Log in</a>
     <a class="btn-nav-create" href="signup.html">Create account</a>
   </div>
@@ -2503,6 +2503,11 @@ function showResults() {
   if($('res-wpm')) $('res-wpm').textContent = wpm;
   $('gauge-wpm-val').textContent = wpm;
 
+  // Save session to Supabase if logged in
+  if (typeof _saveSession === 'function') {
+    _saveSession(S.mode, wpm, S.totalWordsRead, S.elapsedSec);
+  }
+
   // Gauge bar vs 600 elite
   const barPct = Math.min(100, Math.round((wpm / 650) * 100));
   setTimeout(() => { $('gauge-fill').style.width = barPct + '%'; }, 100);
@@ -2952,6 +2957,52 @@ async function handleFileUpload(file) {
     $('file-input').value = '';
   }
 }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// ── SUPABASE AUTH + SESSION SAVING ──
+const _sb = supabase.createClient(
+  'https://rsgctngtigaipxgwnmop.supabase.co',
+  'sb_publishable_oLLAUCumx53xxJNmSZ1dBg_DDWv5xee'
+);
+let _sbUser = null;
+
+function _initials(name, email) {
+  if (name) return name.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2);
+  return email ? email[0].toUpperCase() : '?';
+}
+
+async function _initAuth() {
+  const { data: { session } } = await _sb.auth.getSession();
+  const navRight = document.getElementById('header-nav-right');
+  if (!navRight) return;
+  if (session) {
+    _sbUser = session.user;
+    const name = _sbUser.user_metadata?.full_name || _sbUser.user_metadata?.first_name || _sbUser.email.split('@')[0];
+    const firstName = name.split(' ')[0];
+    navRight.innerHTML = `
+      <a class="btn-nav-link" href="dashboard.html">Dashboard</a>
+      <a class="btn-nav-link" href="dashboard.html" style="width:32px;height:32px;border-radius:50%;background:#2c3490;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;padding:0">${_initials(name, _sbUser.email)}</a>
+    `;
+  }
+}
+
+async function _saveSession(mode, wpm, wordsRead, elapsedSec) {
+  if (!_sbUser) return;
+  try {
+    await _sb.from('sessions').insert({
+      user_id: _sbUser.id,
+      mode: mode,
+      wpm: wpm || null,
+      words_read: wordsRead || null,
+      elapsed_sec: elapsedSec || null
+    });
+  } catch(e) {
+    console.warn('[StudyFast] Session save failed:', e);
+  }
+}
+
+_initAuth();
 </script>
 <script>
 if('serviceWorker' in navigator){
