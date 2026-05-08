@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — StudyFast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--bg:#08080e;--s1:#0f0f1a;--s2:#161625;--s3:#1e1e30;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);--gold:#F7A600;--gold2:#F7BD33;--text:#f2f1fc;--muted:#6a6a90;--muted2:#9090b0;--r:14px;--r-sm:8px;--green:#3dffa0;--orange:#ff6b35}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif}
+header{padding:12px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:rgba(8,8,14,0.88);backdrop-filter:blur(16px);position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo img{height:48px;opacity:0.92}
+.header-right{display:flex;align-items:center;gap:12px}
+.btn-nav-link{font-size:13px;color:var(--muted2);text-decoration:none;padding:6px 10px;border-radius:6px;transition:color .15s}
+.btn-nav-link:hover{color:var(--text)}
+.avatar{width:34px;height:34px;border-radius:50%;background:#2c3490;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;cursor:pointer;flex-shrink:0;border:2px solid transparent;transition:border-color .2s}
+.avatar:hover{border-color:var(--gold)}
+.page{max-width:680px;margin:0 auto;padding:36px 24px 80px}
+.dash-greeting{margin-bottom:28px}
+.dash-greeting h1{font-family:'Bebas Neue';font-size:clamp(32px,5vw,48px);letter-spacing:2px;color:var(--text);margin-bottom:4px}
+.dash-greeting p{font-size:14px;color:var(--muted2)}
+/* Metrics */
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.metric{background:var(--s1);border:1px solid var(--border2);border-radius:var(--r);padding:20px 16px;text-align:center}
+.metric.hi{border-color:var(--gold);background:linear-gradient(135deg,rgba(247,166,0,0.07),var(--s1))}
+.metric-num{font-family:'Bebas Neue';font-size:44px;color:var(--gold);line-height:1;display:block;margin-bottom:4px}
+.metric-num.empty{color:var(--muted)}
+.metric-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+/* CTA to train */
+.train-cta{background:var(--s1);border:1px solid var(--border2);border-radius:var(--r);padding:20px 24px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.train-cta-text strong{display:block;font-size:15px;font-weight:700;color:var(--text);margin-bottom:3px}
+.train-cta-text span{font-size:13px;color:var(--muted2)}
+.btn-train{background:var(--gold);color:#08080e;border:none;border-radius:var(--r-sm);padding:11px 22px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans';transition:background .15s;white-space:nowrap;text-decoration:none;display:inline-block}
+.btn-train:hover{background:var(--gold2)}
+/* Sessions */
+.section-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.sessions{background:var(--s1);border:1px solid var(--border2);border-radius:var(--r);overflow:hidden;margin-bottom:24px}
+.session-row{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--border);gap:12px}
+.session-row:last-child{border-bottom:none}
+.session-mode{font-size:14px;font-weight:600;color:var(--text)}
+.session-date{font-size:11px;color:var(--muted);margin-top:2px}
+.session-wpm{font-family:'JetBrains Mono';font-size:16px;font-weight:500;color:var(--gold)}
+.session-wpm.no-wpm{color:var(--muted);font-size:13px;font-family:'Plus Jakarta Sans'}
+.empty-state{padding:32px 24px;text-align:center;color:var(--muted2);font-size:14px;line-height:1.7}
+.empty-state strong{display:block;color:var(--text);font-size:15px;margin-bottom:6px}
+/* Upgrade banner */
+.upgrade-banner{background:rgba(247,166,0,0.06);border:1px solid rgba(247,166,0,0.2);border-radius:var(--r);padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px}
+.upgrade-text strong{display:block;font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px}
+.upgrade-text span{font-size:12px;color:var(--muted2)}
+.btn-upgrade{background:transparent;color:var(--gold);border:1px solid rgba(247,166,0,0.4);border-radius:var(--r-sm);padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans';transition:all .15s;white-space:nowrap}
+.btn-upgrade:hover{background:rgba(247,166,0,0.1)}
+/* Logout */
+.btn-logout{background:transparent;color:var(--muted);border:none;font-size:13px;cursor:pointer;font-family:'Plus Jakarta Sans';padding:6px 0;transition:color .15s;display:block;margin:0 auto}
+.btn-logout:hover{color:var(--text)}
+/* Loading */
+.loading{text-align:center;padding:80px 20px;color:var(--muted2);font-size:14px}
+@media(max-width:480px){.metrics{grid-template-columns:repeat(3,1fr)}.train-cta{flex-direction:column;align-items:flex-start}.btn-train{width:100%;text-align:center}header{padding:12px 16px}.page{padding:24px 16px 80px}}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html"><img src="/logo-dark.png" alt="StudyFast"></a>
+  <div class="header-right">
+    <a class="btn-nav-link" href="index.html">App</a>
+    <div class="avatar" id="user-avatar" title="Account">?</div>
+  </div>
+</header>
+
+<div class="page" id="page-content">
+  <div class="loading">Loading your dashboard...</div>
+</div>
+
+<script>
+const sb = supabase.createClient(
+  'https://rsgctngtigaipxgwnmop.supabase.co',
+  'sb_publishable_oLLAUCumx53xxJNmSZ1dBg_DDWv5xee'
+);
+
+const MODE_NAMES = {
+  baseline: 'Baseline Test', rsvp: 'RSVP', phrase: 'Phrase Reading',
+  focus: 'Focus Line', scroll: 'Pacer', bionic: 'Chunking', baseline_retest: 'Final Test'
+};
+
+function timeAgo(dateStr) {
+  const diff = Math.floor((Date.now() - new Date(dateStr)) / 1000);
+  if (diff < 60)   return 'Just now';
+  if (diff < 3600) return Math.floor(diff/60) + ' min ago';
+  if (diff < 86400) return Math.floor(diff/3600) + 'h ago';
+  return Math.floor(diff/86400) + 'd ago';
+}
+
+function initials(name, email) {
+  if (name) return name.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2);
+  return email ? email[0].toUpperCase() : '?';
+}
+
+async function init() {
+  // Handle hash tokens from OAuth redirects
+  if (window.location.hash.includes('access_token')) {
+    const { data: { session }, error } = await sb.auth.getSession();
+    if (session) {
+      window.history.replaceState(null, '', window.location.pathname);
+    }
+  }
+
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) { window.location.href = 'login.html'; return; }
+
+  const user = session.user;
+  const name = user.user_metadata?.full_name || user.user_metadata?.first_name || user.email.split('@')[0];
+  const firstName = name.split(' ')[0];
+
+  document.getElementById('user-avatar').textContent = initials(name, user.email);
+
+  // Load sessions
+  const { data: sessions } = await sb.from('sessions')
+    .select('*')
+    .eq('user_id', user.id)
+    .order('created_at', { ascending: false })
+    .limit(20);
+
+  renderDashboard(firstName, sessions || []);
+}
+
+function renderDashboard(name, sessions) {
+  const wpmSessions = sessions.filter(s => s.wpm && s.wpm > 0);
+  const firstWpm = wpmSessions.length > 0 ? wpmSessions[wpmSessions.length - 1].wpm : null;
+  const latestWpm = wpmSessions.length > 0 ? wpmSessions[0].wpm : null;
+  const sessionCount = sessions.length;
+
+  const recentSessions = sessions.slice(0, 5);
+
+  document.getElementById('page-content').innerHTML = `
+    <div class="dash-greeting">
+      <h1>Hey ${name} 👋</h1>
+      <p>Here's your training progress.</p>
+    </div>
+
+    <div class="metrics">
+      <div class="metric">
+        <span class="metric-num ${!firstWpm ? 'empty' : ''}">${firstWpm || '—'}</span>
+        <span class="metric-label">Day 1 WPM</span>
+      </div>
+      <div class="metric hi">
+        <span class="metric-num ${!latestWpm ? 'empty' : ''}">${latestWpm || '—'}</span>
+        <span class="metric-label">Latest WPM</span>
+      </div>
+      <div class="metric">
+        <span class="metric-num">${sessionCount}</span>
+        <span class="metric-label">Sessions</span>
+      </div>
+    </div>
+
+    ${sessionCount === 0 ? `
+    <div class="train-cta">
+      <div class="train-cta-text">
+        <strong>Start your first session</strong>
+        <span>Paste any text and begin. Your results save here automatically.</span>
+      </div>
+      <a class="btn-train" href="index.html">Start training →</a>
+    </div>
+    ` : `
+    <div class="train-cta">
+      <div class="train-cta-text">
+        <strong>Keep the streak going</strong>
+        <span>15 minutes today keeps the progress compounding.</span>
+      </div>
+      <a class="btn-train" href="index.html">Train now →</a>
+    </div>
+    `}
+
+    <div class="section-label">Recent sessions</div>
+    <div class="sessions">
+      ${recentSessions.length === 0 ? `
+        <div class="empty-state">
+          <strong>No sessions yet</strong>
+          Complete your first training session and it will appear here.
+        </div>
+      ` : recentSessions.map(s => `
+        <div class="session-row">
+          <div>
+            <div class="session-mode">${MODE_NAMES[s.mode] || s.mode}</div>
+            <div class="session-date">${timeAgo(s.created_at)}</div>
+          </div>
+          <div class="${s.wpm ? 'session-wpm' : 'session-wpm no-wpm'}">
+            ${s.wpm ? s.wpm + ' WPM' : 'No WPM'}
+          </div>
+        </div>
+      `).join('')}
+    </div>
+
+    <div class="upgrade-banner">
+      <div class="upgrade-text">
+        <strong>Pro coming soon — £0.97/month</strong>
+        <span>Unlimited history, progress chart and priority support.</span>
+      </div>
+      <button class="btn-upgrade" onclick="alert('Pro plan coming very soon!')">Coming Soon</button>
+    </div>
+
+    <button class="btn-logout" id="btn-logout">Log out</button>
+  `;
+
+  document.getElementById('btn-logout').addEventListener('click', async () => {
+    await sb.auth.signOut();
+    window.location.href = 'index.html';
+  });
+}
+
+init();
+</script>
+</body>
+</html>
