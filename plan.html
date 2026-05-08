@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pick Your Plan — StudyFast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--bg:#08080e;--s1:#0f0f1a;--s2:#161625;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);--gold:#F7A600;--gold2:#F7BD33;--text:#f2f1fc;--muted:#6a6a90;--muted2:#9090b0;--r:14px;--r-sm:8px;--green:#3dffa0;--orange:#ff6b35}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif}
+header{padding:12px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:rgba(8,8,14,0.88);backdrop-filter:blur(16px);position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo img{height:48px;opacity:0.92}
+.header-right{font-size:13px;color:var(--muted2)}
+.page{min-height:calc(100vh - 73px);display:flex;align-items:center;justify-content:center;padding:40px 20px}
+.wrap{width:100%;max-width:560px}
+.page-title{font-family:'Bebas Neue';font-size:36px;letter-spacing:2px;color:var(--text);text-align:center;margin-bottom:6px}
+.page-sub{font-size:14px;color:var(--muted2);text-align:center;margin-bottom:32px}
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+.plan{background:var(--s1);border:1px solid var(--border2);border-radius:var(--r);padding:24px 20px;cursor:pointer;transition:border-color .2s;position:relative}
+.plan:hover{border-color:var(--border2)}
+.plan.featured{border:2px solid var(--gold);background:linear-gradient(135deg,rgba(247,166,0,0.06),var(--s1))}
+.plan-badge{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);background:rgba(247,166,0,0.12);border:1px solid rgba(247,166,0,0.25);border-radius:100px;padding:2px 10px;display:inline-block;margin-bottom:12px}
+.plan-name{font-family:'Bebas Neue';font-size:28px;letter-spacing:1px;color:var(--text);margin-bottom:4px}
+.plan-price{font-size:24px;font-weight:700;color:var(--text);margin-bottom:4px}
+.plan-price span{font-size:13px;font-weight:400;color:var(--muted2)}
+.plan-desc{font-size:12px;color:var(--muted2);line-height:1.6;margin-bottom:16px}
+.plan-features{display:flex;flex-direction:column;gap:7px;margin-bottom:20px}
+.pf{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted2)}
+.pf-dot{width:14px;height:14px;border-radius:50%;background:rgba(247,166,0,0.1);border:1px solid rgba(247,166,0,0.25);display:flex;align-items:center;justify-content:center;font-size:7px;color:var(--gold);flex-shrink:0}
+.btn-plan{width:100%;padding:12px;border-radius:var(--r-sm);font-size:14px;font-weight:700;cursor:pointer;border:none;font-family:'Plus Jakarta Sans';transition:all .18s}
+.btn-free{background:var(--s2);color:var(--text);border:1px solid var(--border2)}
+.btn-free:hover{border-color:var(--border2);background:var(--s3,#1e1e30)}
+.btn-pro{background:var(--gold);color:#08080e}
+.btn-pro:hover{background:var(--gold2)}
+.btn-plan:disabled{opacity:0.4;pointer-events:none}
+.footer-note{text-align:center;font-size:12px;color:var(--muted);margin-top:8px}
+@media(max-width:480px){.plans{grid-template-columns:1fr}.page{align-items:flex-start;padding-top:32px}header{padding:12px 16px}}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="index.html"><img src="/logo-dark.png" alt="StudyFast"></a>
+  <div class="header-right" id="user-greeting"></div>
+</header>
+<div class="page">
+  <div class="wrap">
+    <div class="page-title">You're in. Pick your plan.</div>
+    <div class="page-sub">Start free. Upgrade anytime. No commitment.</div>
+    <div class="plans">
+
+      <!-- Free -->
+      <div class="plan">
+        <div class="plan-name">Free</div>
+        <div class="plan-price">£0 <span>/month</span></div>
+        <div class="plan-desc">Track your progress and build your reading habit.</div>
+        <div class="plan-features">
+          <div class="pf"><div class="pf-dot">✓</div>WPM tracking</div>
+          <div class="pf"><div class="pf-dot">✓</div>7-day session history</div>
+          <div class="pf"><div class="pf-dot">✓</div>All 7 training modes</div>
+        </div>
+        <button class="btn-plan btn-free" id="btn-free">Start free →</button>
+      </div>
+
+      <!-- Pro -->
+      <div class="plan featured">
+        <div class="plan-badge">Most popular</div>
+        <div class="plan-name">Pro</div>
+        <div class="plan-price">£0.97 <span>/month</span></div>
+        <div class="plan-desc">Unlimited history, progress chart and priority support.</div>
+        <div class="plan-features">
+          <div class="pf"><div class="pf-dot">✓</div>Everything in free</div>
+          <div class="pf"><div class="pf-dot">✓</div>Unlimited session history</div>
+          <div class="pf"><div class="pf-dot">✓</div>Progress chart</div>
+          <div class="pf"><div class="pf-dot">✓</div>Priority support</div>
+        </div>
+        <button class="btn-plan btn-pro" id="btn-pro" disabled style="opacity:0.5;cursor:not-allowed">Coming Soon</button>
+      </div>
+
+    </div>
+    <div class="footer-note">No credit card needed for the free plan. Cancel Pro anytime.</div>
+  </div>
+</div>
+
+<script>
+const sb = supabase.createClient(
+  'https://rsgctngtigaipxgwnmop.supabase.co',
+  'sb_publishable_oLLAUCumx53xxJNmSZ1dBg_DDWv5xee'
+);
+
+async function init() {
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) { window.location.href = 'signup.html'; return; }
+
+  const name = session.user.user_metadata?.first_name || session.user.email.split('@')[0];
+  document.getElementById('user-greeting').textContent = 'Welcome, ' + name;
+}
+
+document.getElementById('btn-free').addEventListener('click', async () => {
+  const btn = document.getElementById('btn-free');
+  btn.disabled = true; btn.textContent = 'Setting up...';
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) { window.location.href = 'signup.html'; return; }
+  await sb.auth.updateUser({ data: { plan: 'free' } });
+  window.location.href = 'dashboard.html';
+});
+
+document.getElementById('btn-pro').addEventListener('click', async () => {
+  const btn = document.getElementById('btn-pro');
+  btn.disabled = true; btn.textContent = 'Coming soon...';
+  // Stripe integration wired in Step 7
+  setTimeout(() => {
+    btn.disabled = false; btn.textContent = 'Go Pro →';
+    alert('Pro plan coming very soon. Starting you on Free for now.');
+    window.location.href = 'dashboard.html';
+  }, 800);
+});
+
+init();
+</script>
+</body>
+</html>
