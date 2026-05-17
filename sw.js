@@ -1,4 +1,4 @@
-const CACHE = 'studyfast-v9';
+const CACHE = 'studyfast-v10';
 const ASSETS = [
   '/',
   '/index.html',
