@@ -12,7 +12,6 @@
 <title>Speed Reading Trainer: Double Your Reading Speed in 7 Days | StudyFast</title>
 
 <meta name="description" content="Free speed reading trainer used by 50,000+ students in 70 countries. Train 15 mins/day and double your reading speed in 7 days. 4 neuroscience-backed modes: Phrase Reading, RSVP, Focus Line & Chunking. No login needed.">
-<meta name="keywords" content="speed reading, how to read faster, speed reading training, increase reading speed, words per minute, RSVP reading, phrase reading, chunking reading, read faster online, free speed reading app">
 <meta name="author" content="Jordan Harry, StudyFast">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://studyfast.uk/">
@@ -47,11 +46,6 @@
     "@type": "Person",
     "name": "Jordan Harry",
     "url": "https://studyfast.uk/"
-  },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "ratingCount": "50000"
   }
 }
 </script>
@@ -75,7 +69,6 @@
   --orange:  #ff6b35;
   --green:   #3dffa0;
   --blue:    #2c3490;
-  --purple:  #a78bfa;
   --text:    #f2f1fc;
   --muted:   #6a6a90;
   --muted2:  #9090b0;
@@ -281,10 +274,6 @@ main { flex:1; max-width:880px; width:100%; margin:0 auto; padding:36px 24px }
   font-size:9px; font-weight:700; letter-spacing:1px; text-transform:uppercase;
   padding:2px 7px; border-radius:100px;
 }
-.badge-classic { background:rgba(77,158,255,.15); color:var(--blue) }
-.badge-rsvp    { background:rgba(255,107,53,.15);  color:var(--orange) }
-.badge-phrase  { background:rgba(247,166,0,.15);  color:var(--gold) }
-.badge-bionic  { background:rgba(61,255,160,.15);  color:var(--green) }
 
 /* ─── EYE WARM-UP BANNER ────────────────────────────────────────── */
 .warmup-banner {
@@ -421,7 +410,7 @@ main { flex:1; max-width:880px; width:100%; margin:0 auto; padding:36px 24px }
 .input-card { background:var(--s1); border:1px solid var(--border); border-radius:var(--r); padding:24px; margin-bottom:16px }
 .input-card > label { display:block; font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:10px }
 textarea {
-  width:100%; min-height:160px;
+  width:100%; min-height:100px;
   background:var(--s2); border:1px solid var(--border); border-radius:var(--r-sm);
   color:var(--text); font-family:'Plus Jakarta Sans'; font-size:15px; line-height:1.65;
   padding:14px 16px; resize:vertical; outline:none; transition:border-color .2s;
@@ -669,9 +658,6 @@ body.light-mode footer a { color:var(--gold) }
 #pacer-display {
   display:block; text-align:left; max-width:680px; width:100%;
 }
-.pacer-line {
-  display:block; line-height:2.4;
-}
 .pw-line { display:block; line-height:2.4 }
 .pw { display:inline; font-family:'Plus Jakarta Sans'; font-size:19px;
   font-weight:300; color:rgba(242,241,252,0.25); }
@@ -693,13 +679,6 @@ body.light-mode footer a { color:var(--gold) }
   width:100%; max-width:680px; font-family:'Plus Jakarta Sans'; font-size:17px;
   line-height:2; font-weight:300; color:var(--text); text-align:left;
 }
-#bionic-display .bw { display:inline-block; margin-right:.25em }
-#bionic-display .bw b { font-weight:700; color:var(--text) }
-#bionic-display .bw span { opacity:.65 }
-#bionic-display .bw.current b { color:var(--gold) }
-#bionic-display .bw.current span { opacity:1; color:var(--gold2) }
-#bionic-display .bw.done b,
-#bionic-display .bw.done span { opacity:.3 }
 
 /* ─── FIXED BOTTOM PILL (MVP fix) ────────────────────────────────── */
 .reader-controls {
@@ -795,11 +774,6 @@ body.bionic-mode .stage { min-height:unset; justify-content:flex-start; align-it
 .results-hero h2 { font-family:'Bebas Neue'; font-size:clamp(40px,7vw,72px); letter-spacing:2px; margin-bottom:8px }
 .results-hero p { color:var(--muted2); font-size:15px }
 
-.res-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin-bottom:24px }
-.res-card { background:var(--s1); border:1px solid var(--border); border-radius:var(--r); padding:24px 20px; text-align:center }
-.res-card.hi { border-color:var(--gold); background:linear-gradient(135deg,rgba(247,166,0,.07),var(--s1)) }
-.res-card .big { font-family:'Bebas Neue'; font-size:52px; letter-spacing:1px; color:var(--gold); line-height:1; display:block }
-.res-card .lbl { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-top:5px; display:block }
 
 .wpm-gauge { background:var(--s1); border:1px solid var(--border); border-radius:var(--r); padding:24px; margin-bottom:16px }
 .gauge-bar-track { height:10px; background:var(--s3); border-radius:6px; margin:14px 0 8px; overflow:hidden }
@@ -1468,7 +1442,7 @@ body.light-mode .logo-img-colour { display:block }
   <!-- CONTACT -->
   <div class="contact-section">
     <div class="contact-label">Got feedback?</div>
-    <a href="mailto:jordan@studyfast.uk?subject=Feedback" class="contact-btn" target="_blank" style="display:flex;justify-content:center">💬 Send Feedback</a>
+    <a href="mailto:jordan@studyfast.uk?subject=Feedback" class="contact-btn" target="_blank" rel="noopener noreferrer" style="display:flex;justify-content:center">💬 Send Feedback</a>
   </div>
 
 </div>
@@ -1632,11 +1606,11 @@ body.light-mode .logo-img-colour { display:block }
       </div>
       <div class="jm-body">How to learn anything faster, using the techniques Jordan teaches to busy professionals and students across 70 countries. Practical, short, actionable.</div>
       <div class="jm-form">
-        <input id="email-capture-name" class="jm-input" type="text" placeholder="First name">
-        <input id="email-capture-input" class="jm-input" type="email" placeholder="your@email.com">
-        <button id="email-capture-btn" class="jm-btn">JOIN JORDAN MINUTES →</button>
+        <input id="jm-capture-name" class="jm-input" type="text" placeholder="First name">
+        <input id="jm-capture-input" class="jm-input" type="email" placeholder="your@email.com">
+        <button id="jm-capture-btn" class="jm-btn">JOIN JORDAN MINUTES →</button>
       </div>
-      <div id="email-capture-msg" class="jm-microcopy">No spam. Two emails a week. Unsubscribe anytime.</div>
+      <div id="jm-capture-msg" class="jm-microcopy">No spam. Two emails a week. Unsubscribe anytime.</div>
     </div>
 
   </div>
@@ -1700,7 +1674,7 @@ Don't stop now.</div>
 
 <footer>
   <p>Built by <a href="https://studyfast.uk/" target="_blank">StudyFast</a> · Jordan Harry · TEDx 3.4M views · 50,000+ professionals in 70 countries</p>
-  <span class="footer-version">V2026.2</span>
+  <span class="footer-version">V2026.3</span>
 </footer>
 
 </div><!-- .app -->
@@ -1919,8 +1893,6 @@ function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   $(id).classList.add('active');
   window.scrollTo({ top: 0, behavior: 'instant' });
-  document.documentElement.scrollTop = 0;
-  document.body.scrollTop = 0;
 }
 function setReadingMode(on) {
   document.body.classList.toggle('reading', on);
@@ -1950,11 +1922,6 @@ function setWpm(val) {
   S.wpm = Math.min(1000, Math.max(60, val));
   $('speed-live').value = S.wpm;
   if (S.isPlaying) { clearTimeout(S.timer); scheduleNext(); }
-}
-function setChunk(val) {
-  val = Math.min(5, Math.max(1, val));
-  $('chunk-input').value = val;
-  S.chunkSize = val;
 }
 
 // ── MODE SELECTION — simple direct listeners, no delegation ──
@@ -2103,9 +2070,6 @@ function buildSettingsCard({ wpm, chunk, toggle }) {
   </div>`;
 }
 
-const READING_MODE_TOGGLE_HTML = ''; /* replaced by buildSettingsCard */
-const READING_MODE_LOCKED_HTML = '';  /* replaced by buildSettingsCard */
-
 function toggleReadingMode() {
   S.readingMode = !S.readingMode;
   S.rrm = S.readingMode;
@@ -2114,7 +2078,6 @@ function toggleReadingMode() {
   if (t) {
     const sw = t.querySelector('.rrm-switch');
     if (sw) { sw.style.background = S.readingMode ? 'rgba(247,166,0,0.2)' : ''; sw.style.borderColor = S.readingMode ? 'var(--gold)' : ''; }
-    const knob = sw && sw.querySelector ? null : null;
     t.style.background = S.readingMode ? 'rgba(247,166,0,0.06)' : '';
     // animate switch knob via inline style on ::after — use a wrapper span instead
     if (sw) sw.setAttribute('data-on', S.readingMode ? '1' : '0');
@@ -2127,25 +2090,7 @@ function toggleReadingMode() {
   }
 }
 
-function toggleRRM() { toggleReadingMode(); }
-function toggleManualMode() { toggleReadingMode(); }
 
-function applyRRMPreview() {
-  const el = $('lesson-preview-el');
-  if (!el) return;
-  if (S.rrm) {
-    el.style.fontFamily    = "'Plus Jakarta Sans', sans-serif";
-    el.style.fontSize      = '17px';
-    el.style.fontWeight    = '400';
-    el.style.lineHeight    = '1.75';
-    el.style.textAlign     = 'left';
-    el.style.letterSpacing = 'normal';
-    el.style.color         = '#f2f1fc';
-  } else {
-    // Clear inline styles — CSS classes take back over
-    el.removeAttribute('style');
-  }
-}
 
 function populateLesson(mode) {
   // Always reset reading mode when entering a new drill
@@ -2202,10 +2147,6 @@ function populateLesson(mode) {
       cIn.addEventListener('change', () => { S.chunkSize=Math.min(5,Math.max(1,parseInt(cIn.value)||2)); cIn.value=S.chunkSize; });
     }
   });
-}
-function setLessonWpm(val) {
-  val=Math.min(1000,Math.max(60,val)); S.wpm=val;
-  const el=$('lesson-wpm'); if(el) el.value=val;
 }
 $('btn-lesson-start').addEventListener('click', () => {
   buildContent($('text-input').value.trim());
@@ -2516,7 +2457,7 @@ $('btn-baseline-finish').addEventListener('click', ()=>{
   S.totalWordsRead=S.allWords.length;
   clearInterval(S.clockTimer); S.isPlaying=false;
   if(S.mode==='baseline') S.baselineWpm=S.elapsedSec>0?Math.round((S.totalWordsRead/S.elapsedSec)*60):0;
-  window.removeEventListener('scroll', ()=>{});
+  // scroll listener removed via S.isPlaying flag
   setReadingMode(false); showResults();
 });
 
@@ -3225,7 +3166,38 @@ if('serviceWorker' in navigator){
     msg.style.color = '#3a3a55';
   });
 })();
-// ── FUTURE GRID SCROLL DOTS ──
+// ── JORDAN MINUTES EMAIL CAPTURE ──
+(function(){
+  const btn = $('jm-capture-btn');
+  const inp = $('jm-capture-input');
+  const nameInp = $('jm-capture-name');
+  const msg = $('jm-capture-msg');
+  if(!btn||!inp||!msg) return;
+
+  btn.addEventListener('click', async function(){
+    const email = inp.value.trim();
+    const firstName = nameInp ? nameInp.value.trim() : '';
+    if(!firstName){ msg.textContent='Please enter your first name.'; msg.style.color='var(--orange)'; return; }
+    if(!email||!email.includes('@')){ msg.textContent='Please enter a valid email address.'; msg.style.color='var(--orange)'; return; }
+    btn.textContent='Sending…'; btn.style.opacity='0.7'; btn.disabled=true;
+    try {
+      const res = await fetch('https://api.sender.net/v2/subscribers', {
+        method:'POST',
+        headers:{ 'Authorization':'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOWM5ZTc5OTViN2IzNDg5YjFmMWM2OGIwZjdhYWM0ZWI3OTUyMmM3YmIyMzMzMDRjMjc1MzExZjRlYmE5M2YxYThjOTdmMzFmZDllZjlmNTEiLCJpYXQiOjE3NzYxNjM1NDUuODMzODU5LCJuYmYiOjE3NzYxNjM1NDUuODMzODYxLCJleHAiOjQ5Mjk3NjcxNDUuODMxNzc0LCJzdWIiOiIxMDY2NDk5Iiwic2NvcGVzIjpbXX0.oc8ZU6uXB7wRyoLOg5_vb0jsD-m1Yhgte4sJTe_ZZpMLY-6Gk7hZkzTViQKbFTplQGhs7iWhFUMTPzq6R6_Fvtg1R0Mnp6s-MCp6qLymlsrplWzg-UfgxSLbSvjK68dS_caII55BFhBwu2rvSyxj2HXnLf1m7NSR_c5SQCdszN2w_JCr_2faD01AM6YKQ4LobEOGsT_1EcDlncgJGqRLb8STa60haI45kjv48wzIGCBobKJ71pVA6u2KVzYQrsvCRbKmWFGg-jEP_DMoOZZOArmDfm7QHlGQHmZ8l5QMmDd9vogrPo5bmhshyBzWYESuLy3oHGvS9427q5DNYxCAHX-1HqgbdcUOFTOnm7fVTmhci8jib0qQh-_5_7KCvDT-RwMkjwwX5xOa7RGaECM3CEmNt27B21DbAOWBfyGFCf5pCtYus8rNiNlliLyUpBqYSynjKDXndBLVEfmPW2FlEoHRZ1dmJnKdJ3AsTUKp8etLAobv2OgT-Io1pEecxW0XAv_0tVpLSM6XmD54nu7tb92VCnooIoZLNtbV8CVnKtDDcpjn8MiAnY3dqGwu6Aw7Ab0VWRQ3dP_GF-mXGd9wVa3Ds8jA1GnJiU9Xb4nBE2zj1H9olbwRoGtILdvnfug9apDmPKZpVT8fQrBapd3R3IzAA-igP5tCucQRurCzJ1Q', 'Content-Type':'application/json', 'Accept':'application/json' },
+        body: JSON.stringify({ email, firstname: firstName, groups: ['bomjxk'] })
+      });
+      if(!res.ok && res.status !== 409) throw new Error('API error ' + res.status);
+      localStorage.setItem('sf_signed_up','true');
+      if(nameInp) nameInp.style.display='none';
+      inp.style.display='none'; btn.style.display='none';
+      msg.textContent='✓ Jordan Minutes starts this week.'; msg.style.color='var(--green)';
+    } catch(err) {
+      btn.textContent='JOIN JORDAN MINUTES →'; btn.style.opacity='1'; btn.disabled=false;
+      msg.textContent='Something went wrong. Please try again.'; msg.style.color='var(--orange)';
+    }
+  });
+  inp.addEventListener('input',()=>{ msg.textContent='No spam. Two emails a week. Unsubscribe anytime.'; msg.style.color='var(--muted)'; });
+})();
 (function(){
   const grid = $('future-grid');
   if(!grid) return;
