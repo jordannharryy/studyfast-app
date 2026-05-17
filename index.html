@@ -427,6 +427,13 @@ textarea {
   padding:14px 16px; resize:vertical; outline:none; transition:border-color .2s;
 }
 textarea:focus { border-color:var(--gold) }
+.resize-hint {
+  display:flex; justify-content:flex-end;
+  margin-top:4px;
+  font-size:10px; color:rgba(242,241,252,0.2);
+  letter-spacing:0.3px;
+}
+@media(max-width:640px) { .resize-hint { display:none } }
 textarea::placeholder { color:var(--muted) }
 
 .controls-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px }
@@ -582,9 +589,9 @@ body.light-mode #phrase-display { color:#1a1a2e !important; font-family:'Plus Ja
 body.light-mode #rsvp-display { color:#1a1a2e !important; font-size:22px !important; font-weight:500 !important; letter-spacing:normal !important }
 body.light-mode .rsvp-ruler, body.light-mode .rsvp-ruler-bottom { display:none !important }
 /* Pacer — inactive words were too faint */
-body.light-mode .pw { color:rgba(26,26,46,0.55) !important; font-size:17px !important }
+body.light-mode .pw { color:rgba(26,26,46,0.45) !important; font-size:17px !important }
 body.light-mode .pw.active { color:#1a1a2e !important; font-weight:600 !important; text-decoration-color:var(--gold) !important }
-body.light-mode .pw.done { color:rgba(26,26,46,0.3) !important }
+body.light-mode .pw.done { color:rgba(26,26,46,0.2) !important }
 /* Focus — was nearly invisible */
 body.light-mode #focus-display { color:rgba(26,26,46,0.45) !important; font-size:17px !important }
 body.light-mode #focus-display .focus-active { color:#1a1a2e !important; font-weight:700 !important }
@@ -665,16 +672,21 @@ body.light-mode footer a { color:var(--gold) }
 .pacer-line {
   display:block; line-height:2.4;
 }
-.pw {
-  display:inline; font-family:'Plus Jakarta Sans'; font-size:19px;
-  font-weight:300; color:rgba(242,241,252,0.45); margin-right:0.3em;
-}
+.pw-line { display:block; line-height:2.4 }
+.pw { display:inline; font-family:'Plus Jakarta Sans'; font-size:19px;
+  font-weight:300; color:rgba(242,241,252,0.25); }
 .pw.active {
   color:#f2f1fc;
   text-decoration:underline; text-decoration-color:var(--gold);
   text-decoration-thickness:2px; text-underline-offset:5px;
 }
-.pw.done { color:rgba(242,241,252,0.2); }
+.pw.done { color:rgba(242,241,252,0.12); }
+.pw-chunk { display:inline }
+.pw.active .pw-chunk.chunk-active {
+  text-decoration:underline; text-decoration-color:var(--gold);
+  text-decoration-thickness:2px; text-underline-offset:5px;
+  color:#f2f1fc;
+}
 
 /* Bionic display */
 #bionic-display {
@@ -696,7 +708,7 @@ body.light-mode footer a { color:var(--gold) }
   background:rgba(15,15,26,0.95); backdrop-filter:blur(14px);
   border:1px solid var(--border2); border-radius:100px;
   padding:8px 20px max(8px, env(safe-area-inset-bottom)) 12px;
-  z-index:50; white-space:nowrap;
+  z-index:500; white-space:nowrap;
   box-shadow:0 4px 28px rgba(0,0,0,.5);
 }
 
@@ -762,8 +774,8 @@ body.light-mode footer a { color:var(--gold) }
 }
 .pacer-header-controls .wpm-pill-stepper input[type=number]::-webkit-outer-spin-button,
 .pacer-header-controls .wpm-pill-stepper input[type=number]::-webkit-inner-spin-button { -webkit-appearance:none }
-body.pacer .pacer-header-controls { display:flex }
-body.pacer .reader-controls { display:none }
+body.pacer .pacer-header-controls { display:none }
+body.pacer .reader-controls { display:flex }
 body.pacer .header-tag { display:none }
 .progress-fixed {
   position:fixed; bottom:0; left:0; right:0;
@@ -775,8 +787,8 @@ body.pacer .header-tag { display:none }
   transition:width .35s ease; width:0%;
 }
 body.reading .progress-fixed { display:block }
-body.bionic-mode .reader-inner { justify-content:flex-start; padding-top:40px }
-body.bionic-mode .stage { min-height:unset; justify-content:flex-start; align-items:flex-start }
+body.bionic-mode .reader-inner { justify-content:flex-start; padding-top:0 }
+body.bionic-mode .stage { min-height:unset; justify-content:flex-start; align-items:flex-start; padding-top:24px }
 
 /* ─── SCREEN 3: RESULTS ───────────────────────────────────────────── */
 .results-hero { text-align:center; margin-bottom:32px }
@@ -966,14 +978,18 @@ body.light-mode #screen-lesson .lesson-settings p strong { color:#1a1a2e !import
 .btn-advance:hover { background:#ffffff }
 /* Chunking — static full-text display */
 #bionic-display { width:100%; max-width:680px; font-family:'Plus Jakarta Sans'; font-size:19px; line-height:2.2; font-weight:300; color:rgba(242,241,252,0.35); text-align:left }
+.bw-line { display:block }
+.bw { display:inline }
 #bionic-display .bw-bold { font-weight:700; color:var(--text) }
 #bionic-display .bw-dim  { font-weight:300; color:rgba(242,241,252,0.35) }
+#bionic-display .bw.bw-current { color:var(--gold) !important; font-weight:700 !important }
+#bionic-display .bw.bw-done { opacity:0.25 }
 /* Baseline */
 #baseline-display { width:100%; max-width:680px; font-family:'Plus Jakarta Sans'; font-size:17px; font-weight:300; line-height:1.85; color:var(--text); text-align:left }
 /* Future/Contact */
 .future-section { margin-top:36px; margin-bottom:28px }
 .future-label { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:12px }
-.future-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px }
+.future-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:10px }
 .future-card { background:var(--s1); border:1px solid var(--border); border-radius:var(--r); padding:16px 14px; text-align:center; opacity:.65 }
 .future-icon { font-size:22px; margin-bottom:6px; display:block }
 .future-name { font-size:13px; font-weight:700; color:var(--text); margin-bottom:4px }
@@ -983,33 +999,8 @@ body.light-mode #screen-lesson .lesson-settings p strong { color:#1a1a2e !import
 .future-scroll-fade { display:none }
 .future-scroll-hint { display:none }
 @media(max-width:640px) {
-  .future-grid {
-    display:flex; flex-direction:row;
-    overflow-x:auto; -webkit-overflow-scrolling:touch;
-    gap:10px; padding-bottom:8px;
-    margin-left:-20px; margin-right:-20px;
-    padding-left:20px; padding-right:20px;
-    scrollbar-width:none;
-  }
-  .future-grid::-webkit-scrollbar { display:none }
-  .future-card { flex:0 0 148px; min-width:148px }
-  .future-scroll-fade { display:none }
-  .future-scroll-hint {
-    display:flex; align-items:center; gap:6px;
-    margin-top:10px;
-  }
-  .future-scroll-dots { display:flex; gap:5px; align-items:center }
-  .fsd {
-    width:6px; height:6px; border-radius:50%;
-    background:rgba(255,255,255,0.13);
-    transition:width .25s ease, border-radius .25s ease, background .25s ease;
-    flex-shrink:0;
-  }
-  .fsd.active { width:18px; border-radius:3px; background:var(--gold) }
-  .future-swipe-label {
-    margin-left:auto; display:flex; align-items:center; gap:4px;
-    font-size:10px; color:var(--muted); letter-spacing:.5px;
-  }
+  .future-grid { grid-template-columns:repeat(2,1fr) }
+  .future-scroll-hint { display:none }
 }
 /* Email capture — stacked layout + social proof on all screens */
 .ec-social {
@@ -1185,10 +1176,6 @@ body.light-mode .logo-img-colour { display:block }
 ══════════════════════════════════════ -->
 <div class="screen active" id="screen-input">
 
-  <div style="text-align:center;padding:8px 20px;background:rgba(247,166,0,0.06);border-bottom:1px solid rgba(247,166,0,0.12)">
-    <span style="font-size:11px;color:rgba(247,166,0,0.75);font-weight:500">Jordan Harry · UK's #1 Speed Reading Coach · TEDx 3.4M Views</span>
-  </div>
-
   <div class="hero">
     <h1>READ FASTER<span class="accent">START NOW.</span></h1>
     <p>Your brain can process 1,000 words per minute (WPM). Your eyes are the bottleneck. Fix that in 7 days, 15 minutes a day.</p>
@@ -1311,34 +1298,34 @@ body.light-mode .logo-img-colour { display:block }
       <button class="sample-chip" onclick="loadSample('fiction',this)">📖 Fiction</button>
     </div>
 
-    <textarea id="text-input" maxlength="50000" style="border-radius:8px 8px 0 0;border-bottom:none" placeholder="Paste anything: an email, report, NDA, client brief. The longer the better.&#10;&#10;✦ Your text stays in this tab only. We never read it, store it, or send it anywhere. Close the tab, it's gone for good."></textarea>
+    <textarea id="text-input" maxlength="50000" style="border-radius:8px 8px 0 0;border-bottom:none;min-height:100px" placeholder="Paste anything: an email, report, NDA, client brief. The longer the better.&#10;&#10;✦ Your text stays in this tab only. We never read it, store it, or send it anywhere. Close the tab, it's gone for good."></textarea>
+    <div class="resize-hint">
+      <span>drag corner to expand ↑</span>
+    </div>
 
     <!-- OR divider -->
-    <div style="display:flex;align-items:center;gap:10px;margin:10px 0;font-size:11px;color:var(--muted);font-weight:600">
+    <div style="display:flex;align-items:center;gap:10px;margin:8px 0;font-size:11px;color:var(--muted);font-weight:600">
       <div style="flex:1;height:1px;background:var(--border)"></div>
       or
       <div style="flex:1;height:1px;background:var(--border)"></div>
     </div>
 
-    <div id="drop-zone" style="border:1.5px dashed rgba(255,255,255,0.12);border-radius:8px;overflow:hidden;cursor:pointer;transition:all .2s;"
+    <div id="drop-zone" style="border:1.5px dashed rgba(255,255,255,0.12);border-radius:8px;padding:10px 14px;display:flex;align-items:center;gap:12px;cursor:pointer;background:rgba(255,255,255,0.02)"
       onclick="$('file-input').click()"
       ondragover="event.preventDefault();this.style.borderColor='rgba(247,166,0,0.5)'"
       ondragleave="this.style.borderColor='rgba(255,255,255,0.12)'"
       ondrop="event.preventDefault();this.style.borderColor='rgba(255,255,255,0.12)';handleFileUpload(event.dataTransfer.files[0])">
-      <div style="padding:18px 16px;text-align:center;background:rgba(255,255,255,0.02)">
-        <div style="font-size:22px;margin-bottom:6px">📂</div>
-        <div style="font-size:13px;font-weight:600;color:var(--muted2);margin-bottom:3px">Drop a file here <span style="color:var(--muted);font-weight:400">or click to browse</span></div>
-        <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-top:8px">
-          <span style="font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;background:rgba(255,107,53,0.15);color:#ff6b35;border:1px solid rgba(255,107,53,0.2)">PDF</span>
-          <span style="font-size:10px;color:var(--muted)">·</span>
-          <span style="font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;background:rgba(77,158,255,0.15);color:#4d9eff;border:1px solid rgba(77,158,255,0.2)">DOCX</span>
+      <div style="font-size:18px;flex-shrink:0">📂</div>
+      <div>
+        <div style="font-size:12px;font-weight:600;color:var(--muted2)">Drop a file <span style="color:var(--muted);font-weight:400">or click to browse</span></div>
+        <div style="display:flex;align-items:center;gap:5px;margin-top:3px">
+          <span style="font-size:9px;font-weight:700;padding:1px 6px;border-radius:4px;background:rgba(255,107,53,0.15);color:#ff6b35;border:1px solid rgba(255,107,53,0.2)">PDF</span>
+          <span style="font-size:9px;font-weight:700;padding:1px 6px;border-radius:4px;background:rgba(77,158,255,0.15);color:#4d9eff;border:1px solid rgba(77,158,255,0.2)">DOCX</span>
         </div>
       </div>
-      <div style="display:flex;align-items:center;justify-content:center;gap:7px;padding:8px 14px;background:rgba(255,255,255,0.02);border-top:1px solid rgba(255,255,255,0.05);font-size:10px;color:var(--muted)">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="opacity:0.4;flex-shrink:0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        Processed on your device
-        <span style="color:rgba(255,255,255,0.1)">·</span>
-        Deleted on tab close
+      <div style="display:flex;align-items:center;gap:4px;margin-left:auto;font-size:9px;color:var(--muted);flex-shrink:0">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="opacity:0.4;flex-shrink:0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        On-device only
       </div>
     </div>
     <input type="file" id="file-input" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" style="display:none" onchange="handleFileUpload(this.files[0])">
@@ -1416,7 +1403,7 @@ body.light-mode .logo-img-colour { display:block }
   </div>
 
   <!-- EMAIL CAPTURE — HOME SCREEN -->
-  <div style="background:linear-gradient(135deg,#0f0f1a,#141428);border:1px solid rgba(247,166,0,0.22);border-radius:16px;padding:22px;margin-top:24px;margin-bottom:4px;position:relative;overflow:hidden">
+  <div id="home-email-card" style="background:linear-gradient(135deg,#0f0f1a,#141428);border:1px solid rgba(247,166,0,0.22);border-radius:16px;padding:22px;margin-top:24px;margin-bottom:4px;position:relative;overflow:hidden">
     <div style="position:absolute;top:0;right:0;width:140px;height:140px;background:radial-gradient(circle,rgba(247,166,0,0.07),transparent 70%);pointer-events:none"></div>
     <div style="display:inline-block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);background:rgba(247,166,0,0.1);border:1px solid rgba(247,166,0,0.25);padding:3px 10px;border-radius:100px;margin-bottom:12px">7-Day Programme</div>
     <div style="font-size:18px;font-weight:800;color:var(--text);margin-bottom:6px;line-height:1.3">Don't read alone.<br>Get Jordan's daily guide.</div>
@@ -1459,7 +1446,8 @@ body.light-mode .logo-img-colour { display:block }
       <div class="future-grid" id="future-grid">
         <div class="future-card"><span class="future-icon">👁</span><div class="future-name">Eye Warm-Up</div><div class="future-desc">8 research-backed exercises before every session. Primes your visual system for faster training.</div><span class="future-badge">Coming soon</span></div>
         <div class="future-card"><span class="future-icon">🧪</span><div class="future-name">Comprehension Test</div><div class="future-desc">3 questions after each session. Prove your retention matches your speed.</div><span class="future-badge">Coming soon</span></div>
-        <div class="future-card"><span class="future-icon">📊</span><div class="future-name">Progress Dashboard</div><div class="future-desc">Your WPM chart over 7 days. See the improvement happening in real time.</div><span class="future-badge">Coming soon</span></div>
+        <div class="future-card"><span class="future-icon">📊</span><div class="future-name">Dashboard</div><div class="future-desc">Your WPM history, session streaks and progress over time. All in one place.</div><span class="future-badge">Coming soon</span></div>
+        <div class="future-card"><span class="future-icon">⭐</span><div class="future-name">Premium App</div><div class="future-desc">Unlimited sessions, advanced modes, progress tracking and priority coaching access.</div><span class="future-badge">Coming soon</span></div>
       </div>
       <div class="future-scroll-fade"></div>
     </div>
@@ -1468,6 +1456,7 @@ body.light-mode .logo-img-colour { display:block }
         <div class="fsd active" id="fsd-0"></div>
         <div class="fsd" id="fsd-1"></div>
         <div class="fsd" id="fsd-2"></div>
+        <div class="fsd" id="fsd-3"></div>
       </div>
       <div class="future-swipe-label">
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 6h8M7 3l3 3-3 3"/></svg>
@@ -1548,38 +1537,6 @@ body.light-mode .logo-img-colour { display:block }
   <div class="reader-inner">
     <div class="stage" id="stage">
       <!-- content injected by JS per mode -->
-    </div>
-  </div>
-
-  <!-- Baseline pill -->
-  <div class="reader-controls" id="reader-controls-baseline" style="display:none;padding:8px">
-    <button class="btn-advance" id="btn-baseline-finish" style="background:var(--gold);color:#08080e;border-radius:100px;height:50px;padding:0 28px;font-family:'Plus Jakarta Sans';font-size:14px;font-weight:700;border:none;cursor:pointer;touch-action:manipulation">I've finished reading</button>
-  </div>
-  <!-- Focus manual pill -->
-  <div class="reader-controls" id="reader-controls-manual" style="display:none">
-    <button class="btn-advance" id="btn-advance">Advance →</button>
-    <div class="pill-sep" style="width:1px;height:32px;background:rgba(255,255,255,.12);flex-shrink:0"></div>
-    <div class="hint-text" style="font-size:11px;color:#ffffff;white-space:nowrap"><span class="hint-kbd" style="display:inline-block;background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.35);border-radius:4px;padding:2px 7px;font-size:10px;color:#ffffff;font-family:monospace">space</span> or tap</div>
-  </div>
-  <!-- Standard pill -->
-  <div class="reader-controls" id="reader-controls-auto">
-    <button class="btn-play" id="btn-playpause">&#9654;</button>
-    <div class="wpm-pill-wrap">
-      <label>Words per minute</label>
-      <div class="wpm-pill-stepper">
-        <button id="wpm-minus" tabindex="-1">−</button>
-        <input type="number" id="speed-live" min="60" max="1000" step="10" value="250">
-        <button id="wpm-plus" tabindex="-1">+</button>
-      </div>
-    </div>
-    <!-- Chunk size for pacer/chunking -->
-    <div id="pill-chunk-ctrl" class="wpm-pill-wrap" style="display:none">
-      <label>Chunk size</label>
-      <div class="wpm-pill-stepper">
-        <button id="chunk-live-minus" tabindex="-1">−</button>
-        <input type="number" id="chunk-live" min="1" max="5" step="1" value="2">
-        <button id="chunk-live-plus" tabindex="-1">+</button>
-      </div>
     </div>
   </div>
 </div>
@@ -1751,6 +1708,39 @@ Don't stop now.</div>
 <!-- Progress bar fixed to bottom during reading -->
 <div class="progress-fixed" id="progress-fixed">
   <div class="progress-fixed-fill" id="prog-fill"></div>
+</div>
+
+<!-- Fixed bottom pill — outside .app so position:fixed works correctly -->
+<div class="reader-controls" id="reader-controls-auto" style="display:none">
+  <button class="btn-play" id="btn-playpause">&#9654;</button>
+  <div class="wpm-pill-wrap">
+    <label>Words per minute</label>
+    <div class="wpm-pill-stepper">
+      <button id="wpm-minus" tabindex="-1">−</button>
+      <input type="number" id="speed-live" min="60" max="1000" step="10" value="250">
+      <button id="wpm-plus" tabindex="-1">+</button>
+    </div>
+  </div>
+  <div id="pill-chunk-ctrl" class="wpm-pill-wrap" style="display:none">
+    <label>Chunk size</label>
+    <div class="wpm-pill-stepper">
+      <button id="chunk-live-minus" tabindex="-1">−</button>
+      <input type="number" id="chunk-live" min="1" max="5" step="1" value="2">
+      <button id="chunk-live-plus" tabindex="-1">+</button>
+    </div>
+  </div>
+</div>
+
+<!-- Baseline/chunking pill — outside .app -->
+<div class="reader-controls" id="reader-controls-baseline" style="display:none;padding:8px">
+  <button class="btn-advance" id="btn-baseline-finish" style="background:var(--gold);color:#08080e;border-radius:100px;height:50px;padding:0 28px;font-family:'Plus Jakarta Sans';font-size:14px;font-weight:700;border:none;cursor:pointer;touch-action:manipulation">I've finished reading</button>
+</div>
+
+<!-- Focus manual pill — outside .app -->
+<div class="reader-controls" id="reader-controls-manual" style="display:none">
+  <button class="btn-advance" id="btn-advance">Advance →</button>
+  <div class="pill-sep" style="width:1px;height:32px;background:rgba(255,255,255,.12);flex-shrink:0"></div>
+  <div class="hint-text" style="font-size:11px;color:#ffffff;white-space:nowrap"><span class="hint-kbd" style="display:inline-block;background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.35);border-radius:4px;padding:2px 7px;font-size:10px;color:#ffffff;font-family:monospace">space</span> or tap</div>
 </div>
 
 <!-- Celebration overlay -->
@@ -1939,6 +1929,10 @@ function setReadingMode(on) {
     document.body.classList.toggle('light-mode', S.readingMode);
   } else {
     document.body.classList.remove('light-mode');
+    // Hide all pills when leaving reading mode
+    ['reader-controls-auto','reader-controls-baseline','reader-controls-manual'].forEach(id=>{
+      const el=$(id); if(el) el.style.display='none';
+    });
   }
 }
 function goHome() {
@@ -2023,6 +2017,7 @@ function loadSample(key, el) {
   document.querySelectorAll('.sample-chip').forEach(c => c.classList.remove('active'));
   el.classList.add('active');
   $('text-input').value = SAMPLES[key];
+  S._sampleActive = true;
   checkText();
 }
 
@@ -2043,6 +2038,8 @@ function checkText() {
   $('btn-start').textContent = ok ? 'START READING →' : 'PASTE TEXT TO BEGIN →';
   const clearBtn = $('btn-clear-text');
   if (clearBtn) clearBtn.style.display = ok ? 'inline-flex' : 'none';
+  if (!S._sampleActive) document.querySelectorAll('.sample-chip').forEach(c => c.classList.remove('active'));
+  S._sampleActive = false;
 }
 function clearText() {
   $('text-input').value = '';
@@ -2234,11 +2231,43 @@ function buildContent(text) {
     S.phrases = words;
   } else if (S.mode === 'scroll') {
     S.phrases = [];
-    for (let i=0;i<words.length;i+=cs) S.phrases.push(words.slice(i,i+cs).join(' '));
+    // Measure words per line, snap to multiple of chunkSize
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.font = '300 19px Plus Jakarta Sans, sans-serif';
+    const containerWidth = Math.min(680, window.innerWidth - 48);
+    const spaceW = ctx.measureText(' ').width;
+    let lineW = 0, wordsOnLine = 0;
+    for (let i = 0; i < Math.min(words.length, 40); i++) {
+      const ww = ctx.measureText(words[i]).width;
+      if (lineW > 0 && lineW + spaceW + ww > containerWidth) break;
+      lineW += (lineW > 0 ? spaceW : 0) + ww;
+      wordsOnLine++;
+    }
+    // Snap to nearest multiple of chunkSize (minimum cs)
+    const chunksPerLine = Math.max(1, Math.floor(wordsOnLine / cs));
+    const wordsPerLine = chunksPerLine * cs;
+    S.chunksPerLine = chunksPerLine;
+    // Build phrases as individual chunks
+    for (let i = 0; i < words.length; i += cs) S.phrases.push(words.slice(i, i + cs).join(' '));
   } else if (S.mode === 'bionic') {
     S.phrases = [];
-    for (let i=0;i<words.length;i+=cs) S.phrases.push(words.slice(i,i+cs).join(' '));
-    S.bionicHTML = S.phrases.map((p,ci) => ci%2===0 ? `<span class="bw-bold">${p}</span>` : `<span class="bw-dim">${p}</span>`);
+    // Same line-aware measurement as pacer
+    const canvas2 = document.createElement('canvas');
+    const ctx2 = canvas2.getContext('2d');
+    ctx2.font = '300 19px Plus Jakarta Sans, sans-serif';
+    const cw2 = Math.min(680, window.innerWidth - 48);
+    const sw2 = ctx2.measureText(' ').width;
+    let lw2 = 0, wol2 = 0;
+    for (let i = 0; i < Math.min(words.length, 40); i++) {
+      const ww = ctx2.measureText(words[i]).width;
+      if (lw2 > 0 && lw2 + sw2 + ww > cw2) break;
+      lw2 += (lw2 > 0 ? sw2 : 0) + ww;
+      wol2++;
+    }
+    const cpl2 = Math.max(1, Math.floor(wol2 / cs));
+    S.bionicChunksPerLine = cpl2;
+    for (let i = 0; i < words.length; i += cs) S.phrases.push(words.slice(i, i + cs).join(' '));
   } else if (S.mode==='baseline'||S.mode==='baseline_retest') {
     S.phrases = [words.join(' ')];
   } else if (S.mode==='focus') {
@@ -2260,24 +2289,51 @@ function buildContent(text) {
 function buildStage() {
   const stage=$('stage'); stage.innerHTML='';
   if (S.mode==='phrase') {
-    const el=document.createElement('div'); el.id='phrase-display'; el.textContent='Get ready…'; stage.appendChild(el);
+    const pw=document.createElement('div'); pw.className='rsvp-wrapper';
+    const pr=document.createElement('div'); pr.className='rsvp-ruler';
+    const el=document.createElement('div'); el.id='phrase-display'; el.textContent='Get ready…';
+    const prb=document.createElement('div'); prb.className='rsvp-ruler-bottom';
+    pw.appendChild(pr); pw.appendChild(el); pw.appendChild(prb);
+    stage.appendChild(pw);
   } else if (S.mode==='rsvp') {
     const w=document.createElement('div'); w.className='rsvp-wrapper';
     w.innerHTML='<div class="rsvp-ruler"></div><div id="rsvp-display">Ready</div><div class="rsvp-ruler-bottom"></div>';
     stage.appendChild(w);
   } else if (S.mode==='scroll') {
     const bl=document.createElement('div'); bl.id='pacer-display';
-    S.phrases.forEach((chunk,i) => {
-      const sp=document.createElement('span');
-      sp.className='pw'; sp.id='pw-'+i; sp.textContent=(i===0?'':' ')+chunk;
-      bl.appendChild(sp);
+    const cpl = S.chunksPerLine || 1;
+    S.phrases.forEach((chunk, i) => {
+      const lineIdx = Math.floor(i / cpl);
+      const posInLine = i % cpl;
+      let lineEl = bl.querySelector('#pwline-'+lineIdx);
+      if (!lineEl) {
+        lineEl = document.createElement('div');
+        lineEl.className = 'pw-line'; lineEl.id = 'pwline-'+lineIdx;
+        bl.appendChild(lineEl);
+      }
+      const sp = document.createElement('span');
+      sp.className = 'pw'; sp.id = 'pw-'+i;
+      sp.textContent = (posInLine > 0 ? ' ' : '') + chunk;
+      lineEl.appendChild(sp);
     });
     stage.appendChild(bl);
   } else if (S.mode==='bionic') {
     const el=document.createElement('div'); el.id='bionic-display';
-    S.bionicHTML.forEach((h,i) => {
-      if(i>0) el.appendChild(document.createTextNode(' '));
-      const sp=document.createElement('span'); sp.id='bw-'+i; sp.innerHTML=h; el.appendChild(sp);
+    const cpl = S.bionicChunksPerLine || 1;
+    S.phrases.forEach((chunk, i) => {
+      const lineIdx = Math.floor(i / cpl);
+      const posInLine = i % cpl;
+      let lineEl = el.querySelector('#bwline-'+lineIdx);
+      if (!lineEl) {
+        lineEl = document.createElement('div');
+        lineEl.className = 'bw-line'; lineEl.id = 'bwline-'+lineIdx;
+        el.appendChild(lineEl);
+      }
+      const sp = document.createElement('span');
+      sp.id = 'bw-'+i;
+      sp.className = i % 2 === 0 ? 'bw bw-bold' : 'bw bw-dim';
+      sp.textContent = (posInLine > 0 ? ' ' : '') + chunk;
+      lineEl.appendChild(sp);
     });
     stage.appendChild(el);
   } else if (S.mode==='baseline'||S.mode==='baseline_retest') {
@@ -2344,7 +2400,8 @@ function initReader() {
   $('reader-controls-baseline').style.display=isStatic?'flex':'none';
   if(isBionic) $('btn-baseline-finish').textContent='Finished. I\'ve read it all';
   $('reader-controls-manual').style.display=isFocusManual?'flex':'none';
-  $('reader-controls-auto').style.display=(!isStatic&&!isFocusManual)?'flex':'none';
+  const isPacer = S.mode==='scroll';
+  $('reader-controls-auto').style.display=(!isStatic&&!isFocusManual)||isPacer?'flex':'none';
   if(isStatic){
     S.isPlaying=true; S.totalWordsRead=S.allWords.length;
     if(S.clockTimer) clearInterval(S.clockTimer);
@@ -2388,15 +2445,25 @@ function updateDisplay() {
     const el=$('rsvp-display'); if(!el) return;
     el.textContent=S.phrases[i]||'';
   } else if(S.mode==='scroll'){
-    document.querySelectorAll('.pw').forEach((el,idx)=>{el.className='pw'+(idx===i?' active':idx<i?' done':'');});
-    const cur=$('pw-'+i); if(cur) cur.scrollIntoView({block:'nearest',behavior:'smooth'});
-  } else if(S.mode==='bionic'){
-    const all=document.querySelectorAll('#bionic-display > span');
-    all.forEach((el,idx)=>{
-      if(idx===i) el.innerHTML=`<span class="bw-current">${el.textContent}</span>`;
-      else if(idx<i) el.innerHTML=`<span class="bw-past">${el.textContent}</span>`;
+    document.querySelectorAll('.pw').forEach((el,idx)=>{
+      el.className='pw'+(idx===i?' active':idx<i?' done':'');
     });
-    const cur=$('bw-'+i); if(cur) cur.scrollIntoView({block:'nearest',behavior:'smooth'});
+    // Scroll the line containing current chunk into view
+    const cpl = S.chunksPerLine || 1;
+    const lineIdx = Math.floor(i / cpl);
+    const lineEl = $('pwline-'+lineIdx);
+    if(lineEl) lineEl.scrollIntoView({block:'nearest',behavior:'smooth'});
+  } else if(S.mode==='bionic'){
+    document.querySelectorAll('#bionic-display .bw').forEach((el,idx)=>{
+      el.classList.remove('bw-current','bw-done');
+      if(idx===i) el.classList.add('bw-current');
+      else if(idx<i) el.classList.add('bw-done');
+    });
+    // Scroll current line into view
+    const cplb = S.bionicChunksPerLine || 1;
+    const lineIdxB = Math.floor(i / cplb);
+    const lineElB = $('bwline-'+lineIdxB);
+    if(lineElB) lineElB.scrollIntoView({block:'nearest',behavior:'smooth'});
   } else if(S.mode==='focus'){
     if(!$('focus-display')?._built) renderFocusLine(i);
     else { applyFocusTranslate(i); highlightFocusChunk(i); }
@@ -2887,6 +2954,13 @@ document.addEventListener('DOMContentLoaded', () => {
   if (firstChip && $('text-input') && !$('text-input').value.trim()) {
     loadSample('psych', firstChip);
   }
+  // Hide email capture cards if already signed up
+  if (localStorage.getItem('sf_signed_up') === 'true') {
+    const homeCard = $('home-email-card');
+    const resultsCard = $('email-capture-card');
+    if (homeCard) homeCard.style.display = 'none';
+    if (resultsCard) resultsCard.style.display = 'none';
+  }
 });
 if (typeof pdfjsLib !== 'undefined') {
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
@@ -3069,6 +3143,9 @@ if('serviceWorker' in navigator){
       msg.style.color = 'var(--green)';
       msg.style.fontSize = '13px';
       msg.style.padding = '4px 0';
+      // Hide home card too
+      const homeCard = $('home-email-card');
+      if(homeCard) homeCard.style.display = 'none';
     } catch(err) {
       btn.textContent = 'START DAY 1 →';
       btn.style.opacity = '1';
@@ -3129,6 +3206,9 @@ if('serviceWorker' in navigator){
       btn.style.display = 'none';
       msg.textContent = '✓ You\'re in! Check your inbox for Day 1.';
       msg.style.color = 'var(--green)';
+      // Hide results card too
+      const resultsCard = $('email-capture-card');
+      if(resultsCard) resultsCard.style.display = 'none';
       msg.style.fontSize = '13px';
     } catch(err) {
       btn.textContent = 'START DAY 1 →';
