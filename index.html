@@ -133,6 +133,8 @@ body.reading .btn-app { display:none }
 body.reading .btn-back { display:flex }
 body.reading .header-tag { display:none }
 body.reading footer { display:none }
+body.mem-active .header-nav-mid { display:flex !important }
+body.mem-active footer { display:none }
 
 main { flex:1; max-width:880px; width:100%; margin:0 auto; padding:36px 24px }
 
@@ -809,6 +811,68 @@ footer {
 footer p { font-size:11px; color:var(--muted) }
 footer a { color:var(--gold); text-decoration:none; font-weight:600 }
 
+/* ─── MEMORY MODULE ──────────────────────────────────────────────── */
+.mem-screen { display:none; animation:fadeUp .35s ease both; position:fixed; inset:0; top:69px; overflow-y:auto; background:var(--bg); z-index:90; flex-direction:column }
+.mem-screen.active { display:flex }
+.mem-lock { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:48px 24px; text-align:center; flex:1 }
+.mem-lock-icon { width:72px; height:72px; border-radius:50%; background:rgba(247,166,0,0.1); border:1px solid rgba(247,166,0,0.25); display:flex; align-items:center; justify-content:center; font-size:32px; margin:0 auto 20px }
+.mem-lock h2 { font-family:'Bebas Neue'; font-size:clamp(36px,6vw,56px); letter-spacing:2px; margin-bottom:8px }
+.mem-lock p { color:var(--muted2); font-size:15px; max-width:440px; margin:0 auto 28px; line-height:1.7 }
+.mem-what-inside { background:var(--s1); border:1px solid var(--border); border-radius:var(--r); padding:20px 24px; max-width:400px; margin:0 auto 28px; text-align:left }
+.mem-what-inside .mem-wi-label { font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:12px }
+.mem-what-item { display:flex; align-items:center; gap:10px; font-size:13px; color:var(--muted2); margin-bottom:8px }
+.mem-what-item:last-child { margin-bottom:0 }
+.mem-what-item span { color:var(--gold); font-size:10px; font-weight:700 }
+.mem-dash { max-width:880px; margin:0 auto; padding:36px 24px; flex:1; width:100% }
+.mem-dash-hero { text-align:center; margin-bottom:36px }
+.mem-dash-hero h2 { font-family:'Bebas Neue'; font-size:clamp(40px,6vw,64px); letter-spacing:2px; margin-bottom:8px }
+.mem-dash-hero p { color:var(--muted2); font-size:15px; max-width:480px; margin:0 auto }
+.mem-modes-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:24px }
+.mem-mode-card { background:var(--s1); border:1px solid var(--border); border-radius:var(--r); padding:20px 16px; cursor:pointer; transition:all .2s; position:relative }
+.mem-mode-card:hover { border-color:var(--border2); transform:translateY(-2px) }
+.mem-mode-card.locked { opacity:0.5; cursor:default }
+.mem-mode-card.locked:hover { transform:none; border-color:var(--border) }
+.mem-mode-card .mem-icon { font-size:28px; margin-bottom:10px; display:block }
+.mem-mode-card .mem-name { font-size:14px; font-weight:700; color:var(--text); margin-bottom:4px }
+.mem-mode-card .mem-desc { font-size:11px; color:var(--muted); line-height:1.5 }
+.mem-mode-badge { font-size:9px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:2px 7px; border-radius:100px; display:inline-block; margin-top:8px }
+.badge-mem-start { background:rgba(247,166,0,0.15); color:var(--gold) }
+.badge-mem-lock { background:rgba(255,255,255,0.06); color:var(--muted) }
+.mem-drill { max-width:560px; margin:0 auto; padding:36px 24px 120px }
+.mem-step-bar { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin-bottom:24px }
+.mem-step-seg { height:4px; border-radius:2px; background:var(--s3); transition:background .3s }
+.mem-step-seg.active { background:var(--gold) }
+.mem-step-seg.done { background:var(--green) }
+.mem-step-label { font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--gold); margin-bottom:16px }
+.mem-face-wrap { position:relative; width:120px; height:120px; margin:0 auto 20px }
+.mem-face-svg { width:120px; height:120px }
+.mem-dot { position:absolute; width:14px; height:14px; border-radius:50%; background:var(--gold); border:2px solid var(--s2); cursor:pointer; transition:all .2s; transform:translate(-50%,-50%); animation:pulse-dot 2s ease-out infinite }
+.mem-dot:hover { transform:translate(-50%,-50%) scale(1.3) }
+.mem-dot.selected { background:var(--green); animation:none; transform:translate(-50%,-50%) scale(1.2) }
+.mem-jordan-tip { background:var(--s2); border:1px solid var(--border2); border-left:3px solid var(--gold); border-radius:0 var(--r-sm) var(--r-sm) 0; padding:14px 16px; margin-bottom:16px; font-size:13px; color:var(--muted2); line-height:1.6 }
+.mem-jordan-tip strong { color:var(--gold) }
+.mem-quick-picks { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px }
+.mem-pick { font-size:11px; padding:5px 12px; border-radius:100px; border:1px solid var(--border2); background:var(--s2); color:var(--muted2); cursor:pointer; transition:all .15s }
+.mem-pick:hover,.mem-pick.selected { border-color:var(--gold); color:var(--gold); background:rgba(247,166,0,0.08) }
+.mem-input { width:100%; background:var(--s2); border:1px solid var(--border2); border-radius:var(--r-sm); color:var(--text); font-family:'Plus Jakarta Sans'; font-size:14px; padding:12px 16px; outline:none; transition:border-color .2s; margin-bottom:12px; box-sizing:border-box }
+.mem-input:focus { border-color:var(--gold) }
+.mem-input::placeholder { color:var(--muted) }
+.mem-vivid-tags { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px }
+.mem-vtag { font-size:10px; padding:4px 10px; border-radius:100px; border:1px solid var(--border); background:var(--s1); color:var(--muted); cursor:pointer; transition:all .15s }
+.mem-vtag:hover { border-color:var(--purple); color:var(--purple) }
+.mem-review-strip { background:var(--s2); border:1px solid var(--border); border-radius:var(--r-sm); padding:12px 16px; margin-bottom:16px }
+.mem-review-strip .mem-rv-label { font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--muted); margin-bottom:8px }
+.mem-review-intervals { display:flex; justify-content:space-between; font-size:10px; color:var(--muted2); margin-bottom:6px }
+.mem-review-bar { display:grid; grid-template-columns:repeat(4,1fr); gap:4px }
+.mem-review-seg { height:3px; border-radius:2px; background:var(--s3) }
+.mem-review-seg.active { background:var(--gold) }
+.mem-score-big { font-family:'Bebas Neue'; font-size:72px; color:var(--gold); line-height:1; text-align:center }
+.mem-score-label { font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); text-align:center; margin-bottom:24px }
+.mem-result-insight { background:var(--s1); border:1px solid var(--border); border-left:3px solid var(--gold); border-radius:0 var(--r) var(--r) 0; padding:18px 20px; margin-bottom:20px }
+.mem-result-insight h4 { font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin-bottom:6px }
+.mem-result-insight p { font-size:15px; color:var(--text); line-height:1.7; font-weight:300 }
+@media(max-width:640px) { .mem-modes-grid { grid-template-columns:repeat(2,1fr) } .mem-drill { padding:24px 16px 120px } }
+
 /* ─── RESPONSIVE ─────────────────────────────────────────────────── */
 @media(max-width:640px) {
   header { padding:12px 16px }
@@ -1119,7 +1183,8 @@ body.light-mode .logo-img-colour { display:block }
     <img class="logo-img-colour" src="/logo-colour.png" alt="StudyFast">
   </div>
   <div class="header-nav-mid">
-    <a class="btn-nav-link" href="index.html">App</a>
+    <a class="btn-nav-link" href="index.html">Speed Reading</a>
+    <button class="btn-nav-link" onclick="openMemory()" style="background:none;border:none;cursor:pointer;font-family:'Plus Jakarta Sans';font-size:13px;font-weight:600;color:var(--muted2);padding:4px 8px;transition:color .15s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted2)'">Memory</button>
     <a class="btn-nav-link" href="science.html">The Science</a>
   </div>
   <div class="header-nav-right" id="header-nav-right" style="display:none">
@@ -1679,7 +1744,110 @@ Don't stop now.</div>
 
 </div><!-- .app -->
 
-<!-- Progress bar fixed to bottom during reading -->
+<!-- ══ MEMORY MODULE SCREENS — outside .app ══ -->
+
+<!-- LOCK SCREEN -->
+<div class="mem-screen" id="mem-screen-lock">
+  <div class="mem-lock">
+    <div class="mem-lock-icon">🔒</div>
+    <h2>Memory <span style="color:var(--gold)">Training</span></h2>
+    <p>Exclusively for Jordan's private coaching clients. This is where the real performance gap opens.</p>
+    <div class="mem-what-inside">
+      <div class="mem-wi-label">What you get inside</div>
+      <div class="mem-what-item"><div class="wi-dot" style="width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0"></div>Names and faces — Jordan's 4-step system</div>
+      <div class="mem-what-item"><div class="wi-dot" style="width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0"></div>Memory palace builder</div>
+      <div class="mem-what-item"><div class="wi-dot" style="width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0"></div>Spaced repetition drills</div>
+      <div class="mem-what-item"><div class="wi-dot" style="width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0"></div>Association and link techniques</div>
+      <div class="mem-what-item"><div class="wi-dot" style="width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0"></div>Jordan's private coaching methods</div>
+    </div>
+
+    <!-- Code entry -->
+    <div style="width:100%;max-width:400px;margin-bottom:16px">
+      <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;text-align:left">Enter your access code</div>
+      <div style="display:flex;gap:8px">
+        <input id="mem-lock-code" type="password" maxlength="20" autocomplete="off"
+          style="flex:1;background:var(--s2);border:1px solid var(--border2);border-radius:var(--r-sm);color:var(--gold);font-family:'JetBrains Mono';font-size:18px;font-weight:500;letter-spacing:6px;text-align:center;padding:14px;outline:none;transition:border-color .2s"
+          placeholder="••••••••"
+          oninput="this.style.borderColor='var(--border2)';document.getElementById('mem-lock-err').style.display='none'"
+          onkeydown="if(event.key==='Enter') memUnlock()">
+        <button onclick="memUnlock()" style="padding:14px 20px;border-radius:var(--r-sm);background:var(--gold);color:#08080e;font-family:'Bebas Neue';font-size:18px;letter-spacing:2px;border:none;cursor:pointer;white-space:nowrap;transition:all .18s" onmouseover="this.style.background='var(--gold2)'" onmouseout="this.style.background='var(--gold)'">Unlock →</button>
+      </div>
+      <div id="mem-lock-err" style="font-size:12px;color:var(--orange);margin-top:6px;display:none">Incorrect code. Contact Jordan for your personal access code.</div>
+    </div>
+
+    <div style="width:100%;max-width:400px;border-top:1px solid var(--border);padding-top:16px;margin-bottom:16px">
+      <p style="font-size:13px;color:var(--muted);margin-bottom:12px">Not a client yet?</p>
+      <a href="https://calendly.com/study-fast/15-minute-call" target="_blank" rel="noopener noreferrer"
+         class="btn btn-gold" style="display:inline-block;padding:12px 28px;font-family:'Bebas Neue';font-size:17px;letter-spacing:2px;font-weight:400;border-radius:var(--r-sm)">
+        Book a free 15-minute call →
+      </a>
+    </div>
+  </div>
+  <footer style="position:relative;flex-shrink:0">
+    <p>Built by <a href="https://studyfast.uk/" target="_blank">StudyFast</a> · Jordan Harry · TEDx 3.4M views · 50,000+ professionals in 70 countries</p>
+    <span class="footer-version">V2026.3</span>
+  </footer>
+</div>
+
+<!-- MEMORY DASHBOARD -->
+<div class="mem-screen" id="mem-screen-dash">
+  <div class="mem-dash">
+    <div class="mem-dash-hero">
+      <h2>Your Memory <span style="color:var(--gold)">Programme</span></h2>
+      <p>Six techniques. One goal. Remember everything that matters.</p>
+    </div>
+    <div class="mem-modes-grid">
+      <div class="mem-mode-card" onclick="startMemDrill('names')">
+        <span class="mem-icon">🧠</span>
+        <div class="mem-name">Names and Faces</div>
+        <div class="mem-desc">Jordan's 4-step system. Association, location, interaction, repetition.</div>
+        <span class="mem-mode-badge badge-mem-start">Start here</span>
+      </div>
+      <div class="mem-mode-card locked">
+        <span class="mem-icon">🔗</span>
+        <div class="mem-name">Association</div>
+        <div class="mem-desc">Link new information to what you already know. The foundation of all memory.</div>
+        <span class="mem-mode-badge badge-mem-lock">Coming soon</span>
+      </div>
+      <div class="mem-mode-card locked">
+        <span class="mem-icon">📦</span>
+        <div class="mem-name">Chunking</div>
+        <div class="mem-desc">Group information into meaningful units. Fewer pieces, same total recall.</div>
+        <span class="mem-mode-badge badge-mem-lock">Coming soon</span>
+      </div>
+      <div class="mem-mode-card locked">
+        <span class="mem-icon">🏛️</span>
+        <div class="mem-name">Memory Palace</div>
+        <div class="mem-desc">Spatial memory system. Place information in a familiar location and walk through it.</div>
+        <span class="mem-mode-badge badge-mem-lock">Coming soon</span>
+      </div>
+      <div class="mem-mode-card locked">
+        <span class="mem-icon">🔄</span>
+        <div class="mem-name">Spaced Repetition</div>
+        <div class="mem-desc">Ebbinghaus forgetting curve. Review at the exact moment you are about to forget.</div>
+        <span class="mem-mode-badge badge-mem-lock">Coming soon</span>
+      </div>
+      <div class="mem-mode-card locked">
+        <span class="mem-icon">🏁</span>
+        <div class="mem-name">Re-Test</div>
+        <div class="mem-desc">Same names. New score. Proof of your progress.</div>
+        <span class="mem-mode-badge badge-mem-lock">Complete all steps</span>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:8px">
+      <button class="btn btn-ghost" onclick="goMemHome()" style="font-size:13px;padding:10px 24px">← Back to speed reading</button>
+    </div>
+  </div>
+  <footer style="position:relative">
+    <p>Built by <a href="https://studyfast.uk/" target="_blank">StudyFast</a> · Jordan Harry · TEDx 3.4M views · 50,000+ professionals in 70 countries</p>
+    <span class="footer-version">V2026.3</span>
+  </footer>
+</div>
+
+<!-- NAMES AND FACES DRILL -->
+<div class="mem-screen" id="mem-screen-names">
+  <div class="mem-drill" id="mem-drill-wrap"></div>
+</div>
 <div class="progress-fixed" id="progress-fixed">
   <div class="progress-fixed-fill" id="prog-fill"></div>
 </div>
@@ -3031,6 +3199,237 @@ async function _saveSession(mode, wpm, wordsRead, elapsedSec) {
 _initAuth();
 </script>
 <script>
+// ══════════════════════════════════════
+// MEMORY MODULE
+// ══════════════════════════════════════
+const MEM_FACES=[
+  {name:'Sarah',picks:['Sarah Jessica Parker','Sarah Connor','Sarah Millican']},
+  {name:'James',picks:['James Bond','James May','James Brown']},
+  {name:'Emma',picks:['Emma Watson','Emma Thompson','Emma Raducanu']},
+  {name:'David',picks:['David Beckham','David Attenborough','David Bowie']},
+  {name:'Olivia',picks:['Olivia Colman','Olivia Newton-John','Olivia Rodrigo']},
+  {name:'Michael',picks:['Michael Jordan','Michael Bublé','Michael McIntyre']},
+  {name:'Charlotte',picks:['Charlotte Church','Charlotte Bronte','Charlotte Casiraghi']},
+  {name:'Harry',picks:['Harry Styles','Harry Houdini','Prince Harry']},
+  {name:'Jessica',picks:['Jessica Alba','Jessica Ennis','Jessica Biel']},
+  {name:'Tom',picks:['Tom Hanks','Tom Holland','Tom Jones']},
+];
+const MEM_DOTS=[
+  {id:'forehead',label:'Forehead',x:'50%',y:'16%'},
+  {id:'leftbrow',label:'Left brow',x:'32%',y:'28%'},
+  {id:'rightbrow',label:'Right brow',x:'68%',y:'28%'},
+  {id:'nose',label:'Nose',x:'50%',y:'46%'},
+  {id:'leftcheek',label:'Left cheek',x:'26%',y:'56%'},
+  {id:'rightcheek',label:'Right cheek',x:'74%',y:'56%'},
+  {id:'lips',label:'Lips',x:'50%',y:'68%'},
+  {id:'jaw',label:'Jaw',x:'50%',y:'82%'},
+];
+const VIVID_TAGS=['Add movement','Make it louder','Add colour','Make it bigger','Add smell','Make it funny'];
+const MEM_TIPS={
+  association:'Who do you know with this name? A friend, colleague, or celebrity? Picture them right now. Make it someone vivid.',
+  location:'Find the most distinctive feature on this face. What does your eye go to first? That is your anchor point.',
+  interaction:'Picture your association doing something wild on that feature. Moving. Exaggerated. Ridiculous. The stranger the better.',
+  recall:'Find the feature. See the scene. Let the name come to you. Do not force it — trust the system.',
+};
+let M={step:0,faceIdx:0,faces:[],selectedPick:'',selectedDot:'',scene:'',score:0,results:[]};
+
+function showMemScreen(id){
+  document.querySelectorAll('.screen,.mem-screen').forEach(s=>s.classList.remove('active'));
+  const el=document.getElementById(id);
+  if(el) el.classList.add('active');
+  window.scrollTo({top:0,behavior:'instant'});
+  const isReadingMode = id === 'mem-screen-names';
+  const isMemScreen = id.startsWith('mem-');
+  document.body.classList.toggle('reading', false);
+  document.body.classList.toggle('mem-active', isMemScreen);
+  if(id.startsWith('mem-')){
+    const bb=$('btn-back');
+    if(bb) bb.onclick=()=>showMemScreen('mem-screen-dash');
+  }
+}
+const MEM_VALID_CODES=['JORDAN-PRIVATE'];
+function memUnlock(){
+  const val=(document.getElementById('mem-lock-code')?.value||'').trim().toUpperCase();
+  if(MEM_VALID_CODES.includes(val)){
+    localStorage.setItem('sf_mem_access','1');
+    window.location.href='memory.html';
+  } else {
+    const err=document.getElementById('mem-lock-err');
+    const inp=document.getElementById('mem-lock-code');
+    if(err) err.style.display='block';
+    if(inp) inp.style.borderColor='var(--orange)';
+  }
+}
+function checkMemAccess(){
+  const p=new URLSearchParams(window.location.search);
+  const v=p.get('v')||p.get('vault');
+  if(v) localStorage.setItem('sf_vault_key',v);
+  return !!localStorage.getItem('sf_vault_key');
+}
+function openMemory(){
+  if(localStorage.getItem('sf_mem_access')==='1'){
+    window.location.href='memory.html';
+  } else {
+    showMemScreen('mem-screen-lock');
+  }
+}
+function goMemHome(){
+  document.body.classList.remove('mem-active','reading');
+  showScreen('screen-input');
+}
+function startMemDrill(mode){
+  if(mode!=='names'){alert('Coming soon. Names and Faces is available now.');return;}
+  M.faces=[...MEM_FACES].sort(()=>Math.random()-.5).slice(0,5);
+  M.faceIdx=0;M.step=0;M.score=0;M.results=[];
+  M.selectedPick='';M.selectedDot='';M.scene='';
+  showMemScreen('mem-screen-names');
+  renderMemStep();
+}
+function memFaceSVG(){
+  return`<div class="mem-face-wrap">
+    <svg class="mem-face-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="60" cy="58" rx="38" ry="46" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+      <ellipse cx="44" cy="48" rx="6" ry="4" fill="rgba(255,255,255,0.08)"/>
+      <ellipse cx="76" cy="48" rx="6" ry="4" fill="rgba(255,255,255,0.08)"/>
+      <ellipse cx="60" cy="62" rx="4" ry="6" fill="rgba(255,255,255,0.06)"/>
+      <path d="M48 76 Q60 82 72 76" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" fill="none"/>
+      <ellipse cx="22" cy="58" rx="5" ry="9" fill="rgba(255,255,255,0.05)"/>
+      <ellipse cx="98" cy="58" rx="5" ry="9" fill="rgba(255,255,255,0.05)"/>
+    </svg>
+    ${M.step===1?MEM_DOTS.map(d=>`<div class="mem-dot${M.selectedDot===d.id?' selected':''}" style="left:${d.x};top:${d.y}" onclick="selectMemDot('${d.id}')" title="${d.label}"></div>`).join(''):''}
+    ${M.step===2&&M.selectedDot?(()=>{const d=MEM_DOTS.find(x=>x.id===M.selectedDot);return d?`<div class="mem-dot selected" style="left:${d.x};top:${d.y}"></div>`:''})():''}
+  </div>`;
+}
+function memProgressBar(){
+  return`<div class="mem-step-bar">${[0,1,2,3].map(i=>`<div class="mem-step-seg${i<M.step?' done':i===M.step?' active':''}"></div>`).join('')}</div>`;
+}
+function renderMemStep(){
+  const face=M.faces[M.faceIdx];
+  const wrap=$('mem-drill-wrap');
+  if(!face||!wrap){renderMemResults();return;}
+  const counter=`<div style="font-size:11px;color:var(--muted);text-align:right;margin-bottom:4px">${M.faceIdx+1} of ${M.faces.length}</div>`;
+  let html='';
+  if(M.step===0){
+    html=`${memProgressBar()}${counter}
+    <div class="mem-step-label">Step 1 of 4 — Association</div>
+    <div style="font-size:22px;font-weight:700;color:var(--text);text-align:center;margin-bottom:2px">${face.name}</div>
+    <div style="font-size:12px;color:var(--muted);text-align:center;margin-bottom:16px">Meet ${face.name}</div>
+    ${memFaceSVG()}
+    <div class="mem-jordan-tip"><strong>Jordan:</strong> ${MEM_TIPS.association}</div>
+    <div style="font-size:11px;color:var(--muted);margin-bottom:8px">Quick picks — or type your own:</div>
+    <div class="mem-quick-picks">${face.picks.map(p=>`<div class="mem-pick${M.selectedPick===p?' selected':''}" onclick="selectMemPick('${p}')">${p}</div>`).join('')}</div>
+    <input class="mem-input" id="mem-assoc-input" placeholder="Or type your own ${face.name}..." value="${M.selectedPick}" oninput="M.selectedPick=this.value">
+    <button class="btn btn-gold" style="width:100%;padding:14px;font-family:'Bebas Neue';letter-spacing:2px;font-weight:400;font-size:16px;border-radius:var(--r-sm)" onclick="advanceMemStep()">Next — find the feature →</button>`;
+  } else if(M.step===1){
+    html=`${memProgressBar()}${counter}
+    <div class="mem-step-label">Step 2 of 4 — Location</div>
+    <div style="font-size:16px;font-weight:700;color:var(--text);text-align:center;margin-bottom:4px">${face.name}</div>
+    <div style="font-size:12px;color:var(--muted);text-align:center;margin-bottom:4px">Your association: <span style="color:var(--gold)">${M.selectedPick||'your '+face.name}</span></div>
+    <div style="font-size:11px;color:var(--muted2);text-align:center;margin-bottom:14px">Tap the gold dots to select a feature</div>
+    ${memFaceSVG()}
+    <div class="mem-jordan-tip"><strong>Jordan:</strong> ${MEM_TIPS.location}</div>
+    ${M.selectedDot?`<div style="background:rgba(61,255,160,0.1);border:1px solid rgba(61,255,160,0.3);border-radius:var(--r-sm);padding:10px 14px;font-size:13px;color:var(--green);text-align:center;margin-bottom:12px">Anchor: <strong>${MEM_DOTS.find(d=>d.id===M.selectedDot)?.label}</strong></div>`:''}
+    <button class="btn btn-gold" style="width:100%;padding:14px;font-family:'Bebas Neue';letter-spacing:2px;font-weight:400;font-size:16px;border-radius:var(--r-sm)${!M.selectedDot?';opacity:.4;pointer-events:none':''}" onclick="advanceMemStep()">Lock this anchor →</button>`;
+  } else if(M.step===2){
+    html=`${memProgressBar()}${counter}
+    <div class="mem-step-label">Step 3 of 4 — Interaction</div>
+    <div style="font-size:16px;font-weight:700;color:var(--text);text-align:center;margin-bottom:4px">${face.name}</div>
+    <div style="font-size:12px;color:var(--muted);text-align:center;margin-bottom:14px"><span style="color:var(--gold)">${M.selectedPick||'Your '+face.name}</span> on the <span style="color:var(--green)">${MEM_DOTS.find(d=>d.id===M.selectedDot)?.label||''}</span></div>
+    ${memFaceSVG()}
+    <div class="mem-jordan-tip"><strong>Jordan:</strong> ${MEM_TIPS.interaction}</div>
+    <div style="font-size:11px;color:var(--muted);margin-bottom:6px">Describe your scene (writing deepens the encoding):</div>
+    <textarea class="mem-input" id="mem-scene-input" placeholder="Describe your scene — the more vivid and ridiculous the better..." rows="2" style="resize:none" oninput="M.scene=this.value"></textarea>
+    <div style="font-size:11px;color:var(--muted);margin-bottom:8px">Make it more vivid:</div>
+    <div class="mem-vivid-tags">${VIVID_TAGS.map(t=>`<div class="mem-vtag" onclick="addVividTag('${t}')">${t}</div>`).join('')}</div>
+    <button class="btn btn-gold" style="width:100%;padding:14px;font-family:'Bebas Neue';letter-spacing:2px;font-weight:400;font-size:16px;border-radius:var(--r-sm)" onclick="advanceMemStep()">Scene locked — test me →</button>`;
+  } else if(M.step===3){
+    html=`${memProgressBar()}${counter}
+    <div class="mem-step-label" style="color:var(--green)">Step 4 of 4 — Recall</div>
+    <div style="font-size:16px;font-weight:700;color:var(--text);text-align:center;margin-bottom:4px">Who is this?</div>
+    <div style="font-size:12px;color:var(--muted);text-align:center;margin-bottom:14px">Find the feature. See the scene. Let the name come.</div>
+    ${memFaceSVG()}
+    <div class="mem-jordan-tip" style="border-left-color:var(--green)"><strong style="color:var(--green)">Jordan:</strong> ${MEM_TIPS.recall}</div>
+    <input class="mem-input" id="mem-recall-input" placeholder="Type their name..." autocomplete="off">
+    <button class="btn btn-gold" style="width:100%;padding:14px;font-family:'Bebas Neue';letter-spacing:2px;font-weight:400;font-size:16px;border-radius:var(--r-sm);background:var(--green);color:#08080e" onclick="checkMemRecall()">Check my answer</button>
+    <div class="mem-review-strip" style="margin-top:16px">
+      <div class="mem-rv-label">Spaced repetition — ${face.name} returns for review:</div>
+      <div class="mem-review-intervals"><span>10 min</span><span>1 hour</span><span>Tomorrow</span><span>Day 7</span></div>
+      <div class="mem-review-bar"><div class="mem-review-seg active"></div><div class="mem-review-seg"></div><div class="mem-review-seg"></div><div class="mem-review-seg"></div></div>
+    </div>`;
+  }
+  wrap.innerHTML=html;
+  // restore textarea value
+  const ta=$('mem-scene-input');if(ta) ta.value=M.scene;
+}
+function selectMemPick(p){
+  M.selectedPick=p;
+  const inp=$('mem-assoc-input');if(inp) inp.value=p;
+  renderMemStep();
+}
+function selectMemDot(id){M.selectedDot=id;renderMemStep();}
+function addVividTag(t){
+  const ta=$('mem-scene-input');
+  if(ta){ta.value+=(ta.value?' ':'')+t.toLowerCase()+'...';M.scene=ta.value;}
+}
+function advanceMemStep(){
+  if(M.step===0){const inp=$('mem-assoc-input');if(inp&&inp.value.trim()) M.selectedPick=inp.value.trim();if(!M.selectedPick) M.selectedPick='someone you know';}
+  if(M.step===1&&!M.selectedDot) return;
+  if(M.step===2){const ta=$('mem-scene-input');if(ta) M.scene=ta.value;}
+  M.step++;renderMemStep();
+}
+function checkMemRecall(){
+  const inp=$('mem-recall-input');
+  const ans=(inp?inp.value.trim():'').toLowerCase();
+  const correct=M.faces[M.faceIdx].name.toLowerCase();
+  const ok=ans===correct||(correct.startsWith(ans)&&ans.length>1);
+  M.results.push({name:M.faces[M.faceIdx].name,correct:ok});
+  if(ok) M.score++;
+  const wrap=$('mem-drill-wrap');
+  const fb=document.createElement('div');
+  fb.style.cssText=`margin-top:12px;padding:14px;border-radius:var(--r-sm);background:${ok?'rgba(61,255,160,0.1)':'rgba(255,107,53,0.1)'};border:1px solid ${ok?'rgba(61,255,160,0.3)':'rgba(255,107,53,0.3)'};text-align:center;font-size:14px;font-weight:700;color:${ok?'var(--green)':'var(--orange)'}`;
+  fb.textContent=ok?'Correct.':('It was '+M.faces[M.faceIdx].name+'. The system will show you this one again.');
+  wrap.appendChild(fb);
+  setTimeout(()=>{
+    M.faceIdx++;M.step=0;M.selectedPick='';M.selectedDot='';M.scene='';
+    if(M.faceIdx>=M.faces.length) renderMemResults();else renderMemStep();
+  },1800);
+}
+function renderMemResults(){
+  const wrap=$('mem-drill-wrap');if(!wrap) return;
+  const pct=Math.round((M.score/M.faces.length)*100);
+  const insights=[
+    {max:40,txt:`${M.score} out of ${M.faces.length}. The system is new — that is expected. Go again immediately. The second run is always stronger.`},
+    {max:70,txt:`${M.score} out of ${M.faces.length}. Solid start. Make your interaction scenes more exaggerated. The wilder the scene, the stronger the lock.`},
+    {max:90,txt:`${M.score} out of ${M.faces.length}. Strong. Check the faces you missed — was your anchor feature distinctive enough?`},
+    {max:101,txt:`${M.score} out of ${M.faces.length}. Excellent. The system is working. Keep the review schedule and your retention at 7 days will be near perfect.`},
+  ];
+  const insight=insights.find(i=>pct<=i.max);
+  wrap.innerHTML=`
+    <div style="text-align:center;padding:32px 0 16px">
+      <div class="mem-score-big">${M.score}/${M.faces.length}</div>
+      <div class="mem-score-label">Names recalled correctly</div>
+    </div>
+    <div class="mem-result-insight">
+      <h4>Jordan's Take</h4>
+      <p>${insight.txt}</p>
+    </div>
+    <div class="mem-review-strip">
+      <div class="mem-rv-label">Spaced repetition schedule</div>
+      <div class="mem-review-intervals"><span>10 minutes</span><span>1 hour</span><span>Tomorrow</span><span>Day 7</span></div>
+      <div class="mem-review-bar"><div class="mem-review-seg active"></div><div class="mem-review-seg"></div><div class="mem-review-seg"></div><div class="mem-review-seg"></div></div>
+      <div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.6">Each review doubles retention time. Come back in 10 minutes for your first review.</div>
+    </div>
+    <button class="btn btn-gold" style="width:100%;padding:14px;font-family:'Bebas Neue';letter-spacing:2px;font-weight:400;font-size:16px;border-radius:var(--r-sm);margin-bottom:10px" onclick="startMemDrill('names')">Go again →</button>
+    <button class="btn btn-ghost" style="width:100%;padding:12px;font-size:14px;border-radius:var(--r-sm)" onclick="showMemScreen('mem-screen-dash')">Back to memory dashboard</button>
+  `;
+}
+// Check vault key on page load
+(function(){
+  const p=new URLSearchParams(window.location.search);
+  const v=p.get('v')||p.get('vault');
+  if(v) localStorage.setItem('sf_vault_key',v);
+})();
+
 if('serviceWorker' in navigator){
   window.addEventListener('load',()=>{
     navigator.serviceWorker.register('/sw.js')

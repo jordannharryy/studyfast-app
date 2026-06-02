@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Memory Training — StudyFast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#08080e; --s1:#0f0f1a; --s2:#161625; --s3:#1e1e30;
+  --border:rgba(255,255,255,0.07); --border2:rgba(255,255,255,0.12);
+  --gold:#F7A600; --gold2:#F7BD33; --green:#3dffa0; --orange:#ff6b35;
+  --purple:#a78bfa; --text:#f2f1fc; --muted:#6a6a90; --muted2:#9090b0;
+  --r:14px; --r-sm:8px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+*{-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;overflow-x:hidden}
+
+body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
+
+/* HEADER */
+header{padding:12px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:rgba(8,8,14,0.88);backdrop-filter:blur(16px);position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer}
+.logo img{height:48px;display:block;opacity:0.92}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-link{font-size:13px;font-weight:600;color:var(--muted2);padding:6px 14px;border-radius:100px;text-decoration:none;transition:all .15s;border:none;background:none;cursor:pointer;font-family:'Plus Jakarta Sans'}
+.nav-link:hover{color:var(--gold)}
+.nav-link.active{color:var(--gold)}
+
+/* SCREENS */
+.screen{display:none;min-height:calc(100vh - 69px);animation:fadeUp .35s ease both}
+.screen.active{display:flex;flex-direction:column}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+/* LOCK */
+.lock-wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 24px;text-align:center;max-width:500px;margin:0 auto;width:100%}
+.lock-icon{width:80px;height:80px;border-radius:50%;background:rgba(247,166,0,0.1);border:1px solid rgba(247,166,0,0.25);display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 24px}
+.lock-h{font-family:'Bebas Neue';font-size:clamp(40px,7vw,64px);letter-spacing:2px;margin-bottom:10px}
+.lock-sub{color:var(--muted2);font-size:15px;line-height:1.7;margin-bottom:32px}
+.what-inside{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:20px 24px;width:100%;text-align:left;margin-bottom:28px}
+.wi-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.wi-item{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted2);margin-bottom:8px}
+.wi-item:last-child{margin-bottom:0}
+.wi-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0}
+.code-section{width:100%;margin-bottom:16px}
+.code-label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;text-align:left}
+.code-row{display:flex;gap:8px}
+.code-input{flex:1;background:var(--s2);border:1px solid var(--border2);border-radius:var(--r-sm);color:var(--text);font-family:'JetBrains Mono';font-size:18px;font-weight:500;letter-spacing:4px;text-align:center;padding:14px;outline:none;transition:border-color .2s}
+.code-input:focus{border-color:var(--gold)}
+.code-input::placeholder{color:var(--muted);letter-spacing:2px;font-size:14px}
+.btn-unlock{padding:14px 24px;border-radius:var(--r-sm);background:var(--gold);color:#08080e;font-family:'Bebas Neue';font-size:18px;letter-spacing:2px;border:none;cursor:pointer;transition:all .18s;white-space:nowrap}
+.btn-unlock:hover{background:var(--gold2)}
+.code-error{font-size:12px;color:var(--orange);margin-top:6px;display:none}
+.lock-divider{width:100%;border:none;border-top:1px solid var(--border);margin:16px 0}
+.btn-coaching{display:inline-block;padding:12px 24px;border-radius:var(--r-sm);border:1px solid rgba(247,166,0,0.4);color:var(--gold);font-size:13px;font-weight:700;text-decoration:none;transition:all .18s;background:transparent}
+.btn-coaching:hover{background:rgba(247,166,0,0.08)}
+
+/* DASHBOARD */
+.dash-wrap{flex:1;max-width:880px;margin:0 auto;padding:36px 24px;width:100%}
+.dash-hero{text-align:center;margin-bottom:36px}
+.dash-hero h2{font-family:'Bebas Neue';font-size:clamp(40px,6vw,64px);letter-spacing:2px;margin-bottom:8px}
+.dash-hero p{color:var(--muted2);font-size:15px;max-width:480px;margin:0 auto}
+.modes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
+.mode-card{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:20px 16px;cursor:pointer;transition:all .2s;position:relative}
+.mode-card:hover:not(.locked){border-color:var(--border2);transform:translateY(-2px)}
+.mode-card.locked{opacity:0.5;cursor:default}
+.mode-card .mi{font-size:28px;margin-bottom:10px;display:block}
+.mode-card .mn{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
+.mode-card .md{font-size:11px;color:var(--muted);line-height:1.5}
+.mbadge{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:100px;display:inline-block;margin-top:8px}
+.mbadge-start{background:rgba(247,166,0,0.15);color:var(--gold)}
+.mbadge-lock{background:rgba(255,255,255,0.06);color:var(--muted)}
+.btn-ghost{background:var(--s2);border:1px solid var(--border2);color:var(--text);padding:12px 22px;font-size:14px;border-radius:var(--r-sm);cursor:pointer;font-family:'Plus Jakarta Sans';transition:all .18s}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+/* DRILL */
+.drill-wrap{flex:1;max-width:560px;margin:0 auto;padding:36px 24px 120px;width:100%}
+.step-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:24px}
+.step-seg{height:4px;border-radius:2px;background:var(--s3);transition:background .3s}
+.step-seg.active{background:var(--gold)}
+.step-seg.done{background:var(--green)}
+.step-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.step-label.green{color:var(--green)}
+.face-wrap{position:relative;width:160px;height:160px;border-radius:50%;overflow:hidden;margin:0 auto 20px;border:3px solid var(--border2)}
+.face-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+.fdot{position:absolute;width:14px;height:14px;border-radius:50%;background:var(--gold);border:2px solid var(--s2);cursor:pointer;transition:all .2s;transform:translate(-50%,-50%);animation:pulse-dot 2s ease-out infinite}
+.fdot:hover{transform:translate(-50%,-50%) scale(1.3)}
+.fdot.sel{background:var(--green);animation:none;transform:translate(-50%,-50%) scale(1.2)}
+@keyframes pulse-dot{0%{box-shadow:0 0 0 0 rgba(247,166,0,0.6)}60%{box-shadow:0 0 0 6px rgba(247,166,0,0)}100%{box-shadow:0 0 0 0 rgba(247,166,0,0)}}
+.jordan-tip{background:var(--s2);border:1px solid var(--border2);border-left:3px solid var(--gold);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:14px 16px;margin-bottom:16px;font-size:13px;color:var(--muted2);line-height:1.6}
+.jordan-tip strong{color:var(--gold)}
+.jordan-tip.green-tip{border-left-color:var(--green)}
+.jordan-tip.green-tip strong{color:var(--green)}
+.quick-picks{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.pick{font-size:11px;padding:5px 12px;border-radius:100px;border:1px solid var(--border2);background:var(--s2);color:var(--muted2);cursor:pointer;transition:all .15s}
+.pick:hover,.pick.sel{border-color:var(--gold);color:var(--gold);background:rgba(247,166,0,0.08)}
+.mem-input{width:100%;background:var(--s2);border:1px solid var(--border2);border-radius:var(--r-sm);color:var(--text);font-family:'Plus Jakarta Sans';font-size:14px;padding:12px 16px;outline:none;transition:border-color .2s;margin-bottom:12px}
+.mem-input:focus{border-color:var(--gold)}
+.mem-input::placeholder{color:var(--muted)}
+.vtags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.vtag{font-size:10px;padding:4px 10px;border-radius:100px;border:1px solid var(--border);background:var(--s1);color:var(--muted);cursor:pointer;transition:all .15s}
+.vtag:hover{border-color:var(--purple);color:var(--purple)}
+.anchor-confirm{background:rgba(61,255,160,0.1);border:1px solid rgba(61,255,160,0.3);border-radius:var(--r-sm);padding:10px 14px;font-size:13px;color:var(--green);text-align:center;margin-bottom:12px}
+.review-strip{background:var(--s2);border:1px solid var(--border);border-radius:var(--r-sm);padding:12px 16px;margin-bottom:16px}
+.rv-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.rv-intervals{display:flex;justify-content:space-between;font-size:10px;color:var(--muted2);margin-bottom:6px}
+.rv-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+.rv-seg{height:3px;border-radius:2px;background:var(--s3)}
+.rv-seg.active{background:var(--gold)}
+.face-counter{font-size:11px;color:var(--muted);text-align:right;margin-bottom:4px}
+.face-name-big{font-size:24px;font-weight:700;color:var(--text);text-align:center;margin-bottom:2px}
+.face-name-sub{font-size:12px;color:var(--muted);text-align:center;margin-bottom:16px}
+.btn-gold{display:block;width:100%;padding:14px;font-family:'Bebas Neue';font-size:18px;letter-spacing:2px;font-weight:400;border-radius:var(--r-sm);background:var(--gold);color:#08080e;border:none;cursor:pointer;transition:all .18s;text-align:center}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-1px)}
+.btn-gold.green{background:var(--green);color:#08080e}
+.btn-gold:disabled{opacity:.4;pointer-events:none;transform:none}
+.feedback{margin-top:12px;padding:14px;border-radius:var(--r-sm);text-align:center;font-size:14px;font-weight:700}
+.feedback.correct{background:rgba(61,255,160,0.1);border:1px solid rgba(61,255,160,0.3);color:var(--green)}
+.feedback.wrong{background:rgba(255,107,53,0.1);border:1px solid rgba(255,107,53,0.3);color:var(--orange)}
+
+/* RESULTS */
+.results-wrap{flex:1;max-width:560px;margin:0 auto;padding:36px 24px;width:100%}
+.score-big{font-family:'Bebas Neue';font-size:80px;color:var(--gold);line-height:1;text-align:center}
+.score-label{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);text-align:center;margin-bottom:28px}
+.insight{background:var(--s1);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:0 var(--r) var(--r) 0;padding:18px 20px;margin-bottom:20px}
+.insight h4{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.insight p{font-size:15px;color:var(--text);line-height:1.75;font-weight:300}
+.result-name{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid var(--border);font-size:13px}
+.result-name:last-child{border-bottom:none}
+.result-names-card{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:20px}
+.result-names-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);padding:10px 14px;border-bottom:1px solid var(--border)}
+
+/* FOOTER */
+footer{padding:18px 32px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+footer p{font-size:11px;color:var(--muted)}
+footer a{color:var(--gold);text-decoration:none;font-weight:600}
+.footer-version{font-size:11px;color:rgba(255,255,255,0.18);font-family:'JetBrains Mono',monospace}
+
+@media(max-width:640px){
+  header{padding:12px 16px}
+  .modes-grid{grid-template-columns:repeat(2,1fr)}
+  .drill-wrap,.dash-wrap{padding:24px 16px 100px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html">
+    <img src="/logo-dark.png" alt="StudyFast">
+  </a>
+  <nav class="nav-links">
+    <a class="nav-link" href="index.html">Speed Reading</a>
+    <a class="nav-link active" href="memory.html">Memory</a>
+    <a class="nav-link" href="science.html">The Science</a>
+  </nav>
+</header>
+
+<!-- ══ LOCK SCREEN ══ -->
+<div class="screen active" id="screen-lock">
+  <div class="lock-wrap">
+    <div class="lock-icon">🔒</div>
+    <h2 class="lock-h">Memory <span style="color:var(--gold)">Training</span></h2>
+    <p class="lock-sub">Exclusively for Jordan's private coaching clients. This is where the real performance gap opens.</p>
+    <div class="what-inside">
+      <div class="wi-label">What you get inside</div>
+      <div class="wi-item"><div class="wi-dot"></div>Names and faces — Jordan's 4-step system</div>
+      <div class="wi-item"><div class="wi-dot"></div>Memory palace builder</div>
+      <div class="wi-item"><div class="wi-dot"></div>Spaced repetition drills</div>
+      <div class="wi-item"><div class="wi-dot"></div>Association and link techniques</div>
+      <div class="wi-item"><div class="wi-dot"></div>Jordan's private coaching methods</div>
+    </div>
+    <div class="code-section">
+      <div class="code-label">Enter your access code</div>
+      <div class="code-row">
+        <input class="code-input" id="code-input" type="text" placeholder="e.g. JH-2026" maxlength="20" autocomplete="off">
+        <button class="btn-unlock" onclick="checkCode()">Unlock →</button>
+      </div>
+      <div class="code-error" id="code-error">Incorrect code. Contact Jordan for access.</div>
+    </div>
+    <hr class="lock-divider">
+    <p style="font-size:13px;color:var(--muted);margin-bottom:12px">Not a client yet?</p>
+    <a class="btn-coaching" href="https://calendly.com/study-fast/15-minute-call" target="_blank" rel="noopener noreferrer">Book a free 15-minute call →</a>
+  </div>
+  <footer>
+    <p>Built by <a href="https://studyfast.uk/" target="_blank">StudyFast</a> · Jordan Harry · TEDx 3.4M views · 50,000+ professionals in 70 countries</p>
+    <span class="footer-version">V2026.1</span>
+  </footer>
+</div>
+
+<!-- ══ DASHBOARD ══ -->
+<div class="screen" id="screen-dash">
+  <div class="dash-wrap">
+    <div class="dash-hero">
+      <h2>Your Memory <span style="color:var(--gold)">Programme</span></h2>
+      <p>Six techniques. One goal. Remember everything that matters.</p>
+    </div>
+    <div class="modes-grid">
+      <div class="mode-card" onclick="startDrill('names')">
+        <span class="mi">🧠</span>
+        <div class="mn">Names and Faces</div>
+        <div class="md">Jordan's 4-step system. Association, location, interaction, repetition.</div>
+        <span class="mbadge mbadge-start">Start here</span>
+      </div>
+      <div class="mode-card locked">
+        <span class="mi">🔗</span>
+        <div class="mn">Association</div>
+        <div class="md">Link new information to what you already know. The foundation of all memory.</div>
+        <span class="mbadge mbadge-lock">Coming soon</span>
+      </div>
+      <div class="mode-card locked">
+        <span class="mi">📦</span>
+        <div class="mn">Chunking</div>
+        <div class="md">Group information into meaningful units. Fewer pieces, same total recall.</div>
+        <span class="mbadge mbadge-lock">Coming soon</span>
+      </div>
+      <div class="mode-card locked">
+        <span class="mi">🏛️</span>
+        <div class="mn">Memory Palace</div>
+        <div class="md">Spatial memory system. Place information in rooms and walk through it.</div>
+        <span class="mbadge mbadge-lock">Coming soon</span>
+      </div>
+      <div class="mode-card locked">
+        <span class="mi">🔄</span>
+        <div class="mn">Spaced Repetition</div>
+        <div class="md">Ebbinghaus forgetting curve. Review at the exact moment you are about to forget.</div>
+        <span class="mbadge mbadge-lock">Coming soon</span>
+      </div>
+      <div class="mode-card locked">
+        <span class="mi">🏁</span>
+        <div class="mn">Re-Test</div>
+        <div class="md">Same names. New score. Proof of your progress.</div>
+        <span class="mbadge mbadge-lock">Complete all steps</span>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <p>Built by <a href="https://studyfast.uk/" target="_blank">StudyFast</a> · Jordan Harry · TEDx 3.4M views · 50,000+ professionals in 70 countries</p>
+    <span class="footer-version">V2026.1</span>
+  </footer>
+</div>
+
+<!-- ══ NAMES AND FACES DRILL ══ -->
+<div class="screen" id="screen-names">
+  <div class="drill-wrap" id="drill-wrap"></div>
+  <footer>
+    <p>Built by <a href="https://studyfast.uk/" target="_blank">StudyFast</a> · Jordan Harry · TEDx 3.4M views · 50,000+ professionals in 70 countries</p>
+    <span class="footer-version">V2026.1</span>
+  </footer>
+</div>
+
+<!-- ══ RESULTS ══ -->
+<div class="screen" id="screen-results">
+  <div class="results-wrap" id="results-wrap"></div>
+  <footer>
+    <p>Built by <a href="https://studyfast.uk/" target="_blank">StudyFast</a> · Jordan Harry · TEDx 3.4M views · 50,000+ professionals in 70 countries</p>
+    <span class="footer-version">V2026.1</span>
+  </footer>
+</div>
+
+<script>
+// ── ACCESS CODES ──
+const VALID_CODES = ['JORDAN-PRIVATE'];
+
+function checkCode() {
+  const val = document.getElementById('code-input').value.trim().toUpperCase();
+  const err = document.getElementById('code-error');
+  if (VALID_CODES.includes(val)) {
+    localStorage.setItem('sf_mem_access', '1');
+    err.style.display = 'none';
+    showScreen('screen-dash');
+  } else {
+    err.style.display = 'block';
+  }
+}
+document.getElementById('code-input').addEventListener('keydown', e => { if(e.key==='Enter') checkCode(); });
+
+// Check on load
+if (localStorage.getItem('sf_mem_access') === '1') showScreen('screen-dash');
+
+// ── SCREENS ──
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top:0, behavior:'instant' });
+}
+
+// ── DATA — loaded from API ──
+const DOTS = [
+  {id:'forehead',label:'Forehead',x:'50%',y:'14%'},
+  {id:'leftbrow',label:'Left brow',x:'33%',y:'26%'},
+  {id:'rightbrow',label:'Right brow',x:'67%',y:'26%'},
+  {id:'nose',label:'Nose',x:'50%',y:'44%'},
+  {id:'leftcheek',label:'Left cheek',x:'27%',y:'55%'},
+  {id:'rightcheek',label:'Right cheek',x:'73%',y:'55%'},
+  {id:'lips',label:'Lips',x:'50%',y:'66%'},
+  {id:'jaw',label:'Jaw',x:'50%',y:'80%'},
+];
+
+const TIPS = {
+  association: 'Who do you know with this name? A friend, colleague, or celebrity? Picture them right now. Make it someone vivid.',
+  location: 'Find the most distinctive feature on this face. What does your eye go to first? That is your anchor point.',
+  interaction: 'Picture your association doing something wild on that feature. Moving. Exaggerated. Ridiculous. The stranger the better — your brain locks onto it.',
+  recall: 'Find the feature. See the scene. Let the name come to you. Do not force it — trust the system.',
+};
+
+// ── STATE ──
+let S = { step:0, faceIdx:0, faces:[], pick:'', dot:'', scene:'', score:0, results:[], loading:false };
+
+// ── FALLBACK FACE POOL (used if API unavailable) ──
+const FALLBACK_FACES = [
+  {name:'Sarah', photo:'https://randomuser.me/api/portraits/women/1.jpg'},
+  {name:'James', photo:'https://randomuser.me/api/portraits/men/2.jpg'},
+  {name:'Emma', photo:'https://randomuser.me/api/portraits/women/3.jpg'},
+  {name:'David', photo:'https://randomuser.me/api/portraits/men/4.jpg'},
+  {name:'Olivia', photo:'https://randomuser.me/api/portraits/women/5.jpg'},
+  {name:'Michael', photo:'https://randomuser.me/api/portraits/men/6.jpg'},
+  {name:'Charlotte', photo:'https://randomuser.me/api/portraits/women/7.jpg'},
+  {name:'Harry', photo:'https://randomuser.me/api/portraits/men/8.jpg'},
+  {name:'Jessica', photo:'https://randomuser.me/api/portraits/women/9.jpg'},
+  {name:'Tom', photo:'https://randomuser.me/api/portraits/men/10.jpg'},
+  {name:'Sophie', photo:'https://randomuser.me/api/portraits/women/11.jpg'},
+  {name:'Jack', photo:'https://randomuser.me/api/portraits/men/12.jpg'},
+  {name:'Emily', photo:'https://randomuser.me/api/portraits/women/13.jpg'},
+  {name:'Daniel', photo:'https://randomuser.me/api/portraits/men/14.jpg'},
+  {name:'Lucy', photo:'https://randomuser.me/api/portraits/women/15.jpg'},
+  {name:'Oliver', photo:'https://randomuser.me/api/portraits/men/16.jpg'},
+  {name:'Grace', photo:'https://randomuser.me/api/portraits/women/17.jpg'},
+  {name:'William', photo:'https://randomuser.me/api/portraits/men/18.jpg'},
+  {name:'Hannah', photo:'https://randomuser.me/api/portraits/women/19.jpg'},
+  {name:'Ryan', photo:'https://randomuser.me/api/portraits/men/20.jpg'},
+];
+
+// ── FETCH FACES FROM RANDOMUSER.ME ──
+async function fetchFaces(count) {
+  const wrap = document.getElementById('drill-wrap');
+  wrap.innerHTML = `<div style="text-align:center;padding:80px 24px"><div style="font-size:32px;margin-bottom:16px">⏳</div><div style="font-size:14px;color:var(--muted2)">Loading your faces...</div></div>`;
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 5000);
+    const res = await fetch(`https://randomuser.me/api/?results=${count}&inc=name,picture&nat=gb,us,au,ca&noinfo`, { signal: controller.signal });
+    clearTimeout(timeout);
+    const data = await res.json();
+    // Deduplicate by first name
+    const seen = new Set();
+    const faces = data.results
+      .filter(p => { if(seen.has(p.name.first)) return false; seen.add(p.name.first); return true; })
+      .map(p => ({ name: p.name.first, photo: p.picture.large, picks: getCelebPicks(p.name.first) }));
+    if (faces.length < count) {
+      // Pad with fallback if dedup reduced count
+      const fallback = getFallbackFaces(count - faces.length, seen);
+      return faces.concat(fallback).slice(0, count);
+    }
+    return faces;
+  } catch(e) {
+    // API failed — use fallback pool silently
+    return getFallbackFaces(count, new Set());
+  }
+}
+
+function getFallbackFaces(count, exclude) {
+  const pool = FALLBACK_FACES.filter(f => !exclude.has(f.name))
+    .sort(() => Math.random() - .5);
+  const result = [];
+  for (let i = 0; result.length < count; i++) {
+    const f = pool[i % pool.length];
+    result.push({ ...f, picks: getCelebPicks(f.name) });
+  }
+  return result.slice(0, count);
+}
+
+function getCelebPicks(name) {
+  const celebs = {
+    'Sarah':['Sarah Jessica Parker','Sarah Connor','Sarah Millican'],
+    'James':['James Bond','James May','James Brown'],
+    'Emma':['Emma Watson','Emma Thompson','Emma Raducanu'],
+    'David':['David Beckham','David Attenborough','David Bowie'],
+    'Olivia':['Olivia Colman','Olivia Newton-John','Olivia Rodrigo'],
+    'Michael':['Michael Jordan','Michael Bublé','Michael McIntyre'],
+    'Charlotte':['Charlotte Church','Charlotte Bronte','Charlotte Casiraghi'],
+    'Harry':['Harry Styles','Harry Houdini','Prince Harry'],
+    'Jessica':['Jessica Alba','Jessica Ennis','Jessica Biel'],
+    'Tom':['Tom Hanks','Tom Holland','Tom Jones'],
+    'Sophie':['Sophie Ellis-Bextor','Sophie Turner','Sophie Wessex'],
+    'Jack':['Jack Black','Jack Nicholson','Captain Jack Sparrow'],
+    'Emily':['Emily Blunt','Emily Brontë','Emily Ratajkowski'],
+    'Daniel':['Daniel Craig','Daniel Radcliffe','Daniel Day-Lewis'],
+    'Lucy':['Lucy Liu','Lucy Bronze','Lucille Ball'],
+    'Oliver':['Oliver Hardy','Oliver Twist','Jamie Oliver'],
+    'Grace':['Grace Kelly','Grace Jones','Grace Dent'],
+    'William':['Prince William','Will Smith','William Shakespeare'],
+    'Hannah':['Hannah Montana','Hannah Waddingham','Hannah Arendt'],
+    'Ryan':['Ryan Reynolds','Ryan Gosling','Ryan Seacrest'],
+  };
+  if (celebs[name]) return celebs[name];
+  // Fallback — generic prompts
+  return [`A famous ${name} you admire`, `A ${name} you went to school with`, `A ${name} from a film or show`];
+}
+
+function startDrill(mode) {
+  if (mode !== 'names') { alert('Coming soon. Names and Faces is available now.'); return; }
+  showScreen('screen-names');
+  document.getElementById('drill-wrap').innerHTML = `
+    <div style="text-align:center;padding:40px 0 24px">
+      <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Names and Faces</div>
+      <h2 style="font-family:'Bebas Neue';font-size:clamp(36px,6vw,52px);letter-spacing:2px;margin-bottom:8px">How many names <span style="color:var(--gold)">today?</span></h2>
+      <p style="color:var(--muted2);font-size:14px;margin-bottom:32px">Pick your challenge. You can always go again.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px">
+      <div onclick="setDifficulty(5)" style="background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:20px 24px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:space-between" onmouseover="this.style.borderColor='var(--border2)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateY(0)'">
+        <div>
+          <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:3px">First Impression</div>
+          <div style="font-size:12px;color:var(--muted)">5 names — perfect for your first session</div>
+        </div>
+        <div style="font-family:'Bebas Neue';font-size:36px;color:var(--gold);line-height:1">5</div>
+      </div>
+      <div onclick="setDifficulty(10)" style="background:var(--s1);border:1px solid rgba(247,166,0,0.4);border-radius:var(--r);padding:20px 24px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:space-between;position:relative" onmouseover="this.style.borderColor='var(--gold)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(247,166,0,0.4)';this.style.transform='translateY(0)'">
+        <div style="position:absolute;top:-1px;right:16px;background:var(--gold);color:#08080e;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border-radius:0 0 6px 6px">Most popular</div>
+        <div>
+          <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:3px">The Networker</div>
+          <div style="font-size:12px;color:var(--muted)">10 names — a full room of people</div>
+        </div>
+        <div style="font-family:'Bebas Neue';font-size:36px;color:var(--gold);line-height:1">10</div>
+      </div>
+      <div onclick="setDifficulty(20)" style="background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:20px 24px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:space-between" onmouseover="this.style.borderColor='var(--border2)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateY(0)'">
+        <div>
+          <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:3px">The Conference</div>
+          <div style="font-size:12px;color:var(--muted)">20 names — elite level recall</div>
+        </div>
+        <div style="font-family:'Bebas Neue';font-size:36px;color:var(--gold);line-height:1">20</div>
+      </div>
+    </div>
+  `;
+}
+
+async function setDifficulty(count) {
+  const faces = await fetchFaces(count);
+  if (!faces) return;
+  S.faces = faces;
+  S.faceIdx = 0; S.step = 0; S.score = 0; S.results = [];
+  S.pick = ''; S.dot = ''; S.scene = '';
+  render();
+}
+
+function faceDisplay(showDots, activeDot) {
+  const face = S.faces[S.faceIdx];
+  const dots = showDots ? DOTS.map(d => `<div class="fdot${activeDot===d.id?' sel':''}" style="left:${d.x};top:${d.y}" onclick="pickDot('${d.id}')" title="${d.label}"></div>`).join('') : (activeDot ? (() => { const d=DOTS.find(x=>x.id===activeDot); return d?`<div class="fdot sel" style="left:${d.x};top:${d.y}"></div>`:''; })() : '');
+  return `<div class="face-wrap" style="width:160px;height:160px;border-radius:50%;overflow:hidden;position:relative;border:3px solid var(--border2);margin:0 auto 20px">
+    <img src="${face.photo}" alt="${face.name}" style="width:100%;height:100%;object-fit:cover;display:block">
+    ${dots}
+  </div>`;
+}
+
+function progressBar() {
+  return `<div class="step-bar">${[0,1,2,3].map(i=>`<div class="step-seg${i<S.step?' done':i===S.step?' active':''}"></div>`).join('')}</div>`;
+}
+
+function render() {
+  const face = S.faces[S.faceIdx];
+  const wrap = document.getElementById('drill-wrap');
+  if (!face || !wrap) { showResults(); return; }
+  const counter = `<div class="face-counter">${S.faceIdx+1} of ${S.faces.length}</div>`;
+  let html = '';
+
+  if (S.step === 0) {
+    html = `${progressBar()}${counter}
+    <div class="step-label">Step 1 of 4 — Association</div>
+    <div class="face-name-big">${face.name}</div>
+    <div class="face-name-sub">Meet ${face.name}</div>
+    ${faceDisplay(false, '')}
+    <div class="jordan-tip"><strong>Jordan:</strong> ${TIPS.association}</div>
+    <div style="font-size:11px;color:var(--muted);margin-bottom:8px">Quick picks:</div>
+    <div class="quick-picks">${face.picks.map(p=>`<div class="pick${S.pick===p?' sel':''}" onclick="setPick('${p}')">${p}</div>`).join('')}</div>
+    <input class="mem-input" id="pick-input" placeholder="Or type your own ${face.name}..." value="${S.pick}" oninput="S.pick=this.value">
+    <button class="btn-gold" onclick="next()">Next — find the feature →</button>`;
+
+  } else if (S.step === 1) {
+    html = `${progressBar()}${counter}
+    <div class="step-label">Step 2 of 4 — Location</div>
+    <div class="face-name-big">${face.name}</div>
+    <div class="face-name-sub">Association: <span style="color:var(--gold)">${S.pick||'your '+face.name}</span></div>
+    <div style="font-size:11px;color:var(--muted2);text-align:center;margin-bottom:10px">Tap the gold dots to select a feature</div>
+    ${faceDisplay(true, S.dot)}
+    <div class="jordan-tip"><strong>Jordan:</strong> ${TIPS.location}</div>
+    ${S.dot ? `<div class="anchor-confirm">Anchor: <strong>${DOTS.find(d=>d.id===S.dot)?.label}</strong></div>` : ''}
+    <button class="btn-gold" onclick="next()" ${!S.dot?'disabled':''}>Lock this anchor →</button>`;
+
+  } else if (S.step === 2) {
+    const dotLabel = DOTS.find(d=>d.id===S.dot)?.label||'';
+    html = `${progressBar()}${counter}
+    <div class="step-label">Step 3 of 4 — Interaction</div>
+    <div class="face-name-big">${face.name}</div>
+    <div class="face-name-sub"><span style="color:var(--gold)">${S.pick||face.name}</span> on the <span style="color:var(--green)">${dotLabel}</span></div>
+    ${faceDisplay(false, S.dot)}
+    <div class="jordan-tip"><strong>Jordan:</strong> ${TIPS.interaction}</div>
+    <div style="font-size:11px;color:var(--muted);margin-bottom:6px">Describe your scene (writing deepens encoding):</div>
+    <textarea class="mem-input" id="scene-input" placeholder="Describe your scene — the more vivid and ridiculous the better..." rows="2" style="resize:none" oninput="S.scene=this.value"></textarea>
+    <button class="btn-gold" onclick="next()">Scene locked — test me →</button>`;
+
+  } else if (S.step === 3) {
+    html = `${progressBar()}${counter}
+    <div class="step-label green">Step 4 of 4 — Recall</div>
+    <div class="face-name-big" style="color:var(--muted2)">Who is this?</div>
+    <div class="face-name-sub">Find the feature. See the scene. Let the name come.</div>
+    ${faceDisplay(false, '')}
+    <div class="jordan-tip green-tip"><strong>Jordan:</strong> ${TIPS.recall}</div>
+    <input class="mem-input" id="recall-input" placeholder="Type their name..." autocomplete="off">
+    <button class="btn-gold green" onclick="checkRecall()">Check my answer</button>`;
+  }
+
+  wrap.innerHTML = html;
+  const ta = document.getElementById('scene-input');
+  if (ta) ta.value = S.scene;
+}
+
+function setPick(p) { S.pick = p; const inp = document.getElementById('pick-input'); if(inp) inp.value = p; render(); }
+function pickDot(id) { S.dot = id; render(); }
+function addVivid(t) { const ta = document.getElementById('scene-input'); if(ta){ta.value+=(ta.value?' ':'')+t.toLowerCase()+'...';S.scene=ta.value;} }
+
+function next() {
+  if (S.step===0) { const inp=document.getElementById('pick-input'); if(inp&&inp.value.trim()) S.pick=inp.value.trim(); if(!S.pick) S.pick='someone you know'; }
+  if (S.step===1 && !S.dot) return;
+  if (S.step===2) { const ta=document.getElementById('scene-input'); if(ta) S.scene=ta.value; }
+  S.step++; render();
+}
+
+function checkRecall() {
+  const inp = document.getElementById('recall-input');
+  const ans = (inp ? inp.value.trim() : '').toLowerCase();
+  const correct = S.faces[S.faceIdx].name.toLowerCase();
+  const ok = ans === correct || (correct.startsWith(ans) && ans.length > 1);
+  S.results.push({ name:S.faces[S.faceIdx].name, correct:ok });
+  if (ok) S.score++;
+  // Queue wrong answers for a second attempt at end
+  if (!ok) S.faces.push(S.faces[S.faceIdx]);
+  const wrap = document.getElementById('drill-wrap');
+  const fb = document.createElement('div');
+  fb.className = 'feedback ' + (ok ? 'correct' : 'wrong');
+  fb.textContent = ok ? '✓ Correct.' : '✗ It was ' + S.faces[S.faceIdx].name + '. You will see this one again.';
+  wrap.appendChild(fb);
+  setTimeout(() => {
+    S.faceIdx++; S.step=0; S.pick=''; S.dot=''; S.scene='';
+    if (S.faceIdx >= S.faces.length) showResults(); else render();
+  }, 1800);
+}
+
+function showResults() {
+  showScreen('screen-results');
+  const total = S.results.filter(r => !S.results.slice(0, S.results.indexOf(r)).some(x => x.name === r.name)).length || S.faces.slice(0,5).length;
+  const pct = Math.round((S.score / S.results.length) * 100);
+  const insights = [
+    {max:40, txt:`${S.score} out of ${S.results.length}. The system is new — that is expected. Go again immediately. The second run is always stronger.`},
+    {max:70, txt:`${S.score} out of ${S.results.length}. Solid start. Make your interaction scenes more exaggerated. The wilder the scene, the stronger the lock.`},
+    {max:90, txt:`${S.score} out of ${S.results.length}. Strong. Check the faces you missed — was your anchor feature distinctive enough?`},
+    {max:101, txt:`${S.score} out of ${S.results.length}. Excellent. The system is working. Run this drill daily and the results compound fast.`},
+  ];
+  const insight = insights.find(i => pct <= i.max);
+  const nameRows = S.results.map(r => `<div class="result-name"><span>${r.name}</span><span style="color:${r.correct?'var(--green)':'var(--orange)'}">${r.correct?'✓ Correct':'✗ Missed'}</span></div>`).join('');
+  document.getElementById('results-wrap').innerHTML = `
+    <div style="padding:32px 0 8px;text-align:center">
+      <div class="score-big">${S.score}/${S.results.length}</div>
+      <div class="score-label">Names recalled correctly</div>
+    </div>
+    <div class="insight"><h4>Jordan's Take</h4><p>${insight.txt}</p></div>
+    <div class="result-names-card">
+      <div class="result-names-label">This session</div>
+      ${nameRows}
+    </div>
+    <button class="btn-gold" style="margin-bottom:10px" onclick="startDrill('names')">Go again →</button>
+    <button class="btn-ghost" style="width:100%;padding:12px;font-size:14px" onclick="showScreen('screen-dash')">Back to dashboard</button>
+  `;
+}
+</script>
+</body>
+</html>
