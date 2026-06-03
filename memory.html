@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Memory Training — StudyFast</title>
+<title>Memory Training: StudyFast</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -63,16 +63,94 @@ header{padding:12px 32px;display:flex;align-items:center;justify-content:space-b
 .dash-hero{text-align:center;margin-bottom:36px}
 .dash-hero h2{font-family:'Bebas Neue';font-size:clamp(40px,6vw,64px);letter-spacing:2px;margin-bottom:8px}
 .dash-hero p{color:var(--muted2);font-size:15px;max-width:480px;margin:0 auto}
-.modes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
-.mode-card{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:20px 16px;cursor:pointer;transition:all .2s;position:relative}
-.mode-card:hover:not(.locked){border-color:var(--border2);transform:translateY(-2px)}
-.mode-card.locked{opacity:0.5;cursor:default}
-.mode-card .mi{font-size:28px;margin-bottom:10px;display:block}
-.mode-card .mn{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
-.mode-card .md{font-size:11px;color:var(--muted);line-height:1.5}
-.mbadge{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:100px;display:inline-block;margin-top:8px}
-.mbadge-start{background:rgba(247,166,0,0.15);color:var(--gold)}
-.mbadge-lock{background:rgba(255,255,255,0.06);color:var(--muted)}
+
+/* Section labels */
+.dash-section-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.dash-section-label .sdot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.sdot-gold{background:var(--gold)}
+.sdot-green{background:var(--green)}
+
+/* AI card — gold gradient border treatment */
+.ai-card{
+  position:relative;background:var(--s1);border-radius:var(--r);
+  padding:18px 16px;cursor:pointer;transition:all .2s;
+  isolation:isolate;
+}
+.ai-card::before{
+  content:'';position:absolute;inset:0;border-radius:var(--r);
+  padding:1.5px;
+  background:linear-gradient(135deg,rgba(247,166,0,0.9),rgba(247,166,0,0.2),transparent 60%);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  pointer-events:none;
+}
+.ai-card:hover{transform:translateY(-2px);background:var(--s2)}
+.ai-card .ac-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.ai-card .ac-icon{font-size:24px}
+.ai-badge{font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:3px 8px;border-radius:100px;background:rgba(61,255,160,0.12);color:var(--green);border:1px solid rgba(61,255,160,0.25)}
+.start-badge{font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:3px 8px;border-radius:100px;background:rgba(247,166,0,0.15);color:var(--gold);border:1px solid rgba(247,166,0,0.25)}
+.ai-card .ac-name{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
+.ai-card .ac-desc{font-size:11px;color:var(--muted);line-height:1.5}
+
+/* Intention card — full width featured */
+.intent-card{
+  position:relative;background:var(--s1);border-radius:var(--r);
+  padding:18px 20px;cursor:pointer;transition:all .2s;
+  display:flex;align-items:center;gap:16px;margin-bottom:10px;
+  isolation:isolate;
+}
+.intent-card::before{
+  content:'';position:absolute;inset:0;border-radius:var(--r);
+  padding:1.5px;
+  background:linear-gradient(135deg,var(--gold),rgba(247,166,0,0.3),transparent 70%);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  pointer-events:none;
+}
+.intent-card:hover{transform:translateY(-2px);background:var(--s2)}
+.intent-icon{font-size:28px;flex-shrink:0}
+.intent-text{flex:1}
+.intent-name{font-size:15px;font-weight:700;color:var(--text);margin-bottom:3px;display:flex;align-items:center;gap:8px}
+.intent-desc{font-size:12px;color:var(--muted2);line-height:1.5}
+.intent-arrow{color:var(--gold);font-size:20px;flex-shrink:0}
+
+/* AI grid */
+.ai-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px}
+.ai-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:28px}
+
+/* Coming soon locked card */
+.ai-card-locked{
+  position:relative;background:var(--s1);border-radius:var(--r);
+  padding:18px 16px;opacity:0.45;cursor:default;
+  border:1px solid var(--border);
+}
+.ai-card-locked .ac-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.ai-card-locked .ac-icon{font-size:24px}
+.lock-badge{font-size:9px;font-weight:500;padding:3px 8px;border-radius:100px;background:rgba(255,255,255,0.06);color:var(--muted)}
+.ai-card-locked .ac-name{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
+.ai-card-locked .ac-desc{font-size:11px;color:var(--muted);line-height:1.5}
+
+/* Dash divider */
+.dash-divider{border:none;border-top:1px solid var(--border);margin:24px 0}
+
+/* Names card — standalone */
+.names-card{
+  background:var(--s1);border:1px solid var(--border);border-radius:var(--r);
+  padding:18px 20px;display:flex;align-items:center;gap:16px;
+  cursor:pointer;transition:all .2s;
+}
+.names-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.names-icon{width:52px;height:52px;border-radius:50%;background:rgba(247,166,0,0.1);border:1px solid rgba(247,166,0,0.25);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+.names-info{flex:1}
+.names-name{font-size:15px;font-weight:700;color:var(--text);margin-bottom:3px}
+.names-desc{font-size:12px;color:var(--muted2);line-height:1.5;margin-bottom:8px}
+.names-levels{display:flex;gap:6px;flex-wrap:wrap}
+.names-level{font-size:10px;padding:3px 10px;border-radius:100px;background:var(--s2);border:1px solid var(--border);color:var(--muted2)}
+.names-arrow{color:var(--muted);font-size:22px;flex-shrink:0;transition:color .2s}
+.names-card:hover .names-arrow{color:var(--gold)}
+
 .btn-ghost{background:var(--s2);border:1px solid var(--border2);color:var(--text);padding:12px 22px;font-size:14px;border-radius:var(--r-sm);cursor:pointer;font-family:'Plus Jakarta Sans';transition:all .18s}
 .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
 
@@ -86,9 +164,7 @@ header{padding:12px 32px;display:flex;align-items:center;justify-content:space-b
 .step-label.green{color:var(--green)}
 .face-wrap{position:relative;width:160px;height:160px;border-radius:50%;overflow:hidden;margin:0 auto 20px;border:3px solid var(--border2)}
 .face-wrap img{width:100%;height:100%;object-fit:cover;display:block}
-.fdot{position:absolute;width:14px;height:14px;border-radius:50%;background:var(--gold);border:2px solid var(--s2);cursor:pointer;transition:all .2s;transform:translate(-50%,-50%);animation:pulse-dot 2s ease-out infinite}
-.fdot:hover{transform:translate(-50%,-50%) scale(1.3)}
-.fdot.sel{background:var(--green);animation:none;transform:translate(-50%,-50%) scale(1.2)}
+
 @keyframes pulse-dot{0%{box-shadow:0 0 0 0 rgba(247,166,0,0.6)}60%{box-shadow:0 0 0 6px rgba(247,166,0,0)}100%{box-shadow:0 0 0 0 rgba(247,166,0,0)}}
 .jordan-tip{background:var(--s2);border:1px solid var(--border2);border-left:3px solid var(--gold);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:14px 16px;margin-bottom:16px;font-size:13px;color:var(--muted2);line-height:1.6}
 .jordan-tip strong{color:var(--gold)}
@@ -133,6 +209,36 @@ header{padding:12px 32px;display:flex;align-items:center;justify-content:space-b
 .result-names-card{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:20px}
 .result-names-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);padding:10px 14px;border-bottom:1px solid var(--border)}
 
+/* INTENTION SETTER */
+.int-pick{padding:9px 16px;border-radius:100px;border:1px solid var(--border2);background:var(--s2);color:var(--muted2);cursor:pointer;font-size:13px;transition:all .15s;font-family:'Plus Jakarta Sans'}
+.int-pick:hover{border-color:var(--gold);color:var(--gold)}
+.int-pick.sel{border-color:var(--gold);color:var(--gold);background:rgba(247,166,0,0.1);font-weight:600}
+
+/* ACTIVE RECALL */
+.ar-pulse-wrap{display:flex;flex-direction:column;align-items:center}
+.ar-pulse-dot{width:12px;height:12px;border-radius:50%;background:var(--gold);animation:ar-pulse 1.2s ease-out infinite}
+@keyframes ar-pulse{0%{box-shadow:0 0 0 0 rgba(247,166,0,0.7);opacity:1}70%{box-shadow:0 0 0 14px rgba(247,166,0,0);opacity:.7}100%{box-shadow:0 0 0 0 rgba(247,166,0,0);opacity:1}}
+.ar-score-ring{width:100px;height:100px;border-radius:50%;border:4px solid var(--green);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto;background:var(--s1);box-shadow:0 0 32px rgba(61,255,160,0.15)}
+.ar-score-ring.low{border-color:var(--orange);box-shadow:0 0 32px rgba(255,107,53,0.15)}
+.ar-score-ring.mid{border-color:var(--gold);box-shadow:0 0 32px rgba(247,166,0,0.15)}
+.ar-score-n{font-family:'Bebas Neue';font-size:36px;color:var(--green);line-height:1}
+.ar-score-ring.low .ar-score-n{color:var(--orange)}
+.ar-score-ring.mid .ar-score-n{color:var(--gold)}
+.ar-score-l{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+.ar-feedback-card{background:var(--s1);border:1px solid var(--border2);border-left:3px solid var(--gold);border-radius:0 var(--r) var(--r) 0;padding:18px 20px;margin-bottom:16px}
+.ar-avatar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.jh-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--orange));display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#08080e;flex-shrink:0;font-family:'Plus Jakarta Sans'}
+.ar-feedback-text{font-size:14px;color:var(--text);line-height:1.75;font-weight:300;margin:0}
+.ar-breakdown{background:var(--s2);border:1px solid var(--border);border-radius:var(--r-sm);padding:14px 16px;margin-bottom:16px;font-size:13px;line-height:1.8;color:var(--muted2)}
+.ar-hit{color:var(--green);font-weight:600}
+.ar-miss{color:var(--orange);font-weight:600}
+.ar-missed{background:rgba(255,107,53,0.08);border:1px solid rgba(255,107,53,0.25);border-radius:var(--r-sm);padding:14px 16px;font-size:13px;color:var(--muted2);line-height:1.75;margin-bottom:20px}
+
+/* QUESTION PRIME */
+.qp-question{background:var(--s1);border:1px solid var(--border);border-radius:var(--r-sm);padding:14px 16px;margin-bottom:8px;display:flex;align-items:flex-start;gap:12px}
+.qp-q-num{width:24px;height:24px;border-radius:50%;background:rgba(247,166,0,0.12);border:1px solid rgba(247,166,0,0.3);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--gold);flex-shrink:0;margin-top:1px}
+.qp-q-text{font-size:14px;color:var(--text);line-height:1.6;font-weight:300}
+
 /* FOOTER */
 footer{padding:18px 32px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
 footer p{font-size:11px;color:var(--muted)}
@@ -141,8 +247,10 @@ footer a{color:var(--gold);text-decoration:none;font-weight:600}
 
 @media(max-width:640px){
   header{padding:12px 16px}
-  .modes-grid{grid-template-columns:repeat(2,1fr)}
+  .ai-grid{grid-template-columns:1fr 1fr}
+  .ai-grid-2{grid-template-columns:1fr}
   .drill-wrap,.dash-wrap{padding:24px 16px 100px}
+  .names-levels{display:none}
 }
 </style>
 </head>
@@ -167,7 +275,7 @@ footer a{color:var(--gold);text-decoration:none;font-weight:600}
     <p class="lock-sub">Exclusively for Jordan's private coaching clients. This is where the real performance gap opens.</p>
     <div class="what-inside">
       <div class="wi-label">What you get inside</div>
-      <div class="wi-item"><div class="wi-dot"></div>Names and faces — Jordan's 4-step system</div>
+      <div class="wi-item"><div class="wi-dot"></div>Names and faces: Jordan's 4-step system</div>
       <div class="wi-item"><div class="wi-dot"></div>Memory palace builder</div>
       <div class="wi-item"><div class="wi-dot"></div>Spaced repetition drills</div>
       <div class="wi-item"><div class="wi-dot"></div>Association and link techniques</div>
@@ -195,51 +303,74 @@ footer a{color:var(--gold);text-decoration:none;font-weight:600}
 <div class="screen" id="screen-dash">
   <div class="dash-wrap">
     <div class="dash-hero">
-      <h2>Your Memory <span style="color:var(--gold)">Programme</span></h2>
-      <p>Six techniques. One goal. Remember everything that matters.</p>
+      <h2>Memory <span style="color:var(--gold)">Training</span></h2>
+      <p>Two tools. One goal. Remember everything that matters.</p>
     </div>
-    <div class="modes-grid">
-      <div class="mode-card" onclick="startDrill('names')">
-        <span class="mi">🧠</span>
-        <div class="mn">Names and Faces</div>
-        <div class="md">Jordan's 4-step system. Association, location, interaction, repetition.</div>
-        <span class="mbadge mbadge-start">Start here</span>
+
+    <!-- SECTION 1: WHILE YOU READ -->
+    <div class="dash-section-label"><div class="sdot sdot-gold"></div> While you read</div>
+
+    <!-- Intention — full width featured -->
+    <div class="intent-card" onclick="showScreen('screen-intention')">
+      <div class="intent-icon">🎯</div>
+      <div class="intent-text">
+        <div class="intent-name">Intention Setter <span class="start-badge">Start here</span></div>
+        <div class="intent-desc">30 seconds before you read. Tells your brain what to look for. Most people skip this. Most people forget 80% of what they read.</div>
       </div>
-      <div class="mode-card locked">
-        <span class="mi">🔗</span>
-        <div class="mn">Association</div>
-        <div class="md">Link new information to what you already know. The foundation of all memory.</div>
-        <span class="mbadge mbadge-lock">Coming soon</span>
+      <div class="intent-arrow">→</div>
+    </div>
+
+    <!-- AI trio -->
+    <div class="ai-grid">
+      <div class="ai-card" onclick="showScreen('screen-question-prime')">
+        <div class="ac-top"><span class="ac-icon">❓</span><span class="ai-badge">StudyFast AI</span></div>
+        <div class="ac-name">Question Prime</div>
+        <div class="ac-desc">StudyFast AI generates 3 questions from your text. Your brain reads to answer them, not just absorb them.</div>
       </div>
-      <div class="mode-card locked">
-        <span class="mi">📦</span>
-        <div class="mn">Chunking</div>
-        <div class="md">Group information into meaningful units. Fewer pieces, same total recall.</div>
-        <span class="mbadge mbadge-lock">Coming soon</span>
+      <div class="ai-card" onclick="showScreen('screen-active-recall')">
+        <div class="ac-top"><span class="ac-icon">✏️</span><span class="ai-badge">StudyFast AI</span></div>
+        <div class="ac-name">Active Recall</div>
+        <div class="ac-desc">What did you just read? Type it. StudyFast AI checks your recall against the source and scores you.</div>
       </div>
-      <div class="mode-card locked">
-        <span class="mi">🏛️</span>
-        <div class="mn">Memory Palace</div>
-        <div class="md">Spatial memory system. Place information in rooms and walk through it.</div>
-        <span class="mbadge mbadge-lock">Coming soon</span>
-      </div>
-      <div class="mode-card locked">
-        <span class="mi">🔄</span>
-        <div class="mn">Spaced Repetition</div>
-        <div class="md">Ebbinghaus forgetting curve. Review at the exact moment you are about to forget.</div>
-        <span class="mbadge mbadge-lock">Coming soon</span>
-      </div>
-      <div class="mode-card locked">
-        <span class="mi">🏁</span>
-        <div class="mn">Re-Test</div>
-        <div class="md">Same names. New score. Proof of your progress.</div>
-        <span class="mbadge mbadge-lock">Complete all steps</span>
+      <div class="ai-card" onclick="showScreen('screen-teach-back')">
+        <div class="ac-top"><span class="ac-icon">🎤</span><span class="ai-badge">StudyFast AI</span></div>
+        <div class="ac-name">Teach It Back</div>
+        <div class="ac-desc">Explain it simply. StudyFast AI finds the gaps in your understanding and tells you exactly what you missed.</div>
       </div>
     </div>
+
+    <!-- Mind Map — coming soon -->
+    <div class="ai-grid-2">
+      <div class="ai-card-locked">
+        <div class="ac-top"><span class="ac-icon">🗺️</span><span class="lock-badge">Coming soon</span></div>
+        <div class="ac-name">Mind Map</div>
+        <div class="ac-desc">StudyFast AI turns your text into a visual map. Two memory pathways, not one.</div>
+      </div>
+      <div class="ai-card-locked">
+        <div class="ac-top"><span class="ac-icon">🔄</span><span class="lock-badge">Coming soon</span></div>
+        <div class="ac-name">Spaced Review</div>
+        <div class="ac-desc">StudyFast AI resurfaces the ideas you are most likely to have forgotten. Right on time.</div>
+      </div>
+    </div>
+
+    <hr class="dash-divider">
+
+    <!-- SECTION 2: STANDALONE PRACTICE -->
+    <div class="dash-section-label" style="margin-bottom:12px"><div class="sdot sdot-green"></div> Standalone practice</div>
+
+    <div class="names-card" onclick="startDrill('names')">
+      <div class="names-icon">🧠</div>
+      <div class="names-info">
+        <div class="names-name">Names and Faces</div>
+        <div class="names-desc">Jordan's 4-step system. Association, location, interaction, recall. Real photos. Works immediately.</div>
+      </div>
+      <div class="names-arrow">→</div>
+    </div>
+
   </div>
   <footer>
     <p>Built by <a href="https://studyfast.uk/" target="_blank">StudyFast</a> · Jordan Harry · TEDx 3.4M views · 50,000+ professionals in 70 countries</p>
-    <span class="footer-version">V2026.1</span>
+    <span class="footer-version">V2026.2</span>
   </footer>
 </div>
 
@@ -278,6 +409,16 @@ function checkCode() {
 }
 document.getElementById('code-input').addEventListener('keydown', e => { if(e.key==='Enter') checkCode(); });
 
+// Intention field listeners — added after DOM ready
+document.addEventListener('DOMContentLoaded', () => {
+  const pk = document.getElementById('prior-knowledge');
+  const oq = document.getElementById('one-question');
+  if (pk) pk.addEventListener('input', checkIntentionReady);
+  if (oq) oq.addEventListener('input', checkIntentionReady);
+  const qpt = document.getElementById('qp-source-text');
+  if (qpt) qpt.addEventListener('input', checkQPReady);
+});
+
 // Check on load
 if (localStorage.getItem('sf_mem_access') === '1') showScreen('screen-dash');
 
@@ -286,6 +427,472 @@ function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo({ top:0, behavior:'instant' });
+}
+
+// ── TEACH IT BACK ──
+let TB = { audience: '' };
+
+function onTBPaste(el) {
+  setTimeout(() => {
+    const val = el.value.trim();
+    if (val.length < 30) return;
+    const words = val.split(/\s+/).filter(Boolean).length;
+    document.getElementById('tb-paste-area').style.display = 'none';
+    const loaded = document.getElementById('tb-loaded-state');
+    loaded.style.display = 'flex';
+    document.getElementById('tb-word-count').textContent = words + ' words loaded. Text is now hidden.';
+    checkTBReady();
+    setTimeout(() => {
+      document.getElementById('tb-audience-picks').scrollIntoView({ behavior:'smooth', block:'center' });
+    }, 300);
+  }, 50);
+}
+
+function clearTBSource() {
+  document.getElementById('tb-source-text').value = '';
+  document.getElementById('tb-loaded-state').style.display = 'none';
+  document.getElementById('tb-paste-area').style.display = 'block';
+  checkTBReady();
+}
+
+function pickTBAudience(el, val) {
+  document.querySelectorAll('#tb-audience-picks .int-pick').forEach(p => p.classList.remove('sel'));
+  el.classList.add('sel');
+  TB.audience = val;
+  checkTBReady();
+}
+
+function checkTBReady() {
+  const hasSource = document.getElementById('tb-source-text')?.value.trim().length > 30;
+  const hasExplanation = document.getElementById('tb-explanation')?.value.trim().length > 20;
+  const btn = document.getElementById('tb-submit-btn');
+  if (btn) {
+    const ready = hasSource && hasExplanation;
+    btn.style.opacity = ready ? '1' : '0.4';
+    btn.style.pointerEvents = ready ? 'auto' : 'none';
+  }
+}
+
+async function submitTeachBack() {
+  const source = document.getElementById('tb-source-text')?.value.trim();
+  const explanation = document.getElementById('tb-explanation')?.value.trim();
+  if (!source || source.length < 30) { alert('Please paste the text you read first.'); return; }
+  if (!explanation || explanation.length < 20) { alert('Please write your explanation first.'); return; }
+
+  document.getElementById('tb-step-1').style.display = 'none';
+  document.getElementById('tb-loading').style.display = 'block';
+
+  const msgs = [
+    'Jordan\'s AI is reading your explanation...',
+    'Checking it against the source...',
+    'Finding the gaps...',
+    'Building your feedback...',
+  ];
+  let mi = 0;
+  const iv = setInterval(() => { mi=(mi+1)%msgs.length; const el=document.getElementById('tb-loading-text'); if(el) el.textContent=msgs[mi]; }, 1800);
+
+  const audience = TB.audience || 'a smart colleague who has not read it';
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': ANTHROPIC_KEY,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true',
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: `You are Jordan Harry, the UK's number one speed reading coach. You are reviewing a student's Feynman-technique explanation of something they just read. Be specific — reference actual content from the source. Be honest about gaps. Be encouraging about what they got right. Be warm and encouraging. Always acknowledge what they got right first. Frame gaps as opportunities, not failures. Sound like a supportive mentor. First person as Jordan. No em dashes in output.
+
+Respond ONLY with valid JSON:
+{
+  "score": <integer 0-100>,
+  "scoreLabel": "<one of: Excellent / Strong / Good start / Needs work>",
+  "feedback": "<2-3 sentences of Jordan's overall take, specific, honest, direct>",
+  "gotRight": ["<concept they explained correctly>", ...],
+  "gaps": ["<concept they missed or got wrong>", ...],
+  "simplerVersion": "<How Jordan would explain the core idea in 2-3 sentences, showing what a great simple explanation looks like>"
+}`,
+        messages: [{
+          role: 'user',
+          content: `SOURCE TEXT:\n${source.slice(0, 3000)}\n\nSTUDENT'S EXPLANATION (aimed at ${audience}):\n${explanation}\n\nEvaluate this explanation.`
+        }]
+      })
+    });
+
+    clearInterval(iv);
+    const data = await res.json();
+    const raw = data.content?.[0]?.text || '';
+    const clean = raw.replace(/```json|```/g, '').trim();
+    const result = JSON.parse(clean);
+    renderTBResults(result);
+
+  } catch(e) {
+    clearInterval(iv);
+    console.error('TB error:', e);
+    document.getElementById('tb-loading').style.display = 'none';
+    document.getElementById('tb-step-1').style.display = 'block';
+    alert('Something went wrong. Check your connection and try again.');
+  }
+}
+
+function renderTBResults(r) {
+  document.getElementById('tb-loading').style.display = 'none';
+  document.getElementById('tb-results').style.display = 'block';
+
+  const ring = document.getElementById('tb-score-ring');
+  const numEl = document.getElementById('tb-score-num');
+  numEl.textContent = r.score + '%';
+  ring.classList.remove('low','mid');
+  if (r.score < 50) ring.classList.add('low');
+  else if (r.score < 75) ring.classList.add('mid');
+
+  const colors = { 'Excellent':'var(--green)', 'Strong':'var(--green)', 'Good start':'var(--gold)', 'Needs work':'var(--orange)' };
+  const lbl = document.getElementById('tb-score-label');
+  lbl.textContent = r.scoreLabel;
+  lbl.style.color = colors[r.scoreLabel] || 'var(--gold)';
+
+  document.getElementById('tb-feedback-text').textContent = r.feedback;
+
+  if (r.gotRight?.length) {
+    document.getElementById('tb-got-right-wrap').style.display = 'block';
+    document.getElementById('tb-got-right').innerHTML = r.gotRight.map(g => `<div style="margin-bottom:4px"><span class="ar-hit">✓</span> ${g}</div>`).join('');
+  }
+
+  if (r.gaps?.length) {
+    document.getElementById('tb-gaps-wrap').style.display = 'block';
+    document.getElementById('tb-gaps').innerHTML = r.gaps.map(g => `<div style="margin-bottom:6px"><span class="ar-miss">✗</span> ${g}</div>`).join('');
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetTeachBack() {
+  document.getElementById('tb-results').style.display = 'none';
+  document.getElementById('tb-step-1').style.display = 'block';
+  document.getElementById('tb-source-text').value = '';
+  document.getElementById('tb-explanation').value = '';
+  document.getElementById('tb-paste-area').style.display = 'block';
+  document.getElementById('tb-loaded-state').style.display = 'none';
+  TB.audience = '';
+  document.querySelectorAll('#tb-audience-picks .int-pick').forEach(p => p.classList.remove('sel'));
+  checkTBReady();
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
+// ── QUESTION PRIME ──
+let QP = { type: '' };
+
+function pickQPType(el, val) {
+  document.querySelectorAll('#qp-type-picks .int-pick').forEach(p => p.classList.remove('sel'));
+  el.classList.add('sel');
+  QP.type = val;
+  checkQPReady();
+}
+function checkQPReady() {
+  const hasText = document.getElementById('qp-source-text')?.value.trim().length > 50;
+  const btn = document.getElementById('qp-submit-btn');
+  if (btn) {
+    const ready = hasText;
+    btn.style.opacity = ready ? '1' : '0.4';
+    btn.style.pointerEvents = ready ? 'auto' : 'none';
+  }
+}
+
+async function submitQuestionPrime() {
+  const source = document.getElementById('qp-source-text')?.value.trim();
+  if (!source || source.length < 50) { alert('Please paste your text first.'); return; }
+
+  document.getElementById('qp-step-1').style.display = 'none';
+  document.getElementById('qp-loading').style.display = 'block';
+
+  const msgs = ['Jordan\'s AI is reading your text...','Identifying the key ideas...','Forming the right questions...','Almost ready...'];
+  let mi = 0;
+  const iv = setInterval(() => { mi=(mi+1)%msgs.length; const el=document.getElementById('qp-loading-text'); if(el) el.textContent=msgs[mi]; }, 1800);
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': ANTHROPIC_KEY,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true',
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 800,
+        system: `You are Jordan Harry, the UK's number one speed reading coach. You generate reading questions that prime a student's brain before they read a document. Your questions are specific to the actual content — not generic. They target the most important ideas, surprising facts, cause-and-effect relationships, and key arguments in the text. Speak as Jordan — direct, sharp, no fluff. No em dashes in output.
+
+Respond ONLY with valid JSON:
+{
+  "questions": [
+    "Question one here?",
+    "Question two here?",
+    "Question three here?"
+  ]
+}`,
+        messages: [{
+          role: 'user',
+          content: `Reading type: ${QP.type || 'general'}\n\nTEXT:\n${source.slice(0, 3000)}\n\nGenerate 3 specific questions that will prime this reader's brain before they read this text.`
+        }]
+      })
+    });
+
+    clearInterval(iv);
+    const data = await res.json();
+    const raw = data.content?.[0]?.text || '';
+    const clean = raw.replace(/```json|```/g, '').trim();
+    const result = JSON.parse(clean);
+    renderQPResults(result.questions);
+
+  } catch(e) {
+    clearInterval(iv);
+    console.error('QP error:', e);
+    document.getElementById('qp-loading').style.display = 'none';
+    document.getElementById('qp-step-1').style.display = 'block';
+    alert('Something went wrong. Check your connection and try again.');
+  }
+}
+
+function renderQPResults(questions) {
+  document.getElementById('qp-loading').style.display = 'none';
+  document.getElementById('qp-results').style.display = 'block';
+  const list = document.getElementById('qp-questions-list');
+  list.innerHTML = questions.map((q, i) => `
+    <div class="qp-question">
+      <div class="qp-q-num">${i+1}</div>
+      <div class="qp-q-text">${q}</div>
+    </div>
+  `).join('');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetQuestionPrime() {
+  document.getElementById('qp-results').style.display = 'none';
+  document.getElementById('qp-step-1').style.display = 'block';
+  document.getElementById('qp-source-text').value = '';
+  QP.type = '';
+  document.querySelectorAll('#qp-type-picks .int-pick').forEach(p => p.classList.remove('sel'));
+  checkQPReady();
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
+// ── ACTIVE RECALL ──
+function onARPaste(el) {
+  // Small delay so paste content is available
+  setTimeout(() => {
+    const val = el.value.trim();
+    if (val.length < 30) return;
+    const words = val.split(/\s+/).filter(Boolean).length;
+    // Hide textarea, show confirmation
+    document.getElementById('ar-paste-area').style.display = 'none';
+    const loaded = document.getElementById('ar-loaded-state');
+    loaded.style.display = 'flex';
+    document.getElementById('ar-word-count').textContent = words + ' words loaded. Text is now hidden.';
+    checkARReady();
+    // Smooth scroll to recall area
+    setTimeout(() => {
+      document.getElementById('ar-recall-text').scrollIntoView({ behavior:'smooth', block:'center' });
+      document.getElementById('ar-recall-text').focus();
+    }, 300);
+  }, 50);
+}
+
+function clearARSource() {
+  document.getElementById('ar-source-text').value = '';
+  document.getElementById('ar-loaded-state').style.display = 'none';
+  document.getElementById('ar-paste-area').style.display = 'block';
+  checkARReady();
+}
+
+function checkARReady() {
+  const hasSource = document.getElementById('ar-source-text')?.value.trim().length > 30;
+  const hasRecall = document.getElementById('ar-recall-text')?.value.trim().length > 20;
+  const btn = document.getElementById('ar-submit-btn');
+  if (btn) {
+    btn.style.opacity = (hasSource && hasRecall) ? '1' : '0.4';
+    btn.style.pointerEvents = (hasSource && hasRecall) ? 'auto' : 'none';
+  }
+}
+
+const ANTHROPIC_KEY = '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'; // Replace before sharing with clients
+
+async function submitActiveRecall() {
+  const source = document.getElementById('ar-source-text')?.value.trim();
+  const recall = document.getElementById('ar-recall-text')?.value.trim();
+  if (!source || source.length < 50) { alert('Please paste the text you read first.'); return; }
+  if (!recall || recall.length < 20) { alert('Please write what you remember before checking.'); return; }
+
+  // Show loading
+  document.getElementById('ar-step-1').style.display = 'none';
+  document.getElementById('ar-loading').style.display = 'block';
+  const loadingMsgs = [
+    'Jordan\'s AI is reading your text...',
+    'Comparing your recall to the source...',
+    'Identifying what you captured...',
+    'Building your feedback...',
+  ];
+  let msgIdx = 0;
+  const msgInterval = setInterval(() => {
+    msgIdx = (msgIdx + 1) % loadingMsgs.length;
+    const el = document.getElementById('ar-loading-text');
+    if (el) el.textContent = loadingMsgs[msgIdx];
+  }, 1800);
+
+  const intention = JSON.parse(sessionStorage.getItem('sf_intention') || '{}');
+  const intentionContext = intention.question ? `The reader's stated intention was: "${intention.question}"` : '';
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': ANTHROPIC_KEY,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true',
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: `You are Jordan Harry, the UK's number one speed reading coach. TEDx speaker, 3.4M views, 50,000 students across 70 countries. You are scoring a student's active recall attempt purely on comprehension. Do not penalise for poor writing, informal language or missing terminology. Only assess whether they actually understood what they read.
+
+Score based on comprehension only:
+- Did they grasp the central argument or main point: 40 points
+- Did they understand why it matters or what problem it solves: 30 points
+- Did they recall the key supporting ideas or evidence: 20 points
+- Did they demonstrate they understood the implications or conclusions: 10 points
+
+A student who writes "basically it was saying that being busy isn't the same as being productive and most people don't have a system" scores well if that is the core point. Exact words do not matter. Understanding does.
+
+Be encouraging and empathetic. Acknowledge the effort. Find what they got right before addressing gaps. Sound like a supportive coach, not a critic. First person as Jordan. No em dashes in output.
+
+Respond ONLY with valid JSON:
+{
+  "score": <integer 0-100>,
+  "scoreLabel": "<one of: Excellent / Strong / Good start / Needs work>",
+  "feedback": "<2-3 sentences focused on whether they understood the material, not how they expressed it. Be specific about what they got and what they missed conceptually.>",
+  "misses": ["<key concept or idea they failed to understand>"],
+  "missedSummary": "<1-2 sentences on the most important thing they did not understand, in Jordan's voice>"
+}`,
+        messages: [{
+          role: 'user',
+          content: `SOURCE TEXT:\n${source.slice(0, 3000)}\n\nSTUDENT'S RECALL:\n${recall}\n\n${intentionContext}\n\nScore and analyse this recall attempt.`
+        }]
+      })
+    });
+
+    clearInterval(msgInterval);
+    const data = await res.json();
+    const raw = data.content?.[0]?.text || '';
+    const clean = raw.replace(/```json|```/g, '').trim();
+    const result = JSON.parse(clean);
+    renderARResults(result);
+
+  } catch(e) {
+    clearInterval(msgInterval);
+    console.error('AR error:', e);
+    document.getElementById('ar-loading').style.display = 'none';
+    document.getElementById('ar-step-1').style.display = 'block';
+    alert('Something went wrong. Check your API key is set correctly and try again.');
+  }
+}
+
+function renderARResults(r) {
+  document.getElementById('ar-loading').style.display = 'none';
+  document.getElementById('ar-results').style.display = 'block';
+
+  // Score ring
+  const ring = document.getElementById('ar-score-ring');
+  const numEl = document.getElementById('ar-score-num');
+  numEl.textContent = r.score + '%';
+  ring.classList.remove('low','mid');
+  if (r.score < 50) ring.classList.add('low');
+  else if (r.score < 75) ring.classList.add('mid');
+
+  // Score label
+  const colors = { 'Excellent':'var(--green)', 'Strong':'var(--green)', 'Good start':'var(--gold)', 'Needs work':'var(--orange)' };
+  document.getElementById('ar-score-label').textContent = r.scoreLabel;
+  document.getElementById('ar-score-label').style.color = colors[r.scoreLabel] || 'var(--gold)';
+
+  // Jordan's feedback
+  document.getElementById('ar-feedback-text').textContent = r.feedback;
+
+  // What you missed
+  if (r.missedSummary && r.misses?.length) {
+    document.getElementById('ar-missed-wrap').style.display = 'block';
+    document.getElementById('ar-missed').textContent = r.missedSummary;
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetActiveRecall() {
+  document.getElementById('ar-results').style.display = 'none';
+  document.getElementById('ar-step-1').style.display = 'block';
+  document.getElementById('ar-source-text').value = '';
+  document.getElementById('ar-recall-text').value = '';
+  document.getElementById('ar-paste-area').style.display = 'block';
+  document.getElementById('ar-loaded-state').style.display = 'none';
+  const btn = document.getElementById('ar-submit-btn');
+  if (btn) { btn.style.opacity = '0.4'; btn.style.pointerEvents = 'none'; }
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+let INT = { why: '', priorKnowledge: '', question: '' };
+
+function pickWhy(el, val) {
+  document.querySelectorAll('.int-pick').forEach(p => p.classList.remove('sel'));
+  el.classList.add('sel');
+  INT.why = val;
+  document.getElementById('why-custom').value = '';
+  checkIntentionReady();
+}
+function setCustomWhy(val) {
+  document.querySelectorAll('.int-pick').forEach(p => p.classList.remove('sel'));
+  INT.why = val;
+  checkIntentionReady();
+}
+function checkIntentionReady() {
+  INT.priorKnowledge = document.getElementById('prior-knowledge')?.value.trim() || '';
+  INT.question = document.getElementById('one-question')?.value.trim() || '';
+  const ready = INT.why && INT.question;
+  const btn = document.getElementById('btn-intention-start');
+  if (btn) btn.style.opacity = ready ? '1' : '0.4';
+  if (ready) {
+    const summary = document.getElementById('intention-summary');
+    const text = document.getElementById('summary-text');
+    if (summary && text) {
+      text.innerHTML = `<div style="margin-bottom:8px"><span style="color:var(--gold);font-weight:700">Why:</span> ${INT.why}</div>${INT.priorKnowledge ? `<div style="margin-bottom:8px"><span style="color:var(--gold);font-weight:700">You know:</span> ${INT.priorKnowledge}</div>` : ''}<div><span style="color:var(--gold);font-weight:700">Hunting for:</span> ${INT.question}</div>`;
+      summary.style.display = 'block';
+    }
+  }
+}
+function startReading() {
+  if (!INT.why || !INT.question) return;
+  // Store intention in sessionStorage for Active Recall to reference
+  sessionStorage.setItem('sf_intention', JSON.stringify(INT));
+  // Show completion confirmation
+  const overlay = document.createElement('div');
+  overlay.id = 'int-overlay';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(8,8,14,0.97);z-index:500;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px;animation:fadeUp .3s ease';
+  overlay.innerHTML = `
+    <div style="font-size:56px;margin-bottom:20px">🎯</div>
+    <h2 style="font-family:'Bebas Neue';font-size:clamp(36px,6vw,52px);letter-spacing:2px;color:var(--gold);margin-bottom:12px">Intention set.</h2>
+    <div style="background:rgba(247,166,0,0.06);border:1px solid rgba(247,166,0,0.3);border-radius:var(--r);padding:18px 24px;max-width:420px;width:100%;margin-bottom:24px;text-align:left;font-size:13px;line-height:1.8;color:var(--muted2)">
+      <div style="margin-bottom:6px"><span style="color:var(--gold);font-weight:700">Why:</span> ${INT.why}</div>
+      ${INT.priorKnowledge ? `<div style="margin-bottom:6px"><span style="color:var(--gold);font-weight:700">You know:</span> ${INT.priorKnowledge}</div>` : ''}
+      <div><span style="color:var(--gold);font-weight:700">Hunting for:</span> ${INT.question}</div>
+    </div>
+    <div style="background:var(--s2);border:1px solid var(--border2);border-left:3px solid var(--green);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:14px 18px;max-width:420px;width:100%;margin-bottom:28px;font-size:13px;color:var(--muted2);line-height:1.6;text-align:left">
+      <strong style="color:var(--green)">Jordan:</strong> Now go read. Your brain is primed. Come back and use <strong style="color:var(--green)">Active Recall</strong> the moment you finish.
+    </div>
+    <button onclick="document.getElementById('int-overlay').remove();showScreen('screen-dash')" style="padding:14px 32px;border-radius:var(--r-sm);background:var(--gold);color:#08080e;font-family:'Bebas Neue';font-size:18px;letter-spacing:2px;border:none;cursor:pointer;margin-bottom:10px;display:block;width:100%;max-width:300px">Done. I have read it ✓</button>
+    <button onclick="document.getElementById('int-overlay').remove()" style="padding:10px 24px;border-radius:var(--r-sm);background:transparent;border:1px solid var(--border2);color:var(--muted2);font-family:'Plus Jakarta Sans';font-size:13px;cursor:pointer">Not yet. Let me read first</button>
+  `;
+  document.body.appendChild(overlay);
 }
 
 // ── DATA — loaded from API ──
@@ -303,71 +910,45 @@ const DOTS = [
 const TIPS = {
   association: 'Who do you know with this name? A friend, colleague, or celebrity? Picture them right now. Make it someone vivid.',
   location: 'Find the most distinctive feature on this face. What does your eye go to first? That is your anchor point.',
-  interaction: 'Picture your association doing something wild on that feature. Moving. Exaggerated. Ridiculous. The stranger the better — your brain locks onto it.',
-  recall: 'Find the feature. See the scene. Let the name come to you. Do not force it — trust the system.',
+  interaction: 'Picture your association doing something wild on that feature. Moving. Exaggerated. Ridiculous. The stranger the better. Your brain locks onto it.',
+  recall: 'Find the feature. See the scene. Let the name come to you. Do not force it. Trust the system.',
 };
 
 // ── STATE ──
 let S = { step:0, faceIdx:0, faces:[], pick:'', dot:'', scene:'', score:0, results:[], loading:false };
 
-// ── FALLBACK FACE POOL (used if API unavailable) ──
-const FALLBACK_FACES = [
-  {name:'Sarah', photo:'https://randomuser.me/api/portraits/women/1.jpg'},
-  {name:'James', photo:'https://randomuser.me/api/portraits/men/2.jpg'},
-  {name:'Emma', photo:'https://randomuser.me/api/portraits/women/3.jpg'},
-  {name:'David', photo:'https://randomuser.me/api/portraits/men/4.jpg'},
-  {name:'Olivia', photo:'https://randomuser.me/api/portraits/women/5.jpg'},
-  {name:'Michael', photo:'https://randomuser.me/api/portraits/men/6.jpg'},
-  {name:'Charlotte', photo:'https://randomuser.me/api/portraits/women/7.jpg'},
-  {name:'Harry', photo:'https://randomuser.me/api/portraits/men/8.jpg'},
-  {name:'Jessica', photo:'https://randomuser.me/api/portraits/women/9.jpg'},
-  {name:'Tom', photo:'https://randomuser.me/api/portraits/men/10.jpg'},
-  {name:'Sophie', photo:'https://randomuser.me/api/portraits/women/11.jpg'},
-  {name:'Jack', photo:'https://randomuser.me/api/portraits/men/12.jpg'},
-  {name:'Emily', photo:'https://randomuser.me/api/portraits/women/13.jpg'},
-  {name:'Daniel', photo:'https://randomuser.me/api/portraits/men/14.jpg'},
-  {name:'Lucy', photo:'https://randomuser.me/api/portraits/women/15.jpg'},
-  {name:'Oliver', photo:'https://randomuser.me/api/portraits/men/16.jpg'},
-  {name:'Grace', photo:'https://randomuser.me/api/portraits/women/17.jpg'},
-  {name:'William', photo:'https://randomuser.me/api/portraits/men/18.jpg'},
-  {name:'Hannah', photo:'https://randomuser.me/api/portraits/women/19.jpg'},
-  {name:'Ryan', photo:'https://randomuser.me/api/portraits/men/20.jpg'},
+// ── FACE POOL — gender matched, cached locally, no API needed ──
+const FACE_POOL = [
+  {name:'Sarah',   gender:'female', photo:'https://randomuser.me/api/portraits/women/1.jpg',  picks:['Sarah Jessica Parker','Sarah Connor','Sarah Millican']},
+  {name:'James',   gender:'male',   photo:'https://randomuser.me/api/portraits/men/2.jpg',    picks:['James Bond','James May','James Brown']},
+  {name:'Emma',    gender:'female', photo:'https://randomuser.me/api/portraits/women/3.jpg',  picks:['Emma Watson','Emma Thompson','Emma Raducanu']},
+  {name:'David',   gender:'male',   photo:'https://randomuser.me/api/portraits/men/4.jpg',    picks:['David Beckham','David Attenborough','David Bowie']},
+  {name:'Olivia',  gender:'female', photo:'https://randomuser.me/api/portraits/women/5.jpg',  picks:['Olivia Colman','Olivia Newton-John','Olivia Rodrigo']},
+  {name:'Michael', gender:'male',   photo:'https://randomuser.me/api/portraits/men/6.jpg',    picks:['Michael Jordan','Michael Buble','Michael McIntyre']},
+  {name:'Charlotte',gender:'female',photo:'https://randomuser.me/api/portraits/women/7.jpg',  picks:['Charlotte Church','Charlotte Bronte','Charlotte Casiraghi']},
+  {name:'Harry',   gender:'male',   photo:'https://randomuser.me/api/portraits/men/8.jpg',    picks:['Harry Styles','Harry Houdini','Prince Harry']},
+  {name:'Jessica', gender:'female', photo:'https://randomuser.me/api/portraits/women/9.jpg',  picks:['Jessica Alba','Jessica Ennis','Jessica Biel']},
+  {name:'Tom',     gender:'male',   photo:'https://randomuser.me/api/portraits/men/10.jpg',   picks:['Tom Hanks','Tom Holland','Tom Jones']},
+  {name:'Sophie',  gender:'female', photo:'https://randomuser.me/api/portraits/women/11.jpg', picks:['Sophie Ellis-Bextor','Sophie Turner','Sophie Wessex']},
+  {name:'Jack',    gender:'male',   photo:'https://randomuser.me/api/portraits/men/12.jpg',   picks:['Jack Black','Jack Nicholson','Captain Jack Sparrow']},
+  {name:'Emily',   gender:'female', photo:'https://randomuser.me/api/portraits/women/13.jpg', picks:['Emily Blunt','Emily Bronte','Emily Ratajkowski']},
+  {name:'Daniel',  gender:'male',   photo:'https://randomuser.me/api/portraits/men/14.jpg',   picks:['Daniel Craig','Daniel Radcliffe','Daniel Day-Lewis']},
+  {name:'Lucy',    gender:'female', photo:'https://randomuser.me/api/portraits/women/15.jpg', picks:['Lucy Liu','Lucy Bronze','Lucille Ball']},
+  {name:'Oliver',  gender:'male',   photo:'https://randomuser.me/api/portraits/men/16.jpg',   picks:['Oliver Hardy','Oliver Twist','Jamie Oliver']},
+  {name:'Grace',   gender:'female', photo:'https://randomuser.me/api/portraits/women/17.jpg', picks:['Grace Kelly','Grace Jones','Grace Dent']},
+  {name:'William', gender:'male',   photo:'https://randomuser.me/api/portraits/men/18.jpg',   picks:['Prince William','Will Smith','William Shakespeare']},
+  {name:'Hannah',  gender:'female', photo:'https://randomuser.me/api/portraits/women/19.jpg', picks:['Hannah Waddingham','Hannah Montana','Hannah Arendt']},
+  {name:'Ryan',    gender:'male',   photo:'https://randomuser.me/api/portraits/men/20.jpg',   picks:['Ryan Reynolds','Ryan Gosling','Ryan Seacrest']},
 ];
+const FALLBACK_FACES = FACE_POOL;
 
-// ── FETCH FACES FROM RANDOMUSER.ME ──
+// ── LOAD FACES FROM LOCAL POOL (no API — gender matched, instant) ──
 async function fetchFaces(count) {
-  const wrap = document.getElementById('drill-wrap');
-  wrap.innerHTML = `<div style="text-align:center;padding:80px 24px"><div style="font-size:32px;margin-bottom:16px">⏳</div><div style="font-size:14px;color:var(--muted2)">Loading your faces...</div></div>`;
-  try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 5000);
-    const res = await fetch(`https://randomuser.me/api/?results=${count}&inc=name,picture&nat=gb,us,au,ca&noinfo`, { signal: controller.signal });
-    clearTimeout(timeout);
-    const data = await res.json();
-    // Deduplicate by first name
-    const seen = new Set();
-    const faces = data.results
-      .filter(p => { if(seen.has(p.name.first)) return false; seen.add(p.name.first); return true; })
-      .map(p => ({ name: p.name.first, photo: p.picture.large, picks: getCelebPicks(p.name.first) }));
-    if (faces.length < count) {
-      // Pad with fallback if dedup reduced count
-      const fallback = getFallbackFaces(count - faces.length, seen);
-      return faces.concat(fallback).slice(0, count);
-    }
-    return faces;
-  } catch(e) {
-    // API failed — use fallback pool silently
-    return getFallbackFaces(count, new Set());
-  }
-}
-
-function getFallbackFaces(count, exclude) {
-  const pool = FALLBACK_FACES.filter(f => !exclude.has(f.name))
-    .sort(() => Math.random() - .5);
+  const shuffled = [...FACE_POOL].sort(() => Math.random() - .5);
+  // If count > pool, loop around
   const result = [];
   for (let i = 0; result.length < count; i++) {
-    const f = pool[i % pool.length];
-    result.push({ ...f, picks: getCelebPicks(f.name) });
+    result.push({ ...shuffled[i % shuffled.length] });
   }
   return result.slice(0, count);
 }
@@ -413,7 +994,7 @@ function startDrill(mode) {
       <div onclick="setDifficulty(5)" style="background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:20px 24px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:space-between" onmouseover="this.style.borderColor='var(--border2)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateY(0)'">
         <div>
           <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:3px">First Impression</div>
-          <div style="font-size:12px;color:var(--muted)">5 names — perfect for your first session</div>
+          <div style="font-size:12px;color:var(--muted)">5 names. Perfect for your first session.</div>
         </div>
         <div style="font-family:'Bebas Neue';font-size:36px;color:var(--gold);line-height:1">5</div>
       </div>
@@ -421,17 +1002,20 @@ function startDrill(mode) {
         <div style="position:absolute;top:-1px;right:16px;background:var(--gold);color:#08080e;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border-radius:0 0 6px 6px">Most popular</div>
         <div>
           <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:3px">The Networker</div>
-          <div style="font-size:12px;color:var(--muted)">10 names — a full room of people</div>
+          <div style="font-size:12px;color:var(--muted)">10 names. A full room of people.</div>
         </div>
         <div style="font-family:'Bebas Neue';font-size:36px;color:var(--gold);line-height:1">10</div>
       </div>
       <div onclick="setDifficulty(20)" style="background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:20px 24px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:space-between" onmouseover="this.style.borderColor='var(--border2)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateY(0)'">
         <div>
           <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:3px">The Conference</div>
-          <div style="font-size:12px;color:var(--muted)">20 names — elite level recall</div>
+          <div style="font-size:12px;color:var(--muted)">20 names. Elite level recall.</div>
         </div>
         <div style="font-family:'Bebas Neue';font-size:36px;color:var(--gold);line-height:1">20</div>
       </div>
+    </div>
+    <div style="text-align:center;margin-top:4px">
+      <span onclick="showScreen('screen-dash')" style="font-size:12px;color:var(--muted);cursor:pointer;text-decoration:underline;text-decoration-color:rgba(106,106,144,0.4)">← Back to dashboard</span>
     </div>
   `;
 }
@@ -445,12 +1029,10 @@ async function setDifficulty(count) {
   render();
 }
 
-function faceDisplay(showDots, activeDot) {
+function faceDisplay() {
   const face = S.faces[S.faceIdx];
-  const dots = showDots ? DOTS.map(d => `<div class="fdot${activeDot===d.id?' sel':''}" style="left:${d.x};top:${d.y}" onclick="pickDot('${d.id}')" title="${d.label}"></div>`).join('') : (activeDot ? (() => { const d=DOTS.find(x=>x.id===activeDot); return d?`<div class="fdot sel" style="left:${d.x};top:${d.y}"></div>`:''; })() : '');
   return `<div class="face-wrap" style="width:160px;height:160px;border-radius:50%;overflow:hidden;position:relative;border:3px solid var(--border2);margin:0 auto 20px">
     <img src="${face.photo}" alt="${face.name}" style="width:100%;height:100%;object-fit:cover;display:block">
-    ${dots}
   </div>`;
 }
 
@@ -467,45 +1049,47 @@ function render() {
 
   if (S.step === 0) {
     html = `${progressBar()}${counter}
-    <div class="step-label">Step 1 of 4 — Association</div>
+    <div class="step-label">Step 1 of 4: Association</div>
     <div class="face-name-big">${face.name}</div>
     <div class="face-name-sub">Meet ${face.name}</div>
-    ${faceDisplay(false, '')}
+    ${faceDisplay()}
     <div class="jordan-tip"><strong>Jordan:</strong> ${TIPS.association}</div>
     <div style="font-size:11px;color:var(--muted);margin-bottom:8px">Quick picks:</div>
     <div class="quick-picks">${face.picks.map(p=>`<div class="pick${S.pick===p?' sel':''}" onclick="setPick('${p}')">${p}</div>`).join('')}</div>
     <input class="mem-input" id="pick-input" placeholder="Or type your own ${face.name}..." value="${S.pick}" oninput="S.pick=this.value">
-    <button class="btn-gold" onclick="next()">Next — find the feature →</button>`;
+    <button class="btn-gold" onclick="next()">Next: find the feature →</button>`;
 
   } else if (S.step === 1) {
     html = `${progressBar()}${counter}
-    <div class="step-label">Step 2 of 4 — Location</div>
+    <div class="step-label">Step 2 of 4: Location</div>
     <div class="face-name-big">${face.name}</div>
     <div class="face-name-sub">Association: <span style="color:var(--gold)">${S.pick||'your '+face.name}</span></div>
     <div style="font-size:11px;color:var(--muted2);text-align:center;margin-bottom:10px">Tap the gold dots to select a feature</div>
-    ${faceDisplay(true, S.dot)}
+    ${faceDisplay()}
     <div class="jordan-tip"><strong>Jordan:</strong> ${TIPS.location}</div>
-    ${S.dot ? `<div class="anchor-confirm">Anchor: <strong>${DOTS.find(d=>d.id===S.dot)?.label}</strong></div>` : ''}
-    <button class="btn-gold" onclick="next()" ${!S.dot?'disabled':''}>Lock this anchor →</button>`;
+    <div style="font-size:11px;color:var(--muted);margin-bottom:6px">Describe the feature your eye goes to first:</div>
+    <input class="mem-input" id="dot-input" placeholder="e.g. strong jawline, big nose, bushy eyebrows..." value="${S.dot}" oninput="S.dot=this.value;document.getElementById('lock-btn').style.opacity=this.value.trim()?'1':'0.4';document.getElementById('lock-btn').style.pointerEvents=this.value.trim()?'auto':'none'" style="margin-bottom:12px">
+    ${S.dot ? `<div class="anchor-confirm">Anchor: <strong>${S.dot}</strong></div>` : ''}
+    <button class="btn-gold" id="lock-btn" onclick="next()" style="opacity:${S.dot?'1':'0.4'};pointer-events:${S.dot?'auto':'none'}">Lock this anchor →</button>`;
 
   } else if (S.step === 2) {
-    const dotLabel = DOTS.find(d=>d.id===S.dot)?.label||'';
+    const dotLabel = S.dot||'';
     html = `${progressBar()}${counter}
-    <div class="step-label">Step 3 of 4 — Interaction</div>
+    <div class="step-label">Step 3 of 4: Interaction</div>
     <div class="face-name-big">${face.name}</div>
     <div class="face-name-sub"><span style="color:var(--gold)">${S.pick||face.name}</span> on the <span style="color:var(--green)">${dotLabel}</span></div>
-    ${faceDisplay(false, S.dot)}
+    ${faceDisplay()}
     <div class="jordan-tip"><strong>Jordan:</strong> ${TIPS.interaction}</div>
     <div style="font-size:11px;color:var(--muted);margin-bottom:6px">Describe your scene (writing deepens encoding):</div>
-    <textarea class="mem-input" id="scene-input" placeholder="Describe your scene — the more vivid and ridiculous the better..." rows="2" style="resize:none" oninput="S.scene=this.value"></textarea>
-    <button class="btn-gold" onclick="next()">Scene locked — test me →</button>`;
+    <textarea class="mem-input" id="scene-input" placeholder="Describe your scene. The more vivid and ridiculous the better..." rows="2" style="resize:none" oninput="S.scene=this.value"></textarea>
+    <button class="btn-gold" onclick="next()">Scene locked. Test me →</button>`;
 
   } else if (S.step === 3) {
     html = `${progressBar()}${counter}
-    <div class="step-label green">Step 4 of 4 — Recall</div>
+    <div class="step-label green">Step 4 of 4: Recall</div>
     <div class="face-name-big" style="color:var(--muted2)">Who is this?</div>
     <div class="face-name-sub">Find the feature. See the scene. Let the name come.</div>
-    ${faceDisplay(false, '')}
+    ${faceDisplay()}
     <div class="jordan-tip green-tip"><strong>Jordan:</strong> ${TIPS.recall}</div>
     <input class="mem-input" id="recall-input" placeholder="Type their name..." autocomplete="off">
     <button class="btn-gold green" onclick="checkRecall()">Check my answer</button>`;
@@ -517,7 +1101,7 @@ function render() {
 }
 
 function setPick(p) { S.pick = p; const inp = document.getElementById('pick-input'); if(inp) inp.value = p; render(); }
-function pickDot(id) { S.dot = id; render(); }
+
 function addVivid(t) { const ta = document.getElementById('scene-input'); if(ta){ta.value+=(ta.value?' ':'')+t.toLowerCase()+'...';S.scene=ta.value;} }
 
 function next() {
@@ -552,9 +1136,9 @@ function showResults() {
   const total = S.results.filter(r => !S.results.slice(0, S.results.indexOf(r)).some(x => x.name === r.name)).length || S.faces.slice(0,5).length;
   const pct = Math.round((S.score / S.results.length) * 100);
   const insights = [
-    {max:40, txt:`${S.score} out of ${S.results.length}. The system is new — that is expected. Go again immediately. The second run is always stronger.`},
+    {max:40, txt:`${S.score} out of ${S.results.length}. The system is new. That is expected. Go again immediately. The second run is always stronger.`},
     {max:70, txt:`${S.score} out of ${S.results.length}. Solid start. Make your interaction scenes more exaggerated. The wilder the scene, the stronger the lock.`},
-    {max:90, txt:`${S.score} out of ${S.results.length}. Strong. Check the faces you missed — was your anchor feature distinctive enough?`},
+    {max:90, txt:`${S.score} out of ${S.results.length}. Strong. Check the faces you missed. Was your anchor feature distinctive enough?`},
     {max:101, txt:`${S.score} out of ${S.results.length}. Excellent. The system is working. Run this drill daily and the results compound fast.`},
   ];
   const insight = insights.find(i => pct <= i.max);
@@ -574,5 +1158,305 @@ function showResults() {
   `;
 }
 </script>
+<!-- ══ INTENTION SETTER ══ -->
+<div class="screen" id="screen-intention">
+  <div class="dash-wrap" style="max-width:640px">
+
+    <div style="margin-bottom:28px">
+      <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Before you read</div>
+      <h2 style="font-family:'Bebas Neue';font-size:clamp(36px,6vw,52px);letter-spacing:2px;margin-bottom:8px">Set your <span style="color:var(--gold)">intention.</span></h2>
+      <p style="color:var(--muted2);font-size:14px;line-height:1.7">Your brain retains what it is looking for. This takes 60 seconds and changes everything you remember from the next reading session.</p>
+    </div>
+
+    <!-- Jordan tip -->
+    <div class="jordan-tip" style="margin-bottom:24px">
+      <strong>Jordan:</strong> Most people open a document and just start reading. Their brain has no filter, so it treats every sentence as equally important. Nothing stands out. Nothing sticks. Set your intention first and your brain becomes a heat-seeking missile for what matters.
+    </div>
+
+    <!-- Step 1 — Why -->
+    <div style="margin-bottom:20px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:10px">1. Why are you reading this?</div>
+      <div id="why-picks" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px">
+        <div class="int-pick" onclick="pickWhy(this,'Learn something new')">Learn something new</div>
+        <div class="int-pick" onclick="pickWhy(this,'Solve a specific problem')">Solve a specific problem</div>
+        <div class="int-pick" onclick="pickWhy(this,'Get a quick overview')">Get a quick overview</div>
+        <div class="int-pick" onclick="pickWhy(this,'Find one key idea')">Find one key idea</div>
+        <div class="int-pick" onclick="pickWhy(this,'Prepare to teach it')">Prepare to teach it</div>
+        <div class="int-pick" onclick="pickWhy(this,'Make a decision')">Make a decision</div>
+      </div>
+      <input class="mem-input" id="why-custom" placeholder="Or type your own reason..." style="margin-bottom:0" oninput="setCustomWhy(this.value)">
+    </div>
+
+    <!-- Step 2. What you already know -->
+    <div style="margin-bottom:20px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:6px">2. What do you already know about this topic?</div>
+      <div style="font-size:12px;color:var(--muted2);margin-bottom:10px">Even a sentence. This primes your existing knowledge so new information connects to something.</div>
+      <textarea class="mem-input" id="prior-knowledge" placeholder="e.g. I know the basics of eye movement but nothing about fixation patterns..." rows="3" style="resize:none;margin-bottom:0"></textarea>
+    </div>
+
+    <!-- Step 3 — One question -->
+    <div style="margin-bottom:28px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:6px">3. What is the one question you want answered?</div>
+      <div style="font-size:12px;color:var(--muted2);margin-bottom:10px">One specific question. Your brain will hunt for the answer automatically as you read.</div>
+      <input class="mem-input" id="one-question" placeholder="e.g. What actually causes regression when reading?" style="margin-bottom:0">
+    </div>
+
+    <!-- Intention summary card — shown after all three filled -->
+    <div id="intention-summary" style="display:none;background:rgba(247,166,0,0.06);border:1px solid rgba(247,166,0,0.3);border-radius:var(--r);padding:18px 20px;margin-bottom:20px">
+      <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px">Your intention is set</div>
+      <div style="font-size:13px;color:var(--text);line-height:1.7" id="summary-text"></div>
+    </div>
+
+    <button class="btn-gold" id="btn-intention-start" onclick="startReading()" style="margin-bottom:10px">I am ready. Start reading →</button>
+    <button class="btn-ghost" onclick="showScreen('screen-dash')" style="width:100%;padding:12px;font-size:14px;text-align:center">← Back to dashboard</button>
+
+  </div>
+  <footer>
+    <p>Built by <a href="https://studyfast.uk/" target="_blank">StudyFast</a> · Jordan Harry · TEDx 3.4M views · 50,000+ professionals in 70 countries</p>
+    <span class="footer-version">V2026.2</span>
+  </footer>
+</div>
+
+<!-- ══ QUESTION PRIME ══ -->
+<div class="screen" id="screen-question-prime">
+  <div class="dash-wrap" style="max-width:640px">
+
+    <div style="margin-bottom:24px">
+      <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Before you read</div>
+      <h2 style="font-family:'Bebas Neue';font-size:clamp(36px,6vw,52px);letter-spacing:2px;margin-bottom:8px">Question <span style="color:var(--gold)">Prime.</span></h2>
+      <p style="color:var(--muted2);font-size:14px;line-height:1.7">StudyFast AI reads your text and generates the questions your brain should be hunting for. Read to answer them, not just absorb.</p>
+    </div>
+
+    <div class="jordan-tip" style="margin-bottom:24px">
+      <strong>Jordan:</strong> Robinson proved this in 1946. When your brain has a question to answer, it reads with a filter. Every sentence is evaluated: does this help me answer my question? Without a question, everything feels equally important, so nothing sticks.
+    </div>
+
+    <!-- Input -->
+    <div id="qp-step-1">
+      <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:6px">Paste your text</div>
+      <div style="font-size:12px;color:var(--muted2);margin-bottom:10px">StudyFast AI will read it and generate 3 questions before you start. The questions stay visible while you read.</div>
+      <textarea class="mem-input" id="qp-source-text" placeholder="Paste the article, report, chapter or document you are about to read..." rows="6" style="resize:none"></textarea>
+
+      <button class="btn-gold" id="qp-submit-btn" onclick="submitQuestionPrime()" style="opacity:.4;pointer-events:none">Generate my questions →</button>
+      <button class="btn-ghost" onclick="showScreen('screen-dash')" style="width:100%;padding:12px;font-size:14px;text-align:center;margin-top:10px">← Back to dashboard</button>
+    </div>
+
+    <!-- Loading -->
+    <div id="qp-loading" style="display:none;text-align:center;padding:48px 0">
+      <div class="ar-pulse-wrap">
+        <div class="ar-pulse-dot"></div>
+        <div style="font-size:13px;color:var(--muted2);margin-top:16px" id="qp-loading-text">StudyFast AI is reading your text...</div>
+      </div>
+    </div>
+
+    <!-- Questions output -->
+    <div id="qp-results" style="display:none">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+        <div class="jh-avatar">JH</div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold)">3 questions generated</div>
+          <div style="font-size:12px;color:var(--muted2)">Glance at these for 30 seconds. Then close this screen and read your document.</div>
+        </div>
+      </div>
+
+      <div id="qp-questions-list" style="margin-bottom:20px"></div>
+
+      <div style="background:rgba(61,255,160,0.07);border:1px solid rgba(61,255,160,0.25);border-radius:var(--r-sm);padding:16px 18px;margin-bottom:24px;text-align:center">
+        <div style="font-size:15px;font-weight:700;color:var(--green);margin-bottom:4px">Now go read your document.</div>
+        <div style="font-size:12px;color:var(--muted2)">Keep the questions in mind. Do not write notes. Read at full speed. Come back here when you are done.</div>
+      </div>
+
+      <div style="margin-top:24px;display:flex;flex-direction:column;gap:10px">
+        <button class="btn-gold" onclick="showScreen('screen-active-recall')" style="background:var(--green);color:#08080e">Done reading. Check my recall →</button>
+        <button class="btn-gold" onclick="resetQuestionPrime()">Try with different text</button>
+        <button class="btn-ghost" onclick="showScreen('screen-dash')" style="width:100%;padding:12px;font-size:14px;text-align:center">← Back to dashboard</button>
+      </div>
+    </div>
+
+  </div>
+  <footer><p>Built by <a href="https://studyfast.uk/" target="_blank">StudyFast</a> · Jordan Harry · TEDx 3.4M views · 50,000+ professionals in 70 countries</p><span class="footer-version">V2026.2</span></footer>
+</div>
+
+<!-- ══ ACTIVE RECALL ══ -->
+<div class="screen" id="screen-active-recall">
+  <div class="dash-wrap" style="max-width:640px">
+
+    <div style="margin-bottom:24px">
+      <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);margin-bottom:8px">After you read</div>
+      <h2 style="font-family:'Bebas Neue';font-size:clamp(36px,6vw,52px);letter-spacing:2px;margin-bottom:8px">Active <span style="color:var(--gold)">Recall.</span></h2>
+      <p style="color:var(--muted2);font-size:14px;line-height:1.7">The single most powerful memory technique in existence. Retrieval is the memory, not the reading.</p>
+    </div>
+
+    <div class="jordan-tip" style="margin-bottom:24px">
+      <strong>Jordan:</strong> Roediger and Karpicke proved this in 2008. Retrieval practice beats re-reading by a significant margin every time. Writing what you remember right now does more for retention than reading the document twice.
+    </div>
+
+    <!-- Step 1: Paste the text -->
+    <div id="ar-step-1">
+      <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:6px">1. Paste the text you just read</div>
+      <div style="font-size:12px;color:var(--muted2);margin-bottom:10px">Paste it below. Once loaded it disappears so you cannot look back.</div>
+
+      <!-- Paste area — visible before paste -->
+      <div id="ar-paste-area">
+        <textarea class="mem-input" id="ar-source-text" placeholder="Paste the article, report, chapter or document you just read..." rows="5" style="resize:none" oninput="onARPaste(this)"></textarea>
+      </div>
+
+      <!-- Loaded confirmation — shown after paste, hides textarea -->
+      <div id="ar-loaded-state" style="display:none;background:rgba(61,255,160,0.07);border:1px solid rgba(61,255,160,0.3);border-radius:var(--r-sm);padding:14px 18px;margin-bottom:12px;align-items:center;gap:12px">
+        <div style="font-size:22px;flex-shrink:0">✓</div>
+        <div style="flex:1">
+          <div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:2px">Text locked in</div>
+          <div style="font-size:11px;color:var(--muted2)" id="ar-word-count"></div>
+        </div>
+        <button onclick="clearARSource()" style="font-size:11px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:var(--r-sm);cursor:pointer;padding:5px 10px;transition:all .15s;font-family:'Plus Jakarta Sans'" onmouseover="this.style.color='var(--orange)';this.style.borderColor='var(--orange)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--border)'">Clear</button>
+      </div>
+
+      <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;margin-top:16px">2. What do you remember?</div>
+      <div style="font-size:12px;color:var(--muted2);margin-bottom:10px">Do not look back. Type everything that comes to mind. Main ideas, details, anything. Do not filter yourself.</div>
+      <textarea class="mem-input" id="ar-recall-text" placeholder="Write everything you remember. Main ideas, specific details, anything at all..." rows="5" style="resize:none" oninput="checkARReady()"></textarea>
+
+      <button class="btn-gold" id="ar-submit-btn" onclick="submitActiveRecall()" style="margin-top:4px;opacity:.4;pointer-events:none">Check my recall →</button>
+      <button class="btn-ghost" onclick="showScreen('screen-dash')" style="width:100%;padding:12px;font-size:14px;text-align:center;margin-top:10px">← Back to dashboard</button>
+    </div>
+
+    <!-- Loading state -->
+    <div id="ar-loading" style="display:none;text-align:center;padding:48px 0">
+      <div class="ar-pulse-wrap">
+        <div class="ar-pulse-dot"></div>
+        <div style="font-size:13px;color:var(--muted2);margin-top:16px" id="ar-loading-text">StudyFast AI is reading your text...</div>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div id="ar-results" style="display:none">
+      <!-- Score ring + title -->
+      <div style="text-align:center;margin-bottom:28px">
+        <div class="ar-score-ring" id="ar-score-ring">
+          <div class="ar-score-n" id="ar-score-num">—</div>
+          <div class="ar-score-l">retained</div>
+        </div>
+        <div style="font-family:'Bebas Neue';font-size:28px;letter-spacing:2px;margin-top:12px" id="ar-score-label">Checking...</div>
+      </div>
+
+      <!-- Jordan's feedback — JH avatar -->
+      <div class="ar-feedback-card" id="ar-feedback-card">
+        <div class="ar-avatar-row">
+          <div class="jh-avatar">JH</div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold)">Jordan's Take</div>
+        </div>
+        <p class="ar-feedback-text" id="ar-feedback-text"></p>
+      </div>
+
+      <!-- What you missed -->
+      <div id="ar-missed-wrap" style="display:none">
+        <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--orange);margin-bottom:10px">What you missed</div>
+        <div class="ar-missed" id="ar-missed"></div>
+      </div>
+
+      <!-- Next steps -->
+      <div style="margin-top:24px;display:flex;flex-direction:column;gap:10px">
+        <button class="btn-gold" onclick="showScreen('screen-teach-back')" style="background:var(--green);color:#08080e">Try Teach It Back next →</button>
+        <button class="btn-gold" onclick="resetActiveRecall()">Try again with new text</button>
+        <button class="btn-ghost" onclick="showScreen('screen-dash')" style="width:100%;padding:12px;font-size:14px;text-align:center">← Back to dashboard</button>
+      </div>
+    </div>
+
+  </div>
+  <footer><p>Built by <a href="https://studyfast.uk/" target="_blank">StudyFast</a> · Jordan Harry · TEDx 3.4M views · 50,000+ professionals in 70 countries</p><span class="footer-version">V2026.2</span></footer>
+</div>
+
+<!-- ══ TEACH IT BACK ══ -->
+<div class="screen" id="screen-teach-back">
+  <div class="dash-wrap" style="max-width:640px">
+
+    <div style="margin-bottom:24px">
+      <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px">After you read</div>
+      <h2 style="font-family:'Bebas Neue';font-size:clamp(36px,6vw,52px);letter-spacing:2px;margin-bottom:8px">Teach It <span style="color:var(--gold)">Back.</span></h2>
+      <p style="color:var(--muted2);font-size:14px;line-height:1.7">If you cannot explain it simply, you do not understand it yet. The Feynman technique: StudyFast AI finds the gaps in your understanding and tells you exactly what you missed.</p>
+    </div>
+
+    <div class="jordan-tip" style="margin-bottom:24px">
+      <strong>Jordan:</strong> Richard Feynman never memorised what he did not understand. Explaining something simply forces you to find the gaps. Most people think they understood what they read. This proves it.
+    </div>
+
+    <!-- Input step -->
+    <div id="tb-step-1">
+
+      <!-- Source text — paste and hide -->
+      <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:6px">1. Paste the text you just read</div>
+      <div style="font-size:12px;color:var(--muted2);margin-bottom:10px">StudyFast AI needs this to check your explanation against the source. It disappears once loaded.</div>
+
+      <div id="tb-paste-area">
+        <textarea class="mem-input" id="tb-source-text" placeholder="Paste the article, report, chapter or document you just read..." rows="4" style="resize:none" oninput="onTBPaste(this)"></textarea>
+      </div>
+      <div id="tb-loaded-state" style="display:none;background:rgba(61,255,160,0.07);border:1px solid rgba(61,255,160,0.3);border-radius:var(--r-sm);padding:12px 16px;margin-bottom:12px;align-items:center;gap:12px">
+        <div style="font-size:20px;flex-shrink:0">✓</div>
+        <div style="flex:1">
+          <div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:2px">Text locked in</div>
+          <div style="font-size:11px;color:var(--muted2)" id="tb-word-count"></div>
+        </div>
+        <button onclick="clearTBSource()" style="font-size:11px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:var(--r-sm);cursor:pointer;padding:5px 10px;font-family:'Plus Jakarta Sans'" onmouseover="this.style.color='var(--orange)';this.style.borderColor='var(--orange)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--border)'">Clear</button>
+      </div>
+
+      <!-- Explanation -->
+      <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;margin-top:16px">2. Your explanation</div>
+      <div style="font-size:12px;color:var(--muted2);margin-bottom:10px">Do not look back at the text. Explain what you read in your own words. Keep it simple. Write as if you are speaking.</div>
+      <textarea class="mem-input" id="tb-explanation" placeholder="Explain what you just read as simply as you can. Imagine you are talking to someone who has never seen this before..." rows="6" style="resize:none" oninput="checkTBReady()"></textarea>
+
+      <button class="btn-gold" id="tb-submit-btn" onclick="submitTeachBack()" style="margin-top:4px;opacity:.4;pointer-events:none">Get Jordan's feedback →</button>
+      <button class="btn-ghost" onclick="showScreen('screen-dash')" style="width:100%;padding:12px;font-size:14px;text-align:center;margin-top:10px">← Back to dashboard</button>
+    </div>
+
+    <!-- Loading -->
+    <div id="tb-loading" style="display:none;text-align:center;padding:48px 0">
+      <div class="ar-pulse-wrap">
+        <div class="ar-pulse-dot"></div>
+        <div style="font-size:13px;color:var(--muted2);margin-top:16px" id="tb-loading-text">StudyFast AI is reading your explanation...</div>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div id="tb-results" style="display:none">
+
+      <!-- Overall grade -->
+      <div style="text-align:center;margin-bottom:24px">
+        <div class="ar-score-ring" id="tb-score-ring">
+          <div class="ar-score-n" id="tb-score-num">—</div>
+          <div class="ar-score-l">understood</div>
+        </div>
+        <div style="font-family:'Bebas Neue';font-size:28px;letter-spacing:2px;margin-top:12px" id="tb-score-label"></div>
+      </div>
+
+      <!-- Jordan's feedback -->
+      <div class="ar-feedback-card" style="margin-bottom:16px">
+        <div class="ar-avatar-row">
+          <div class="jh-avatar">JH</div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold)">Jordan's Feedback</div>
+        </div>
+        <p class="ar-feedback-text" id="tb-feedback-text"></p>
+      </div>
+
+      <!-- What you got right -->
+      <div id="tb-got-right-wrap" style="display:none;margin-bottom:16px">
+        <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--green);margin-bottom:8px">What you understood well</div>
+        <div class="ar-breakdown" id="tb-got-right"></div>
+      </div>
+
+      <!-- Gaps -->
+      <div id="tb-gaps-wrap" style="display:none;margin-bottom:20px">
+        <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--orange);margin-bottom:8px">Gaps in your understanding</div>
+        <div class="ar-missed" id="tb-gaps"></div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px">
+        <button class="btn-gold" onclick="resetTeachBack()">Try again. Explain it better.</button>
+        <button class="btn-ghost" onclick="showScreen('screen-dash')" style="width:100%;padding:12px;font-size:14px;text-align:center">← Back to dashboard</button>
+      </div>
+    </div>
+
+  </div>
+  <footer><p>Built by <a href="https://studyfast.uk/" target="_blank">StudyFast</a> · Jordan Harry · TEDx 3.4M views · 50,000+ professionals in 70 countries</p><span class="footer-version">V2026.2</span></footer>
+</div>
+
 </body>
 </html>
